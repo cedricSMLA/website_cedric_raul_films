@@ -1,0 +1,18 @@
+---
+export interface Props {
+  price: string;
+  label?: string;
+  class?: string;
+}
+
+const { 
+  price,
+  label = 'À partir de',
+  class: className = ''
+} = Astro.props;
+---
+
+<div class={`inline-flex items-center bg-gradient-to-r from-accent-blue to-accent-purple text-white px-6 py-3 rounded-full font-semibold shadow-lg ${className}`}>
+  <span class="text-sm opacity-90 mr-2">{label}</span>
+  <span class="text-lg font-bold">{price}</span>
+</div>

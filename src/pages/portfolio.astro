@@ -1,0 +1,171 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Card from '@/components/Card.astro';
+import VideoEmbed from '@/components/VideoEmbed.astro';
+import { getCollection } from 'astro:content';
+
+const portfolioItems = await getCollection('portfolio');
+const sortedItems = portfolioItems.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Get unique tags for filtering
+const allTags = [...new Set(portfolioItems.flatMap(item => item.data.tags))];
+---
+
+<Base 
+  title="Portfolio - Cédric Raúl Films"
+  description="Découvrez notre portfolio de films de mariage cinématographiques, vidéos corporate et prises de vue drone FPV."
+>
+  <!-- Header -->
+  <Section background="dark" padding="xl">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-6xl font-bold text-warm-ivory mb-6">
+        Portfolio
+      </h1>
+      <p class="text-xl text-warm-beige max-w-2xl mx-auto">
+        Découvrez nos créations cinématographiques : mariages, corporate et drone FPV
+      </p>
+    </div>
+    
+    <!-- Filters -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      <button 
+        data-filter="all" 
+        class="filter-btn active px-6 py-2 rounded-full border border-warm-beige text-warm-beige hover:bg-warm-beige hover:text-deep-black transition-colors"
+      >
+        Tout
+      </button>
+      {allTags.map(tag => (
+        <button 
+          data-filter={tag.toLowerCase()}
+          class="filter-btn px-6 py-2 rounded-full border border-warm-beige text-warm-beige hover:bg-warm-beige hover:text-deep-black transition-colors"
+        >
+          {tag}
+        </button>
+      ))}
+    </div>
+  </Section>
+
+  <!-- Portfolio Grid -->
+  <Section background="dark" padding="lg">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+      {sortedItems.map((item) => (
+        <Card 
+          href={`/portfolio/${item.slug}`}
+          class={`portfolio-item group ${item.data.tags.map(tag => tag.toLowerCase()).join(' ')}`}
+          data-tags={item.data.tags.map(tag => tag.toLowerCase()).join(',')}
+        >
+          <VideoEmbed 
+            youtubeId={item.data.youtubeId}
+            title={item.data.title}
+            class="aspect-video"
+          />
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2 mb-3">
+              {item.data.tags.map(tag => (
+                <span class="px-2 py-1 bg-warm-beige/10 text-warm-beige text-xs rounded">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            
+            <h3 class="text-xl font-semibold text-warm-ivory mb-2 group-hover:text-warm-beige transition-colors">
+              {item.data.title}
+            </h3>
+            
+            <p class="text-warm-beige text-sm mb-3">
+              {item.data.description}
+            </p>
+            
+            {item.data.location && (
+              <p class="text-warm-beige/70 text-xs">
+                📍 {item.data.location}
+              </p>
+            )}
+            
+            {item.data.client && (
+              <p class="text-accent-blue text-xs mt-1">
+                Client: {item.data.client}
+              </p>
+            )}
+          </div>
+        </Card>
+      ))}
+    </div>
+    
+    <!-- No results message -->
+    <div id="no-results" class="text-center py-16 hidden">
+      <h3 class="text-2xl font-semibold text-warm-ivory mb-4">Aucun résultat</h3>
+      <p class="text-warm-beige">Aucune vidéo ne correspond à ce filtre.</p>
+    </div>
+  </Section>
+
+  <!-- CTA Section -->
+  <Section background="gradient" padding="xl">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-warm-ivory mb-6">
+        Votre projet vous ressemble
+      </h2>
+      <p class="text-xl text-warm-beige mb-8">
+        Chaque mariage est unique, chaque histoire mérite un traitement sur mesure
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="/contact"
+          class="bg-accent-blue text-white px-8 py-4 rounded text-lg hover:bg-accent-blue/80 transition-colors"
+        >
+          Discuter de votre projet
+        </a>
+        <a 
+          href="/loren"
+          class="border-2 border-warm-beige text-warm-beige px-8 py-4 rounded text-lg hover:bg-warm-beige hover:text-deep-black transition-colors"
+        >
+          Découvrir LOREN
+        </a>
+      </div>
+    </div>
+  </Section>
+</Base>
+
+<script>
+  // Portfolio filtering
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  const noResults = document.getElementById('no-results');
+  
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Update active button
+      filterButtons.forEach(btn => btn.classList.remove('active', 'bg-warm-beige', 'text-deep-black'));
+      button.classList.add('active', 'bg-warm-beige', 'text-deep-black');
+      
+      const filter = button.dataset.filter;
+      let visibleCount = 0;
+      
+      portfolioItems.forEach(item => {
+        const tags = item.dataset.tags;
+        
+        if (filter === 'all' || tags.includes(filter)) {
+          item.style.display = 'block';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      
+      // Show/hide no results message
+      if (visibleCount === 0) {
+        noResults?.classList.remove('hidden');
+      } else {
+        noResults?.classList.add('hidden');
+      }
+    });
+  });
+</script>
+
+<style>
+  .filter-btn.active {
+    @apply bg-warm-beige text-deep-black;
+  }
+</style>

@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: cedric-raul-films
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    
+    environment:
+      - NODE_ENV=production
+      - TZ=Europe/Paris
+    
+    volumes:
+      # Logs persistence
+      - ./logs:/var/log/nginx
+      # Optional: custom nginx config override
+      # - ./nginx.custom.conf:/etc/nginx/nginx.conf:ro
+      # Optional: media files for production
+      # - ./production-media:/usr/share/nginx/html/media
+    
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cedric-raul.rule=Host(`cedricraulfilms.fr`) || Host(`www.cedricraulfilms.fr`)"
+      - "traefik.http.routers.cedric-raul.entrypoints=websecure"
+      - "traefik.http.routers.cedric-raul.tls.certresolver=letsencrypt"
+      # Redirect www to non-www
+      - "traefik.http.middlewares.www-redirect.redirectregex.regex=^https://www\\.(.*)"
+      - "traefik.http.middlewares.www-redirect.redirectregex.replacement=https://$${1}"
+      - "traefik.http.routers.cedric-raul.middlewares=www-redirect"
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Traefik reverse proxy for production with SSL
+  # Uncomment if using Traefik for SSL termination
+  # traefik:
+  #   image: traefik:v2.10
+  #   container_name: traefik
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #     - "8080:8080"  # Dashboard
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - ./traefik.yml:/etc/traefik/traefik.yml:ro
+  #     - ./traefik/acme.json:/acme.json
+  #   environment:
+  #     - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL}
+  #     - CLOUDFLARE_API_KEY=${CLOUDFLARE_API_KEY}
+
+  # Optional: Future API container
+  # api:
+  #   build: ./server
+  #   container_name: cedric-raul-api
+  #   restart: unless-stopped
+  #   environment:
+  #     - NODE_ENV=production
+  #     - DATABASE_URL=sqlite:///data/database.db
+  #     - SMTP_HOST=${SMTP_HOST}
+  #     - SMTP_PORT=${SMTP_PORT}
+  #     - SMTP_USER=${SMTP_USER}
+  #     - SMTP_PASS=${SMTP_PASS}
+  #   volumes:
+  #     - ./server/data:/app/data
+  #   expose:
+  #     - "3000"
+  #   depends_on:
+  #     - web
+
+  # Optional: Monitoring with Uptime Kuma
+  # uptime-kuma:
+  #   image: louislam/uptime-kuma:1
+  #   container_name: uptime-kuma
+  #   volumes:
+  #     - ./uptime-kuma:/app/data
+  #   ports:
+  #     - "3001:3001"
+  #   restart: unless-stopped
+
+networks:
+  default:
+    name: cedric-raul-network
+
+volumes:
+  logs:
+    driver: local

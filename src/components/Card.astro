@@ -1,0 +1,33 @@
+---
+export interface Props {
+  title?: string;
+  class?: string;
+  href?: string;
+  hover?: boolean;
+}
+
+const { 
+  title,
+  class: className = '',
+  href,
+  hover = true
+} = Astro.props;
+
+const baseClasses = 'bg-gray-900/50 rounded-lg overflow-hidden border border-warm-beige/10';
+const hoverClasses = hover ? 'hover:border-warm-beige/30 transition-all duration-300 hover:transform hover:scale-105' : '';
+const classes = `${baseClasses} ${hoverClasses} ${className}`;
+
+const Element = href ? 'a' : 'div';
+---
+
+<Element 
+  href={href}
+  class={classes}
+>
+  {title && (
+    <div class="p-6 pb-4">
+      <h3 class="text-xl font-semibold text-warm-ivory">{title}</h3>
+    </div>
+  )}
+  <slot />
+</Element>

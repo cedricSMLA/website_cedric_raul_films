@@ -1,0 +1,217 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const { title, description, image, noindex = false } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImage = image ? new URL(image, Astro.site) : new URL('/media/hero-poster.jpg', Astro.site);
+
+// Analytics
+const plausibleDomain = import.meta.env.PLAUSIBLE_DOMAIN;
+const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/script.js';
+---
+
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description || "Cédric Raúl Films - Vidéaste mariage cinématographique, drone FPV, Côte d'Azur. Films de mariage haut de gamme."} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Robots -->
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description || "Vidéaste mariage cinématographique sur la Côte d'Azur"} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:locale" content="fr_FR" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description || "Vidéaste mariage cinématographique sur la Côte d'Azur"} />
+    <meta property="twitter:image" content={socialImage} />
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <title>{title}</title>
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Cédric Raúl Films",
+        "description": "Vidéaste spécialisé dans les films de mariage cinématographiques et les vidéos corporate avec drone FPV",
+        "url": "https://cedricraulfilms.fr",
+        "logo": "https://cedricraulfilms.fr/logo.svg",
+        "image": "https://cedricraulfilms.fr/media/hero-poster.jpg",
+        "telephone": "+33-X-XX-XX-XX-XX",
+        "priceRange": "€€€",
+        "areaServed": {
+          "@type": "Place",
+          "name": "Côte d'Azur, France"
+        },
+        "serviceType": ["Vidéaste mariage", "Drone FPV", "Vidéo corporate"],
+        "founder": {
+          "@type": "Person",
+          "name": "Cédric Raúl"
+        }
+      }
+    </script>
+    
+    <!-- Analytics - Plausible -->
+    {plausibleDomain && (
+      <script defer data-domain={plausibleDomain} src={plausibleSrc}></script>
+    )}
+  </head>
+  <body class="bg-deep-black text-warm-ivory font-sans antialiased">
+    <!-- Header sticky -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-deep-black/70 backdrop-blur-md border-b border-warm-beige/10">
+      <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="/" class="text-xl font-bold text-warm-ivory hover:text-warm-beige transition-colors">
+          Cédric Raúl Films
+        </a>
+        
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="/" class="text-warm-ivory hover:text-warm-beige transition-colors">Accueil</a>
+          <a href="/portfolio" class="text-warm-ivory hover:text-warm-beige transition-colors">Portfolio</a>
+          <a href="/loren" class="text-warm-ivory hover:text-warm-beige transition-colors">LOREN</a>
+          <a href="/a-propos" class="text-warm-ivory hover:text-warm-beige transition-colors">À propos</a>
+          <a href="/photographes" class="text-warm-ivory hover:text-warm-beige transition-colors">Photographes</a>
+          <a href="/contact" class="bg-accent-blue text-white px-4 py-2 rounded hover:bg-accent-blue/80 transition-colors">
+            Contact
+          </a>
+        </div>
+        
+        <!-- Mobile menu button -->
+        <button class="md:hidden text-warm-ivory" id="mobile-menu-btn">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </nav>
+      
+      <!-- Mobile menu -->
+      <div class="md:hidden hidden bg-deep-black/90 backdrop-blur-md border-t border-warm-beige/10" id="mobile-menu">
+        <div class="container mx-auto px-4 py-4 space-y-4">
+          <a href="/" class="block text-warm-ivory hover:text-warm-beige transition-colors">Accueil</a>
+          <a href="/portfolio" class="block text-warm-ivory hover:text-warm-beige transition-colors">Portfolio</a>
+          <a href="/loren" class="block text-warm-ivory hover:text-warm-beige transition-colors">LOREN</a>
+          <a href="/a-propos" class="block text-warm-ivory hover:text-warm-beige transition-colors">À propos</a>
+          <a href="/photographes" class="block text-warm-ivory hover:text-warm-beige transition-colors">Photographes</a>
+          <a href="/contact" class="block bg-accent-blue text-white px-4 py-2 rounded hover:bg-accent-blue/80 transition-colors text-center">
+            Contact
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="pt-20">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-deep-black border-t border-warm-beige/10 py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-xl font-bold text-warm-ivory mb-4">Cédric Raúl Films</h3>
+            <p class="text-warm-beige text-sm">
+              Vidéaste spécialisé dans les films de mariage cinématographiques et les vidéos corporate.
+            </p>
+          </div>
+          
+          <div>
+            <h4 class="font-semibold text-warm-ivory mb-4">Navigation</h4>
+            <div class="space-y-2 text-sm">
+              <a href="/" class="block text-warm-beige hover:text-warm-ivory transition-colors">Accueil</a>
+              <a href="/portfolio" class="block text-warm-beige hover:text-warm-ivory transition-colors">Portfolio</a>
+              <a href="/loren" class="block text-warm-beige hover:text-warm-ivory transition-colors">LOREN</a>
+              <a href="/a-propos" class="block text-warm-beige hover:text-warm-ivory transition-colors">À propos</a>
+              <a href="/contact" class="block text-warm-beige hover:text-warm-ivory transition-colors">Contact</a>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="font-semibold text-warm-ivory mb-4">Légal</h4>
+            <div class="space-y-2 text-sm">
+              <a href="/mentions-legales" class="block text-warm-beige hover:text-warm-ivory transition-colors">Mentions légales</a>
+              <a href="/confidentialite" class="block text-warm-beige hover:text-warm-ivory transition-colors">Confidentialité</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border-t border-warm-beige/10 mt-8 pt-8 text-center text-sm text-warm-beige">
+          <p>&copy; 2024 Cédric Raúl Films. Tous droits réservés.</p>
+          <p class="mt-2 opacity-70">by <span class="text-warm-ivory">SMLEYE Prod</span></p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-deep-black/95 backdrop-blur-sm border-t border-warm-beige/10 p-4 z-50 hidden">
+      <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-warm-beige">
+          Ce site utilise des cookies pour améliorer votre expérience. 
+          <a href="/confidentialite" class="text-warm-ivory underline">En savoir plus</a>
+        </p>
+        <div class="flex gap-2">
+          <button id="accept-cookies" class="bg-accent-blue text-white px-4 py-2 rounded text-sm hover:bg-accent-blue/80 transition-colors">
+            Accepter
+          </button>
+          <button id="decline-cookies" class="bg-transparent border border-warm-beige text-warm-beige px-4 py-2 rounded text-sm hover:bg-warm-beige/10 transition-colors">
+            Refuser
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      mobileMenuBtn?.addEventListener('click', () => {
+        mobileMenu?.classList.toggle('hidden');
+      });
+
+      // Cookie banner
+      const cookieBanner = document.getElementById('cookie-banner');
+      const acceptBtn = document.getElementById('accept-cookies');
+      const declineBtn = document.getElementById('decline-cookies');
+      
+      // Show banner if no preference set
+      if (!localStorage.getItem('cookie-consent')) {
+        cookieBanner?.classList.remove('hidden');
+      }
+      
+      acceptBtn?.addEventListener('click', () => {
+        localStorage.setItem('cookie-consent', 'accepted');
+        cookieBanner?.classList.add('hidden');
+      });
+      
+      declineBtn?.addEventListener('click', () => {
+        localStorage.setItem('cookie-consent', 'declined');
+        cookieBanner?.classList.add('hidden');
+      });
+    </script>
+  </body>
+</html>

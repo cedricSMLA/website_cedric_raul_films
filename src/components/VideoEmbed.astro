@@ -1,0 +1,100 @@
+---
+export interface Props {
+  youtubeId: string;
+  title: string;
+  poster?: string;
+  class?: string;
+  autoplay?: boolean;
+  muted?: boolean;
+}
+
+const { 
+  youtubeId,
+  title,
+  poster,
+  class: className = '',
+  autoplay = false,
+  muted = true
+} = Astro.props;
+
+const posterUrl = poster || `/media/posters/${youtubeId}.jpg`;
+const embedUrl = `https://www.youtube.com/embed/${youtubeId}?${autoplay ? 'autoplay=1&' : ''}${muted ? 'mute=1&' : ''}rel=0&showinfo=0&controls=1`;
+const fallbackUrl = `https://www.youtube.com/watch?v=${youtubeId}`;
+---
+
+<div class={`relative aspect-video rounded-lg overflow-hidden bg-gray-900 ${className}`}>
+  <!-- Poster image -->
+  <img 
+    src={posterUrl}
+    alt={title}
+    class="absolute inset-0 w-full h-full object-cover"
+    loading="lazy"
+    id={`poster-${youtubeId}`}
+  />
+  
+  <!-- YouTube iframe -->
+  <iframe
+    src={embedUrl}
+    title={title}
+    class="absolute inset-0 w-full h-full"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+    loading="lazy"
+    id={`iframe-${youtubeId}`}
+    style="display: none;"
+  ></iframe>
+  
+  <!-- Play button overlay -->
+  <button 
+    class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/50 transition-colors group"
+    id={`play-btn-${youtubeId}`}
+    aria-label={`Lire la vidéo: ${title}`}
+  >
+    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:bg-white transition-colors">
+      <svg class="w-6 h-6 text-deep-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </div>
+  </button>
+  
+  <!-- Error fallback -->
+  <div 
+    class="absolute inset-0 flex flex-col items-center justify-center bg-gray-900/90 hidden"
+    id={`error-${youtubeId}`}
+  >
+    <p class="text-warm-beige text-center mb-4">Vidéo temporairement indisponible</p>
+    <a 
+      href={fallbackUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="bg-accent-blue text-white px-4 py-2 rounded hover:bg-accent-blue/80 transition-colors"
+    >
+      Voir sur YouTube
+    </a>
+  </div>
+</div>
+
+<script define:vars={{ youtubeId }}>
+  const playBtn = document.getElementById(`play-btn-${youtubeId}`);
+  const iframe = document.getElementById(`iframe-${youtubeId}`);
+  const poster = document.getElementById(`poster-${youtubeId}`);
+  const errorDiv = document.getElementById(`error-${youtubeId}`);
+  
+  // Play button click handler
+  playBtn?.addEventListener('click', () => {
+    iframe.style.display = 'block';
+    poster.style.display = 'none';
+    playBtn.style.display = 'none';
+    
+    // Reload iframe to start playback
+    const src = iframe.src;
+    iframe.src = src + '&autoplay=1';
+  });
+  
+  // Handle iframe load errors
+  iframe?.addEventListener('error', () => {
+    errorDiv?.classList.remove('hidden');
+    playBtn?.classList.add('hidden');
+  });
+</script>
