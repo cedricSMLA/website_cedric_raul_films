@@ -6,6 +6,10 @@ export interface Props {
   class?: string;
   autoplay?: boolean;
   muted?: boolean;
+  hoverPlay?: boolean;
+  modalView?: boolean;
+  hoverStartTime?: number; // Temps de démarrage en secondes pour le hover
+  modalStartTime?: number; // Temps de démarrage en secondes pour la modal
 }
 
 const { 
@@ -14,48 +18,63 @@ const {
   poster,
   class: className = '',
   autoplay = false,
-  muted = true
+  muted = true,
+  hoverPlay = true,
+  modalView = true,
+  hoverStartTime = 0,
+  modalStartTime = 0
 } = Astro.props;
 
-const posterUrl = poster || `/media/posters/${youtubeId}.jpg`;
-const embedUrl = `https://www.youtube.com/embed/${youtubeId}?${autoplay ? 'autoplay=1&' : ''}${muted ? 'mute=1&' : ''}rel=0&showinfo=0&controls=1`;
-const fallbackUrl = `https://www.youtube.com/watch?v=${youtubeId}`;
+// Auto-génération du poster depuis YouTube si non fourni  
+const posterUrl = poster || `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`;
+
+// URLs avec temps de démarrage optionnel
+const embedUrl = `https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&playsinline=1${modalStartTime ? `&start=${modalStartTime}` : ''}`;
+const hoverEmbedUrl = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&rel=0&controls=0&modestbranding=1&playsinline=1&loop=1&playlist=${youtubeId}${hoverStartTime ? `&start=${hoverStartTime}` : ''}`;
+const fallbackUrl = `https://www.youtube.com/watch?v=${youtubeId}${modalStartTime ? `&t=${modalStartTime}s` : ''}`;
 ---
 
-<div class={`relative aspect-video rounded-lg overflow-hidden bg-gray-900 ${className}`}>
-  <!-- Poster image -->
+<div class={`video-embed relative aspect-video rounded-lg overflow-hidden bg-gray-900 ${className} ${hoverPlay ? 'hover-enabled' : ''} ${modalView ? 'modal-enabled cursor-pointer' : ''}`} data-youtube-id={youtubeId}>
+  <!-- Poster image avec optimisations -->
   <img 
     src={posterUrl}
     alt={title}
-    class="absolute inset-0 w-full h-full object-cover"
+    class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
     loading="lazy"
+    decoding="async"
     id={`poster-${youtubeId}`}
+    onload="this.style.opacity=1"
+    style="opacity: 0;"
   />
   
-  <!-- YouTube iframe -->
-  <iframe
-    src={embedUrl}
-    title={title}
-    class="absolute inset-0 w-full h-full"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-    loading="lazy"
-    id={`iframe-${youtubeId}`}
-    style="display: none;"
-  ></iframe>
+  <!-- YouTube iframe pour hover (muet, sans controles) -->
+  <div
+    class="absolute inset-0 w-full h-full transition-opacity duration-300"
+    id={`hover-iframe-container-${youtubeId}`}
+    style="display: none; opacity: 0;"
+  ></div>
   
-  <!-- Play button overlay -->
+  <!-- YouTube iframe principal - chargé au clic -->
+  <div
+    class="absolute inset-0 w-full h-full"
+    id={`iframe-container-${youtubeId}`}
+    style="display: none;"
+  ></div>
+  
+  <!-- Zone cliquable invisible -->
   <button 
-    class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/50 transition-colors group"
+    class="play-button absolute inset-0 bg-transparent transition-all duration-300 group z-10"
     id={`play-btn-${youtubeId}`}
-    aria-label={`Lire la vidéo: ${title}`}
+    aria-label={modalView ? `Ouvrir la vidéo en grand: ${title}` : `Lire la vidéo: ${title}`}
   >
-    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:bg-white transition-colors">
-      <svg class="w-6 h-6 text-deep-black ml-1" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M8 5v14l11-7z"/>
-      </svg>
-    </div>
+    <!-- Icône fullscreen en bas à droite -->
+    {modalView && (
+      <div class="absolute bottom-4 right-4 w-8 h-8 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+        </svg>
+      </div>
+    )}
   </button>
   
   <!-- Error fallback -->
@@ -75,26 +94,185 @@ const fallbackUrl = `https://www.youtube.com/watch?v=${youtubeId}`;
   </div>
 </div>
 
-<script define:vars={{ youtubeId }}>
+<script define:vars={{ youtubeId, embedUrl, hoverEmbedUrl, hoverPlay, modalView, hoverStartTime, modalStartTime }}>
   const playBtn = document.getElementById(`play-btn-${youtubeId}`);
-  const iframe = document.getElementById(`iframe-${youtubeId}`);
+  const iframeContainer = document.getElementById(`iframe-container-${youtubeId}`);
+  const hoverIframeContainer = document.getElementById(`hover-iframe-container-${youtubeId}`);
   const poster = document.getElementById(`poster-${youtubeId}`);
   const errorDiv = document.getElementById(`error-${youtubeId}`);
+  const videoEmbed = document.querySelector(`[data-youtube-id="${youtubeId}"]`);
   
-  // Play button click handler
-  playBtn?.addEventListener('click', () => {
-    iframe.style.display = 'block';
-    poster.style.display = 'none';
-    playBtn.style.display = 'none';
+  let iframeLoaded = false;
+  let hoverIframeLoaded = false;
+  let hoverTimeout;
+  
+  // Fonction pour créer l'iframe de hover
+  function loadHoverIframe() {
+    if (hoverIframeLoaded || !hoverPlay) return;
     
-    // Reload iframe to start playback
-    const src = iframe.src;
-    iframe.src = src + '&autoplay=1';
-  });
+    const iframe = document.createElement('iframe');
+    iframe.src = hoverEmbedUrl;
+    iframe.title = `${youtubeId} hover preview`;
+    iframe.className = 'absolute inset-0 w-full h-full';
+    iframe.frameBorder = '0';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.loading = 'eager';
+    
+    hoverIframeContainer.appendChild(iframe);
+    hoverIframeLoaded = true;
+  }
   
-  // Handle iframe load errors
-  iframe?.addEventListener('error', () => {
-    errorDiv?.classList.remove('hidden');
-    playBtn?.classList.add('hidden');
-  });
+  // Fonction pour créer l'iframe principal
+  function loadMainIframe() {
+    if (iframeLoaded) return;
+    
+    const iframe = document.createElement('iframe');
+    iframe.src = embedUrl + '&autoplay=1';
+    iframe.title = `${youtubeId} video`;
+    iframe.className = 'absolute inset-0 w-full h-full';
+    iframe.frameBorder = '0';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    iframe.loading = 'eager';
+    
+    iframe.onerror = () => {
+      errorDiv?.classList.remove('hidden');
+      playBtn?.style.setProperty('display', 'none');
+    };
+    
+    iframeContainer.appendChild(iframe);
+    iframeLoaded = true;
+  }
+  
+  // Fonction pour créer le modal
+  function openModal() {
+    // Créer le modal
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4';
+    modal.id = `modal-${youtubeId}`;
+    
+    // Conteneur vidéo dans le modal
+    const modalVideo = document.createElement('div');
+    modalVideo.className = 'relative w-full max-w-6xl aspect-video bg-gray-900 rounded-lg overflow-hidden';
+    
+    // Iframe pour le modal
+    const modalIframe = document.createElement('iframe');
+    modalIframe.src = embedUrl + '&autoplay=1';
+    modalIframe.title = `${youtubeId} modal video`;
+    modalIframe.className = 'absolute inset-0 w-full h-full';
+    modalIframe.frameBorder = '0';
+    modalIframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    modalIframe.allowFullscreen = true;
+    
+    // Bouton fermer
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'absolute top-4 right-4 w-10 h-10 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center text-white transition-colors z-10';
+    closeBtn.innerHTML = '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>';
+    
+    modalVideo.appendChild(modalIframe);
+    modalVideo.appendChild(closeBtn);
+    modal.appendChild(modalVideo);
+    document.body.appendChild(modal);
+    
+    // Animation d'ouverture
+    modal.style.opacity = '0';
+    setTimeout(() => {
+      modal.style.opacity = '1';
+      modal.style.transition = 'opacity 0.3s ease';
+    }, 10);
+    
+    // Fermer le modal
+    const closeModal = () => {
+      modal.style.opacity = '0';
+      setTimeout(() => {
+        document.body.removeChild(modal);
+        document.body.style.overflow = 'auto';
+      }, 300);
+    };
+    
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    
+    // Fermer avec Escape
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        document.removeEventListener('keydown', handleEscape);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+    
+    // Empêcher le scroll du body
+    document.body.style.overflow = 'hidden';
+  }
+  
+  // Gestion du hover
+  if (hoverPlay) {
+    videoEmbed?.addEventListener('mouseenter', () => {
+      clearTimeout(hoverTimeout);
+      hoverTimeout = setTimeout(() => {
+        loadHoverIframe();
+        hoverIframeContainer.style.display = 'block';
+        setTimeout(() => {
+          hoverIframeContainer.style.opacity = '1';
+          // Plus besoin de cacher le bouton play car il n'existe plus
+        }, 100);
+      }, 500); // Délai de 500ms avant de jouer
+    });
+    
+    videoEmbed?.addEventListener('mouseleave', () => {
+      clearTimeout(hoverTimeout);
+      hoverIframeContainer.style.opacity = '0';
+      // Plus besoin de remettre le bouton play visible
+      
+      setTimeout(() => {
+        hoverIframeContainer.style.display = 'none';
+      }, 300);
+    });
+  }
+  
+  // Gestion du clic - sur tout le conteneur vidéo
+  const handleVideoClick = (e) => {
+    e.stopPropagation();
+    
+    if (modalView) {
+      openModal();
+    } else {
+      loadMainIframe();
+      iframeContainer.style.display = 'block';
+      poster.style.opacity = '0';
+      playBtn.style.display = 'none';
+      hoverIframeContainer.style.display = 'none';
+      
+      setTimeout(() => {
+        poster.style.display = 'none';
+      }, 300);
+    }
+  };
+  
+  // Clic sur le bouton ou sur toute la vidéo
+  playBtn?.addEventListener('click', handleVideoClick);
+  videoEmbed?.addEventListener('click', handleVideoClick);
+  
+  // Preload optimisé avec Intersection Observer
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const link = document.createElement('link');
+          link.rel = 'preconnect';
+          link.href = 'https://www.youtube.com';
+          document.head.appendChild(link);
+          
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '50px'
+    });
+    
+    if (videoEmbed) observer.observe(videoEmbed);
+  }
 </script>

@@ -11,7 +11,9 @@ const portfolioCollection = defineCollection({
     featured: z.boolean().optional().default(false),
     date: z.date(),
     location: z.string().optional(),
-    client: z.string().optional()
+    client: z.string().optional(),
+    hoverStartTime: z.number().optional(),
+    modalStartTime: z.number().optional()
   })
 });
 

@@ -50,46 +50,58 @@ const allTags = [...new Set(portfolioItems.flatMap(item => item.data.tags))];
   <Section background="dark" padding="lg">
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
       {sortedItems.map((item) => (
-        <Card 
-          href={`/portfolio/${item.slug}`}
-          class={`portfolio-item group ${item.data.tags.map(tag => tag.toLowerCase()).join(' ')}`}
+        <div 
+          class={`portfolio-item group cursor-pointer ${item.data.tags.map(tag => tag.toLowerCase()).join(' ')}`}
           data-tags={item.data.tags.map(tag => tag.toLowerCase()).join(',')}
+          data-slug={item.slug}
+          data-youtube-id={item.data.youtubeId}
+          data-title={item.data.title}
+          data-description={item.data.description}
+          data-location={item.data.location || ''}
+          data-client={item.data.client || ''}
+          data-date={item.data.date.toISOString()}
         >
-          <VideoEmbed 
-            youtubeId={item.data.youtubeId}
-            title={item.data.title}
-            class="aspect-video"
-          />
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2 mb-3">
-              {item.data.tags.map(tag => (
-                <span class="px-2 py-1 bg-warm-beige/10 text-warm-beige text-xs rounded">
-                  {tag}
-                </span>
-              ))}
+          <Card class="h-full hover:transform hover:scale-105 transition-all duration-300">
+            <VideoEmbed 
+              youtubeId={item.data.youtubeId}
+              title={item.data.title}
+              class="aspect-video"
+              hoverPlay={true}
+              modalView={true}
+              hoverStartTime={item.data.hoverStartTime || 0}
+              modalStartTime={item.data.modalStartTime || 0}
+            />
+            <div class="p-6">
+              <div class="flex flex-wrap gap-2 mb-3">
+                {item.data.tags.map(tag => (
+                  <span class="px-2 py-1 bg-warm-beige/10 text-warm-beige text-xs rounded">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              
+              <h3 class="text-xl font-semibold text-warm-ivory mb-2 group-hover:text-warm-beige transition-colors">
+                {item.data.title}
+              </h3>
+              
+              <p class="text-warm-beige text-sm mb-3">
+                {item.data.description}
+              </p>
+              
+              {item.data.location && (
+                <p class="text-warm-beige/70 text-xs">
+                  📍 {item.data.location}
+                </p>
+              )}
+              
+              {item.data.client && (
+                <p class="text-accent-blue text-xs mt-1">
+                  Client: {item.data.client}
+                </p>
+              )}
             </div>
-            
-            <h3 class="text-xl font-semibold text-warm-ivory mb-2 group-hover:text-warm-beige transition-colors">
-              {item.data.title}
-            </h3>
-            
-            <p class="text-warm-beige text-sm mb-3">
-              {item.data.description}
-            </p>
-            
-            {item.data.location && (
-              <p class="text-warm-beige/70 text-xs">
-                📍 {item.data.location}
-              </p>
-            )}
-            
-            {item.data.client && (
-              <p class="text-accent-blue text-xs mt-1">
-                Client: {item.data.client}
-              </p>
-            )}
-          </div>
-        </Card>
+          </Card>
+        </div>
       ))}
     </div>
     
@@ -129,6 +141,207 @@ const allTags = [...new Set(portfolioItems.flatMap(item => item.data.tags))];
 </Base>
 
 <script>
+  // État global de la modal
+  let currentModal = null;
+  let focusedElementBeforeModal = null;
+  let supportsBackdropFilter = CSS.supports('backdrop-filter', 'blur(10px)');
+  
+  // Focus trap elements
+  const focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+  
+  // Fonction pour créer et ouvrir la modal
+  function openModal(slug, updateURL = true) {
+    const item = document.querySelector(`[data-slug="${slug}"]`);
+    if (!item) return;
+    
+    // Sauvegarder l'élément qui avait le focus
+    focusedElementBeforeModal = document.activeElement;
+    
+    // Créer la modal
+    const modal = document.createElement('div');
+    modal.className = `fixed inset-0 z-50 flex items-center justify-center p-4 ${supportsBackdropFilter ? 'backdrop-blur-md' : ''} bg-black/80`;
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'modal-title');
+    modal.id = `modal-${slug}`;
+    
+    // Données de l'item
+    const youtubeId = item.dataset.youtubeId;
+    const title = item.dataset.title;
+    const description = item.dataset.description;
+    const location = item.dataset.location;
+    const client = item.dataset.client;
+    const date = new Date(item.dataset.date).toLocaleDateString('fr-FR', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+    
+    // Conteneur modal
+    const modalContent = document.createElement('div');
+    modalContent.className = 'relative w-full max-w-6xl bg-deep-black rounded-lg overflow-hidden shadow-2xl';
+    modalContent.setAttribute('role', 'document');
+    
+    // Contenu de la modal
+    modalContent.innerHTML = `
+      <!-- Header -->
+      <div class="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 to-transparent p-6">
+        <div class="flex justify-between items-start">
+          <div>
+            <h2 id="modal-title" class="text-2xl font-bold text-warm-ivory mb-2">${title}</h2>
+            <div class="flex flex-wrap gap-4 text-sm text-warm-beige">
+              ${location ? `<span>📍 ${location}</span>` : ''}
+              ${client ? `<span>👤 ${client}</span>` : ''}
+              <span>📅 ${date}</span>
+            </div>
+          </div>
+          <button 
+            class="close-modal w-10 h-10 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center text-white transition-colors"
+            aria-label="Fermer la modal"
+            tabindex="0"
+          >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Vidéo -->
+      <div class="relative aspect-video">
+        <iframe
+          src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+          title="${title}"
+          class="absolute inset-0 w-full h-full"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          tabindex="0"
+        ></iframe>
+        
+        <!-- Fallback si erreur -->
+        <div class="video-fallback absolute inset-0 flex flex-col items-center justify-center bg-gray-900/90 hidden">
+          <p class="text-warm-beige text-center mb-4">Vidéo temporairement indisponible</p>
+          <a 
+            href="https://www.youtube.com/watch?v=${youtubeId}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-accent-blue text-white px-4 py-2 rounded hover:bg-accent-blue/80 transition-colors"
+            tabindex="0"
+          >
+            Voir sur YouTube
+          </a>
+        </div>
+      </div>
+      
+      <!-- Footer avec description -->
+      ${description ? `
+        <div class="p-6 bg-deep-black/95">
+          <p class="text-warm-beige leading-relaxed">${description}</p>
+        </div>
+      ` : ''}
+    `;
+    
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    currentModal = modal;
+    
+    // Empêcher le scroll du body
+    document.body.style.overflow = 'hidden';
+    
+    // Animation d'ouverture
+    modal.style.opacity = '0';
+    requestAnimationFrame(() => {
+      modal.style.opacity = '1';
+      modal.style.transition = 'opacity 0.3s ease';
+    });
+    
+    // Gestion des événements
+    setupModalEvents(modal, slug, updateURL);
+    
+    // Focus sur le premier élément focusable
+    const firstFocusable = modal.querySelector(focusableElementsString);
+    if (firstFocusable) {
+      setTimeout(() => firstFocusable.focus(), 100);
+    }
+    
+    // Mettre à jour l'URL si demandé
+    if (updateURL) {
+      history.pushState({ modal: slug }, '', `?v=${slug}`);
+    }
+  }
+  
+  // Configuration des événements de la modal
+  function setupModalEvents(modal, slug, updateURL) {
+    const closeBtn = modal.querySelector('.close-modal');
+    const iframe = modal.querySelector('iframe');
+    const fallback = modal.querySelector('.video-fallback');
+    
+    // Fonction de fermeture
+    const closeModal = () => {
+      modal.style.opacity = '0';
+      setTimeout(() => {
+        if (modal.parentNode) {
+          document.body.removeChild(modal);
+        }
+        document.body.style.overflow = 'auto';
+        currentModal = null;
+        
+        // Restaurer le focus
+        if (focusedElementBeforeModal) {
+          focusedElementBeforeModal.focus();
+        }
+        
+        // Nettoyer l'URL si nécessaire
+        if (updateURL && window.location.search.includes('v=')) {
+          history.pushState({}, '', window.location.pathname);
+        }
+      }, 300);
+    };
+    
+    // Événements de fermeture
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    
+    // Gestion d'erreur iframe
+    iframe.addEventListener('error', () => {
+      fallback.classList.remove('hidden');
+    });
+    
+    // Trap du focus
+    setupFocusTrap(modal);
+  }
+  
+  // Focus trap
+  function setupFocusTrap(modal) {
+    const focusableElements = modal.querySelectorAll(focusableElementsString);
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+    
+    modal.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modal.querySelector('.close-modal').click();
+        return;
+      }
+      
+      if (e.key === 'Tab') {
+        if (e.shiftKey) {
+          if (document.activeElement === firstFocusable) {
+            lastFocusable.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastFocusable) {
+            firstFocusable.focus();
+            e.preventDefault();
+          }
+        }
+      }
+    });
+  }
+  
   // Portfolio filtering
   const filterButtons = document.querySelectorAll('.filter-btn');
   const portfolioItems = document.querySelectorAll('.portfolio-item');
@@ -161,6 +374,36 @@ const allTags = [...new Set(portfolioItems.flatMap(item => item.data.tags))];
         noResults?.classList.add('hidden');
       }
     });
+  });
+  
+  // Clic sur les items du portfolio
+  portfolioItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openModal(item.dataset.slug);
+    });
+  });
+  
+  // Gestion de l'historique du navigateur
+  window.addEventListener('popstate', (e) => {
+    if (currentModal) {
+      // Fermer la modal sans mettre à jour l'URL
+      currentModal.querySelector('.close-modal').click();
+    } else if (e.state?.modal) {
+      // Ouvrir la modal depuis l'historique
+      openModal(e.state.modal, false);
+    }
+  });
+  
+  // Vérifier si on doit ouvrir une modal au chargement
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const videoSlug = urlParams.get('v');
+    
+    if (videoSlug) {
+      setTimeout(() => openModal(videoSlug, false), 100);
+    }
   });
 </script>
 
