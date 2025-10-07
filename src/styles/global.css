@@ -1,0 +1,97 @@
+/* Variables globales pour le thème moody vert-sauge & doré désaturé */
+:root {
+  --background-primary: #F2EEE3;
+  --background-secondary: #A3B18A;
+  --background-dark: #1C1A19;
+  --text-primary: #5E5B55;
+  --text-secondary: #A3B18A;
+  --accent-primary: #C2A56B;
+  --accent-light: #D4B87E;
+  --border-subtle: rgba(94, 91, 85, 0.2);
+  --shadow-soft: 0 2px 8px rgba(28, 26, 25, 0.08);
+  --shadow-cinema: 0 4px 16px rgba(28, 26, 25, 0.12), 0 2px 6px rgba(28, 26, 25, 0.08);
+}
+
+/* Grain pellicule subtil pour ambiance cinématographique */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200vh;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E") repeat;
+  opacity: 0.02;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  will-change: transform;
+  animation: grain 8s steps(10) infinite;
+}
+
+/* Style des liens */
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-light);
+}
+
+/* Sélection de texte */
+::selection {
+  background-color: var(--accent-primary);
+  color: var(--background-primary);
+}
+
+::-moz-selection {
+  background-color: var(--accent-primary);
+  color: var(--background-primary);
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* Base pour un look éditorial */
+body {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Amélioration des transitions globales */
+* {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Focus states accessibles */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+

@@ -51,7 +51,10 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <title>{title}</title>
-    
+
+    <!-- Global styles -->
+    <link rel="stylesheet" href="/src/styles/global.css" />
+
     <!-- JSON-LD Schema -->
     <script type="application/ld+json">
       {
@@ -81,27 +84,30 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
       <script defer data-domain={plausibleDomain} src={plausibleSrc}></script>
     )}
   </head>
-  <body class="bg-deep-black text-warm-ivory font-sans antialiased">
-    <!-- Header sticky -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-deep-black/70 backdrop-blur-md border-b border-warm-beige/10">
-      <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="/" class="text-xl font-bold text-warm-ivory hover:text-warm-beige transition-colors">
-          Cédric Raúl Films
+  <body class="bg-lin text-pierre font-sans antialiased">
+    <!-- Container global 77% -->
+    <div class="w-[77%] mx-auto">
+      <!-- Header sticky -->
+      <header class="fixed top-0 left-0 right-0 z-50 bg-lin/95 backdrop-blur-sm">
+        <nav class="w-[77%] mx-auto px-4 py-8 flex justify-between items-end">
+        <a href="/" class="hover:text-doré-patiné transition-colors">
+          <div class="text-4xl font-bold text-pierre uppercase tracking-tight" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">
+            Cédric Raúl Films
+          </div>
+          <div class="text-xs text-pierre/70 mt-0.5">
+            Wedding videographer
+          </div>
         </a>
-        
+
         <div class="hidden md:flex items-center space-x-8">
-          <a href="/" class="text-warm-ivory hover:text-warm-beige transition-colors">Accueil</a>
-          <a href="/portfolio" class="text-warm-ivory hover:text-warm-beige transition-colors">Portfolio</a>
-          <a href="/loren" class="text-warm-ivory hover:text-warm-beige transition-colors">LOREN</a>
-          <a href="/a-propos" class="text-warm-ivory hover:text-warm-beige transition-colors">À propos</a>
-          <a href="/photographes" class="text-warm-ivory hover:text-warm-beige transition-colors">Photographes</a>
-          <a href="/contact" class="bg-accent-blue text-white px-4 py-2 rounded hover:bg-accent-blue/80 transition-colors">
+          <a href="/" class="text-pierre hover:text-doré-patiné transition-all hover:scale-110 text-lg">Accueil</a>
+          <a href="/contact" class="bg-noir-doux text-lin px-4 py-2 rounded hover:bg-pierre transition-all hover:scale-105 text-lg">
             Contact
           </a>
         </div>
-        
+
         <!-- Mobile menu button -->
-        <button class="md:hidden text-warm-ivory" id="mobile-menu-btn">
+        <button class="md:hidden text-pierre" id="mobile-menu-btn">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
@@ -109,75 +115,78 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
       </nav>
       
       <!-- Mobile menu -->
-      <div class="md:hidden hidden bg-deep-black/90 backdrop-blur-md border-t border-warm-beige/10" id="mobile-menu">
+      <div class="md:hidden hidden bg-lin/90 backdrop-blur-md" id="mobile-menu">
         <div class="container mx-auto px-4 py-4 space-y-4">
-          <a href="/" class="block text-warm-ivory hover:text-warm-beige transition-colors">Accueil</a>
-          <a href="/portfolio" class="block text-warm-ivory hover:text-warm-beige transition-colors">Portfolio</a>
-          <a href="/loren" class="block text-warm-ivory hover:text-warm-beige transition-colors">LOREN</a>
-          <a href="/a-propos" class="block text-warm-ivory hover:text-warm-beige transition-colors">À propos</a>
-          <a href="/photographes" class="block text-warm-ivory hover:text-warm-beige transition-colors">Photographes</a>
-          <a href="/contact" class="block bg-accent-blue text-white px-4 py-2 rounded hover:bg-accent-blue/80 transition-colors text-center">
+          <a href="/" class="block text-pierre hover:text-doré-patiné transition-all hover:scale-105 text-lg">Accueil</a>
+          <a href="/contact" class="block bg-noir-doux text-lin px-4 py-2 rounded hover:bg-pierre transition-all hover:scale-105 text-center text-lg">
             Contact
           </a>
         </div>
       </div>
     </header>
 
-    <!-- Main content -->
-    <main class="pt-20">
-      <slot />
-    </main>
+      <!-- Main content -->
+      <main class="pt-20">
+        <slot />
+      </main>
 
-    <!-- Footer -->
-    <footer class="bg-deep-black border-t border-warm-beige/10 py-12">
-      <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-3 gap-8">
-          <div>
-            <h3 class="text-xl font-bold text-warm-ivory mb-4">Cédric Raúl Films</h3>
-            <p class="text-warm-beige text-sm">
+      <!-- Footer -->
+      <footer class="bg-lin border-t border-pierre/20 py-16">
+        <div class="px-4 max-w-2xl mx-auto text-center">
+          <!-- Logo et description -->
+          <div class="mb-8">
+            <h3 class="text-2xl font-bold text-pierre mb-4" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">
+              CÉDRIC RAÚL FILMS
+            </h3>
+            <p class="text-pierre/70 text-sm max-w-md mx-auto leading-relaxed">
               Vidéaste spécialisé dans les films de mariage cinématographiques et les vidéos corporate.
             </p>
           </div>
-          
-          <div>
-            <h4 class="font-semibold text-warm-ivory mb-4">Navigation</h4>
-            <div class="space-y-2 text-sm">
-              <a href="/" class="block text-warm-beige hover:text-warm-ivory transition-colors">Accueil</a>
-              <a href="/portfolio" class="block text-warm-beige hover:text-warm-ivory transition-colors">Portfolio</a>
-              <a href="/loren" class="block text-warm-beige hover:text-warm-ivory transition-colors">LOREN</a>
-              <a href="/a-propos" class="block text-warm-beige hover:text-warm-ivory transition-colors">À propos</a>
-              <a href="/contact" class="block text-warm-beige hover:text-warm-ivory transition-colors">Contact</a>
-            </div>
+
+          <!-- Réseaux sociaux -->
+          <div class="flex justify-center space-x-8 mb-8">
+            <a href="https://www.instagram.com/cedric_raul_films/" target="_blank"
+               class="w-12 h-12 bg-pierre/10 rounded-full flex items-center justify-center text-pierre/70 hover:text-doré-patiné hover:bg-doré-patiné/10 transition-all hover:scale-110">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+
+            <a href="https://www.youtube.com/@C%C3%A9dricRa%C3%BAlFilms" target="_blank"
+               class="w-12 h-12 bg-pierre/10 rounded-full flex items-center justify-center text-pierre/70 hover:text-doré-patiné hover:bg-doré-patiné/10 transition-all hover:scale-110">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+
+            <a href="mailto:contact@smleyeprod.fr"
+               class="w-12 h-12 bg-pierre/10 rounded-full flex items-center justify-center text-pierre/70 hover:text-doré-patiné hover:bg-doré-patiné/10 transition-all hover:scale-110">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </a>
           </div>
-          
-          <div>
-            <h4 class="font-semibold text-warm-ivory mb-4">Légal</h4>
-            <div class="space-y-2 text-sm">
-              <a href="/mentions-legales" class="block text-warm-beige hover:text-warm-ivory transition-colors">Mentions légales</a>
-              <a href="/confidentialite" class="block text-warm-beige hover:text-warm-ivory transition-colors">Confidentialité</a>
-            </div>
+
+          <!-- Copyright -->
+          <div class="pt-6 border-t border-pierre/10">
+            <p class="text-xs text-pierre/60">&copy; 2024 Cédric Raúl Films. Tous droits réservés.</p>
+            <p class="text-xs text-pierre/50 mt-1">by <span class="text-doré-patiné">SMLEYE Prod</span></p>
           </div>
         </div>
-        
-        <div class="border-t border-warm-beige/10 mt-8 pt-8 text-center text-sm text-warm-beige">
-          <p>&copy; 2024 Cédric Raúl Films. Tous droits réservés.</p>
-          <p class="mt-2 opacity-70">by <span class="text-warm-ivory">SMLEYE Prod</span></p>
-        </div>
-      </div>
-    </footer>
+      </footer>
 
     <!-- Cookie Banner -->
-    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-deep-black/95 backdrop-blur-sm border-t border-warm-beige/10 p-4 z-50 hidden">
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-lin/95 backdrop-blur-sm border-t border-pierre/20 p-4 z-50 hidden">
       <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-sm text-warm-beige">
-          Ce site utilise des cookies pour améliorer votre expérience. 
-          <a href="/confidentialite" class="text-warm-ivory underline">En savoir plus</a>
+        <p class="text-sm text-pierre/80">
+          Ce site utilise des cookies pour améliorer votre expérience.
+          <a href="/confidentialite" class="text-doré-patiné underline">En savoir plus</a>
         </p>
         <div class="flex gap-2">
-          <button id="accept-cookies" class="bg-accent-blue text-white px-4 py-2 rounded text-sm hover:bg-accent-blue/80 transition-colors">
+          <button id="accept-cookies" class="bg-doré-patiné text-noir-doux px-4 py-2 rounded text-sm hover:bg-doré-light transition-colors">
             Accepter
           </button>
-          <button id="decline-cookies" class="bg-transparent border border-warm-beige text-warm-beige px-4 py-2 rounded text-sm hover:bg-warm-beige/10 transition-colors">
+          <button id="decline-cookies" class="bg-transparent border border-pierre text-pierre px-4 py-2 rounded text-sm hover:bg-pierre/10 transition-colors">
             Refuser
           </button>
         </div>

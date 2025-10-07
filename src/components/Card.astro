@@ -13,8 +13,8 @@ const {
   hover = true
 } = Astro.props;
 
-const baseClasses = 'bg-gray-900/50 rounded-lg overflow-hidden border border-warm-beige/10';
-const hoverClasses = hover ? 'hover:border-warm-beige/30 transition-all duration-300 hover:transform hover:scale-105' : '';
+const baseClasses = 'bg-lin rounded-lg overflow-hidden border border-pierre/20 shadow-soft';
+const hoverClasses = hover ? 'hover:border-pierre/40 hover:shadow-cinema transition-all duration-300 hover:transform hover:-translate-y-1' : '';
 const classes = `${baseClasses} ${hoverClasses} ${className}`;
 
 const Element = href ? 'a' : 'div';
@@ -26,7 +26,7 @@ const Element = href ? 'a' : 'div';
 >
   {title && (
     <div class="p-6 pb-4">
-      <h3 class="text-xl font-semibold text-warm-ivory">{title}</h3>
+      <h3 class="text-xl font-semibold text-pierre">{title}</h3>
     </div>
   )}
   <slot />

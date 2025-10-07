@@ -1,20 +1,21 @@
 ---
 export interface Props {
   class?: string;
-  background?: 'dark' | 'light' | 'gradient';
+  background?: 'primary' | 'secondary' | 'dark' | 'gradient';
   padding?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
-const { 
+const {
   class: className = '',
-  background = 'dark',
+  background = 'primary',
   padding = 'lg'
 } = Astro.props;
 
 const backgrounds = {
-  dark: 'bg-deep-black',
-  light: 'bg-warm-ivory text-deep-black',
-  gradient: 'bg-gradient-to-br from-deep-black to-gray-900'
+  primary: 'bg-lin text-pierre',
+  secondary: 'bg-sauge text-lin',
+  dark: 'bg-noir-doux text-lin',
+  gradient: 'bg-gradient-to-br from-lin to-sauge text-pierre'
 };
 
 const paddings = {

@@ -17,318 +17,189 @@ const photographes = await getCollection('photographes');
 const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 3);
 ---
 
-<Base 
+<Base
   title="Cédric Raúl Films - Vidéaste mariage cinématographique Côte d'Azur"
   description="Vidéaste spécialisé dans les films de mariage cinématographiques et les vidéos corporate avec drone FPV sur la Côte d'Azur."
 >
-  <!-- Hero Section -->
-  <Section class="relative min-h-screen flex items-center" padding="xl">
-    <!-- Hero Image Background -->
-    <div class="absolute inset-0">
-      <img 
-        src="/media/photo/02.jpg" 
-        alt="Cédric Raúl Films - Vidéaste mariage cinématographique"
+  <!-- Hero Video -->
+  <section class="w-full pt-8 md:pt-12 pb-8 md:pb-12">
+    <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group">
+      <video
+        id="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        disablepictureinpicture
         class="w-full h-full object-cover"
-        loading="eager"
-      />
-      <div class="absolute inset-0 bg-black/50"></div>
-    </div>
-    
-    <!-- Hero Content -->
-    <div class="relative z-10 text-center max-w-4xl mx-auto">
-      <h1 class="text-5xl md:text-7xl font-bold text-warm-ivory mb-6 animate-fade-in">
-        Votre mariage,<br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-blue to-accent-purple">
-          une œuvre cinématographique
-        </span>
-      </h1>
-      
-      <p class="text-xl md:text-2xl text-warm-beige mb-8 animate-slide-up">
-        Vidéaste spécialisé dans les films de mariage haut de gamme avec drone FPV sur la Côte d'Azur
-      </p>
-      
-      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-        <Button href="#contact" size="lg">
-          Vérifier ma date
-        </Button>
-        <Button href="/contact" variant="outline" size="lg">
-          Réserver un appel
-        </Button>
-      </div>
-    </div>
-  </Section>
+      >
+        <source src="/media/video/teaser.mp4" type="video/mp4">
+      </video>
 
-  <!-- Video Showreel Section -->
-  <Section background="dark" padding="lg">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-warm-ivory mb-4">
-          Découvrez notre univers
-        </h2>
-        <p class="text-lg text-warm-beige">
-          Un aperçu de notre savoir-faire cinématographique
-        </p>
-      </div>
-      
-      <div class="relative group" id="showreel-container">
-        <video 
-          id="showreel-video"
+      <!-- Mute/Unmute button -->
+      <button
+        id="mute-toggle"
+        class="absolute bottom-4 right-4 w-10 h-10 bg-noir-doux/50 hover:bg-noir-doux/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 border border-doré-patiné/30 hover:border-doré-patiné/60"
+        aria-label="Activer/Désactiver le son"
+      >
+        <svg id="mute-icon" class="w-5 h-5 text-doré-patiné" fill="currentColor" viewBox="0 0 28 24">
+          <path d="M3 9v6h4l5 5V4L7 9H3z"/>
+          <path d="m20 9 2.5-2.5 1.5 1.5-2.5 2.5 2.5 2.5-1.5 1.5-2.5-2.5-2.5 2.5-1.5-1.5 2.5-2.5-2.5-2.5 1.5-1.5 2.5 2.5z"/>
+        </svg>
+        <svg id="unmute-icon" class="w-5 h-5 text-doré-patiné hidden" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- Two Videos Side by Side -->
+  <section class="w-full pb-8 md:pb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+
+      <!-- Melissa Video -->
+      <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="melissa">
+        <video
           muted
           loop
           playsinline
           disablepictureinpicture
-          controlslist="nodownload nofullscreen noremoteplayback"
-          poster="/media/hero-poster.jpg"
-          class="w-full aspect-video object-cover rounded-lg"
-          preload="metadata"
+          class="w-full h-full object-cover"
+          onmouseenter="this.play()"
+          onmouseleave="this.pause()"
         >
-          <source src="/media/video/melissa_cedric_insta.mp4" type="video/mp4">
+          <source src="/media/video/teaser_shooting_melissa.mp4" type="video/mp4">
         </video>
-        
-        <!-- Custom mute/unmute button - appears on hover -->
-        <button 
-          id="mute-toggle"
-          class="absolute top-6 right-6 w-14 h-14 bg-black/40 hover:bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 border border-white/20 hover:border-white/40"
-          aria-label="Activer/Désactiver le son"
+
+        <!-- Overlay on hover -->
+        <div class="absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <div class="text-center text-lin">
+            <h3 class="text-xl md:text-2xl font-bold mb-2 text-doré-patiné">Melissa & Daniel</h3>
+            <p class="text-md md:text-lg">Septembre 2025</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solene & Thomas Video -->
+      <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="solene">
+        <video
+          muted
+          loop
+          playsinline
+          disablepictureinpicture
+          class="w-full h-full object-cover"
+          poster="/media/video/tezase_solene_thomas_poster.jpg"
+          onmouseenter="this.play()"
+          onmouseleave="this.pause()"
         >
-          <svg id="mute-icon" class="w-6 h-6 text-white/90" fill="currentColor" viewBox="0 0 28 24">
-            <path d="M3 9v6h4l5 5V4L7 9H3z"/>
-            <path d="m20 9 2.5-2.5 1.5 1.5-2.5 2.5 2.5 2.5-1.5 1.5-2.5-2.5-2.5 2.5-1.5-1.5 2.5-2.5-2.5-2.5 1.5-1.5 2.5 2.5z"/>
-          </svg>
-          <svg id="unmute-icon" class="w-6 h-6 text-white/90 hidden" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </Section>
+          <source src="/media/video/tezase_solene_thomas_website.mp4" type="video/mp4">
+        </video>
 
-  <!-- Portfolio Teaser -->
-  <Section background="dark" padding="xl">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-warm-ivory mb-6">
-        Nos dernières créations
-      </h2>
-      <p class="text-xl text-warm-beige max-w-2xl mx-auto">
-        Découvrez une sélection de nos films de mariage les plus récents
-      </p>
-    </div>
-    
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-      {featuredItems.map((item) => (
-        <Card href={`/portfolio/${item.slug}`} class="group">
-          <VideoEmbed 
-            youtubeId={item.data.youtubeId}
-            title={item.data.title}
-            class="aspect-video"
-          />
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-warm-ivory mb-2 group-hover:text-warm-beige transition-colors">
-              {item.data.title}
-            </h3>
-            <p class="text-warm-beige text-sm mb-3">{item.data.description}</p>
-            <div class="flex flex-wrap gap-2">
-              {item.data.tags.map(tag => (
-                <span class="px-2 py-1 bg-warm-beige/10 text-warm-beige text-xs rounded">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </Card>
-      ))}
-    </div>
-    
-    <div class="text-center">
-      <Button href="/portfolio" variant="outline" size="lg">
-        Voir tout le portfolio
-      </Button>
-    </div>
-  </Section>
-
-  <!-- LOREN Bandeau -->
-  <Section background="gradient" padding="lg">
-    <div class="text-center">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-warm-ivory mb-6">
-          Forfait LOREN
-        </h2>
-        <p class="text-xl text-warm-beige mb-8">
-          Notre formule complète pour immortaliser votre jour J avec élégance et emotion
-        </p>
-        
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
-          <BadgePrice price="2900€ TTC" />
-          <Button href="/loren" size="lg">
-            Découvrir LOREN
-          </Button>
-        </div>
-        
-        <div class="grid md:grid-cols-3 gap-6 text-center">
-          <div class="p-4">
-            <div class="w-12 h-12 bg-accent-blue rounded-full flex items-center justify-center mx-auto mb-3">
-              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-warm-ivory mb-2">Film complet</h3>
-            <p class="text-warm-beige text-sm">Couverture intégrale de votre journée</p>
-          </div>
-          
-          <div class="p-4">
-            <div class="w-12 h-12 bg-accent-purple rounded-full flex items-center justify-center mx-auto mb-3">
-              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-warm-ivory mb-2">Drone FPV</h3>
-            <p class="text-warm-beige text-sm">Prises de vue aériennes spectaculaires</p>
-          </div>
-          
-          <div class="p-4">
-            <div class="w-12 h-12 bg-accent-blue rounded-full flex items-center justify-center mx-auto mb-3">
-              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-warm-ivory mb-2">Post-production</h3>
-            <p class="text-warm-beige text-sm">Montage professionnel et étalonnage</p>
+        <!-- Overlay on hover -->
+        <div class="absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <div class="text-center text-lin">
+            <h3 class="text-xl md:text-2xl font-bold mb-2 text-doré-patiné">Solène & Thomas</h3>
+            <p class="text-md md:text-lg">Août 2024</p>
           </div>
         </div>
       </div>
-    </div>
-  </Section>
 
-  <!-- Photographes Teaser -->
-  <Section background="dark" padding="xl">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-warm-ivory mb-6">
-        Nos photographes partenaires
-      </h2>
-      <p class="text-xl text-warm-beige max-w-2xl mx-auto">
-        Collaborez avec les meilleurs photographes pour un duo vidéo/photo parfait
-      </p>
     </div>
-    
-    <div class="grid md:grid-cols-3 gap-8 mb-12">
-      {featuredPhotographes.map((photographe) => (
-        <Card href={`/photographes#${photographe.slug}`}>
-          <img 
-            src={photographe.data.images[0]} 
-            alt={photographe.data.name}
-            class="w-full h-64 object-cover"
-            loading="lazy"
-          />
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-warm-ivory mb-2">{photographe.data.name}</h3>
-            <p class="text-accent-blue text-sm font-medium mb-3">{photographe.data.speciality}</p>
-            <p class="text-warm-beige text-sm">{photographe.data.bio}</p>
-          </div>
-        </Card>
-      ))}
-    </div>
-    
-    <div class="text-center">
-      <Button href="/photographes" variant="outline" size="lg">
-        Voir tous nos partenaires
-      </Button>
-    </div>
-  </Section>
+  </section>
 
-  <!-- Drone FPV Bandeau -->
-  <Section background="gradient" padding="md">
-    <div class="text-center max-w-4xl mx-auto">
-      <h2 class="text-2xl md:text-3xl font-bold text-warm-ivory mb-4">
-        Drone FPV Certifié
-      </h2>
-      <p class="text-warm-beige">
-        Pilote certifié DGAC, assurances complètes. Prises de vue aériennes autorisées et sécurisées.
-        <a href="/drone-fpv" class="text-warm-ivory underline ml-2">En savoir plus</a>
-      </p>
-    </div>
-  </Section>
+  <!-- Video Modal -->
+  <div id="video-modal" class="fixed inset-0 bg-noir-doux/95 z-50 hidden flex items-center justify-center p-4">
+    <!-- Close button -->
+    <button id="close-modal-btn" class="absolute top-6 right-6 w-12 h-12 bg-doré-patiné/20 hover:bg-doré-patiné/40 rounded-full flex items-center justify-center text-doré-patiné transition-colors z-10">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
 
-  <!-- Contact CTA -->
-  <Section background="dark" padding="xl" class="border-t border-warm-beige/10" id="contact">
-    <div class="text-center max-w-3xl mx-auto">
-      <h2 class="text-4xl md:text-5xl font-bold text-warm-ivory mb-6">
-        Prêt à créer votre film de mariage ?
-      </h2>
-      <p class="text-xl text-warm-beige mb-8">
-        Contactez-nous pour discuter de votre projet et vérifier nos disponibilités
-      </p>
-      
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <Button href="/contact" size="lg">
-          Demander un devis
-        </Button>
-        <Button href="tel:+33123456789" variant="outline" size="lg">
-          Appelez-nous
-        </Button>
-      </div>
+    <!-- Video container -->
+    <div class="w-full max-w-6xl aspect-video bg-noir-doux rounded-lg overflow-hidden shadow-cinema">
+      <video
+        id="modal-video"
+        controls
+        class="w-full h-full"
+        autoplay
+      >
+        <!-- Source will be set dynamically -->
+      </video>
     </div>
-  </Section>
+  </div>
 </Base>
 
 <script>
-  // Video showreel functionality
+  // Video modal functionality
   document.addEventListener('DOMContentLoaded', function() {
-    const video = document.getElementById('showreel-video') as HTMLVideoElement;
-    const container = document.getElementById('showreel-container');
+    const videoModal = document.getElementById('video-modal');
+    const modalVideo = document.getElementById('modal-video');
+    const closeBtn = document.getElementById('close-modal-btn');
+
+    // Hero video mute/unmute functionality
+    const heroVideo = document.getElementById('hero-video');
     const muteToggle = document.getElementById('mute-toggle');
     const muteIcon = document.getElementById('mute-icon');
     const unmuteIcon = document.getElementById('unmute-icon');
-    
-    if (!video || !container || !muteToggle) return;
-    
-    let hasStartedPlaying = false;
-    
-    // Intersection Observer for scroll-triggered video
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !hasStartedPlaying) {
-          // Auto-play when in view (silent)
-          video.muted = true;
-          video.play().catch(() => {
-            console.log('Autoplay prevented by browser');
-          });
-          hasStartedPlaying = true;
+
+    if (heroVideo && muteToggle) {
+      muteToggle.addEventListener('click', function() {
+        heroVideo.muted = !heroVideo.muted;
+
+        if (heroVideo.muted) {
+          muteIcon.classList.remove('hidden');
+          unmuteIcon.classList.add('hidden');
+        } else {
+          muteIcon.classList.add('hidden');
+          unmuteIcon.classList.remove('hidden');
         }
       });
-    }, {
-      threshold: 0.3, // Trigger when 30% of video is visible
-      rootMargin: '0px'
+    }
+
+    const videos = {
+      melissa: '/media/video/teaser_shooting_melissa.mp4',
+      solene: '/media/video/tezase_solene_thomas_website.mp4'
+    };
+
+    // Add click listeners to video containers
+    document.querySelectorAll('[data-video]').forEach(container => {
+      container.addEventListener('click', function() {
+        const videoId = this.getAttribute('data-video');
+        const videoSrc = videos[videoId];
+
+        if (videoSrc) {
+          modalVideo.src = videoSrc;
+          videoModal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+      });
     });
-    
-    observer.observe(container);
-    
-    // Mute/unmute toggle
-    muteToggle.addEventListener('click', function() {
-      video.muted = !video.muted;
-      
-      if (video.muted) {
-        muteIcon?.classList.remove('hidden');
-        unmuteIcon?.classList.add('hidden');
-      } else {
-        muteIcon?.classList.add('hidden');
-        unmuteIcon?.classList.remove('hidden');
+
+    // Close modal function
+    function closeVideoModal() {
+      modalVideo.pause();
+      modalVideo.src = '';
+      videoModal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close button
+    closeBtn.addEventListener('click', closeVideoModal);
+
+    // Close modal when clicking outside video
+    videoModal.addEventListener('click', function(e) {
+      if (e.target === videoModal) {
+        closeVideoModal();
       }
     });
-    
-    // Smooth scroll reveal animation
-    const revealOnScroll = () => {
-      const elements = document.querySelectorAll('[data-reveal]');
-      elements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-        
-        if (elementTop < window.innerHeight - elementVisible) {
-          element.classList.add('animate-slide-up');
-        }
-      });
-    };
-    
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll(); // Initial check
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
+        closeVideoModal();
+      }
+    });
   });
 </script>
+
