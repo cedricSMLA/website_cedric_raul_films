@@ -88,45 +88,49 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
     <!-- Container global 77% -->
     <div class="w-[77%] mx-auto">
       <!-- Header sticky -->
-      <header class="fixed top-0 left-0 right-0 z-50 bg-lin/95 backdrop-blur-sm">
-        <nav class="w-[77%] mx-auto px-4 py-8 flex justify-between items-end">
-        <a href="/" class="hover:text-doré-patiné transition-colors">
-          <div class="text-4xl font-bold text-pierre uppercase tracking-tight" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">
-            Cédric Raúl Films
-          </div>
-          <div class="text-xs text-pierre/70 mt-0.5">
-            Wedding videographer
-          </div>
-        </a>
+      <header class="fixed top-0 left-0 right-0 z-50 bg-lin/95 backdrop-blur-sm transition-all duration-300" id="header">
+        <nav class="w-[77%] mx-auto px-4 py-8">
+          <!-- Top row: Title and hamburger -->
+          <div class="flex justify-between items-end">
+            <a href="/" class="hover:text-doré-patiné transition-colors">
+              <div class="text-4xl font-bold text-pierre uppercase tracking-tight" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">
+                Cédric Raúl Films
+              </div>
+              <div class="text-xs text-pierre/70 mt-0.5">
+                Wedding videographer
+              </div>
+            </a>
 
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="/" class="text-pierre hover:text-doré-patiné transition-all hover:scale-110 text-lg">Accueil</a>
-          <a href="/contact" class="bg-noir-doux text-lin px-4 py-2 rounded hover:bg-pierre transition-all hover:scale-105 text-lg">
-            Contact
-          </a>
-        </div>
+            <div class="hidden md:flex items-center space-x-8">
+              <a href="/" class="text-pierre hover:text-doré-patiné transition-all hover:scale-110 text-base">ACCUEIL</a>
+              <a href="/contact" class="text-pierre hover:text-doré-patiné transition-all hover:scale-110 text-base">
+                CONTACT
+              </a>
+            </div>
 
-        <!-- Mobile menu button -->
-        <button class="md:hidden text-pierre" id="mobile-menu-btn">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </nav>
-      
-      <!-- Mobile menu -->
-      <div class="md:hidden hidden bg-lin/90 backdrop-blur-md" id="mobile-menu">
-        <div class="container mx-auto px-4 py-4 space-y-4">
-          <a href="/" class="block text-pierre hover:text-doré-patiné transition-all hover:scale-105 text-lg">Accueil</a>
-          <a href="/contact" class="block bg-noir-doux text-lin px-4 py-2 rounded hover:bg-pierre transition-all hover:scale-105 text-center text-lg">
-            Contact
-          </a>
-        </div>
-      </div>
-    </header>
+            <!-- Mobile menu button -->
+            <button class="md:hidden text-pierre" id="mobile-menu-btn">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Mobile menu items (hidden by default) -->
+          <div class="md:hidden overflow-hidden transition-all duration-500 ease-out max-h-0 opacity-0" id="mobile-menu-items">
+            <div class="mt-6 flex flex-col space-y-4">
+              <a href="/" class="text-pierre hover:text-doré-patiné transition-all text-base py-2 transform translate-x-4 opacity-0 duration-300" id="menu-item-1">ACCUEIL</a>
+              <a href="/contact" class="text-pierre hover:text-doré-patiné transition-all text-base py-2 transform translate-x-4 opacity-0 duration-300" id="menu-item-2">CONTACT</a>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Mobile overlay -->
+      <div class="md:hidden fixed top-0 left-0 right-0 bottom-0 bg-noir-doux/50 z-40 opacity-0 invisible transition-all duration-500" id="mobile-overlay"></div>
 
       <!-- Main content -->
-      <main class="pt-20">
+      <main class="pt-24 md:pt-20">
         <slot />
       </main>
 
@@ -194,13 +198,63 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
     </div>
 
     <script>
-      // Mobile menu toggle
+      // Mobile menu toggle with animations
       const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      
+      const mobileMenuItems = document.getElementById('mobile-menu-items');
+      const mobileOverlay = document.getElementById('mobile-overlay');
+      const menuItem1 = document.getElementById('menu-item-1');
+      const menuItem2 = document.getElementById('menu-item-2');
+
+      let isMenuOpen = false;
+
       mobileMenuBtn?.addEventListener('click', () => {
-        mobileMenu?.classList.toggle('hidden');
+        if (!isMenuOpen) {
+          // Open menu
+          mobileMenuItems?.classList.remove('max-h-0', 'opacity-0');
+          mobileMenuItems?.classList.add('max-h-64', 'opacity-100');
+
+          // Show overlay
+          mobileOverlay?.classList.remove('opacity-0', 'invisible');
+          mobileOverlay?.classList.add('opacity-100', 'visible');
+
+          // Animate menu items
+          setTimeout(() => {
+            menuItem1?.classList.remove('translate-x-4', 'opacity-0');
+            menuItem1?.classList.add('translate-x-0', 'opacity-100');
+          }, 250);
+
+          setTimeout(() => {
+            menuItem2?.classList.remove('translate-x-4', 'opacity-0');
+            menuItem2?.classList.add('translate-x-0', 'opacity-100');
+          }, 350);
+
+          isMenuOpen = true;
+        } else {
+          closeMenu();
+        }
       });
+
+      function closeMenu() {
+        // Hide menu items first
+        menuItem1?.classList.add('translate-x-4', 'opacity-0');
+        menuItem1?.classList.remove('translate-x-0', 'opacity-100');
+        menuItem2?.classList.add('translate-x-4', 'opacity-0');
+        menuItem2?.classList.remove('translate-x-0', 'opacity-100');
+
+        // Then hide overlay and menu
+        setTimeout(() => {
+          mobileMenuItems?.classList.add('max-h-0', 'opacity-0');
+          mobileMenuItems?.classList.remove('max-h-64', 'opacity-100');
+
+          mobileOverlay?.classList.add('opacity-0', 'invisible');
+          mobileOverlay?.classList.remove('opacity-100', 'visible');
+        }, 200);
+
+        isMenuOpen = false;
+      }
+
+      // Close menu when clicking on overlay
+      mobileOverlay?.addEventListener('click', closeMenu);
 
       // Cookie banner
       const cookieBanner = document.getElementById('cookie-banner');

@@ -461,7 +461,10 @@ ${data.nom}
     const target = document.querySelector('#contact');
     console.log('Scroll target found:', target);
     if (target) {
-      const targetPosition = target.offsetTop - 150; // 150px de marge au-dessus
+      // Offset différent selon la taille d'écran
+      const isMobile = window.innerWidth < 768;
+      const offset = isMobile ? 180 : 150; // 180px sur mobile, 150px sur desktop
+      const targetPosition = target.offsetTop - offset;
       window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'

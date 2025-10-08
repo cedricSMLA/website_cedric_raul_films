@@ -22,7 +22,7 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
   description="Vidéaste spécialisé dans les films de mariage cinématographiques et les vidéos corporate avec drone FPV sur la Côte d'Azur."
 >
   <!-- Hero Video -->
-  <section class="w-full pt-8 md:pt-12 pb-8 md:pb-12">
+  <section class="w-full pt-20 md:pt-12 pb-8 md:pb-12">
     <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group">
       <video
         id="hero-video"
@@ -33,7 +33,7 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
         disablepictureinpicture
         class="w-full h-full object-cover"
       >
-        <source src="/media/video/teaser.mp4" type="video/mp4">
+        <source src="/media/video/teaser_sarah_thierry.mp4" type="video/mp4">
       </video>
 
       <!-- Mute/Unmute button -->
@@ -53,34 +53,61 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
     </div>
   </section>
 
-  <!-- Two Videos Side by Side -->
+  <!-- Three Videos Layout -->
   <section class="w-full pb-8 md:pb-12">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 
-      <!-- Melissa Video -->
-      <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="melissa">
-        <video
-          muted
-          loop
-          playsinline
-          disablepictureinpicture
-          class="w-full h-full object-cover"
-          onmouseenter="this.play()"
-          onmouseleave="this.pause()"
-        >
-          <source src="/media/video/teaser_shooting_melissa.mp4" type="video/mp4">
-        </video>
+      <!-- Left Column: Two stacked videos -->
+      <div class="space-y-4 md:space-y-6">
+        <!-- Raumane & Maxime Video -->
+        <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="raumane">
+          <video
+            muted
+            loop
+            playsinline
+            disablepictureinpicture
+            class="w-full h-full object-cover"
+            poster="/media/video/raumane_maxime_poster.jpg"
+            onmouseenter="this.play()"
+            onmouseleave="this.pause()"
+          >
+            <source src="/media/video/TEASER_RAUMANE_MAXIME_WEBSITE.mp4" type="video/mp4">
+          </video>
 
-        <!-- Overlay on hover -->
-        <div class="absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <div class="text-center text-lin">
-            <h3 class="text-xl md:text-2xl font-bold mb-2 text-doré-patiné">Melissa & Daniel</h3>
-            <p class="text-md md:text-lg">Septembre 2025</p>
+          <!-- Overlay on hover -->
+          <div class="absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <div class="text-center text-lin">
+              <h3 class="text-xl md:text-2xl font-bold mb-2 text-doré-patiné">Raumane & Maxime</h3>
+              <p class="text-md md:text-lg">Octobre 2024</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Melissa & Daniel Video -->
+        <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="melissa">
+          <video
+            muted
+            loop
+            playsinline
+            disablepictureinpicture
+            class="w-full h-full object-cover"
+            onmouseenter="this.play()"
+            onmouseleave="this.pause()"
+          >
+            <source src="/media/video/teaser_shooting_melissa.mp4" type="video/mp4">
+          </video>
+
+          <!-- Overlay on hover -->
+          <div class="absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <div class="text-center text-lin">
+              <h3 class="text-xl md:text-2xl font-bold mb-2 text-doré-patiné">Melissa & Daniel</h3>
+              <p class="text-md md:text-lg">Septembre 2025</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Solene & Thomas Video -->
+      <!-- Right Column: Solene & Thomas Video -->
       <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="solene">
         <video
           muted
@@ -137,6 +164,7 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
     const modalVideo = document.getElementById('modal-video');
     const closeBtn = document.getElementById('close-modal-btn');
 
+
     // Hero video mute/unmute functionality
     const heroVideo = document.getElementById('hero-video');
     const muteToggle = document.getElementById('mute-toggle');
@@ -158,8 +186,10 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
     }
 
     const videos = {
+      sarah: '/media/video/teaser_sarah_thierry.mp4',
       melissa: '/media/video/teaser_shooting_melissa.mp4',
-      solene: '/media/video/tezase_solene_thomas_website.mp4'
+      solene: '/media/video/tezase_solene_thomas_website.mp4',
+      raumane: '/media/video/TEASER_RAUMANE_MAXIME_WEBSITE.mp4'
     };
 
     // Add click listeners to video containers
