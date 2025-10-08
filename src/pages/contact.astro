@@ -14,18 +14,18 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
   <!-- Hero Section -->
   <Section background="primary" padding="xl">
     <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-6xl md:text-7xl font-bold text-pierre mb-8 leading-tight">
+      <h1 class="scroll-reveal text-6xl md:text-7xl font-bold text-pierre mb-8 leading-tight">
         L'art de raconter
         <span class="block text-doré-patiné italic">votre histoire</span>
       </h1>
 
-      <p class="text-xl text-pierre/70 mb-12 max-w-2xl mx-auto leading-relaxed">
+      <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-pierre/70 mb-12 max-w-2xl mx-auto leading-relaxed">
         Chaque mariage est unique. Créons ensemble un film cinématographique
         qui transcende le temps et capture l'essence de votre amour.
       </p>
 
       <!-- CTA simple -->
-      <div class="flex justify-center mb-16">
+      <div class="scroll-reveal scroll-reveal-delay-2 flex justify-center mb-16">
         <a href="#contact" class="bg-noir-doux text-lin px-12 py-4 rounded-md font-medium hover:bg-pierre transition-all duration-300 hover:scale-105">
           Discutons de votre projet
         </a>
@@ -33,7 +33,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
 
       <!-- Promesses -->
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="text-center">
+        <div class="scroll-reveal-slide-left text-center">
           <div class="w-12 h-12 bg-doré-patiné rounded-full flex items-center justify-center mx-auto mb-3">
             <svg class="w-6 h-6 text-noir-doux" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -43,7 +43,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
           <p class="text-pierre/70 text-sm">Sous 24h maximum</p>
         </div>
 
-        <div class="text-center">
+        <div class="scroll-reveal scroll-reveal-delay-1 text-center">
           <div class="w-12 h-12 bg-sauge rounded-full flex items-center justify-center mx-auto mb-3">
             <svg class="w-6 h-6 text-lin" fill="currentColor" viewBox="0 0 24 24">
               <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -53,7 +53,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
           <p class="text-pierre/70 text-sm">Personnalisé et détaillé</p>
         </div>
 
-        <div class="text-center">
+        <div class="scroll-reveal-slide-right text-center">
           <div class="w-12 h-12 bg-doré-patiné rounded-full flex items-center justify-center mx-auto mb-3">
             <svg class="w-6 h-6 text-noir-doux" fill="currentColor" viewBox="0 0 24 24">
               <path d="M17 8h1a4 4 0 110 8h-1m-10-8H6a4 4 0 000 8h1m2-4h8"/>
@@ -66,36 +66,31 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
     </div>
   </Section>
 
-  <!-- Séparateur élégant avec transition -->
-  <div class="w-full py-16 bg-gradient-to-b from-lin via-sauge-light to-pierre/20 relative">
-    <!-- Dégradés latéraux -->
-    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent opacity-60"
-         style="background: radial-gradient(ellipse at center, rgba(163, 177, 138, 0.3) 0%, transparent 70%);">
-    </div>
-
-    <div class="max-w-4xl mx-auto text-center relative z-10">
-      <div class="w-24 h-0.5 bg-doré-patiné mx-auto mb-8"></div>
-      <h2 class="text-3xl md:text-4xl font-bold text-pierre mb-4">
+  <!-- Séparateur élégant -->
+  <Section background="dark" padding="xl">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="scroll-reveal-fade w-24 h-0.5 bg-doré-patiné mx-auto mb-8"></div>
+      <h2 class="scroll-reveal text-3xl md:text-4xl font-bold text-lin mb-4">
         Créons ensemble votre film
       </h2>
-      <p class="text-lg text-pierre/70 max-w-2xl mx-auto">
+      <p class="scroll-reveal scroll-reveal-delay-1 text-lg text-lin/70 max-w-2xl mx-auto">
         Chaque détail compte pour raconter votre histoire unique.
         Partagez-nous vos envies et vos inspirations.
       </p>
-      <div class="w-24 h-0.5 bg-doré-patiné mx-auto mt-8"></div>
+      <div class="scroll-reveal-fade scroll-reveal-delay-2 w-24 h-0.5 bg-doré-patiné mx-auto mt-8"></div>
     </div>
-  </div>
+  </Section>
 
   <!-- Contact Form -->
-  <Section background="dark" padding="xl" id="contact">
-    <div class="max-w-3xl mx-auto">
+  <Section background="primary" padding="xl">
+    <div class="max-w-3xl mx-auto" id="contact">
 
       <!-- Formulaire -->
-      <form id="contact-form" class="space-y-8">
+      <form id="contact-form" class="scroll-reveal space-y-8">
         <!-- Infos de base -->
         <div class="grid md:grid-cols-2 gap-6">
           <div>
-            <label for="nom" class="block text-sm font-medium text-lin/90 mb-3">
+            <label for="nom" class="block text-sm font-medium text-pierre/80 mb-3">
               Vos noms *
             </label>
             <input
@@ -103,13 +98,13 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
               id="nom"
               name="nom"
               required
-              class="w-full px-4 py-3 border border-lin/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-noir-doux/50 text-lin placeholder-lin/50"
+              class="w-full px-4 py-3 border border-pierre/20 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-pierre placeholder-pierre/40"
               placeholder="Marie & Thomas"
             />
           </div>
 
           <div>
-            <label for="email" class="block text-sm font-medium text-lin/90 mb-3">
+            <label for="email" class="block text-sm font-medium text-pierre/80 mb-3">
               Email *
             </label>
             <input
@@ -117,7 +112,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
               id="email"
               name="email"
               required
-              class="w-full px-4 py-3 border border-lin/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-noir-doux/50 text-lin placeholder-lin/50"
+              class="w-full px-4 py-3 border border-pierre/20 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-pierre placeholder-pierre/40"
               placeholder="marie.thomas@email.com"
             />
           </div>
@@ -126,7 +121,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
         <!-- Détails mariage -->
         <div class="grid md:grid-cols-2 gap-6">
           <div>
-            <label for="date" class="block text-sm font-medium text-lin/90 mb-3">
+            <label for="date" class="block text-sm font-medium text-pierre/80 mb-3">
               Date de votre mariage *
             </label>
             <input
@@ -134,12 +129,12 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
               id="date"
               name="date"
               required
-              class="w-full px-4 py-3 border border-lin/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-noir-doux/50 text-lin"
+              class="w-full px-4 py-3 border border-pierre/20 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-pierre"
             />
           </div>
 
           <div>
-            <label for="lieu" class="block text-sm font-medium text-lin/90 mb-3">
+            <label for="lieu" class="block text-sm font-medium text-pierre/80 mb-3">
               Lieu *
             </label>
             <input
@@ -147,7 +142,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
               id="lieu"
               name="lieu"
               required
-              class="w-full px-4 py-3 border border-lin/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-noir-doux/50 text-lin placeholder-lin/50"
+              class="w-full px-4 py-3 border border-pierre/20 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-pierre placeholder-pierre/40"
               placeholder="Nice, Côte d'Azur"
             />
           </div>
@@ -155,13 +150,13 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
 
         <!-- Budget -->
         <div>
-          <label for="budget" class="block text-sm font-medium text-lin/90 mb-3">
+          <label for="budget" class="block text-sm font-medium text-pierre/80 mb-3">
             Budget envisagé
           </label>
           <select
             id="budget"
             name="budget"
-            class="w-full px-4 py-3 border border-lin/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-noir-doux/50 text-lin"
+            class="w-full px-4 py-3 border border-pierre/20 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-pierre"
           >
             <option value="">Sélectionnez une fourchette</option>
             <option value="2000-3000">2000€ - 3000€</option>
@@ -174,7 +169,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
 
         <!-- Message -->
         <div>
-          <label for="message" class="block text-sm font-medium text-lin/90 mb-3">
+          <label for="message" class="block text-sm font-medium text-pierre/80 mb-3">
             Parlez-nous de votre vision *
           </label>
           <textarea
@@ -182,7 +177,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
             name="message"
             rows="5"
             required
-            class="w-full px-4 py-3 border border-lin/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent resize-none bg-noir-doux/50 text-lin placeholder-lin/50"
+            class="w-full px-4 py-3 border border-pierre/20 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent resize-none bg-lin text-pierre placeholder-pierre/40"
             placeholder="Décrivez-nous votre mariage, vos attentes, l'ambiance que vous souhaitez..."
           ></textarea>
         </div>
@@ -194,9 +189,9 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
             id="consent"
             name="consent"
             required
-            class="mt-1.5 h-4 w-4 text-doré-patiné border-lin/30 rounded focus:ring-doré-patiné bg-noir-doux/50"
+            class="mt-1.5 h-4 w-4 text-doré-patiné border-pierre/30 rounded focus:ring-doré-patiné"
           />
-          <label for="consent" class="text-sm text-lin/70 leading-relaxed">
+          <label for="consent" class="text-sm text-pierre/60 leading-relaxed">
             J'accepte que mes données soient utilisées pour traiter ma demande.
             <a href="/confidentialite" class="text-doré-patiné underline hover:no-underline">Politique de confidentialité</a>
           </label>
@@ -218,10 +213,10 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <!-- Texte -->
         <div>
-          <h2 class="text-4xl font-bold text-lin mb-6">
+          <h2 class="scroll-reveal text-4xl font-bold text-lin mb-6">
             Une approche différente
           </h2>
-          <p class="text-lin/80 mb-8 leading-relaxed">
+          <p class="scroll-reveal scroll-reveal-delay-1 text-lin/80 mb-8 leading-relaxed">
             Nous privilégions l'authenticité à la mise en scène. Chaque geste, chaque regard,
             chaque sourire est capturé dans sa vérité pour créer un récit sincère et émouvant.
           </p>
@@ -285,18 +280,18 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
   <!-- Notre vision -->
   <Section background="primary" padding="xl">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl md:text-5xl font-bold text-pierre mb-8">
+      <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-pierre mb-8">
         Notre vision
       </h2>
 
-      <p class="text-xl text-pierre/80 mb-12 leading-relaxed">
+      <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-pierre/80 mb-12 leading-relaxed">
         Nous croyons que chaque mariage est une histoire unique qui mérite d'être racontée avec
         l'élégance et l'émotion du grand cinéma. Notre mission : créer des films qui transcendent
         le temps et touchent les cœurs.
       </p>
 
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="text-center">
+        <div class="scroll-reveal-slide-left text-center">
           <div class="w-16 h-16 bg-doré-patiné rounded-full flex items-center justify-center mx-auto mb-4">
             <svg class="w-8 h-8 text-noir-doux" fill="currentColor" viewBox="0 0 24 24">
               <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
@@ -308,7 +303,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
           </p>
         </div>
 
-        <div class="text-center">
+        <div class="scroll-reveal scroll-reveal-delay-2 text-center">
           <div class="w-16 h-16 bg-sauge rounded-full flex items-center justify-center mx-auto mb-4">
             <svg class="w-8 h-8 text-lin" fill="currentColor" viewBox="0 0 24 24">
               <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -320,7 +315,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
           </p>
         </div>
 
-        <div class="text-center">
+        <div class="scroll-reveal-slide-right text-center">
           <div class="w-16 h-16 bg-doré-patiné rounded-full flex items-center justify-center mx-auto mb-4">
             <svg class="w-8 h-8 text-noir-doux" fill="currentColor" viewBox="0 0 24 24">
               <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
@@ -385,7 +380,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
   <Section background="primary" padding="xl">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-pierre mb-6">
-        Une production <span class="text-doré-patiné">SMLEYE Prod</span>
+        Une production <span class="text-doré-patiné" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">SMLEYE PROD</span>
       </h2>
 
       <p class="text-xl text-pierre/80 mb-8 leading-relaxed">
@@ -463,9 +458,50 @@ ${data.nom}
   // Smooth scroll
   document.querySelector('a[href="#contact"]')?.addEventListener('click', function(e) {
     e.preventDefault();
-    document.querySelector('#contact')?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
+    const target = document.querySelector('#contact');
+    console.log('Scroll target found:', target);
+    if (target) {
+      const targetPosition = target.offsetTop - 150; // 150px de marge au-dessus
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+    } else {
+      console.error('Element #contact not found');
+    }
   });
+
+  // Scroll reveal animations
+  function initScrollReveal() {
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-visible');
+          // Log pour debug
+          console.log('Animation triggered for:', entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observer tous les éléments avec les classes scroll-reveal
+    const elements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-slide-left, .scroll-reveal-slide-right, .scroll-reveal-fade');
+    console.log('Found elements to animate:', elements.length);
+
+    elements.forEach(el => {
+      observer.observe(el);
+      console.log('Observing:', el);
+    });
+  }
+
+  // Initialiser après le chargement du DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollReveal);
+  } else {
+    initScrollReveal();
+  }
 </script>
