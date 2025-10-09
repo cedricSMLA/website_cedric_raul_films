@@ -22,7 +22,7 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
   description="Vidéaste spécialisé dans les films de mariage cinématographiques et les vidéos corporate avec drone FPV sur la Côte d'Azur."
 >
   <!-- Hero Video -->
-  <section class="w-full pt-20 md:pt-12 pb-8 md:pb-12">
+  <section class="w-full pt-28 md:pt-0 pb-8 md:pb-12">
     <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group">
       <video
         id="hero-video"
@@ -53,7 +53,7 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
     </div>
   </section>
 
-  <!-- Three Videos Layout -->
+  <!-- Four Videos Layout -->
   <section class="w-full pb-8 md:pb-12">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 
@@ -107,26 +107,52 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
         </div>
       </div>
 
-      <!-- Right Column: Solene & Thomas Video -->
-      <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="solene">
-        <video
-          muted
-          loop
-          playsinline
-          disablepictureinpicture
-          class="w-full h-full object-cover"
-          poster="/media/video/tezase_solene_thomas_poster.jpg"
-          onmouseenter="this.play()"
-          onmouseleave="this.pause()"
-        >
-          <source src="/media/video/tezase_solene_thomas_website.mp4" type="video/mp4">
-        </video>
+      <!-- Right Column: Two stacked videos -->
+      <div class="space-y-4 md:space-y-6">
+        <!-- Solene & Thomas Video -->
+        <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="solene">
+          <video
+            muted
+            loop
+            playsinline
+            disablepictureinpicture
+            class="w-full h-full object-cover"
+            poster="/media/video/tezase_solene_thomas_poster.jpg"
+            onmouseenter="this.play()"
+            onmouseleave="this.pause()"
+          >
+            <source src="/media/video/tezase_solene_thomas_website.mp4" type="video/mp4">
+          </video>
 
-        <!-- Overlay on hover -->
-        <div class="absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <div class="text-center text-lin">
-            <h3 class="text-xl md:text-2xl font-bold mb-2 text-doré-patiné">Solène & Thomas</h3>
-            <p class="text-md md:text-lg">Août 2024</p>
+          <!-- Overlay on hover -->
+          <div class="absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <div class="text-center text-lin">
+              <h3 class="text-xl md:text-2xl font-bold mb-2 text-doré-patiné">Solène & Thomas</h3>
+              <p class="text-md md:text-lg">Août 2024</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Amelie & Cedric Video -->
+        <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="amelie">
+          <video
+            muted
+            loop
+            playsinline
+            disablepictureinpicture
+            class="w-full h-full object-cover"
+            onmouseenter="this.play()"
+            onmouseleave="this.pause()"
+          >
+            <source src="/media/video/amelie_cedric_website.mp4" type="video/mp4">
+          </video>
+
+          <!-- Overlay on hover -->
+          <div class="absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <div class="text-center text-lin">
+              <h3 class="text-xl md:text-2xl font-bold mb-2 text-doré-patiné">Amelie & Cedric</h3>
+              <p class="text-md md:text-lg">2024</p>
+            </div>
           </div>
         </div>
       </div>
@@ -189,7 +215,8 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
       sarah: '/media/video/teaser_sarah_thierry.mp4',
       melissa: '/media/video/teaser_shooting_melissa.mp4',
       solene: '/media/video/tezase_solene_thomas_website.mp4',
-      raumane: '/media/video/TEASER_RAUMANE_MAXIME_WEBSITE.mp4'
+      raumane: '/media/video/TEASER_RAUMANE_MAXIME_WEBSITE.mp4',
+      amelie: '/media/video/amelie_cedric_website.mp4'
     };
 
     // Add click listeners to video containers

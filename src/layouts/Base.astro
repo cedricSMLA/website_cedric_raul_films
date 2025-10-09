@@ -85,6 +85,9 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
     )}
   </head>
   <body class="bg-lin text-pierre font-sans antialiased">
+    <!-- Page transition overlay -->
+    <div class="page-transition-overlay" id="page-transition-overlay"></div>
+
     <!-- Container global 77% -->
     <div class="w-[77%] mx-auto">
       <!-- Header sticky -->
@@ -93,10 +96,10 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
           <!-- Top row: Title and hamburger -->
           <div class="flex justify-between items-end">
             <a href="/" class="hover:text-doré-patiné transition-colors">
-              <div class="text-4xl font-bold text-pierre uppercase tracking-tight" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">
+              <div class="text-5xl font-bold text-pierre uppercase tracking-tight leading-none" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">
                 Cédric Raúl Films
               </div>
-              <div class="text-xs text-pierre/70 mt-0.5">
+              <div class="text-sm text-pierre/70 mt-1 ml-0.5">
                 Wedding videographer
               </div>
             </a>
@@ -130,7 +133,7 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
       <div class="md:hidden fixed top-0 left-0 right-0 bottom-0 bg-noir-doux/50 z-40 opacity-0 invisible transition-all duration-500" id="mobile-overlay"></div>
 
       <!-- Main content -->
-      <main class="pt-24 md:pt-20">
+      <main class="pt-32 md:pt-20">
         <slot />
       </main>
 
@@ -274,6 +277,49 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
       declineBtn?.addEventListener('click', () => {
         localStorage.setItem('cookie-consent', 'declined');
         cookieBanner?.classList.add('hidden');
+      });
+
+      // Page transitions
+      const overlay = document.getElementById('page-transition-overlay');
+      const links = document.querySelectorAll('a[href^="/"]');
+
+      // Exclure les liens externes, ancres et downloads
+      const internalLinks = Array.from(links).filter(link => {
+        const href = link.getAttribute('href');
+        return href &&
+               href.startsWith('/') &&
+               !href.startsWith('//') &&
+               !link.hasAttribute('download') &&
+               !link.getAttribute('target') === '_blank' &&
+               !href.includes('#');
+      });
+
+      internalLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+
+          // Ne pas intercepter si c'est la page actuelle
+          if (href === window.location.pathname) {
+            return;
+          }
+
+          e.preventDefault();
+
+          // Déclencher l'animation de sortie
+          document.body.classList.add('page-exit');
+          overlay?.classList.add('active');
+
+          // Naviguer après l'animation (450ms)
+          setTimeout(() => {
+            window.location.href = href;
+          }, 450);
+        });
+      });
+
+      // Animation d'entrée au chargement de la page
+      window.addEventListener('pageshow', () => {
+        document.body.classList.remove('page-exit');
+        overlay?.classList.remove('active');
       });
     </script>
   </body>
