@@ -18,7 +18,7 @@ export default {
       colors: {
         // Palette moody vert-sauge & doré désaturé
         'sauge': '#A3B18A',
-        'lin': '#F2EEE3',
+        'lin': '#FAFAF8',
         'pierre': '#5E5B55',
         'noir-doux': '#1C1A19',
         'doré-patiné': '#C2A56B',
@@ -35,7 +35,7 @@ export default {
         'strong': '0 8px 32px rgba(28, 26, 25, 0.16), 0 4px 12px rgba(28, 26, 25, 0.12)'
       },
       backgroundColor: {
-        'primary': '#F2EEE3',
+        'primary': '#FAFAF8',
         'secondary': '#A3B18A',
         'dark': '#1C1A19'
       },

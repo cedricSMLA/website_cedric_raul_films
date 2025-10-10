@@ -22,24 +22,25 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
   description="Vidéaste spécialisé dans les films de mariage cinématographiques et les vidéos corporate avec drone FPV sur la Côte d'Azur."
 >
   <!-- Hero Video -->
-  <section class="w-full pt-28 md:pt-0 pb-8 md:pb-12">
-    <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group">
+  <section class="w-full pt-6 md:pt-0 pb-4 md:pb-12">
+    <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer md:cursor-default hover:shadow-strong transition-all duration-300" id="hero-video-container" data-video="amelie">
       <video
         id="hero-video"
-        autoplay
         muted
         loop
         playsinline
         disablepictureinpicture
+        preload="metadata"
+        poster="/media/video/amelie_cedric_poster.jpg"
         class="w-full h-full object-cover"
       >
-        <source src="/media/video/teaser_sarah_thierry.mp4" type="video/mp4">
+        <source src="/media/video/amelie_cedric_website.mp4" type="video/mp4">
       </video>
 
-      <!-- Mute/Unmute button -->
+      <!-- Mute/Unmute button (desktop uniquement) -->
       <button
         id="mute-toggle"
-        class="absolute bottom-4 right-4 w-10 h-10 bg-noir-doux/50 hover:bg-noir-doux/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 border border-doré-patiné/30 hover:border-doré-patiné/60"
+        class="hidden md:flex absolute bottom-4 right-4 w-10 h-10 bg-noir-doux/50 hover:bg-noir-doux/80 backdrop-blur-sm rounded-full items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 border border-doré-patiné/30 hover:border-doré-patiné/60"
         aria-label="Activer/Désactiver le son"
       >
         <svg id="mute-icon" class="w-5 h-5 text-doré-patiné" fill="currentColor" viewBox="0 0 28 24">
@@ -51,108 +52,151 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
         </svg>
       </button>
     </div>
+
+    <!-- Titre sous la vidéo (mobile uniquement) -->
+    <div class="md:hidden mt-2 text-center">
+      <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Amelie & Cedric</h3>
+    </div>
   </section>
 
   <!-- Four Videos Layout -->
-  <section class="w-full pb-8 md:pb-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+  <section class="w-full pb-4 md:pb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6">
 
       <!-- Left Column: Two stacked videos -->
-      <div class="space-y-4 md:space-y-6">
+      <div class="space-y-2 md:space-y-6">
         <!-- Raumane & Maxime Video -->
-        <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="raumane">
-          <video
-            muted
-            loop
-            playsinline
-            disablepictureinpicture
-            class="w-full h-full object-cover"
-            poster="/media/video/raumane_maxime_poster.jpg"
-            onmouseenter="this.play()"
-            onmouseleave="this.pause()"
-          >
-            <source src="/media/video/TEASER_RAUMANE_MAXIME_WEBSITE.mp4" type="video/mp4">
-          </video>
+        <div>
+          <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="raumane">
+            <video
+              muted
+              loop
+              playsinline
+              disablepictureinpicture
+              preload="metadata"
+              class="w-full h-full object-cover"
+              poster="/media/video/raumane_maxime_poster.jpg"
+              onmouseenter="this.play()"
+              onmouseleave="this.pause()"
+            >
+              <source src="/media/video/TEASER_RAUMANE_MAXIME_WEBSITE.mp4" type="video/mp4">
+            </video>
 
-          <!-- Overlay on hover -->
-          <div class="absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <div class="text-center text-lin">
-              <h3 class="text-xl md:text-2xl font-bold mb-2 text-doré-patiné">Raumane & Maxime</h3>
-              <p class="text-md md:text-lg">Octobre 2024</p>
+            <!-- Overlay on hover (desktop uniquement) -->
+            <div class="hidden md:flex absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
+              <div class="text-center text-lin">
+                <h3 class="text-xl md:text-2xl mb-2 text-doré-patiné" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Raumane & Maxime</h3>
+                <p class="text-md md:text-lg">Octobre 2024</p>
+              </div>
             </div>
+          </div>
+
+          <!-- Titre sous la vidéo (mobile uniquement) -->
+          <div class="md:hidden mt-2 text-center">
+            <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Raumane & Maxime</h3>
+            <p class="text-sm text-pierre/70">Octobre 2024</p>
           </div>
         </div>
 
         <!-- Melissa & Daniel Video -->
-        <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="melissa">
-          <video
-            muted
-            loop
-            playsinline
-            disablepictureinpicture
-            class="w-full h-full object-cover"
-            onmouseenter="this.play()"
-            onmouseleave="this.pause()"
-          >
-            <source src="/media/video/teaser_shooting_melissa.mp4" type="video/mp4">
-          </video>
+        <div>
+          <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="melissa">
+            <video
+              muted
+              loop
+              playsinline
+              disablepictureinpicture
+              preload="metadata"
+              poster="/media/video/teaser_shooting_melissa_poster.jpg"
+              class="w-full h-full object-cover"
+              onmouseenter="this.play()"
+              onmouseleave="this.pause()"
+            >
+              <source src="/media/video/teaser_shooting_melissa.mp4" type="video/mp4">
+            </video>
 
-          <!-- Overlay on hover -->
-          <div class="absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <div class="text-center text-lin">
-              <h3 class="text-xl md:text-2xl font-bold mb-2 text-doré-patiné">Melissa & Daniel</h3>
-              <p class="text-md md:text-lg">Septembre 2025</p>
+            <!-- Overlay on hover (desktop uniquement) -->
+            <div class="hidden md:flex absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
+              <div class="text-center text-lin">
+                <h3 class="text-xl md:text-2xl mb-2 text-doré-patiné" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Melissa & Daniel</h3>
+                <p class="text-md md:text-lg">Septembre 2025</p>
+              </div>
             </div>
+          </div>
+
+          <!-- Titre sous la vidéo (mobile uniquement) -->
+          <div class="md:hidden mt-2 text-center">
+            <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Melissa & Daniel</h3>
+            <p class="text-sm text-pierre/70">Septembre 2025</p>
           </div>
         </div>
       </div>
 
       <!-- Right Column: Two stacked videos -->
-      <div class="space-y-4 md:space-y-6">
+      <div class="space-y-2 md:space-y-6">
         <!-- Solene & Thomas Video -->
-        <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="solene">
-          <video
-            muted
-            loop
-            playsinline
-            disablepictureinpicture
-            class="w-full h-full object-cover"
-            poster="/media/video/tezase_solene_thomas_poster.jpg"
-            onmouseenter="this.play()"
-            onmouseleave="this.pause()"
-          >
-            <source src="/media/video/tezase_solene_thomas_website.mp4" type="video/mp4">
-          </video>
+        <div>
+          <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="solene">
+            <video
+              muted
+              loop
+              playsinline
+              disablepictureinpicture
+              preload="metadata"
+              class="w-full h-full object-cover"
+              poster="/media/video/tezase_solene_thomas_poster.jpg"
+              onmouseenter="this.play()"
+              onmouseleave="this.pause()"
+            >
+              <source src="/media/video/tezase_solene_thomas_website.mp4" type="video/mp4">
+            </video>
 
-          <!-- Overlay on hover -->
-          <div class="absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <div class="text-center text-lin">
-              <h3 class="text-xl md:text-2xl font-bold mb-2 text-doré-patiné">Solène & Thomas</h3>
-              <p class="text-md md:text-lg">Août 2024</p>
+            <!-- Overlay on hover (desktop uniquement) -->
+            <div class="hidden md:flex absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
+              <div class="text-center text-lin">
+                <h3 class="text-xl md:text-2xl mb-2 text-doré-patiné" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Solène & Thomas</h3>
+                <p class="text-md md:text-lg">Août 2024</p>
+              </div>
             </div>
+          </div>
+
+          <!-- Titre sous la vidéo (mobile uniquement) -->
+          <div class="md:hidden mt-2 text-center">
+            <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Solène & Thomas</h3>
+            <p class="text-sm text-pierre/70">Août 2024</p>
           </div>
         </div>
 
-        <!-- Amelie & Cedric Video -->
-        <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="amelie">
-          <video
-            muted
-            loop
-            playsinline
-            disablepictureinpicture
-            class="w-full h-full object-cover"
-            onmouseenter="this.play()"
-            onmouseleave="this.pause()"
-          >
-            <source src="/media/video/amelie_cedric_website.mp4" type="video/mp4">
-          </video>
+        <!-- Sarah & Thierry Video -->
+        <div>
+          <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="sarah">
+            <video
+              muted
+              loop
+              playsinline
+              disablepictureinpicture
+              preload="metadata"
+              class="w-full h-full object-cover"
+              poster="/media/video/teaser_sarah_thierry_poster.jpg"
+              onmouseenter="this.play()"
+              onmouseleave="this.pause()"
+            >
+              <source src="/media/video/teaser_sarah_thierry.mp4" type="video/mp4">
+            </video>
 
-          <!-- Overlay on hover -->
-          <div class="absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <div class="text-center text-lin">
-              <h3 class="text-xl md:text-2xl font-bold mb-2 text-doré-patiné">Amelie & Cedric</h3>
-              <p class="text-md md:text-lg">2024</p>
+            <!-- Overlay on hover (desktop uniquement) -->
+            <div class="hidden md:flex absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
+              <div class="text-center text-lin">
+                <h3 class="text-xl md:text-2xl mb-2 text-doré-patiné" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Sarah & Thierry</h3>
+                <p class="text-md md:text-lg">2024</p>
+              </div>
             </div>
+          </div>
+
+          <!-- Titre sous la vidéo (mobile uniquement) -->
+          <div class="md:hidden mt-2 text-center">
+            <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Sarah & Thierry</h3>
+            <p class="text-sm text-pierre/70">2024</p>
           </div>
         </div>
       </div>
@@ -191,14 +235,26 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
     const closeBtn = document.getElementById('close-modal-btn');
 
 
-    // Hero video mute/unmute functionality
+    // Hero video - autoplay desktop uniquement
     const heroVideo = document.getElementById('hero-video');
+    const heroVideoContainer = document.getElementById('hero-video-container');
     const muteToggle = document.getElementById('mute-toggle');
     const muteIcon = document.getElementById('mute-icon');
     const unmuteIcon = document.getElementById('unmute-icon');
 
+    // Autoplay sur desktop uniquement
+    if (heroVideo) {
+      const isDesktop = window.innerWidth >= 768;
+      if (isDesktop) {
+        heroVideo.autoplay = true;
+        heroVideo.play().catch(e => console.log('Autoplay prevented:', e));
+      }
+    }
+
+    // Mute/unmute toggle (desktop)
     if (heroVideo && muteToggle) {
-      muteToggle.addEventListener('click', function() {
+      muteToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
         heroVideo.muted = !heroVideo.muted;
 
         if (heroVideo.muted) {
@@ -221,8 +277,21 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
 
     // Add click listeners to video containers
     document.querySelectorAll('[data-video]').forEach(container => {
-      container.addEventListener('click', function() {
+      container.addEventListener('click', function(e) {
+        // Sur desktop, empêcher l'ouverture de la modal pour la vidéo hero
         const videoId = this.getAttribute('data-video');
+        const isDesktop = window.innerWidth >= 768;
+
+        // Si c'est la vidéo hero sur desktop, ne pas ouvrir la modal
+        if (videoId === 'amelie' && isDesktop) {
+          return;
+        }
+
+        // Si on clique sur le bouton mute, ne pas ouvrir la modal
+        if (e.target.closest('#mute-toggle')) {
+          return;
+        }
+
         const videoSrc = videos[videoId];
 
         if (videoSrc) {
