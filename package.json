@@ -5,8 +5,8 @@
   "private": true,
   "description": "Site web officiel de Cédric Raúl Films - Vidéaste mariage cinématographique",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "astro dev --host",
+    "start": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
