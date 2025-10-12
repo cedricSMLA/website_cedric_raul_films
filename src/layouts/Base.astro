@@ -133,6 +133,7 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
 
             <div class="flex items-center space-x-8">
               <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all hover:scale-110 text-base" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">ACCUEIL</a>
+              <a href="/a-propos" class="text-noir-doux hover:text-doré-patiné transition-all hover:scale-110 text-base" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">À PROPOS</a>
               <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all hover:scale-110 text-base" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">
                 CONTACT
               </a>
@@ -143,7 +144,8 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
           <div class="md:hidden overflow-hidden transition-all duration-500 ease-out max-h-0 opacity-0" id="mobile-menu-items">
             <div class="mt-6 flex flex-col space-y-4">
               <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all text-base py-2 transform translate-x-4 opacity-0 duration-300" id="menu-item-1" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">ACCUEIL</a>
-              <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all text-base py-2 transform translate-x-4 opacity-0 duration-300" id="menu-item-2" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">CONTACT</a>
+              <a href="/a-propos" class="text-noir-doux hover:text-doré-patiné transition-all text-base py-2 transform translate-x-4 opacity-0 duration-300" id="menu-item-2" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">À PROPOS</a>
+              <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all text-base py-2 transform translate-x-4 opacity-0 duration-300" id="menu-item-3" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">CONTACT</a>
             </div>
           </div>
         </nav>
@@ -227,6 +229,7 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
       const mobileOverlay = document.getElementById('mobile-overlay');
       const menuItem1 = document.getElementById('menu-item-1');
       const menuItem2 = document.getElementById('menu-item-2');
+      const menuItem3 = document.getElementById('menu-item-3');
 
       let isMenuOpen = false;
 
@@ -234,7 +237,7 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
         if (!isMenuOpen) {
           // Open menu
           mobileMenuItems?.classList.remove('max-h-0', 'opacity-0');
-          mobileMenuItems?.classList.add('max-h-64', 'opacity-100');
+          mobileMenuItems?.classList.add('max-h-96', 'opacity-100');
 
           // Show overlay
           mobileOverlay?.classList.remove('opacity-0', 'invisible');
@@ -251,6 +254,11 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
             menuItem2?.classList.add('translate-x-0', 'opacity-100');
           }, 350);
 
+          setTimeout(() => {
+            menuItem3?.classList.remove('translate-x-4', 'opacity-0');
+            menuItem3?.classList.add('translate-x-0', 'opacity-100');
+          }, 450);
+
           isMenuOpen = true;
         } else {
           closeMenu();
@@ -263,6 +271,8 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
         menuItem1?.classList.remove('translate-x-0', 'opacity-100');
         menuItem2?.classList.add('translate-x-4', 'opacity-0');
         menuItem2?.classList.remove('translate-x-0', 'opacity-100');
+        menuItem3?.classList.add('translate-x-4', 'opacity-0');
+        menuItem3?.classList.remove('translate-x-0', 'opacity-100');
 
         // Then hide overlay and menu
         setTimeout(() => {
