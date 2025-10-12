@@ -18,11 +18,11 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
 ---
 
 <Base
-  title="Cédric Raúl Films - Vidéaste mariage cinématographique Côte d'Azur"
-  description="Vidéaste spécialisé dans les films de mariage cinématographiques et les vidéos corporate avec drone FPV sur la Côte d'Azur."
+  title="Cédric Raúl Films - Vidéaste mariage cinématographique Paris & Worldwide"
+  description="Films de mariage cinématographiques qui provoquent l'émotion. Basé à Paris, disponible partout ailleurs. Drone FPV inclus."
 >
   <!-- Hero Video -->
-  <section class="w-full pt-6 md:pt-0 pb-4 md:pb-12">
+  <section class="w-full pb-4 md:pb-12">
     <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer md:cursor-default hover:shadow-strong transition-all duration-300" id="hero-video-container" data-video="amelie">
       <video
         id="hero-video"
@@ -203,6 +203,45 @@ const featuredPhotographes = photographes.filter(p => p.data.featured).slice(0, 
 
     </div>
   </section>
+
+  <!-- Témoignages - Version élégante -->
+  <Section background="dark" padding="xl">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold text-lin mb-12" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">
+        Ce que mes couples disent
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- Témoignage 1 -->
+        <div class="text-left">
+          <p class="text-lg text-lin/80 mb-4 italic leading-relaxed">
+            "J'ai eu des frissons en regardant notre film. J'étais émue aux larmes.
+            Cédric a capturé des moments que je pensais avoir oubliés."
+          </p>
+          <p class="text-doré-patiné font-medium">— Raumane & Maxime</p>
+          <p class="text-lin/60 text-sm">Octobre 2024</p>
+        </div>
+
+        <!-- Témoignage 2 -->
+        <div class="text-left">
+          <p class="text-lg text-lin/80 mb-4 italic leading-relaxed">
+            "Je savais que Cédric faisait du bon travail, mais le résultat
+            a largement dépassé mes espérances. C'est du grand cinéma."
+          </p>
+          <p class="text-doré-patiné font-medium">— Thomas</p>
+          <p class="text-lin/60 text-sm">Août 2024</p>
+        </div>
+      </div>
+
+      <!-- Badge Featured (discrètement) -->
+      <div class="mt-12 pt-8 border-t border-lin/10">
+        <p class="text-lin/60 text-sm mb-2">Publié dans</p>
+        <a href="https://www.lasoeurdelamariee.com/mariage-moderne-a-paris/" target="_blank" rel="noopener noreferrer" class="text-doré-patiné hover:text-doré-light transition-colors text-base">
+          La Sœur de la Mariée
+        </a>
+      </div>
+    </div>
+  </Section>
 
   <!-- Video Modal -->
   <div id="video-modal" class="fixed inset-0 bg-noir-doux/95 z-50 hidden flex items-center justify-center p-4">

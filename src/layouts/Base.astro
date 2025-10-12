@@ -91,30 +91,30 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
     <!-- Container global 77% -->
     <div class="w-[95%] md:w-[77%] mx-auto">
       <!-- Header -->
-      <header class="bg-lin transition-all duration-300 relative z-40 md:fixed md:top-0 md:left-0 md:right-0" id="header">
-        <nav class="w-full px-4 py-4 md:w-[77%] md:mx-auto md:py-8">
+      <header class="bg-lin transition-all duration-300 relative z-40" id="header">
+        <nav class="w-full px-4 py-6 md:px-0 md:py-10">
           <!-- Mobile layout -->
           <div class="md:hidden">
             <a href="/" class="hover:text-doré-patiné transition-colors block">
-              <div class="text-3xl font-bold uppercase tracking-tight leading-tight" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif; color: #2A2926;">
+              <div class="text-3xl font-bold uppercase tracking-tight leading-none" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif; color: #2A2926;">
                 Cédric Raúl
               </div>
             </a>
-            <div class="flex justify-between items-center mt-1">
+            <div class="flex justify-between items-end mt-1">
               <div>
                 <a href="/" class="hover:text-doré-patiné transition-colors">
-                  <div class="text-3xl font-bold uppercase tracking-tight leading-tight" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif; color: #2A2926;">
+                  <div class="text-3xl font-bold uppercase tracking-tight leading-none" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif; color: #2A2926;">
                     Films
                   </div>
                 </a>
-                <div class="text-sm text-pierre mt-0.5">
+                <div class="text-xs text-pierre/70 mt-2 tracking-wide">
                   Wedding videographer
                 </div>
               </div>
               <!-- Mobile menu button -->
-              <button class="text-pierre pr-2 self-end pb-1" id="mobile-menu-btn">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              <button class="text-pierre/80 hover:text-pierre transition-colors" id="mobile-menu-btn">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
               </button>
             </div>
@@ -122,30 +122,28 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
 
           <!-- Desktop layout -->
           <div class="hidden md:flex justify-between items-end">
-            <a href="/" class="hover:text-doré-patiné transition-colors">
-              <div class="text-5xl font-bold uppercase tracking-tight leading-none" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif; color: #2A2926;">
+            <a href="/" class="hover:text-doré-patiné transition-colors group">
+              <div class="text-5xl font-bold uppercase tracking-tight leading-none mb-2" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif; color: #2A2926;">
                 Cédric Raúl Films
               </div>
-              <div class="text-sm text-pierre mt-1 ml-0.5">
+              <div class="text-xs text-pierre/60 group-hover:text-pierre/80 transition-colors tracking-widest uppercase" style="letter-spacing: 0.1em;">
                 Wedding videographer
               </div>
             </a>
 
-            <div class="flex items-center space-x-8">
-              <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all hover:scale-110 text-base" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">ACCUEIL</a>
-              <a href="/a-propos" class="text-noir-doux hover:text-doré-patiné transition-all hover:scale-110 text-base" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">À PROPOS</a>
-              <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all hover:scale-110 text-base" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">
-                CONTACT
-              </a>
+            <div class="flex items-center gap-10 pb-1">
+              <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">ACCUEIL</a>
+              <a href="/a-propos" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">À PROPOS</a>
+              <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">CONTACT</a>
             </div>
           </div>
 
           <!-- Mobile menu items (hidden by default) -->
           <div class="md:hidden overflow-hidden transition-all duration-500 ease-out max-h-0 opacity-0" id="mobile-menu-items">
-            <div class="mt-6 flex flex-col space-y-4">
-              <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all text-base py-2 transform translate-x-4 opacity-0 duration-300" id="menu-item-1" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">ACCUEIL</a>
-              <a href="/a-propos" class="text-noir-doux hover:text-doré-patiné transition-all text-base py-2 transform translate-x-4 opacity-0 duration-300" id="menu-item-2" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">À PROPOS</a>
-              <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all text-base py-2 transform translate-x-4 opacity-0 duration-300" id="menu-item-3" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">CONTACT</a>
+            <div class="mt-8 flex flex-col space-y-1 border-t border-pierre/10 pt-6">
+              <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-1" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">ACCUEIL</a>
+              <a href="/a-propos" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-2" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">À PROPOS</a>
+              <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-3" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">CONTACT</a>
             </div>
           </div>
         </nav>
@@ -155,7 +153,7 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
       <div class="md:hidden fixed top-0 left-0 right-0 bottom-0 bg-noir-doux/50 z-30 opacity-0 invisible transition-all duration-500" id="mobile-overlay"></div>
 
       <!-- Main content -->
-      <main class="md:pt-36">
+      <main>
         <slot />
       </main>
 
@@ -167,8 +165,11 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
             <h3 class="text-2xl font-bold text-pierre mb-4" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">
               CÉDRIC RAÚL FILMS
             </h3>
-            <p class="text-pierre/70 text-sm max-w-md mx-auto leading-relaxed">
-              Vidéaste spécialisé dans les films de mariage cinématographiques et les vidéos corporate.
+            <p class="text-pierre/70 text-sm max-w-md mx-auto leading-relaxed mb-2">
+              Films de mariage cinématographiques qui provoquent l'émotion
+            </p>
+            <p class="text-pierre/60 text-xs">
+              Basé à Paris • Disponible partout ailleurs
             </p>
           </div>
 
@@ -247,17 +248,17 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
           setTimeout(() => {
             menuItem1?.classList.remove('translate-x-4', 'opacity-0');
             menuItem1?.classList.add('translate-x-0', 'opacity-100');
-          }, 250);
+          }, 100);
 
           setTimeout(() => {
             menuItem2?.classList.remove('translate-x-4', 'opacity-0');
             menuItem2?.classList.add('translate-x-0', 'opacity-100');
-          }, 350);
+          }, 200);
 
           setTimeout(() => {
             menuItem3?.classList.remove('translate-x-4', 'opacity-0');
             menuItem3?.classList.add('translate-x-0', 'opacity-100');
-          }, 450);
+          }, 300);
 
           isMenuOpen = true;
         } else {
@@ -277,7 +278,7 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
         // Then hide overlay and menu
         setTimeout(() => {
           mobileMenuItems?.classList.add('max-h-0', 'opacity-0');
-          mobileMenuItems?.classList.remove('max-h-64', 'opacity-100');
+          mobileMenuItems?.classList.remove('max-h-96', 'opacity-100');
 
           mobileOverlay?.classList.add('opacity-0', 'invisible');
           mobileOverlay?.classList.remove('opacity-100', 'visible');
@@ -288,6 +289,11 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
 
       // Close menu when clicking on overlay
       mobileOverlay?.addEventListener('click', closeMenu);
+
+      // Close menu when clicking on a menu item
+      [menuItem1, menuItem2, menuItem3].forEach(item => {
+        item?.addEventListener('click', closeMenu);
+      });
 
       // Cookie banner
       const cookieBanner = document.getElementById('cookie-banner');

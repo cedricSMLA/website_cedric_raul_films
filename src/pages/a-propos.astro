@@ -6,14 +6,14 @@ import Card from '@/components/Card.astro';
 
 <Base
   title="À propos - Cédric Raúl Films"
-  description="Découvrez Cédric Raúl Films, vidéaste mariage cinématographique. Notre approche unique, notre vision artistique et notre expertise technique pour immortaliser votre grand jour."
+  description="Des films de mariage qui provoquent l'émotion. Approche cinématographique, drone FPV, post-production soignée. Paris & worldwide. À partir de 2900€."
 >
   <!-- Hero Section -->
   <Section background="primary" padding="xl">
-    <div class="max-w-4xl mx-auto text-center -mt-16 md:mt-0">
-      <h1 class="scroll-reveal text-6xl md:text-7xl font-bold text-pierre mb-8 leading-tight">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="scroll-reveal text-5xl md:text-7xl font-bold text-pierre mb-8 leading-tight">
         Une vision
-        <span class="block text-doré-patiné italic">cinématographique</span>
+        <span class="block text-doré-patiné italic">cinéma&shy;tographique</span>
       </h1>
 
       <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-pierre/70 mb-12 max-w-2xl mx-auto leading-relaxed">
@@ -24,243 +24,402 @@ import Card from '@/components/Card.astro';
   </Section>
 
   <!-- Présentation Cédric -->
-  <Section background="dark" padding="xl">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-[2fr_3fr] gap-12 items-center">
-        <!-- Photo (desktop only) -->
-        <div class="scroll-reveal hidden md:block md:order-1">
-          <div class="relative aspect-[4/5] w-full max-w-md mx-auto">
+  <Section background="dark" padding="xl" class="rounded-2xl">
+    <div class="max-w-7xl mx-auto">
+      <!-- Titre principal -->
+      <div class="text-center mb-16">
+        <h2 class="scroll-reveal text-4xl md:text-6xl font-bold text-lin mb-6 leading-tight">
+          Des films qui provoquent
+          <span class="block text-doré-patiné italic">l'émotion</span>
+        </h2>
+        <div class="w-24 h-1 bg-doré-patiné mx-auto"></div>
+      </div>
+
+      <!-- Témoignages stylisés -->
+      <div class="grid md:grid-cols-2 gap-8 mb-20">
+        <!-- Témoignage 1 -->
+        <div class="scroll-reveal scroll-reveal-delay-1 relative">
+          <div class="bg-lin/5 backdrop-blur-sm border border-doré-patiné/20 rounded-xl p-8 md:p-10">
+            <svg class="w-10 h-10 text-doré-patiné/40 mb-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p class="text-lg md:text-xl text-lin mb-4 leading-relaxed italic">
+              "J'ai eu des frissons, j'étais émue aux larmes."
+            </p>
+            <p class="text-lin/60 text-sm font-medium">— Raumane</p>
+          </div>
+        </div>
+
+        <!-- Témoignage 2 -->
+        <div class="scroll-reveal scroll-reveal-delay-2 relative">
+          <div class="bg-lin/5 backdrop-blur-sm border border-doré-patiné/20 rounded-xl p-8 md:p-10">
+            <svg class="w-10 h-10 text-doré-patiné/40 mb-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p class="text-lg md:text-xl text-lin mb-4 leading-relaxed italic">
+              "Le résultat est allé bien au-delà de mes espérances."
+            </p>
+            <p class="text-lin/60 text-sm font-medium">— Thomas</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section principale avec photo -->
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-20">
+        <!-- Photo -->
+        <div class="scroll-reveal order-2 lg:order-1">
+          <div class="relative aspect-[3/4] w-full max-w-lg mx-auto">
             <img
               src="/media/photo/IMG_1094.jpg"
               alt="Cédric Raúl, vidéaste mariage"
-              class="w-full h-full object-cover rounded-lg shadow-cinema"
+              class="w-full h-full object-cover rounded-2xl shadow-strong"
             />
-            <div class="absolute inset-0 rounded-lg ring-1 ring-doré-patiné/20"></div>
+            <div class="absolute inset-0 rounded-2xl ring-1 ring-doré-patiné/30"></div>
+            <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-doré-patiné/10 rounded-full blur-3xl"></div>
           </div>
         </div>
 
         <!-- Contenu -->
-        <div class="md:order-2">
-          <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-lin mb-6">
-            Une approche différente
-          </h2>
-
-          <p class="scroll-reveal scroll-reveal-delay-1 text-lg text-lin/80 mb-8 leading-relaxed">
-            Je privilégie l'authenticité à la mise en scène. Chaque geste, chaque regard,
-            chaque sourire est capturé dans sa vérité pour créer un récit sincère et émouvant.
-          </p>
-
-          <!-- Photo (mobile only) -->
-          <div class="scroll-reveal block md:hidden mb-8">
-            <div class="relative aspect-[4/5] w-full max-w-sm mx-auto">
-              <img
-                src="/media/photo/IMG_1094.jpg"
-                alt="Cédric Raúl, vidéaste mariage"
-                class="w-full h-full object-cover rounded-lg shadow-cinema"
-              />
-              <div class="absolute inset-0 rounded-lg ring-1 ring-doré-patiné/20"></div>
-            </div>
-          </div>
-
-          <p class="scroll-reveal scroll-reveal-delay-2 text-lin/70 mb-10 leading-relaxed">
-            Vidéaste passionné basé à Paris, je me déplace partout en France pour immortaliser
-            vos plus beaux moments avec une approche cinématographique et des outils innovants.
-          </p>
-
-          <!-- Infos contact -->
-          <div class="space-y-4 mb-10">
-            <div class="flex items-center space-x-4">
-              <div class="w-12 h-12 bg-doré-patiné/20 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
-              </div>
-              <div>
-                <p class="text-lin font-medium">contact@smleyeprod.fr</p>
-                <p class="text-lin/60 text-sm">Réponse sous 24h</p>
-              </div>
-            </div>
-
-            <div class="flex items-center space-x-4">
-              <div class="w-12 h-12 bg-doré-patiné/20 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-              </div>
-              <div>
-                <p class="text-lin font-medium">Paris</p>
-                <p class="text-lin/60 text-sm">Déplacements partout en France</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Expertises -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div class="bg-noir-doux/30 p-4 rounded-lg border border-doré-patiné/10">
-              <div class="flex items-center space-x-3 mb-2">
-                <div class="w-8 h-8 bg-doré-patiné/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg class="w-4 h-4 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                  </svg>
-                </div>
-                <h3 class="text-lg font-bold text-lin">Excellence technique</h3>
-              </div>
-              <p class="text-lin/70 text-sm leading-relaxed">
-                Matériel 4K professionnel, drone FPV, post-production cinématographique
-              </p>
-            </div>
-
-            <div class="bg-noir-doux/30 p-4 rounded-lg border border-doré-patiné/10">
-              <div class="flex items-center space-x-3 mb-2">
-                <div class="w-8 h-8 bg-doré-patiné/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg class="w-4 h-4 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                  </svg>
-                </div>
-                <h3 class="text-lg font-bold text-lin">Discrétion absolue</h3>
-              </div>
-              <p class="text-lin/70 text-sm leading-relaxed">
-                Présence invisible pour capturer vos moments intimes sans perturber
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Section>
-
-  <!-- Notre vision -->
-  <Section background="primary" padding="xl">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-pierre mb-8">
-        Notre vision
-      </h2>
-
-      <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-pierre/80 mb-12 leading-relaxed">
-        Nous croyons que chaque mariage est une histoire unique qui mérite d'être racontée avec
-        l'élégance et l'émotion du grand cinéma. Notre mission : créer des films qui transcendent
-        le temps et touchent les cœurs.
-      </p>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="scroll-reveal-slide-left text-center">
-          <div class="w-16 h-16 bg-doré-patiné rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-noir-doux" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-pierre mb-3">Émotion authentique</h3>
-          <p class="text-pierre/70">
-            Capturer les vraies émotions, sans mise en scène, pour des souvenirs authentiques.
-          </p>
-        </div>
-
-        <div class="scroll-reveal scroll-reveal-delay-2 text-center">
-          <div class="w-16 h-16 bg-sauge rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-lin" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-pierre mb-3">Excellence technique</h3>
-          <p class="text-pierre/70">
-            Matériel de pointe et savoir-faire artisanal pour une qualité cinématographique.
-          </p>
-        </div>
-
-        <div class="scroll-reveal-slide-right text-center">
-          <div class="w-16 h-16 bg-doré-patiné rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-noir-doux" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-pierre mb-3">Innovation créative</h3>
-          <p class="text-pierre/70">
-            Techniques avant-gardistes et vision artistique pour sublimer chaque instant.
-          </p>
-        </div>
-      </div>
-    </div>
-  </Section>
-
-  <!-- Innovation technologique -->
-  <Section background="dark" padding="xl">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl md:text-5xl font-bold text-lin mb-8">
-        Innovation technologique
-      </h2>
-
-      <p class="text-xl text-lin/80 mb-12 leading-relaxed">
-        Pionniers de l'usage du drone FPV dans le mariage, nous repoussons constamment les limites
-        de la créativité pour offrir des perspectives inédites et saisissantes.
-      </p>
-
-      <div class="grid md:grid-cols-2 gap-8">
-        <Card class="bg-noir-doux/50 border-pierre/20" hover={false}>
-          <div class="p-8 text-center">
-            <div class="w-12 h-12 bg-doré-patiné rounded-lg flex items-center justify-center mx-auto mb-4">
-              <svg class="w-6 h-6 text-noir-doux" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-lin mb-4">Drone FPV avancé</h3>
-            <p class="text-lin/80">
-              Caméras 4K stabilisées, vols sécurisés, trajectoires cinématographiques impossibles
-              avec un drone classique.
+        <div class="scroll-reveal order-1 lg:order-2 space-y-8">
+          <div>
+            <h3 class="text-2xl md:text-3xl font-bold text-lin mb-4">
+              Une approche unique
+            </h3>
+            <p class="text-lg text-lin/80 leading-relaxed">
+              Je ne documente pas votre mariage, je le sublime. Chaque film est pensé comme une œuvre cinématographique :
+              attention obsessionnelle aux détails, étalonnage soigné, montage narratif qui raconte votre histoire.
             </p>
           </div>
-        </Card>
 
-        <Card class="bg-noir-doux/50 border-pierre/20" hover={false}>
-          <div class="p-8 text-center">
-            <div class="w-12 h-12 bg-sauge rounded-lg flex items-center justify-center mx-auto mb-4">
-              <svg class="w-6 h-6 text-lin" fill="currentColor" viewBox="0 0 24 24">
+          <div class="bg-lin/5 border-l-4 border-doré-patiné rounded-r-lg p-6">
+            <p class="text-base text-lin/90 leading-relaxed">
+              Drone FPV, caméras 4K stabilisées, techniques avant-gardistes :
+              j'utilise les meilleurs outils pour créer des plans que personne d'autre ne peut obtenir.
+            </p>
+          </div>
+
+          <!-- Stats visuelles -->
+          <div class="grid grid-cols-2 gap-6">
+            <div class="text-center p-6 bg-noir-doux/40 rounded-xl border border-doré-patiné/10">
+              <p class="text-4xl font-bold text-doré-patiné mb-2">4K</p>
+              <p class="text-sm text-lin/70">Qualité cinéma</p>
+            </div>
+            <div class="text-center p-6 bg-noir-doux/40 rounded-xl border border-doré-patiné/10">
+              <p class="text-4xl font-bold text-doré-patiné mb-2">FPV</p>
+              <p class="text-sm text-lin/70">Plans exclusifs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloc investissement raffiné -->
+      <div class="scroll-reveal max-w-4xl mx-auto mb-20">
+        <div class="bg-gradient-to-br from-doré-patiné/10 via-transparent to-sauge/10 border border-doré-patiné/30 rounded-2xl p-10 md:p-12 text-center backdrop-blur-sm">
+          <p class="text-lin/60 text-sm uppercase tracking-[0.3em] mb-4" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Investissement</p>
+          <p class="text-5xl md:text-6xl font-bold text-lin mb-6" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">À partir de 2900€</p>
+          <div class="space-y-2 mb-6">
+            <p class="text-lin/80 text-lg">Film complet • Drone FPV inclus</p>
+            <p class="text-lin/70 text-base">Post-production cinématographique</p>
+          </div>
+          <div class="w-16 h-1 bg-doré-patiné mx-auto mb-4"></div>
+          <p class="text-lin/60 text-sm">Paris & worldwide • Nombreuses dates 2025-2026</p>
+        </div>
+      </div>
+
+      <!-- Expertises redessinées -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="scroll-reveal-slide-left group">
+          <div class="bg-noir-doux/40 hover:bg-noir-doux/60 border border-doré-patiné/20 hover:border-doré-patiné/40 rounded-xl p-8 transition-all duration-300 h-full">
+            <div class="w-14 h-14 bg-doré-patiné/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-lin mb-4">Workflow moderne</h3>
-            <p class="text-lin/80">
-              Post-production assistée par IA, étalonnage HDR, mixage surround pour une expérience
-              immersive totale.
+            <h3 class="text-xl font-bold text-lin mb-3">Excellence technique</h3>
+            <p class="text-lin/70 leading-relaxed">
+              Matériel 4K professionnel, drone FPV dernière génération, post-production cinématographique
             </p>
           </div>
-        </Card>
+        </div>
+
+        <div class="scroll-reveal scroll-reveal-delay-1 group">
+          <div class="bg-noir-doux/40 hover:bg-noir-doux/60 border border-doré-patiné/20 hover:border-doré-patiné/40 rounded-xl p-8 transition-all duration-300 h-full">
+            <div class="w-14 h-14 bg-sauge/30 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7 text-sauge" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-lin mb-3">Discrétion totale</h3>
+            <p class="text-lin/70 leading-relaxed">
+              Présence invisible pour capturer vos moments intimes sans jamais perturber votre journée
+            </p>
+          </div>
+        </div>
+
+        <div class="scroll-reveal-slide-right group">
+          <div class="bg-noir-doux/40 hover:bg-noir-doux/60 border border-doré-patiné/20 hover:border-doré-patiné/40 rounded-xl p-8 transition-all duration-300 h-full">
+            <div class="w-14 h-14 bg-doré-patiné/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-lin mb-3">Accompagnement personnalisé</h3>
+            <p class="text-lin/70 leading-relaxed">
+              Réponse sous 24h, conseils experts, suivi complet de votre projet du début à la livraison
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </Section>
 
-  <!-- SMLEYE Prod -->
+  <!-- Un regard différent -->
   <Section background="primary" padding="xl">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-pierre mb-6">
-        Une production <span class="text-doré-patiné" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">SMLEYE PROD</span>
-      </h2>
+    <div class="max-w-6xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Image montagne -->
+        <div class="scroll-reveal order-2 lg:order-1">
+          <div class="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-strong">
+            <img
+              src="/media/photo/A7406889.jpg"
+              alt="Aventure en haute montagne - Cédric Raúl"
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 rounded-2xl ring-1 ring-doré-patiné/20"></div>
+          </div>
+        </div>
 
-      <p class="text-xl text-pierre/80 mb-8 leading-relaxed">
-        Cédric Raúl Films fait partie de l'écosystème créatif SMLEYE Prod, studio de production
-        audiovisuelle spécialisé dans les contenus premium et l'innovation technologique.
-      </p>
+        <!-- Contenu -->
+        <div class="scroll-reveal order-1 lg:order-2">
+          <h2 class="text-4xl md:text-5xl font-bold text-pierre mb-6 leading-tight">
+            Un regard forgé
+            <span class="block text-doré-patiné italic">par la montagne</span>
+          </h2>
+
+          <div class="space-y-6 text-lg text-pierre/80 leading-relaxed">
+            <p>
+              Randonneur expérimenté, j'ai commencé par documenter mes aventures en haute altitude.
+              Filmer les sommets, la lumière dorée sur les crêtes, le silence étoilé des nuits en refuge.
+            </p>
+
+            <p>
+              La montagne m'a enseigné l'essentiel : <strong class="text-pierre">attendre le moment parfait</strong>,
+              capturer l'authenticité sans la forcer, révéler la beauté là où d'autres passent à côté.
+            </p>
+
+            <div class="bg-doré-patiné/10 border-l-4 border-doré-patiné rounded-r-lg p-6">
+              <p class="text-pierre font-medium">
+                Ingénieur en informatique de formation, vidéaste par passion :
+                cette double casquette me permet d'allier précision technique et sensibilité artistique.
+              </p>
+            </div>
+
+            <p>
+              C'est exactement ce que j'apporte à vos mariages : une capacité à saisir l'instant fugace,
+              à être là sans être vu, à transformer vos moments en récits visuels puissants.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Le processus créatif -->
+  <Section background="dark" padding="xl" class="rounded-2xl">
+    <div class="max-w-6xl mx-auto">
+      <!-- Titre -->
+      <div class="text-center mb-16">
+        <h2 class="scroll-reveal text-4xl md:text-6xl font-bold text-lin mb-6">
+          Le processus créatif
+        </h2>
+        <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-lin/80 max-w-3xl mx-auto leading-relaxed">
+          Chaque film est unique car chaque couple l'est. Voici comment je travaille
+          pour créer un récit qui vous ressemble.
+        </p>
+      </div>
+
+      <!-- Étapes du processus -->
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <!-- Avant -->
+        <div class="scroll-reveal-slide-left">
+          <div class="bg-noir-doux/40 border border-doré-patiné/20 rounded-xl p-8 h-full">
+            <div class="flex items-center space-x-4 mb-6">
+              <div class="w-12 h-12 bg-doré-patiné/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-lin">Écoute intuitive</h3>
+            </div>
+            <p class="text-lin/80 leading-relaxed mb-4">
+              La plupart des couples pensent ne pas avoir d'attentes particulières. En réalité, si — elles sont juste
+              non-formulées. Mon rôle : écouter activement, lire entre les lignes, comprendre
+              ce que vous voulez vraiment sans avoir à le formuler.
+            </p>
+            <p class="text-lin/70 text-sm italic">
+              Un vrai échange, pas un questionnaire.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pendant -->
+        <div class="scroll-reveal-slide-right">
+          <div class="bg-noir-doux/40 border border-sauge/30 rounded-xl p-8 h-full">
+            <div class="flex items-center space-x-4 mb-6">
+              <div class="w-12 h-12 bg-sauge/30 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-sauge" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-lin">Présence invisible</h3>
+            </div>
+            <p class="text-lin/80 leading-relaxed mb-4">
+              Le jour J, ma consigne est simple : <strong class="text-lin">vivez votre journée, oubliez la caméra</strong>.
+              Je cherche les moments de complicité entre vous, avec vos invités. Ces instants où personne ne pense
+              au vidéaste, où l'authenticité transparaît.
+            </p>
+            <p class="text-lin/70 text-sm italic">
+              Vous vivez, je capture. Point.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Après - Section large -->
+      <div class="scroll-reveal">
+        <div class="bg-gradient-to-br from-doré-patiné/10 via-noir-doux/40 to-sauge/10 border border-doré-patiné/20 rounded-2xl p-10 md:p-12">
+          <div class="flex items-center space-x-4 mb-8">
+            <div class="text-5xl">✂️</div>
+            <h3 class="text-3xl font-bold text-lin">Montage énergétique</h3>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8 text-lin/80">
+            <div>
+              <h4 class="text-lg font-semibold text-lin mb-3">Sound design immersif</h4>
+              <p class="leading-relaxed">
+                Ambiances, respirations, rires : je travaille le son comme une bande-son de film
+                pour vous replonger dans l'atmosphère du jour.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="text-lg font-semibold text-lin mb-3">Colorimétrie narrative</h4>
+              <p class="leading-relaxed">
+                Les couleurs racontent autant que les images. Vous êtes les personnages principaux
+                d'un récit visuel où chaque teinte compte.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="text-lg font-semibold text-lin mb-3">Rythme sur-mesure</h4>
+              <p class="leading-relaxed">
+                Le montage suit l'énergie de votre journée : moments calmes, séquences dynamiques,
+                instants touchants. Votre film respire comme vous avez vécu.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-8 border-t border-lin/10">
+            <p class="text-lin/70 text-center">
+              <strong class="text-lin">Plusieurs jours de post-production</strong> pour que chaque seconde soit parfaite.
+              Ce n'est pas de l'assemblage, c'est de l'artisanat.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- L'équipe étendue -->
+  <Section background="primary" padding="xl">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-pierre mb-6">
+          Un réseau de confiance
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Collaboration photographes -->
+        <div class="scroll-reveal scroll-reveal-delay-1">
+          <div class="bg-white rounded-xl p-8 shadow-cinema h-full">
+            <div class="w-12 h-12 bg-sauge/20 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-sauge-dark" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-pierre mb-3">Photographes partenaires</h3>
+            <p class="text-pierre/80 leading-relaxed">
+              Je collabore avec une équipe de 3 photographes en qui j'ai une confiance absolue.
+              Coordination fluide, vision partagée, zéro friction le jour J.
+            </p>
+          </div>
+        </div>
+
+        <!-- Backup équipe -->
+        <div class="scroll-reveal scroll-reveal-delay-2">
+          <div class="bg-white rounded-xl p-8 shadow-cinema h-full">
+            <div class="w-12 h-12 bg-doré-patiné/20 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-pierre mb-3">Fiabilité garantie</h3>
+            <p class="text-pierre/80 leading-relaxed">
+              Je travaille seul sur vos images, mais j'ai une équipe de secours formée à mes standards.
+              Si un imprévu m'empêche d'être là, votre mariage est couvert. Même exigence, même qualité.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SMLEYE Prod - version courte -->
+      <div class="scroll-reveal mt-12 text-center">
+        <p class="text-pierre/70 leading-relaxed">
+          Cédric Raúl Films fait partie de l'écosystème créatif
+          <span class="font-bold text-doré-patiné" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">SMLEYE PROD</span>,
+          studio de production audiovisuelle spécialisé dans les contenus premium.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Ce que vous recevez -->
+  <Section background="dark" padding="xl" class="rounded-2xl">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-lin mb-6">
+          Ce que vous recevez
+        </h2>
+        <p class="scroll-reveal scroll-reveal-delay-1 text-lg text-lin/80">
+          Livrables pensés pour revivre votre mariage sous tous les angles.
+        </p>
+      </div>
 
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="text-center">
-          <h3 class="font-bold text-pierre mb-2">Expertise technique</h3>
-          <p class="text-pierre/70 text-sm">
-            Plus de 10 ans d'expérience en production audiovisuelle
+        <div class="scroll-reveal-slide-left bg-noir-doux/40 border border-doré-patiné/20 rounded-xl p-6 text-center">
+          <div class="text-4xl mb-4">🎬</div>
+          <h3 class="text-xl font-bold text-lin mb-3">Film complet</h3>
+          <p class="text-lin/70 text-sm">
+            Le récit intégral de votre journée, monté et sonorisé avec soin.
           </p>
         </div>
 
-        <div class="text-center">
-          <h3 class="font-bold text-pierre mb-2">Réseau créatif</h3>
-          <p class="text-pierre/70 text-sm">
-            Collaboration avec les meilleurs talents artistiques
+        <div class="scroll-reveal scroll-reveal-delay-1 bg-noir-doux/40 border border-doré-patiné/20 rounded-xl p-6 text-center">
+          <div class="text-4xl mb-4">⚡</div>
+          <h3 class="text-xl font-bold text-lin mb-3">Teaser</h3>
+          <p class="text-lin/70 text-sm">
+            Version condensée et dynamique, parfaite pour partager sur les réseaux.
           </p>
         </div>
 
-        <div class="text-center">
-          <h3 class="font-bold text-pierre mb-2">Innovation continue</h3>
-          <p class="text-pierre/70 text-sm">
-            R&D permanente sur les nouvelles technologies
+        <div class="scroll-reveal-slide-right bg-noir-doux/40 border border-doré-patiné/20 rounded-xl p-6 text-center">
+          <div class="text-4xl mb-4">📁</div>
+          <h3 class="text-xl font-bold text-lin mb-3">Brutes nettoyées</h3>
+          <p class="text-lin/70 text-sm">
+            Rushes bruts triés et optimisés, disponibles sur demande.
           </p>
         </div>
       </div>
@@ -268,20 +427,20 @@ import Card from '@/components/Card.astro';
   </Section>
 
   <!-- CTA finale -->
-  <Section background="dark" padding="xl">
+  <Section background="primary" padding="xl">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-lin mb-6">
+      <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-pierre mb-6">
         Prêt à raconter votre histoire ?
       </h2>
 
-      <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-lin/70 mb-10 leading-relaxed">
-        Discutons ensemble de votre projet et créons un film qui vous ressemble.
+      <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-pierre/80 mb-10 leading-relaxed">
+        Discutons ensemble de votre projet et créons un film qui vous ressemble vraiment.
       </p>
 
       <div class="scroll-reveal scroll-reveal-delay-2">
         <a
           href="/contact#contact"
-          class="inline-block bg-doré-patiné text-noir-doux px-12 py-4 rounded-md font-medium hover:bg-doré-patiné/90 transition-all duration-300 hover:scale-105"
+          class="inline-block bg-noir-doux text-lin px-12 py-4 rounded-md font-medium hover:bg-doré-patiné hover:text-noir-doux transition-all duration-300 hover:scale-105"
         >
           Contactez-nous
         </a>

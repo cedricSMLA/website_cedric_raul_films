@@ -9,48 +9,52 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
 
 <Base
   title="Contact - Cédric Raúl Films"
-  description="Contactez Cédric Raúl Films pour votre projet de film de mariage cinématographique. Découvrez notre vision et notre approche unique sur la Côte d'Azur."
+  description="Créons ensemble votre film de mariage. Films cinématographiques qui provoquent l'émotion. Paris & worldwide, nombreuses dates 2025-2026."
 >
   <!-- Hero Section -->
-  <Section background="primary" padding="xl">
-    <div class="max-w-4xl mx-auto text-center -mt-16 md:mt-0">
-      <h1 class="scroll-reveal text-6xl md:text-7xl font-bold text-pierre mb-8 leading-tight">
-        L'art de raconter
-        <span class="block text-doré-patiné italic">votre histoire</span>
+  <Section background="dark" padding="xl" class="rounded-2xl">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="scroll-reveal text-5xl md:text-6xl font-bold text-lin mb-6 leading-tight">
+        Créons votre film
+        <span class="block text-doré-patiné italic">ensemble</span>
       </h1>
 
-      <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-pierre/70 mb-12 max-w-2xl mx-auto leading-relaxed">
-        Chaque mariage est unique. Créons ensemble un film cinématographique
-        qui transcende le temps et capture l'essence de votre amour.
+      <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-lin/90 mb-4 max-w-2xl mx-auto leading-relaxed">
+        Un film de mariage qui vous fera revivre chaque émotion,
+        comme si vous y étiez encore.
+      </p>
+
+      <p class="scroll-reveal scroll-reveal-delay-2 text-base text-lin/80 mb-12">
+        Destination weddings • Nombreuses dates disponibles 2025-2026
       </p>
 
       <!-- CTA simple -->
       <div class="scroll-reveal scroll-reveal-delay-2 flex justify-center mb-16">
-        <a href="#contact" class="bg-noir-doux text-lin px-12 py-4 rounded-md font-medium hover:bg-pierre transition-all duration-300 hover:scale-105">
+        <a href="#contact" class="bg-doré-patiné text-noir-doux px-12 py-4 rounded-md font-medium hover:bg-lin hover:text-noir-doux transition-all duration-300 hover:scale-105">
           Discutons de votre projet
         </a>
       </div>
 
       <!-- Promesses -->
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-3 gap-8 bg-noir-doux/40 backdrop-blur-sm p-8 md:p-10 rounded-xl border border-lin/10">
         <div class="scroll-reveal-slide-left text-center">
           <div class="w-12 h-12 bg-doré-patiné rounded-full flex items-center justify-center mx-auto mb-3">
             <svg class="w-6 h-6 text-noir-doux" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </div>
-          <h3 class="font-semibold text-pierre">Réponse rapide</h3>
-          <p class="text-pierre/70 text-sm">Sous 24h maximum</p>
+          <h3 class="font-semibold text-lin">Réponse rapide</h3>
+          <p class="text-lin/80 text-sm">Sous 24h maximum</p>
         </div>
 
         <div class="scroll-reveal scroll-reveal-delay-1 text-center">
           <div class="w-12 h-12 bg-sauge rounded-full flex items-center justify-center mx-auto mb-3">
-            <svg class="w-6 h-6 text-lin" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-noir-doux" fill="currentColor" viewBox="0 0 24 24">
               <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </div>
-          <h3 class="font-semibold text-pierre">Devis gratuit</h3>
-          <p class="text-pierre/70 text-sm">Personnalisé et détaillé</p>
+          <h3 class="font-semibold text-lin">Devis gratuit</h3>
+          <p class="text-lin/80 text-sm">Personnalisé et détaillé</p>
         </div>
 
         <div class="scroll-reveal-slide-right text-center">
@@ -59,25 +63,10 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
               <path d="M17 8h1a4 4 0 110 8h-1m-10-8H6a4 4 0 000 8h1m2-4h8"/>
             </svg>
           </div>
-          <h3 class="font-semibold text-pierre">Conseil expert</h3>
-          <p class="text-pierre/70 text-sm">Accompagnement personnalisé</p>
+          <h3 class="font-semibold text-lin">Conseil expert</h3>
+          <p class="text-lin/80 text-sm">Accompagnement personnalisé</p>
         </div>
       </div>
-    </div>
-  </Section>
-
-  <!-- Séparateur élégant -->
-  <Section background="dark" padding="xl">
-    <div class="max-w-4xl mx-auto text-center">
-      <div class="scroll-reveal-fade w-24 h-0.5 bg-doré-patiné mx-auto mb-8"></div>
-      <h2 class="scroll-reveal text-3xl md:text-4xl font-bold text-lin mb-4">
-        Créons ensemble votre film
-      </h2>
-      <p class="scroll-reveal scroll-reveal-delay-1 text-lg text-lin/70 max-w-2xl mx-auto">
-        Chaque détail compte pour raconter votre histoire unique.
-        Partagez-nous vos envies et vos inspirations.
-      </p>
-      <div class="scroll-reveal-fade scroll-reveal-delay-2 w-24 h-0.5 bg-doré-patiné mx-auto mt-8"></div>
     </div>
   </Section>
 
@@ -86,11 +75,11 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
     <div class="max-w-3xl mx-auto" id="contact">
 
       <!-- Formulaire -->
-      <form id="contact-form" class="scroll-reveal space-y-8">
+      <form id="contact-form" class="scroll-reveal space-y-8 bg-white p-8 md:p-12 rounded-lg shadow-cinema">
         <!-- Infos de base -->
         <div class="grid md:grid-cols-2 gap-6">
           <div>
-            <label for="nom" class="block text-sm font-medium text-pierre/80 mb-3">
+            <label for="nom" class="block text-sm font-medium text-noir-doux mb-3">
               Vos noms *
             </label>
             <input
@@ -98,13 +87,13 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
               id="nom"
               name="nom"
               required
-              class="w-full px-4 py-3 border border-pierre/20 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-pierre placeholder-pierre/40"
+              class="w-full px-4 py-3 border border-pierre/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-noir-doux placeholder-pierre/60"
               placeholder="Marie & Thomas"
             />
           </div>
 
           <div>
-            <label for="email" class="block text-sm font-medium text-pierre/80 mb-3">
+            <label for="email" class="block text-sm font-medium text-noir-doux mb-3">
               Email *
             </label>
             <input
@@ -112,64 +101,47 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
               id="email"
               name="email"
               required
-              class="w-full px-4 py-3 border border-pierre/20 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-pierre placeholder-pierre/40"
+              class="w-full px-4 py-3 border border-pierre/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-noir-doux placeholder-pierre/60"
               placeholder="marie.thomas@email.com"
             />
           </div>
         </div>
 
-        <!-- Détails mariage -->
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <label for="date" class="block text-sm font-medium text-pierre/80 mb-3">
-              Date de votre mariage *
-            </label>
-            <input
-              type="date"
-              id="date"
-              name="date"
-              required
-              class="w-full px-4 py-3 border border-pierre/20 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-pierre"
-            />
-          </div>
-
-          <div>
-            <label for="lieu" class="block text-sm font-medium text-pierre/80 mb-3">
-              Lieu *
-            </label>
-            <input
-              type="text"
-              id="lieu"
-              name="lieu"
-              required
-              class="w-full px-4 py-3 border border-pierre/20 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-pierre placeholder-pierre/40"
-              placeholder="Nice, Côte d'Azur"
-            />
-          </div>
+        <!-- Date mariage -->
+        <div>
+          <label for="date" class="block text-sm font-medium text-noir-doux mb-3">
+            Date de votre mariage *
+          </label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            required
+            class="w-full px-4 py-3 border border-pierre/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-noir-doux"
+          />
         </div>
 
-        <!-- Budget -->
+        <!-- Budget (optionnel) -->
         <div>
-          <label for="budget" class="block text-sm font-medium text-pierre/80 mb-3">
-            Budget envisagé
+          <label for="budget" class="block text-sm font-medium text-noir-doux mb-3">
+            Budget envisagé <span class="text-pierre font-normal">(optionnel)</span>
           </label>
           <select
             id="budget"
             name="budget"
-            class="w-full px-4 py-3 border border-pierre/20 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-pierre"
+            class="w-full px-4 py-3 border border-pierre/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-noir-doux"
           >
-            <option value="">Sélectionnez une fourchette</option>
-            <option value="2000-3000">2000€ - 3000€</option>
-            <option value="3000-4000">3000€ - 4000€</option>
-            <option value="4000-5000">4000€ - 5000€</option>
+            <option value="">Préfère ne pas préciser</option>
+            <option value="2000-3500">2000€ - 3500€</option>
+            <option value="3500-5000">3500€ - 5000€</option>
             <option value="5000+">Plus de 5000€</option>
-            <option value="autre">À discuter</option>
+            <option value="discuter">À discuter ensemble</option>
           </select>
         </div>
 
         <!-- Message -->
         <div>
-          <label for="message" class="block text-sm font-medium text-pierre/80 mb-3">
+          <label for="message" class="block text-sm font-medium text-noir-doux mb-3">
             Parlez-nous de votre vision *
           </label>
           <textarea
@@ -177,7 +149,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
             name="message"
             rows="5"
             required
-            class="w-full px-4 py-3 border border-pierre/20 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent resize-none bg-lin text-pierre placeholder-pierre/40"
+            class="w-full px-4 py-3 border border-pierre/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent resize-none bg-lin text-noir-doux placeholder-pierre/60"
             placeholder="Décrivez-nous votre mariage, vos attentes, l'ambiance que vous souhaitez..."
           ></textarea>
         </div>
@@ -189,9 +161,9 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
             id="consent"
             name="consent"
             required
-            class="mt-1.5 h-4 w-4 text-doré-patiné border-pierre/30 rounded focus:ring-doré-patiné"
+            class="mt-1.5 h-4 w-4 text-doré-patiné border-pierre/40 rounded focus:ring-doré-patiné"
           />
-          <label for="consent" class="text-sm text-pierre/60 leading-relaxed">
+          <label for="consent" class="text-sm text-pierre leading-relaxed">
             J'accepte que mes données soient utilisées pour traiter ma demande.
             <a href="/confidentialite" class="text-doré-patiné underline hover:no-underline">Politique de confidentialité</a>
           </label>
@@ -230,7 +202,6 @@ Informations :
 - Noms : ${data.nom}
 - Email : ${data.email}
 - Date du mariage : ${data.date}
-- Lieu : ${data.lieu}
 - Budget envisagé : ${data.budget || 'Non spécifié'}
 
 Message :
@@ -291,19 +262,15 @@ ${data.nom}
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('reveal-visible');
-          // Log pour debug
-          console.log('Animation triggered for:', entry.target);
         }
       });
     }, observerOptions);
 
     // Observer tous les éléments avec les classes scroll-reveal
     const elements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-slide-left, .scroll-reveal-slide-right, .scroll-reveal-fade');
-    console.log('Found elements to animate:', elements.length);
 
     elements.forEach(el => {
       observer.observe(el);
-      console.log('Observing:', el);
     });
   }
 
