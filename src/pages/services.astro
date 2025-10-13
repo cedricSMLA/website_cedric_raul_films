@@ -178,54 +178,118 @@ import Section from '@/components/Section.astro';
 
   <!-- L'équipe étendue -->
   <Section background="dark" padding="xl" class="rounded-2xl">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-lin mb-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Titre -->
+      <div class="text-center mb-16">
+        <h2 class="scroll-reveal text-4xl md:text-6xl font-bold text-lin mb-6">
           Un réseau de confiance
         </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-doré-patiné to-transparent mx-auto"></div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8 mb-12">
-        <!-- Collaboration photographes -->
-        <div class="scroll-reveal scroll-reveal-delay-1">
-          <div class="bg-noir-doux/40 border border-doré-patiné/20 rounded-xl p-8 h-full">
-            <div class="w-12 h-12 bg-sauge/20 rounded-full flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-sauge" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/>
-              </svg>
+      <!-- Photographes partenaires - Grid asymétrique -->
+      <div class="mb-16">
+        <div class="scroll-reveal text-center mb-10">
+          <h3 class="text-2xl md:text-3xl font-bold text-lin mb-4">Photographes partenaires</h3>
+          <p class="text-lin/70 max-w-2xl mx-auto leading-relaxed">
+            Une collaboration fluide avec des artistes qui partagent ma vision. Coordination parfaite garantie le jour J.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+          <!-- Coraline -->
+          <div class="scroll-reveal-slide-left group">
+            <!-- Photo -->
+            <div class="relative overflow-hidden rounded-2xl mb-6">
+              <div class="aspect-[4/5] overflow-hidden bg-noir-doux/40 border border-doré-patiné/20 group-hover:border-doré-patiné/40 transition-all duration-500">
+                <img
+                  src="/media/photo/Coraline.jpeg"
+                  alt="Coraline - Photographe partenaire"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <!-- Accent géométrique -->
+              <div class="absolute -bottom-3 -right-3 w-24 h-24 border-r-2 border-b-2 border-doré-patiné/30"></div>
             </div>
-            <h3 class="text-xl font-bold text-lin mb-3">Photographes partenaires</h3>
-            <p class="text-lin/80 leading-relaxed">
-              Je collabore avec une équipe de 3 photographes en qui j'ai une confiance absolue.
-              Coordination fluide, vision partagée, zéro friction le jour J.
-            </p>
+
+            <!-- Infos -->
+            <div class="pl-4 border-l-2 border-doré-patiné/30">
+              <h4 class="text-3xl font-bold text-lin mb-2">Coraline</h4>
+              <p class="text-sauge text-sm font-medium uppercase tracking-wider mb-4">Photographe mariage</p>
+              <p class="text-lin/70 leading-relaxed">
+                Regard sensible, lumière naturelle, instants volés.
+              </p>
+            </div>
+          </div>
+
+          <!-- Alexys -->
+          <div class="scroll-reveal-slide-right group">
+            <!-- Photo -->
+            <div class="relative overflow-hidden rounded-2xl mb-6">
+              <div class="aspect-[4/5] overflow-hidden bg-noir-doux/40 border border-doré-patiné/20 group-hover:border-doré-patiné/40 transition-all duration-500">
+                <img
+                  src="/media/photo/Alexys.jpg"
+                  alt="Alexys - Photographe partenaire"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <!-- Accent géométrique -->
+              <div class="absolute -bottom-3 -right-3 w-24 h-24 border-r-2 border-b-2 border-doré-patiné/30"></div>
+            </div>
+
+            <!-- Infos -->
+            <div class="pl-4 border-l-2 border-doré-patiné/30">
+              <h4 class="text-3xl font-bold text-lin mb-2">Alexys</h4>
+              <p class="text-sauge text-sm font-medium uppercase tracking-wider mb-4">Photographe mariage</p>
+              <p class="text-lin/70 leading-relaxed">
+                Approche documentaire, émotions brutes, récit visuel.
+              </p>
+            </div>
           </div>
         </div>
 
-        <!-- Backup équipe -->
-        <div class="scroll-reveal scroll-reveal-delay-2">
-          <div class="bg-noir-doux/40 border border-doré-patiné/20 rounded-xl p-8 h-full">
-            <div class="w-12 h-12 bg-doré-patiné/20 rounded-full flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-lin mb-3">Fiabilité garantie</h3>
-            <p class="text-lin/80 leading-relaxed">
-              Je travaille seul sur vos images, mais j'ai une équipe de secours formée à mes standards.
-              Si un imprévu m'empêche d'être là, votre mariage est couvert. Même exigence, même qualité.
+        <!-- Forfait combiné photo + vidéo -->
+        <div class="scroll-reveal mt-10 text-center">
+          <div class="inline-block bg-gradient-to-r from-doré-patiné/10 via-sauge/5 to-doré-patiné/10 border border-doré-patiné/30 rounded-xl px-6 py-4">
+            <p class="text-lin/70 text-sm">
+              Forfaits combinés <span class="text-doré-patiné font-medium">Photo + Vidéo</span> disponibles
             </p>
           </div>
         </div>
       </div>
 
-      <!-- SMLEYE Prod - version courte -->
+      <!-- Fiabilité garantie - Mise en avant -->
+      <div class="scroll-reveal mb-12">
+        <div class="bg-gradient-to-br from-doré-patiné/10 via-noir-doux/40 to-sauge/10 border border-doré-patiné/20 rounded-2xl p-10 md:p-12">
+          <div class="flex flex-col md:flex-row items-center md:items-start gap-6 mb-6">
+            <div class="w-16 h-16 bg-doré-patiné/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-8 h-8 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <div class="text-center md:text-left">
+              <h3 class="text-3xl font-bold text-lin mb-3">Fiabilité garantie</h3>
+              <p class="text-lin/80 leading-relaxed max-w-3xl">
+                Je travaille seul sur vos <span class="text-lin font-medium">films</span> pour garantir une cohérence totale,
+                mais j'ai constitué une équipe de vidéastes de secours formés à mes standards.
+                Si un imprévu m'empêche d'être présent, votre mariage est couvert par un professionnel de confiance.
+                <span class="text-lin font-medium">Même exigence, même qualité.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SMLEYE Prod -->
       <div class="scroll-reveal text-center">
-        <p class="text-lin/70 leading-relaxed">
-          Cédric Raúl Films fait partie de l'écosystème créatif
-          <span class="font-bold text-doré-patiné" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">SMLEYE PROD</span>,
-          studio de production audiovisuelle spécialisé dans les contenus premium.
-        </p>
+        <div class="inline-block bg-noir-doux/60 border border-lin/10 rounded-xl px-8 py-6">
+          <p class="text-lin/60 text-sm uppercase tracking-widest mb-2">Écosystème</p>
+          <p class="text-lin/80 leading-relaxed">
+            Cédric Raúl Films fait partie de
+            <span class="font-bold text-doré-patiné" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">SMLEYE PROD</span>
+          </p>
+          <p class="text-lin/60 text-sm mt-2">Studio de production audiovisuelle premium</p>
+        </div>
       </div>
     </div>
   </Section>
