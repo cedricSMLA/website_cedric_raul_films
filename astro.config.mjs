@@ -1,8 +1,13 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+import node from '@astrojs/node';
 
 export default defineConfig({
+  output: 'server',
+  adapter: node({
+    mode: 'standalone'
+  }),
   site: process.env.SITE_URL || 'https://cedricraulfilms.fr',
   integrations: [
     tailwind(),

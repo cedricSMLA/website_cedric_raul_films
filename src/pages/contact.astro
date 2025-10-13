@@ -12,61 +12,79 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
   description="Créons ensemble votre film de mariage. Films cinématographiques qui provoquent l'émotion. Paris & worldwide, nombreuses dates 2025-2026."
 >
   <!-- Hero Section -->
-  <Section background="dark" padding="xl" class="rounded-2xl">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="scroll-reveal text-5xl md:text-6xl font-bold text-lin mb-6 leading-tight">
-        Créons votre film
-        <span class="block text-doré-patiné italic">ensemble</span>
-      </h1>
+  <Section background="dark" padding="xl" class="rounded-xl mb-8">
+    <div class="max-w-5xl mx-auto">
 
-      <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-lin/90 mb-4 max-w-2xl mx-auto leading-relaxed">
-        Un film de mariage qui vous fera revivre chaque émotion,
-        comme si vous y étiez encore.
-      </p>
+      <!-- Titre centré avec cadre -->
+      <div class="relative mb-16">
+        <!-- Ligne supérieure -->
+        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-doré-patiné/40 to-transparent"></div>
 
-      <p class="scroll-reveal scroll-reveal-delay-2 text-base text-lin/80 mb-12">
-        Destination weddings • Nombreuses dates disponibles 2025-2026
-      </p>
+        <div class="text-center py-12">
+          <h1 class="scroll-reveal text-5xl md:text-7xl font-bold text-lin mb-4 leading-tight tracking-tight">
+            Créons votre film
+            <span class="block text-doré-patiné italic font-light mt-2">ensemble</span>
+          </h1>
 
-      <!-- CTA simple -->
-      <div class="scroll-reveal scroll-reveal-delay-2 flex justify-center mb-16">
-        <a href="#contact" class="bg-doré-patiné text-noir-doux px-12 py-4 rounded-md font-medium hover:bg-lin hover:text-noir-doux transition-all duration-300 hover:scale-105">
-          Discutons de votre projet
-        </a>
+          <div class="w-24 h-1 bg-gradient-to-r from-transparent via-doré-patiné to-transparent mx-auto mb-10 animate-line-reveal"></div>
+
+          <p class="scroll-reveal scroll-reveal-delay-1 text-lg md:text-xl text-lin/90 max-w-3xl mx-auto leading-relaxed mb-6">
+            Un film de mariage qui vous fera revivre chaque émotion,
+            comme si vous y étiez encore.
+          </p>
+
+          <p class="scroll-reveal scroll-reveal-delay-2 text-sm text-lin/70">
+            Destination weddings • Nombreuses dates disponibles 2025-2026
+          </p>
+        </div>
+
+        <!-- Ligne inférieure -->
+        <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-doré-patiné/40 to-transparent"></div>
       </div>
 
-      <!-- Promesses -->
-      <div class="grid md:grid-cols-3 gap-8 bg-noir-doux/40 backdrop-blur-sm p-8 md:p-10 rounded-xl border border-lin/10">
-        <div class="scroll-reveal-slide-left text-center">
-          <div class="w-12 h-12 bg-doré-patiné rounded-full flex items-center justify-center mx-auto mb-3">
-            <svg class="w-6 h-6 text-noir-doux" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3 class="font-semibold text-lin">Réponse rapide</h3>
-          <p class="text-lin/80 text-sm">Sous 24h maximum</p>
+      <!-- CTA + Promesses -->
+      <div class="space-y-10">
+        <!-- CTA -->
+        <div class="scroll-reveal text-center">
+          <a href="#contact" class="inline-block bg-doré-patiné text-noir-doux px-12 py-4 rounded-md font-medium hover:bg-lin hover:text-noir-doux transition-all duration-300">
+            Discutons de votre projet
+          </a>
         </div>
 
-        <div class="scroll-reveal scroll-reveal-delay-1 text-center">
-          <div class="w-12 h-12 bg-sauge rounded-full flex items-center justify-center mx-auto mb-3">
-            <svg class="w-6 h-6 text-noir-doux" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
+        <!-- Promesses en grid -->
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="scroll-reveal scroll-reveal-delay-1 bg-lin/5 border border-doré-patiné/20 rounded-lg p-6 text-center">
+            <div class="w-10 h-10 bg-doré-patiné/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-5 h-5 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lin mb-2">Réponse rapide</h3>
+            <p class="text-lin/70 text-sm">Sous 24h maximum</p>
           </div>
-          <h3 class="font-semibold text-lin">Devis gratuit</h3>
-          <p class="text-lin/80 text-sm">Personnalisé et détaillé</p>
-        </div>
 
-        <div class="scroll-reveal-slide-right text-center">
-          <div class="w-12 h-12 bg-doré-patiné rounded-full flex items-center justify-center mx-auto mb-3">
-            <svg class="w-6 h-6 text-noir-doux" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17 8h1a4 4 0 110 8h-1m-10-8H6a4 4 0 000 8h1m2-4h8"/>
-            </svg>
+          <div class="scroll-reveal scroll-reveal-delay-2 bg-lin/5 border border-doré-patiné/20 rounded-lg p-6 text-center">
+            <div class="w-10 h-10 bg-sauge/30 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-5 h-5 text-sauge" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lin mb-2">Devis gratuit</h3>
+            <p class="text-lin/70 text-sm">Personnalisé et détaillé</p>
           </div>
-          <h3 class="font-semibold text-lin">Conseil expert</h3>
-          <p class="text-lin/80 text-sm">Accompagnement personnalisé</p>
+
+          <div class="scroll-reveal scroll-reveal-delay-3 bg-lin/5 border border-doré-patiné/20 rounded-lg p-6 text-center">
+            <div class="w-10 h-10 bg-doré-patiné/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-5 h-5 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17 8h1a4 4 0 110 8h-1m-10-8H6a4 4 0 000 8h1m2-4h8"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lin mb-2">Conseil expert</h3>
+            <p class="text-lin/70 text-sm">Accompagnement personnalisé</p>
+          </div>
         </div>
       </div>
+
     </div>
   </Section>
 
@@ -171,53 +189,86 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
 
         <!-- Submit -->
         <div class="pt-6 text-center">
-          <Button type="submit" size="lg" class="w-full">
+          <button
+            type="submit"
+            id="submit-btn"
+            class="w-full bg-noir-doux text-lin px-12 py-4 rounded-md font-medium hover:bg-doré-patiné hover:text-noir-doux transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             Envoyer ma demande
-          </Button>
+          </button>
         </div>
+
+        <!-- Messages de feedback -->
+        <div id="form-message" class="hidden mt-4 p-4 rounded-lg text-center"></div>
       </form>
     </div>
   </Section>
 </Base>
 
-<script define:vars={{ contactEmail }}>
+<script>
   // Contact form handling
   const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const formMessage = document.getElementById('form-message');
 
-  form?.addEventListener('submit', function(e) {
+  form?.addEventListener('submit', async function(e) {
     e.preventDefault();
+
+    // Disable button and show loading state
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi en cours...';
+    formMessage.classList.add('hidden');
 
     // Get form data
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
+    const data = {
+      nom: formData.get('nom'),
+      email: formData.get('email'),
+      date: formData.get('date'),
+      budget: formData.get('budget'),
+      message: formData.get('message'),
+      consent: formData.get('consent') ? true : false
+    };
 
-    // Build mailto URL
-    const subject = encodeURIComponent(`Demande de devis - Mariage du ${data.date}`);
-    const body = encodeURIComponent(`
-Bonjour,
+    try {
+      // Send to API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
 
-Je souhaite recevoir un devis pour la vidéo de mon mariage.
+      const result = await response.json();
 
-Informations :
-- Noms : ${data.nom}
-- Email : ${data.email}
-- Date du mariage : ${data.date}
-- Budget envisagé : ${data.budget || 'Non spécifié'}
+      if (result.success) {
+        // Success message
+        formMessage.textContent = result.message;
+        formMessage.className = 'mt-4 p-4 rounded-lg text-center bg-sauge/20 text-sauge border border-sauge/30';
+        formMessage.classList.remove('hidden');
 
-Message :
-${data.message}
+        // Reset form
+        form.reset();
 
-Merci pour votre retour.
-
-Cordialement,
-${data.nom}
-    `.trim());
-
-    const mailtoUrl = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-    window.location.href = mailtoUrl;
-
-    // Confirmation
-    alert('Votre demande va s\'ouvrir dans votre client email. Si cela ne fonctionne pas, copiez les informations et envoyez-les à ' + contactEmail);
+        // Scroll to message
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        // Error message
+        formMessage.textContent = result.error || 'Une erreur est survenue.';
+        formMessage.className = 'mt-4 p-4 rounded-lg text-center bg-red-100 text-red-700 border border-red-300';
+        formMessage.classList.remove('hidden');
+      }
+    } catch (error) {
+      // Network error
+      formMessage.textContent = 'Erreur de connexion. Veuillez vérifier votre connexion internet et réessayer.';
+      formMessage.className = 'mt-4 p-4 rounded-lg text-center bg-red-100 text-red-700 border border-red-300';
+      formMessage.classList.remove('hidden');
+    } finally {
+      // Re-enable button
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Envoyer ma demande';
+    }
   });
 
   // Fonction de scroll vers le formulaire
