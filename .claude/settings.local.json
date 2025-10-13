@@ -4,7 +4,9 @@
       "Bash(mkdir:*)",
       "Bash(chmod:*)",
       "Bash(cd:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(git stash:*)",
+      "Bash(git reflog:*)"
     ],
     "defaultMode": "acceptEdits"
   }
