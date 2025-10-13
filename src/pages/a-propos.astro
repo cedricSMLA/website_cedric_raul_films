@@ -9,17 +9,27 @@ import Card from '@/components/Card.astro';
   description="Des films de mariage qui provoquent l'émotion. Approche cinématographique, drone FPV, post-production soignée. Paris & worldwide. À partir de 2900€."
 >
   <!-- Hero Section -->
-  <Section background="primary" padding="xl">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="scroll-reveal text-5xl md:text-7xl font-bold text-pierre mb-8 leading-tight">
-        Une vision
-        <span class="block text-doré-patiné italic">cinéma&shy;tographique</span>
-      </h1>
+  <Section background="primary" padding="lg">
+    <div class="relative max-w-5xl mx-auto">
+      <!-- Ligne décorative supérieure -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-doré-patiné to-transparent"></div>
 
-      <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-pierre/70 mb-12 max-w-2xl mx-auto leading-relaxed">
-        Découvrez l'histoire, la passion et l'expertise qui font de Cédric Raúl Films
-        un acteur unique dans l'univers du film de mariage.
-      </p>
+      <div class="text-center pt-16 pb-12">
+        <h1 class="scroll-reveal text-5xl md:text-7xl font-bold text-noir-doux mb-8 leading-tight tracking-tight">
+          Une vision
+          <span class="block text-doré-patiné italic font-light">cinéma&shy;tographique</span>
+        </h1>
+
+        <div class="w-16 h-px bg-doré-patiné/40 mx-auto mb-8"></div>
+
+        <p class="scroll-reveal scroll-reveal-delay-1 text-lg md:text-xl text-pierre max-w-3xl mx-auto leading-relaxed">
+          Découvrez l'histoire, la passion et l'expertise qui font de Cédric Raúl Films
+          un acteur unique dans l'univers du film de mariage.
+        </p>
+      </div>
+
+      <!-- Ligne décorative inférieure -->
+      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-doré-patiné to-transparent"></div>
     </div>
   </Section>
 
@@ -112,65 +122,6 @@ import Card from '@/components/Card.astro';
         </div>
       </div>
 
-      <!-- Bloc investissement raffiné -->
-      <div class="scroll-reveal max-w-4xl mx-auto mb-20">
-        <div class="bg-gradient-to-br from-doré-patiné/10 via-transparent to-sauge/10 border border-doré-patiné/30 rounded-2xl p-10 md:p-12 text-center backdrop-blur-sm">
-          <p class="text-lin/60 text-sm uppercase tracking-[0.3em] mb-4" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Investissement</p>
-          <p class="text-5xl md:text-6xl font-bold text-lin mb-6" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">À partir de 2900€</p>
-          <div class="space-y-2 mb-6">
-            <p class="text-lin/80 text-lg">Film complet • Drone FPV inclus</p>
-            <p class="text-lin/70 text-base">Post-production cinématographique</p>
-          </div>
-          <div class="w-16 h-1 bg-doré-patiné mx-auto mb-4"></div>
-          <p class="text-lin/60 text-sm">Paris & worldwide • Nombreuses dates 2025-2026</p>
-        </div>
-      </div>
-
-      <!-- Expertises redessinées -->
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="scroll-reveal-slide-left group">
-          <div class="bg-noir-doux/40 hover:bg-noir-doux/60 border border-doré-patiné/20 hover:border-doré-patiné/40 rounded-xl p-8 transition-all duration-300 h-full">
-            <div class="w-14 h-14 bg-doré-patiné/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <svg class="w-7 h-7 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-lin mb-3">Excellence technique</h3>
-            <p class="text-lin/70 leading-relaxed">
-              Matériel 4K professionnel, drone FPV dernière génération, post-production cinématographique
-            </p>
-          </div>
-        </div>
-
-        <div class="scroll-reveal scroll-reveal-delay-1 group">
-          <div class="bg-noir-doux/40 hover:bg-noir-doux/60 border border-doré-patiné/20 hover:border-doré-patiné/40 rounded-xl p-8 transition-all duration-300 h-full">
-            <div class="w-14 h-14 bg-sauge/30 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <svg class="w-7 h-7 text-sauge" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-lin mb-3">Discrétion totale</h3>
-            <p class="text-lin/70 leading-relaxed">
-              Présence invisible pour capturer vos moments intimes sans jamais perturber votre journée
-            </p>
-          </div>
-        </div>
-
-        <div class="scroll-reveal-slide-right group">
-          <div class="bg-noir-doux/40 hover:bg-noir-doux/60 border border-doré-patiné/20 hover:border-doré-patiné/40 rounded-xl p-8 transition-all duration-300 h-full">
-            <div class="w-14 h-14 bg-doré-patiné/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <svg class="w-7 h-7 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-lin mb-3">Accompagnement personnalisé</h3>
-            <p class="text-lin/70 leading-relaxed">
-              Réponse sous 24h, conseils experts, suivi complet de votre projet du début à la livraison
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   </Section>
 
@@ -225,7 +176,7 @@ import Card from '@/components/Card.astro';
     </div>
   </Section>
 
-  <!-- Le processus créatif -->
+  <!-- Forfaits - en dernier -->
   <Section background="dark" padding="xl" class="rounded-2xl">
     <div class="max-w-6xl mx-auto">
       <!-- Titre -->
