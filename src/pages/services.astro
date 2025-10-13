@@ -8,27 +8,24 @@ import Section from '@/components/Section.astro';
   description="Films de mariage sur-mesure : processus créatif unique, livrables premium, accompagnement personnalisé. De l'écoute intuitive à la post-production artisanale."
 >
   <!-- Hero Section -->
-  <Section background="primary" padding="lg">
-    <div class="relative max-w-5xl mx-auto">
-      <!-- Ligne décorative supérieure -->
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-doré-patiné to-transparent"></div>
+  <Section background="primary" padding="xl" class="rounded-xl mb-8 relative overflow-hidden">
+    <!-- Gradient background avec effet coin supérieur gauche -->
+    <div class="absolute inset-0 bg-gradient-to-br from-doré-patiné/15 via-lin to-pierre/10"></div>
 
-      <div class="text-center pt-16 pb-12">
+    <div class="max-w-5xl mx-auto relative z-10">
+      <div class="text-center">
         <h1 class="scroll-reveal text-5xl md:text-7xl font-bold text-noir-doux mb-8 leading-tight tracking-tight">
           Une expérience
-          <span class="block text-doré-patiné italic font-light">sur-mesure</span>
+          <span class="block text-doré-patiné italic font-light mt-2">sur-mesure</span>
         </h1>
 
-        <div class="w-16 h-px bg-doré-patiné/40 mx-auto mb-8"></div>
+        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-doré-patiné to-transparent mx-auto mb-10 animate-line-reveal"></div>
 
         <p class="scroll-reveal scroll-reveal-delay-1 text-lg md:text-xl text-pierre max-w-3xl mx-auto leading-relaxed">
           De la première rencontre à la livraison finale, découvrez comment je transforme
           votre mariage en un récit cinématographique inoubliable.
         </p>
       </div>
-
-      <!-- Ligne décorative inférieure -->
-      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-doré-patiné to-transparent"></div>
     </div>
   </Section>
 
