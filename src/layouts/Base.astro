@@ -133,8 +133,8 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
 
             <div class="flex items-center gap-10 pb-1">
               <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">ACCUEIL</a>
-              <a href="/a-propos" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">À PROPOS</a>
               <a href="/services" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">SERVICES</a>
+              <a href="/a-propos" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">À PROPOS</a>
               <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">CONTACT</a>
             </div>
           </div>
@@ -143,8 +143,8 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
           <div class="md:hidden overflow-hidden transition-all duration-500 ease-out max-h-0 opacity-0" id="mobile-menu-items">
             <div class="mt-8 flex flex-col space-y-1 border-t border-pierre/10 pt-6">
               <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-1" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">ACCUEIL</a>
-              <a href="/a-propos" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-2" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">À PROPOS</a>
-              <a href="/services" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-3" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">SERVICES</a>
+              <a href="/services" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-2" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">SERVICES</a>
+              <a href="/a-propos" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-3" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">À PROPOS</a>
               <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-4" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">CONTACT</a>
             </div>
           </div>
@@ -206,24 +206,6 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
           </div>
         </div>
       </footer>
-
-    <!-- Cookie Banner -->
-    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-lin/95 backdrop-blur-sm border-t border-pierre/20 p-4 z-50 hidden">
-      <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-sm text-pierre/80">
-          Ce site utilise des cookies pour améliorer votre expérience.
-          <a href="/confidentialite" class="text-doré-patiné underline">En savoir plus</a>
-        </p>
-        <div class="flex gap-2">
-          <button id="accept-cookies" class="bg-doré-patiné text-noir-doux px-4 py-2 rounded text-sm hover:bg-doré-light transition-colors">
-            Accepter
-          </button>
-          <button id="decline-cookies" class="bg-transparent border border-pierre text-pierre px-4 py-2 rounded text-sm hover:bg-pierre/10 transition-colors">
-            Refuser
-          </button>
-        </div>
-      </div>
-    </div>
 
     <script>
       // Mobile menu toggle with animations
@@ -303,26 +285,6 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
       // Close menu when clicking on a menu item
       [menuItem1, menuItem2, menuItem3, menuItem4].forEach(item => {
         item?.addEventListener('click', closeMenu);
-      });
-
-      // Cookie banner
-      const cookieBanner = document.getElementById('cookie-banner');
-      const acceptBtn = document.getElementById('accept-cookies');
-      const declineBtn = document.getElementById('decline-cookies');
-      
-      // Show banner if no preference set
-      if (!localStorage.getItem('cookie-consent')) {
-        cookieBanner?.classList.remove('hidden');
-      }
-      
-      acceptBtn?.addEventListener('click', () => {
-        localStorage.setItem('cookie-consent', 'accepted');
-        cookieBanner?.classList.add('hidden');
-      });
-      
-      declineBtn?.addEventListener('click', () => {
-        localStorage.setItem('cookie-consent', 'declined');
-        cookieBanner?.classList.add('hidden');
       });
 
       // Page transitions

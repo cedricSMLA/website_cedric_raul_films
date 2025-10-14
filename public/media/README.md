@@ -1,28 +1,41 @@
-# Placeholders Media
+# Media Assets
 
-Ce dossier contient les placeholders pour les médias du site. 
+Ce dossier contient les médias du site Cédric Raul Films.
 
 ## Structure
 
-- `hero-poster.jpg` - Image héro principale (1920x1080)
-- `posters/` - Images poster pour vidéos YouTube 
-- `portfolio/` - Thumbnails du portfolio
-- `photographes/` - Photos des photographes partenaires
+```
+media/
+├── video/          # Vidéos de mariages et shootings
+│   ├── *.mp4      # Fichiers vidéo (exclus du git)
+│   └── *_poster.jpg # Posters pour les vidéos (exclus du git)
+├── photo/          # Photos de shootings
+│   └── *.jpg/jpeg  # Fichiers photo (exclus du git)
+└── README.md       # Ce fichier
+```
 
-## Format recommandé
+## Important
 
-- Images : WebP avec fallback JPEG
-- Vidéos posters : 1920x1080 ou 1280x720
-- Thumbnails : 640x360
-- Photos portraits : 400x400 minimum
+Les fichiers media (vidéos, images, posters) sont **exclus du repository git** via `.gitignore` car ils sont trop volumineux.
 
-## Optimisation
+### Déploiement en production
 
-Utiliser des outils comme:
-- `squoosh.app` pour l'optimisation web
-- `ffmpeg` pour extraire les posters vidéo
-- Compression AVIF/WebP pour les navigateurs modernes
+Les médias doivent être hébergés séparément via:
+- CDN (Cloudflare, AWS CloudFront, etc.)
+- Service de stockage cloud (AWS S3, Google Cloud Storage, etc.)
+- Service vidéo spécialisé (Vimeo, YouTube, Mux, etc.)
 
-## Remplacement
+### Formats recommandés
 
-Remplacer ces placeholders par vos vrais médias avant la mise en production.
+- **Vidéos**: MP4 (H.264), WebM, format web-optimisé
+- **Posters vidéo**: JPG (1920x1080 ou 1280x720)
+- **Photos**: JPG/WebP optimisées pour le web
+- **Compression**: Utiliser `ffmpeg`, `squoosh.app`, ou `sharp`
+
+### Développement local
+
+Pour développer localement, placez vos fichiers media dans:
+- `public/media/video/` pour les vidéos
+- `public/media/photo/` pour les photos
+
+Les fichiers seront automatiquement ignorés par git.

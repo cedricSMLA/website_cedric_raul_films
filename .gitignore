@@ -56,3 +56,21 @@ docker-volumes/
 # Cache
 .cache/
 .parcel-cache/
+
+# Media files (large files not for git)
+public/media/video/*.mp4
+public/media/video/*.mov
+public/media/video/*.avi
+public/media/video/*.webm
+public/media/photo/*.jpg
+public/media/photo/*.jpeg
+public/media/photo/*.png
+public/media/photo/*.gif
+public/media/photo/*.webp
+public/media/photo/*.heic
+
+# Keep structure and documentation
+!public/media/README.md
+!public/media/.gitkeep
+!public/media/video/.gitkeep
+!public/media/photo/.gitkeep
