@@ -71,3 +71,8 @@ public/media/photo/*.heic
 !public/media/.gitkeep
 !public/media/video/.gitkeep
 !public/media/photo/.gitkeep
+
+# Local scripts and signatures
+deploy-media-to-pi.sh
+email-signature.html
+email-signature-proton.html
