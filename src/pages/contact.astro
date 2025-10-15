@@ -277,7 +277,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
     if (target) {
       // Offset différent selon la taille d'écran
       const isMobile = window.innerWidth < 768;
-      const offset = isMobile ? 180 : 150; // 180px sur mobile, 150px sur desktop
+      const offset = isMobile ? 120 : 80; // 120px sur mobile, 80px sur desktop (descendu plus bas)
       const targetPosition = target.offsetTop - offset;
       window.scrollTo({
         top: targetPosition,
