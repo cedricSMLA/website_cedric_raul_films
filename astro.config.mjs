@@ -34,6 +34,9 @@ export default defineConfig({
     strict: true
   },
   vite: {
+    server: {
+      allowedHosts: ['cedricraulfilms.fr', 'www.cedricraulfilms.fr', 'localhost']
+    },
     build: {
       rollupOptions: {
         output: {

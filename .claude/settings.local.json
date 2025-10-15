@@ -6,7 +6,10 @@
       "Bash(cd:*)",
       "Bash(cd:*)",
       "Bash(git stash:*)",
-      "Bash(git reflog:*)"
+      "Bash(git reflog:*)",
+      "Bash(sudo systemctl:*)",
+      "Bash(sudo lsof:*)",
+      "Bash(sudo pkill:*)"
     ],
     "defaultMode": "acceptEdits"
   }

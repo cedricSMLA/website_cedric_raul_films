@@ -160,19 +160,19 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 
     // Configure SMTP transporter
     const transporter = nodemailer.createTransport({
-      host: import.meta.env.SMTP_HOST,
-      port: parseInt(import.meta.env.SMTP_PORT),
-      secure: import.meta.env.SMTP_SECURE === 'true',
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT || '587'),
+      secure: process.env.SMTP_SECURE === 'true',
       auth: {
-        user: import.meta.env.SMTP_USER,
-        pass: import.meta.env.SMTP_PASS,
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
     });
 
     // Email content (using sanitized inputs)
     const mailOptions = {
-      from: import.meta.env.SMTP_USER,
-      to: import.meta.env.CONTACT_EMAIL,
+      from: process.env.SMTP_USER,
+      to: process.env.CONTACT_EMAIL,
       replyTo: sanitizedEmail,
       subject: `Demande de devis - Mariage du ${sanitizedDate}`,
       text: `

@@ -27,7 +27,7 @@ Site web officiel de Cédric Raúl Films, vidéaste spécialisé dans les films 
 - **Framework** : Astro SSG + TypeScript
 - **Styles** : Tailwind CSS
 - **Contenu** : Markdown éditable
-- **Déploiement** : Docker + Nginx
+- **Déploiement** : systemd + Nginx + Certbot
 - **Hosting** : Raspberry Pi 4 optimisé
 - **Analytics** : Plausible (optionnel)
 - **Tests** : Playwright + Vitest
@@ -85,17 +85,16 @@ src/
 ├── layouts/        # Layout de base avec SEO
 ├── components/     # Composants réutilisables
 ├── pages/          # Pages du site
+│   └── api/        # API routes (formulaire contact)
 ├── content/        # Contenu Markdown
 └── test/           # Tests unitaires
 
 public/
 ├── media/          # Assets médias
+│   ├── video/      # Vidéos (exclus git)
+│   └── photo/      # Photos (exclus git)
 ├── favicon.svg     # Favicon
 └── logo.svg        # Logo
-
-scripts/
-├── backup.sh       # Script de sauvegarde restic
-└── rotate-logs.sh  # Rotation des logs
 ```
 
 ## 🎬 Contenu
@@ -129,18 +128,125 @@ featured: true
 ---
 ```
 
-## 🐳 Déploiement
+## 🚀 Déploiement
 
-### Docker (recommandé)
+### Sur Raspberry Pi 4
+
+#### 1. Prérequis système
 ```bash
-# Build de l'image
-docker build -t cedric-raul-films .
+# Mise à jour
+sudo apt update && sudo apt upgrade -y
 
-# Lancement avec docker-compose
-docker-compose up -d
+# Installer Node.js 18+
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
 
-# Vérification
-curl http://localhost/health
+# Installer nginx
+sudo apt install -y nginx
+
+# Installer Certbot pour SSL
+sudo apt install -y certbot python3-certbot-nginx
+```
+
+#### 2. Déployer l'application
+```bash
+# Cloner le projet
+cd /var/www/
+sudo git clone <repo-url> cedricraulfilms
+cd cedricraulfilms
+
+# Installer les dépendances
+npm install
+
+# Configurer les variables d'environnement
+sudo cp .env.example .env
+sudo nano .env  # Éditer avec vos valeurs
+
+# Build en mode production
+npm run build
+
+# Créer le dossier de logs
+sudo mkdir -p /var/log/cedric-raul
+sudo chown smleye:smleye /var/log/cedric-raul
+
+# Copier et éditer le service systemd
+sudo cp cedric-raul.service /etc/systemd/system/
+sudo nano /etc/systemd/system/cedric-raul.service  # Éditer le SMTP_PASS
+
+# Recharger systemd et activer le service
+sudo systemctl daemon-reload
+sudo systemctl enable cedric-raul
+sudo systemctl start cedric-raul
+
+# Vérifier le statut
+sudo systemctl status cedric-raul
+```
+
+#### 3. Configurer Nginx
+```bash
+# Copier la configuration nginx
+sudo cp nginx.conf /etc/nginx/sites-available/cedricraulfilms
+sudo ln -s /etc/nginx/sites-available/cedricraulfilms /etc/nginx/sites-enabled/
+
+# Tester la configuration
+sudo nginx -t
+
+# Redémarrer nginx
+sudo systemctl restart nginx
+```
+
+#### 4. Configurer SSL avec Certbot
+```bash
+# Obtenir les certificats Let's Encrypt
+sudo certbot --nginx -d cedricraulfilms.fr -d www.cedricraulfilms.fr
+
+# Le renouvellement est automatique via cron
+```
+
+#### Service systemd
+
+Contenu de `/etc/systemd/system/cedric-raul.service`:
+
+```ini
+[Unit]
+Description=Cedric Raul Films Website
+After=network.target
+
+[Service]
+Type=simple
+User=smleye
+WorkingDirectory=/var/www/cedricraulfilms
+ExecStart=/usr/bin/node ./dist/server/entry.mjs
+Restart=always
+RestartSec=10
+
+# Variables d'environnement
+Environment=NODE_ENV=production
+Environment=HOST=0.0.0.0
+Environment=PORT=4321
+
+# SMTP Configuration
+Environment=SMTP_HOST=smtp.protonmail.ch
+Environment=SMTP_PORT=587
+Environment=SMTP_SECURE=false
+Environment=SMTP_USER=contact@cedricraulfilms.fr
+Environment=SMTP_PASS=votre_mot_de_passe
+
+Environment=CONTACT_EMAIL=contact@cedricraulfilms.fr
+Environment=SITE_URL=https://cedricraulfilms.fr
+
+# Logs
+StandardOutput=append:/var/log/cedric-raul/app.log
+StandardError=append:/var/log/cedric-raul/error.log
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**Note**: Créer le dossier de logs avant:
+```bash
+sudo mkdir -p /var/log/cedric-raul
+sudo chown smleye:smleye /var/log/cedric-raul
 ```
 
 ### Variables d'environnement
@@ -149,6 +255,13 @@ curl http://localhost/health
 SITE_URL=https://cedricraulfilms.fr
 CONTACT_EMAIL=contact@cedricraulfilms.fr
 
+# SMTP (pour formulaire de contact)
+SMTP_HOST=smtp.protonmail.ch
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=contact@cedricraulfilms.fr
+SMTP_PASS=votre_mot_de_passe
+
 # Optionnelles
 PLAUSIBLE_DOMAIN=cedricraulfilms.fr
 PLAUSIBLE_SRC=https://plausible.io/js/script.js
@@ -156,43 +269,46 @@ PLAUSIBLE_SRC=https://plausible.io/js/script.js
 
 ### Nginx
 Configuration optimisée incluse avec :
+- Reverse proxy vers Node.js (port 4321)
 - Cache TTL approprié selon les types de fichiers
 - Headers de sécurité (HSTS, CSP, X-Frame-Options...)
-- Compression gzip/brotli
+- Compression gzip
 - Rate limiting
 
-## 🔧 Configuration Raspberry Pi 4
+## 🔧 Optimisations Raspberry Pi 4
 
-### Prérequis système
+### Swap et mémoire
 ```bash
-# Mise à jour
-sudo apt update && sudo apt upgrade -y
-
-# Docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-sudo usermod -aG docker pi
-
-# Docker Compose
-sudo apt install docker-compose-plugin
-```
-
-### Optimisations Pi
-```bash
-# Augmenter la swap si nécessaire
+# Augmenter la swap pour les builds npm
 sudo dphys-swapfile swapoff
-sudo nano /etc/dphys-swapfile  # CONF_SWAPSIZE=1024
+sudo nano /etc/dphys-swapfile  # CONF_SWAPSIZE=2048
 sudo dphys-swapfile setup
 sudo dphys-swapfile swapon
+```
 
-# Configuration réseau
-# Configurer port forwarding 80/443 sur votre box internet
+### Réseau
+```bash
+# Configurer port forwarding sur votre box internet:
+# - Port 80 (HTTP) → IP locale de la Pi
+# - Port 443 (HTTPS) → IP locale de la Pi
+
+# IP statique recommandée pour la Pi
 ```
 
 ### Monitoring
 ```bash
-# Installer Uptime Kuma (optionnel)
-docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:1
+# Voir les logs en temps réel
+sudo journalctl -u cedric-raul -f
+
+# Voir les dernières lignes
+sudo journalctl -u cedric-raul -n 100
+
+# Status du service
+sudo systemctl status cedric-raul
+
+# Logs applicatifs
+tail -f /var/log/cedric-raul/app.log
+tail -f /var/log/cedric-raul/error.log
 ```
 
 ## 📊 Performance
@@ -244,22 +360,11 @@ docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name upti
 
 ## 🔄 Sauvegardes
 
-### Script automatique
-Le script `scripts/backup.sh` utilise restic pour :
-- Sauvegarder les fichiers du site
-- Sauvegarder la configuration Nginx
-- Nettoyer les anciennes sauvegardes
-- Envoyer des notifications
-
-### Configuration
-```bash
-# Variables d'environnement pour backup
-export RESTIC_REPOSITORY=/mnt/backup/restic-repo
-export RESTIC_PASSWORD_FILE=/etc/restic/password
-
-# Crontab pour automatisation
-0 2 * * * /opt/scripts/backup.sh >> /var/log/backup.log 2>&1
-```
+### Stratégie recommandée
+- **Code source**: Git (repository distant)
+- **Médias**: Backup externe (USB, NAS, cloud)
+- **Config nginx**: Copie manuelle ou script personnalisé
+- **Base de données**: (à venir si API avec DB)
 
 ## 🎯 Roadmap V2
 
@@ -329,23 +434,44 @@ npm run test
 
 ### Logs
 ```bash
-# Rotation automatique
-0 1 * * * /opt/scripts/rotate-logs.sh
+# Logs de l'application
+sudo journalctl -u cedric-raul -f
+tail -f /var/log/cedric-raul/app.log
+tail -f /var/log/cedric-raul/error.log
 
-# Consultation
-docker-compose logs -f web
-tail -f logs/access.log
+# Logs nginx
+sudo tail -f /var/log/nginx/cedricraul_access.log
+sudo tail -f /var/log/nginx/cedricraul_error.log
 ```
 
 ### Mises à jour
 ```bash
-# Dépendances
-npm audit
-npm update
+# Mise à jour du code
+cd /var/www/cedricraulfilms
+git pull
+npm install
+npm run build
 
-# Rebuild image
-docker-compose build --no-cache
-docker-compose up -d
+# Redémarrer l'application
+sudo systemctl restart cedric-raul
+
+# Vérifier le statut
+sudo systemctl status cedric-raul
+```
+
+### Redémarrage complet
+```bash
+# Redémarrer nginx
+sudo systemctl restart nginx
+
+# Redémarrer l'app Node
+sudo systemctl restart cedric-raul
+
+# Voir les logs en cas de problème
+sudo journalctl -u cedric-raul -n 50
+
+# Redémarrer la Pi (si nécessaire)
+sudo reboot
 ```
 
 ## 📞 Support

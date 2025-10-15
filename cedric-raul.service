@@ -1,0 +1,33 @@
+[Unit]
+Description=Cedric Raul Films Website
+After=network.target
+
+[Service]
+Type=simple
+User=smleye
+WorkingDirectory=/var/www/cedricraulfilms
+ExecStart=/usr/bin/node ./dist/server/entry.mjs
+Restart=always
+RestartSec=10
+
+# Variables d'environnement
+Environment=NODE_ENV=production
+Environment=HOST=0.0.0.0
+Environment=PORT=4321
+
+# SMTP Configuration - À MODIFIER avec vos vraies valeurs
+Environment=SMTP_HOST=smtp.protonmail.ch
+Environment=SMTP_PORT=587
+Environment=SMTP_SECURE=false
+Environment=SMTP_USER=contact@cedricraulfilms.fr
+Environment=SMTP_PASS=votre_mot_de_passe
+
+Environment=CONTACT_EMAIL=contact@cedricraulfilms.fr
+Environment=SITE_URL=https://cedricraulfilms.fr
+
+# Logs
+StandardOutput=append:/var/log/cedric-raul/app.log
+StandardError=append:/var/log/cedric-raul/error.log
+
+[Install]
+WantedBy=multi-user.target

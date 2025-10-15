@@ -44,9 +44,6 @@ temp/
 server/data/*.db
 server/data/backups/
 
-# Docker volumes (if mapped locally)
-docker-volumes/
-
 # IDE
 .vscode/
 .idea/
