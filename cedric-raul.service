@@ -5,8 +5,8 @@ After=network.target
 [Service]
 Type=simple
 User=smleye
-WorkingDirectory=/var/www/cedricraulfilms
-ExecStart=/usr/bin/node ./dist/server/entry.mjs
+WorkingDirectory=/home/smleye/website_cedric_raul_films
+ExecStart=/usr/bin/node --preserve-symlinks ./dist/server/entry.mjs
 Restart=always
 RestartSec=10
 
