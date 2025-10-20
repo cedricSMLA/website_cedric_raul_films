@@ -44,15 +44,18 @@ import Section from '@/components/Section.astro';
 
       <!-- Timeline cinématique avec ligne centrale -->
       <div class="max-w-6xl mx-auto relative" id="timeline-container">
-        <!-- Ligne verticale centrale (desktop uniquement) -->
-        <div class="hidden md:block absolute left-1/2 top-0 h-full w-px -translate-x-1/2">
-          <div class="h-full w-px bg-gradient-to-b from-doré-patiné/20 via-doré-patiné/40 to-doré-patiné/20"></div>
+        <!-- Ligne verticale centrale progressive (desktop uniquement) -->
+        <div class="hidden md:block absolute left-1/2 top-0 h-full w-px -translate-x-1/2" id="timeline-track">
+          <!-- Ligne de fond statique -->
+          <div class="absolute inset-0 w-px bg-gradient-to-b from-doré-patiné/10 via-doré-patiné/20 to-doré-patiné/10"></div>
+          <!-- Ligne progressive qui se dessine -->
+          <div class="absolute top-0 left-0 w-px bg-gradient-to-b from-doré-patiné/80 via-doré-patiné to-doré-patiné/60 origin-top transition-transform duration-300 ease-out" id="timeline-progress" style="transform: scaleY(0);"></div>
         </div>
 
         <div class="space-y-16 md:space-y-24">
 
         <!-- Étape 01 - GAUCHE -->
-        <div class="scroll-reveal timeline-item" data-side="left">
+        <div class="scroll-reveal timeline-item" data-side="left" data-step="1">
           <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
             <!-- Contenu à gauche (desktop) -->
             <div class="md:pr-12 md:text-right order-2 md:order-1">
@@ -78,8 +81,8 @@ import Section from '@/components/Section.astro';
             </div>
 
             <!-- Point central (desktop uniquement) -->
-            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 order-1 md:order-2">
-              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-doré-patiné to-doré-patiné/60 flex items-center justify-center shadow-2xl ring-4 ring-lin">
+            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 order-1 md:order-2 timeline-circle">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-doré-patiné to-doré-patiné/60 flex items-center justify-center shadow-2xl ring-4 ring-lin transition-all duration-700 ease-out">
                 <span class="text-noir-doux font-bold text-2xl">01</span>
               </div>
             </div>
@@ -90,14 +93,14 @@ import Section from '@/components/Section.astro';
         </div>
 
         <!-- Étape 02 - DROITE -->
-        <div class="scroll-reveal timeline-item" data-side="right">
+        <div class="scroll-reveal timeline-item" data-side="right" data-step="2">
           <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
             <!-- Espace gauche (desktop) -->
             <div class="hidden md:block"></div>
 
             <!-- Point central (desktop uniquement) -->
-            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2">
-              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-sauge to-sauge/60 flex items-center justify-center shadow-2xl ring-4 ring-lin">
+            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 timeline-circle">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-sauge to-sauge/60 flex items-center justify-center shadow-2xl ring-4 ring-lin transition-all duration-700 ease-out">
                 <span class="text-noir-doux font-bold text-2xl">02</span>
               </div>
             </div>
@@ -128,7 +131,7 @@ import Section from '@/components/Section.astro';
         </div>
 
         <!-- Étape 03 - GAUCHE -->
-        <div class="scroll-reveal timeline-item" data-side="left">
+        <div class="scroll-reveal timeline-item" data-side="left" data-step="3">
           <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
             <!-- Contenu à gauche (desktop) -->
             <div class="md:pr-12 md:text-right">
@@ -154,8 +157,8 @@ import Section from '@/components/Section.astro';
             </div>
 
             <!-- Point central (desktop uniquement) -->
-            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2">
-              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-doré-patiné to-doré-patiné/60 flex items-center justify-center shadow-2xl ring-4 ring-lin">
+            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 timeline-circle">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-doré-patiné to-doré-patiné/60 flex items-center justify-center shadow-2xl ring-4 ring-lin transition-all duration-700 ease-out">
                 <span class="text-noir-doux font-bold text-2xl">03</span>
               </div>
             </div>
@@ -166,14 +169,14 @@ import Section from '@/components/Section.astro';
         </div>
 
         <!-- Étape 04 - DROITE -->
-        <div class="scroll-reveal timeline-item" data-side="right">
+        <div class="scroll-reveal timeline-item" data-side="right" data-step="4">
           <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
             <!-- Espace gauche (desktop) -->
             <div class="hidden md:block"></div>
 
             <!-- Point central (desktop uniquement) -->
-            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2">
-              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-sauge to-sauge/60 flex items-center justify-center shadow-2xl ring-4 ring-lin">
+            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 timeline-circle">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-sauge to-sauge/60 flex items-center justify-center shadow-2xl ring-4 ring-lin transition-all duration-700 ease-out">
                 <span class="text-noir-doux font-bold text-2xl">04</span>
               </div>
             </div>
@@ -208,11 +211,11 @@ import Section from '@/components/Section.astro';
         </div>
 
         <!-- Étape 05 - CENTRÉ (mise en avant finale) -->
-        <div class="scroll-reveal timeline-item" data-side="center">
+        <div class="scroll-reveal timeline-item" data-side="center" data-step="5">
           <div class="max-w-4xl mx-auto relative">
             <!-- Point central (desktop uniquement) -->
-            <div class="hidden md:flex absolute left-1/2 -top-8 -translate-x-1/2">
-              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-doré-patiné via-doré-patiné to-doré-light flex items-center justify-center shadow-2xl ring-4 ring-doré-patiné/30">
+            <div class="hidden md:flex absolute left-1/2 -top-8 -translate-x-1/2 timeline-circle">
+              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-doré-patiné via-doré-patiné to-doré-light flex items-center justify-center shadow-2xl ring-4 ring-doré-patiné/30 transition-all duration-700 ease-out">
                 <span class="text-noir-doux font-bold text-3xl">05</span>
               </div>
             </div>
@@ -508,5 +511,89 @@ import Section from '@/components/Section.astro';
     document.addEventListener('DOMContentLoaded', initScrollReveal);
   } else {
     initScrollReveal();
+  }
+
+  // ============================================
+  // TIMELINE SCROLL STORYTELLING (SUBTIL & PREMIUM)
+  // ============================================
+  function initTimelineEffects() {
+    const timelineContainer = document.getElementById('timeline-container');
+    const timelineProgress = document.getElementById('timeline-progress');
+    const timelineCircles = document.querySelectorAll('.timeline-circle > div');
+
+    if (!timelineContainer || !timelineProgress) return;
+
+    let ticking = false;
+
+    // Animation de la ligne progressive
+    function updateTimeline() {
+      if (ticking) return;
+
+      ticking = true;
+      requestAnimationFrame(() => {
+        const rect = timelineContainer.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const start = rect.top;
+        const end = rect.bottom;
+
+        // Calculer le pourcentage de scroll dans la section
+        let progress = 0;
+        if (start < windowHeight && end > 0) {
+          progress = Math.max(0, Math.min(1, (windowHeight - start) / (windowHeight + rect.height)));
+        }
+
+        // Appliquer avec scaleY (plus fluide que height)
+        timelineProgress.style.transform = `scaleY(${progress})`;
+
+        ticking = false;
+      });
+    }
+
+    // Observer pour les cercles (effet scale subtil)
+    const circleObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const circle = entry.target;
+        if (entry.isIntersecting) {
+          // Scale subtil + brightness
+          circle.style.transform = 'scale(1)';
+          circle.style.filter = 'brightness(1.1)';
+        } else if (entry.boundingClientRect.top > 0) {
+          // Pas encore visible
+          circle.style.transform = 'scale(0.85)';
+          circle.style.filter = 'brightness(0.7)';
+        }
+      });
+    }, {
+      threshold: 0.5,
+      rootMargin: '-20% 0px'
+    });
+
+    // Observer chaque cercle
+    timelineCircles.forEach(circle => {
+      circle.style.transform = 'scale(0.85)';
+      circle.style.filter = 'brightness(0.7)';
+      circleObserver.observe(circle);
+    });
+
+    // Écouter le scroll (throttled)
+    let scrollTimeout;
+    function handleScroll() {
+      updateTimeline();
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(updateTimeline, 50);
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+
+    // Init
+    updateTimeline();
+  }
+
+  // Initialiser
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTimelineEffects);
+  } else {
+    initTimelineEffects();
   }
 </script>
