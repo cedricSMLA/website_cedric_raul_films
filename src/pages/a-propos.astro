@@ -1,75 +1,82 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
-import Card from '@/components/Card.astro';
 ---
 
 <Base
   title="À propos - Cédric Raúl Films"
-  description="Des films de mariage qui provoquent l'émotion. Approche cinématographique, drone FPV, post-production soignée. Paris & worldwide. À partir de 2900€."
+  description="Des films de mariage qui provoquent l'émotion. Approche cinématographique, drone FPV, post-production soignée. Paris & worldwide."
 >
-  <!-- Hero Section -->
+  <!-- Hero Section avec LOREN -->
   <Section background="primary" padding="xl" class="rounded-xl mb-8 relative overflow-hidden">
-    <!-- Gradient background avec effet coin supérieur gauche -->
+    <!-- Gradient background -->
     <div class="absolute inset-0 bg-gradient-to-br from-doré-patiné/15 via-lin to-pierre/10"></div>
 
     <div class="max-w-5xl mx-auto relative z-10">
       <div class="text-center">
-        <h1 class="scroll-reveal text-5xl md:text-7xl font-bold text-noir-doux mb-8 leading-tight tracking-tight">
+        <!-- LOREN Signature -->
+        <div class="scroll-reveal mb-8">
+          <h1 class="text-4xl md:text-5xl font-extralight tracking-[0.3em] text-noir-doux mb-3" style="background: linear-gradient(to right, #2c2c2c, #8b7355); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            LOREN
+          </h1>
+          <p class="text-sm md:text-base text-pierre/70 italic font-light tracking-wide">
+            Ce que l'amour révèle au silence
+          </p>
+        </div>
+
+        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-doré-patiné to-transparent mx-auto my-10 animate-line-reveal"></div>
+
+        <h2 class="scroll-reveal scroll-reveal-delay-1 text-3xl md:text-5xl font-bold text-noir-doux mb-8 leading-tight">
           Une vision
-          <span class="block text-doré-patiné italic font-light mt-2">cinéma&shy;tographique</span>
-        </h1>
+          <span class="block text-doré-patiné italic font-light mt-2">cinématographique</span>
+        </h2>
 
-        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-doré-patiné to-transparent mx-auto mb-10 animate-line-reveal"></div>
-
-        <p class="scroll-reveal scroll-reveal-delay-1 text-lg md:text-xl text-pierre max-w-3xl mx-auto leading-relaxed mb-8">
+        <p class="scroll-reveal scroll-reveal-delay-2 text-lg md:text-xl text-pierre max-w-3xl mx-auto leading-relaxed">
           Entre précision technique et sensibilité artistique,
           je transforme l'émotion brute de votre mariage en récit visuel qui traverse le temps.
         </p>
-
-        <!-- Stats visuelles subtiles -->
-        <div class="scroll-reveal scroll-reveal-delay-2 flex flex-wrap justify-center gap-6 md:gap-12 text-xs md:text-sm text-pierre/70">
-          <div class="flex items-center gap-2">
-            <div class="w-2 h-2 bg-doré-patiné rounded-full flex-shrink-0"></div>
-            <span class="whitespace-nowrap">Paris & Worldwide</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <div class="w-2 h-2 bg-sauge rounded-full flex-shrink-0"></div>
-            <span class="whitespace-nowrap">Ingénieur & Artiste</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <div class="w-2 h-2 bg-doré-patiné rounded-full flex-shrink-0"></div>
-            <span class="whitespace-nowrap">Vision Cinéma</span>
-          </div>
-        </div>
       </div>
     </div>
   </Section>
 
-  <!-- Présentation Cédric -->
+  <!-- Quote philosophique -->
+  <Section background="dark" padding="lg" class="rounded-xl mb-8">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="scroll-reveal relative">
+        <svg class="w-12 h-12 text-doré-patiné/20 mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+        </svg>
+        <p class="text-2xl md:text-3xl text-lin font-light italic leading-relaxed mb-6">
+          "Un film de mariage n'est pas une simple archive.<br class="hidden md:block" />
+          C'est l'art de capturer ce qui ne se voit pas :<br class="hidden md:block" />
+          l'émotion, le temps qui suspend son vol, l'invisible rendu éternel."
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- L'invisible rendu visible -->
   <Section background="dark" padding="xl" class="rounded-xl mb-8">
     <div class="max-w-6xl mx-auto">
 
-      <!-- Titre centré avec cadre -->
-      <div class="relative mb-20">
-        <!-- Ligne supérieure -->
+      <!-- Titre avec cadre -->
+      <div class="relative mb-16">
         <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-doré-patiné/40 to-transparent"></div>
 
         <div class="text-center py-12">
           <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-lin mb-4 leading-tight">
-            Des films qui provoquent
-            <span class="block text-doré-patiné italic mt-2">l'émotion</span>
+            L'invisible
+            <span class="block text-doré-patiné italic mt-2">rendu visible</span>
           </h2>
         </div>
 
-        <!-- Ligne inférieure -->
         <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-doré-patiné/40 to-transparent"></div>
       </div>
 
       <!-- Grid symétrique : Photo + Contenu -->
-      <div class="grid lg:grid-cols-2 gap-16 items-center mb-20">
+      <div class="grid lg:grid-cols-2 gap-16 items-center mb-16">
 
-        <!-- Photo (gauche) -->
+        <!-- Photo gauche -->
         <div class="scroll-reveal">
           <div class="relative aspect-[4/5] w-full">
             <img
@@ -81,91 +88,128 @@ import Card from '@/components/Card.astro';
           </div>
         </div>
 
-        <!-- Contenu (droite) - alignement vertical centré -->
+        <!-- Contenu droite -->
         <div class="scroll-reveal scroll-reveal-delay-1 space-y-8">
 
-          <!-- Bloc 1 -->
           <div class="border-l-2 border-doré-patiné pl-6">
-            <h3 class="text-2xl font-bold text-lin mb-3">
-              Une approche unique
-            </h3>
-            <p class="text-base text-lin/80 leading-relaxed">
-              Je ne documente pas votre mariage, je le sublime. Chaque film est pensé comme une œuvre cinématographique :
-              attention obsessionnelle aux détails, étalonnage soigné, montage narratif qui raconte votre histoire.
+            <p class="text-base md:text-lg text-lin/80 leading-relaxed">
+              Il y a ce que l'on voit : les robes, les décors, les sourires. Et puis il y a <strong class="text-lin">ce qui se joue entre deux regards</strong>,
+              ce frisson dans la voix pendant les vœux, cette seconde où tout bascule.
             </p>
           </div>
 
-          <!-- Bloc 2 -->
+          <!-- Highlight box glassmorphism -->
+          <div class="relative rounded-xl p-8 overflow-hidden" style="background: linear-gradient(135deg, rgba(237, 229, 216, 0.08) 0%, rgba(212, 197, 176, 0.05) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(237, 229, 216, 0.15);">
+            <!-- Grain overlay -->
+            <div class="absolute inset-0 pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay; opacity: 0.03;"></div>
+
+            <p class="relative z-10 text-lin font-light leading-relaxed text-base md:text-lg">
+              Je ne documente pas votre mariage.<br />
+              <strong class="text-doré-patiné">Je le sublime.</strong><br />
+              Chaque film est pensé comme une œuvre cinématographique où l'émotion devient narrative.
+            </p>
+          </div>
+
           <div class="border-l-2 border-sauge pl-6">
-            <h3 class="text-2xl font-bold text-lin mb-3">
-              Techniques avant-gardistes
-            </h3>
-            <p class="text-base text-lin/80 leading-relaxed">
-              Drone FPV, caméras 4K stabilisées, gimbal cinéma :
-              j'utilise les meilleurs outils pour créer des plans que personne d'autre ne peut obtenir.
+            <p class="text-base md:text-lg text-lin/80 leading-relaxed">
+              Attention obsessionnelle aux détails, étalonnage soigné, montage qui raconte votre histoire :
+              je crée des films qui provoquent l'émotion, encore et encore, même des années après.
             </p>
           </div>
 
-          <!-- Stats - grid symétrique -->
-          <div class="grid grid-cols-2 gap-6 pt-4">
-            <div class="text-center p-6 bg-lin/5 rounded-lg border border-doré-patiné/20">
-              <p class="text-3xl font-bold text-doré-patiné mb-2">4K</p>
-              <p class="text-xs text-lin/70 uppercase tracking-wider">Qualité cinéma</p>
-            </div>
-            <div class="text-center p-6 bg-lin/5 rounded-lg border border-doré-patiné/20">
-              <p class="text-3xl font-bold text-doré-patiné mb-2">FPV</p>
-              <p class="text-xs text-lin/70 uppercase tracking-wider">Plans exclusifs</p>
-            </div>
-          </div>
-
         </div>
-      </div>
-
-      <!-- Témoignages - grid parfaitement symétrique en bas -->
-      <div class="grid md:grid-cols-2 gap-12">
-
-        <!-- Témoignage 1 -->
-        <div class="scroll-reveal scroll-reveal-delay-1">
-          <div class="bg-lin/5 border border-doré-patiné/20 rounded-lg p-8 h-full flex flex-col justify-between">
-            <div>
-              <svg class="w-8 h-8 text-doré-patiné/30 mb-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-              </svg>
-              <p class="text-lg text-lin mb-6 leading-relaxed italic">
-                "J'ai eu des frissons, j'étais émue aux larmes."
-              </p>
-            </div>
-            <p class="text-doré-patiné text-sm font-medium">— Raumane</p>
-          </div>
-        </div>
-
-        <!-- Témoignage 2 -->
-        <div class="scroll-reveal scroll-reveal-delay-2">
-          <div class="bg-lin/5 border border-doré-patiné/20 rounded-lg p-8 h-full flex flex-col justify-between">
-            <div>
-              <svg class="w-8 h-8 text-doré-patiné/30 mb-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-              </svg>
-              <p class="text-lg text-lin mb-6 leading-relaxed italic">
-                "Le résultat est allé bien au-delà de mes espérances."
-              </p>
-            </div>
-            <p class="text-doré-patiné text-sm font-medium">— Thomas</p>
-          </div>
-        </div>
-
       </div>
 
     </div>
   </Section>
 
-  <!-- Un regard différent -->
-  <Section background="dark" padding="xl" class="rounded-xl">
+  <!-- Une signature, pas un service -->
+  <Section background="primary" padding="xl" class="rounded-xl mb-8">
     <div class="max-w-6xl mx-auto">
 
-      <!-- Titre centré avec cadre -->
-      <div class="relative mb-20">
-        <!-- Ligne supérieure -->
+      <!-- Titre -->
+      <div class="text-center mb-16">
+        <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-noir-doux mb-6 leading-tight">
+          Une signature,
+          <span class="block text-doré-patiné italic mt-2">pas un service</span>
+        </h2>
+        <div class="w-16 h-0.5 bg-doré-patiné mx-auto"></div>
+      </div>
+
+      <!-- Grid 2 colonnes -->
+      <div class="grid md:grid-cols-2 gap-12 mb-16">
+
+        <!-- Colonne 1 : Techniques avant-gardistes -->
+        <div class="scroll-reveal scroll-reveal-delay-1">
+          <div class="mb-6">
+            <h3 class="text-2xl font-bold text-pierre mb-4 flex items-center gap-3">
+              <span class="w-2 h-2 bg-doré-patiné rounded-full"></span>
+              Techniques avant-gardistes
+            </h3>
+            <p class="text-base text-pierre/80 leading-relaxed">
+              <strong class="text-pierre">Drone FPV</strong>, caméras 4K stabilisées, gimbal cinéma :
+              j'utilise les meilleurs outils pour créer des plans que personne d'autre ne peut obtenir.
+            </p>
+          </div>
+
+          <!-- Stats mini -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="text-center p-4 bg-noir-doux/5 rounded-lg border border-doré-patiné/20">
+              <p class="text-3xl font-bold text-doré-patiné mb-1">4K</p>
+              <p class="text-xs text-pierre/70 uppercase tracking-wider">Qualité cinéma</p>
+            </div>
+            <div class="text-center p-4 bg-noir-doux/5 rounded-lg border border-doré-patiné/20">
+              <p class="text-3xl font-bold text-doré-patiné mb-1">FPV</p>
+              <p class="text-xs text-pierre/70 uppercase tracking-wider">Plans exclusifs</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne 2 : Approche unique -->
+        <div class="scroll-reveal scroll-reveal-delay-2">
+          <div class="mb-6">
+            <h3 class="text-2xl font-bold text-pierre mb-4 flex items-center gap-3">
+              <span class="w-2 h-2 bg-sauge rounded-full"></span>
+              Approche unique
+            </h3>
+            <p class="text-base text-pierre/80 leading-relaxed mb-4">
+              Chaque couple a une histoire différente. Je prends le temps de comprendre la vôtre pour créer un film qui vous ressemble vraiment.
+            </p>
+            <p class="text-base text-pierre/80 leading-relaxed">
+              Pas de templates, pas de formules. Juste votre histoire, racontée avec l'exigence du cinéma.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Highlight central glassmorphism -->
+      <div class="scroll-reveal scroll-reveal-delay-3">
+        <div class="relative rounded-2xl p-10 md:p-12 overflow-hidden max-w-4xl mx-auto" style="background: linear-gradient(135deg, rgba(44, 44, 44, 0.05) 0%, rgba(139, 115, 85, 0.08) 100%); backdrop-filter: blur(12px); border: 1px solid rgba(212, 197, 176, 0.2);">
+          <!-- Grain overlay -->
+          <div class="absolute inset-0 pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay; opacity: 0.03;"></div>
+
+          <div class="relative z-10 text-center">
+            <p class="text-xl md:text-2xl text-pierre font-light italic leading-relaxed mb-6">
+              "Ce n'est pas seulement un film.<br class="hidden md:block" />
+              C'est votre héritage émotionnel."
+            </p>
+            <p class="text-doré-patiné text-sm md:text-base font-medium tracking-wider">
+              — LOREN, l'essence de votre histoire
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </Section>
+
+  <!-- Un regard forgé par la montagne -->
+  <Section background="dark" padding="xl" class="rounded-xl mb-8">
+    <div class="max-w-6xl mx-auto">
+
+      <!-- Titre avec cadre -->
+      <div class="relative mb-16">
         <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-doré-patiné/40 to-transparent"></div>
 
         <div class="text-center py-12">
@@ -175,43 +219,42 @@ import Card from '@/components/Card.astro';
           </h2>
         </div>
 
-        <!-- Ligne inférieure -->
         <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-doré-patiné/40 to-transparent"></div>
       </div>
 
-      <!-- Grid symétrique : Contenu + Photo -->
+      <!-- Grid symétrique : Contenu + Photo (inversé) -->
       <div class="grid lg:grid-cols-2 gap-16 items-center">
 
-        <!-- Contenu (gauche) -->
+        <!-- Contenu gauche -->
         <div class="scroll-reveal space-y-6">
 
-          <!-- Bloc 1 -->
           <div class="border-l-2 border-sauge pl-6">
-            <p class="text-base text-lin/80 leading-relaxed">
+            <p class="text-base md:text-lg text-lin/80 leading-relaxed">
               Randonneur expérimenté, j'ai commencé par documenter mes aventures en haute altitude.
               Filmer les sommets, la lumière dorée sur les crêtes, le silence étoilé des nuits en refuge.
             </p>
           </div>
 
-          <!-- Bloc 2 - highlight -->
-          <div class="bg-doré-patiné/10 border border-doré-patiné/30 rounded-lg p-6">
-            <p class="text-lin font-medium leading-relaxed">
-              La montagne m'a enseigné l'essentiel : <strong class="text-lin">attendre le moment parfait</strong>,
+          <!-- Highlight box -->
+          <div class="relative rounded-xl p-8 overflow-hidden" style="background: linear-gradient(135deg, rgba(212, 197, 176, 0.12) 0%, rgba(139, 115, 85, 0.08) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(212, 197, 176, 0.2);">
+            <!-- Grain overlay -->
+            <div class="absolute inset-0 pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay; opacity: 0.03;"></div>
+
+            <p class="relative z-10 text-lin font-light leading-relaxed text-base md:text-lg">
+              La montagne m'a enseigné l'essentiel : <strong class="text-doré-patiné">attendre le moment parfait</strong>,
               capturer l'authenticité sans la forcer, révéler la beauté là où d'autres passent à côté.
             </p>
           </div>
 
-          <!-- Bloc 3 -->
           <div class="border-l-2 border-doré-patiné pl-6">
-            <p class="text-base text-lin/80 leading-relaxed">
+            <p class="text-base md:text-lg text-lin/80 leading-relaxed">
               Ingénieur en informatique de formation, vidéaste par passion :
               cette double casquette me permet d'allier <strong class="text-lin">précision technique</strong> et <strong class="text-lin">sensibilité artistique</strong>.
             </p>
           </div>
 
-          <!-- Bloc 4 -->
           <div class="border-l-2 border-sauge pl-6">
-            <p class="text-base text-lin/80 leading-relaxed">
+            <p class="text-base md:text-lg text-lin/80 leading-relaxed">
               C'est exactement ce que j'apporte à vos mariages : une capacité à saisir l'instant fugace,
               à être là sans être vu, à transformer vos moments en récits visuels puissants.
             </p>
@@ -219,7 +262,7 @@ import Card from '@/components/Card.astro';
 
         </div>
 
-        <!-- Photo (droite) -->
+        <!-- Photo droite -->
         <div class="scroll-reveal scroll-reveal-delay-1">
           <div class="relative aspect-[4/5] w-full">
             <img
@@ -236,21 +279,88 @@ import Card from '@/components/Card.astro';
     </div>
   </Section>
 
-  <!-- CTA finale -->
-  <Section background="primary" padding="xl">
+  <!-- Témoignages -->
+  <Section background="dark" padding="lg" class="rounded-xl mb-8">
+    <div class="max-w-5xl mx-auto">
+
+      <div class="grid md:grid-cols-2 gap-10">
+
+        <!-- Témoignage 1 -->
+        <div class="scroll-reveal scroll-reveal-delay-1">
+          <div class="relative rounded-xl p-8 h-full flex flex-col justify-between overflow-hidden" style="background: linear-gradient(135deg, rgba(237, 229, 216, 0.05) 0%, rgba(237, 229, 216, 0.02) 100%); backdrop-filter: blur(8px); border: 1px solid rgba(237, 229, 216, 0.15);">
+            <!-- Grain overlay -->
+            <div class="absolute inset-0 pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay; opacity: 0.03;"></div>
+
+            <div class="relative z-10">
+              <svg class="w-8 h-8 text-doré-patiné/30 mb-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+              </svg>
+              <p class="text-lg text-lin mb-6 leading-relaxed italic">
+                "J'ai eu des frissons, j'étais émue aux larmes."
+              </p>
+            </div>
+            <p class="relative z-10 text-doré-patiné text-sm font-medium">— Raumane</p>
+          </div>
+        </div>
+
+        <!-- Témoignage 2 -->
+        <div class="scroll-reveal scroll-reveal-delay-2">
+          <div class="relative rounded-xl p-8 h-full flex flex-col justify-between overflow-hidden" style="background: linear-gradient(135deg, rgba(237, 229, 216, 0.05) 0%, rgba(237, 229, 216, 0.02) 100%); backdrop-filter: blur(8px); border: 1px solid rgba(237, 229, 216, 0.15);">
+            <!-- Grain overlay -->
+            <div class="absolute inset-0 pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay; opacity: 0.03;"></div>
+
+            <div class="relative z-10">
+              <svg class="w-8 h-8 text-doré-patiné/30 mb-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+              </svg>
+              <p class="text-lg text-lin mb-6 leading-relaxed italic">
+                "Le résultat est allé bien au-delà de mes espérances."
+              </p>
+            </div>
+            <p class="relative z-10 text-doré-patiné text-sm font-medium">— Thomas</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </Section>
+
+  <!-- Signature finale -->
+  <Section background="primary" padding="lg" class="rounded-xl mb-8">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-pierre mb-6">
-        Prêt à raconter votre histoire ?
+      <div class="scroll-reveal">
+        <p class="text-xl md:text-2xl text-pierre font-light italic mb-4 leading-relaxed">
+          Votre mariage mérite plus qu'un souvenir.<br class="hidden md:block" />
+          Il mérite une œuvre.
+        </p>
+        <div class="w-16 h-0.5 bg-doré-patiné mx-auto my-6"></div>
+        <p class="text-doré-patiné text-base md:text-lg font-medium tracking-wider">
+          Cédric Raúl
+        </p>
+        <p class="text-pierre/60 text-sm mt-2">
+          Vidéaste mariage cinématographique • Paris & Worldwide
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- CTA finale -->
+  <Section background="dark" padding="xl" class="rounded-xl">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-lin mb-6 leading-tight">
+        Prêt à raconter
+        <span class="block text-doré-patiné italic mt-2">votre histoire ?</span>
       </h2>
 
-      <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-pierre/80 mb-10 leading-relaxed">
+      <p class="scroll-reveal scroll-reveal-delay-1 text-lg md:text-xl text-lin/80 mb-10 leading-relaxed">
         Discutons ensemble de votre projet et créons un film qui vous ressemble vraiment.
       </p>
 
       <div class="scroll-reveal scroll-reveal-delay-2">
         <a
           href="/contact#contact"
-          class="inline-block bg-noir-doux text-lin px-12 py-4 rounded-md font-medium hover:bg-doré-patiné hover:text-noir-doux transition-all duration-300 hover:scale-105"
+          class="inline-block bg-doré-patiné text-noir-doux px-12 py-4 rounded-md font-medium hover:bg-lin hover:text-noir-doux transition-all duration-300 hover:scale-105 shadow-strong"
         >
           Contactez-nous
         </a>
@@ -276,7 +386,7 @@ import Card from '@/components/Card.astro';
     }, observerOptions);
 
     // Observer tous les éléments avec les classes scroll-reveal
-    const elements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-slide-left, .scroll-reveal-slide-right, .scroll-reveal-fade');
+    const elements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-delay-1, .scroll-reveal-delay-2, .scroll-reveal-delay-3, .scroll-reveal-slide-left, .scroll-reveal-slide-right, .scroll-reveal-fade');
     elements.forEach(el => observer.observe(el));
   }
 
