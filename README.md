@@ -7,20 +7,24 @@ Site web officiel de Cédric Raúl Films, vidéaste spécialisé dans les films 
 ### Pages V1
 - ✅ **Accueil** - Hero vidéo, portfolio teaser, forfait LOREN, photographes partenaires
 - ✅ **Portfolio** - Filtres par tags, intégration YouTube, navigation fluide
-- ✅ **LOREN** - Forfait signature 2900€ TTC, FAQ, call-to-action
+- ✅ **Services** - Timeline interactive processus créatif, carousel 3D forfaits LOREN (4 offres), livrables, partenaires (Coraline Events Flash Visual, Alexys KA)
 - ✅ **À propos** - Vision, approche, innovation FPV, mention SMLEYE Prod
 - ✅ **Contact** - Formulaire mailto, informations pratiques, stub réservation d'appel
 - ✅ **Photographes** - Partenaires, carousel d'images, liens vers contact
+- ✅ **Politique de confidentialité** - Mentions légales, RGPD, cookies
 
 ### Fonctionnalités techniques
 - 🎥 Intégration vidéos YouTube avec fallback robuste
 - 📱 Design responsive mobile-first
 - 🚁 Mise en avant de l'expertise drone FPV
 - 🎨 Identité visuelle moody cinéma + touches futuristes discrètes
+- 🎭 Carousel 3D coverflow avec perspective CSS 3D, swipe/drag, animations fluides
+- 📅 Timeline interactive du processus créatif avec animations scroll
 - 🔍 SEO optimisé avec meta tags, JSON-LD, sitemap
 - 🍪 Banner cookies conforme RGPD
 - ⚡ Performance optimisée (LCP < 2.5s, CLS < 0.1)
 - ♿ Accessibilité AA
+- 🎨 Nouveau favicon CR cinématographique
 
 ## 🛠 Stack Technique
 
@@ -127,6 +131,36 @@ instagram: "https://instagram.com/username"
 featured: true
 ---
 ```
+
+**Partenaires actuels** :
+- **Coraline** - Events Flash Visual ([Instagram](https://www.instagram.com/eventsflashvisual/))
+- **Alexys KA** - Photographe mariage ([Portfolio](https://alexyska.mypixieset.com/wedding/))
+
+### Forfaits LOREN
+Gamme complète de forfaits mariage présentée via carousel 3D :
+
+- **LOREN Pure** (2 300€)
+  - 6 heures de couverture
+  - Film de 6 minutes
+  - Teaser
+  - Rushes optimisés
+
+- **LOREN Âme** (2 900€)
+  - 9 heures de couverture
+  - Film de 8 minutes
+  - Teaser
+  - Rushes optimisés
+
+- **LOREN Infinie** (3 500€)
+  - 12 heures de couverture
+  - Film de 12 minutes
+  - Teaser
+  - Rushes optimisés
+
+- **LOREN Création** (Sur devis)
+  - Mariages multi-jours
+  - Prestation personnalisée
+  - Film sur mesure
 
 ## 🚀 Déploiement
 
@@ -326,6 +360,21 @@ tail -f /var/log/cedric-raul/error.log
 - JavaScript minimal
 - Service Worker (V2)
 
+### Animations & Interactions
+**Carousel 3D Coverflow (Page Services)** :
+- Perspective CSS 3D (1200px) pour profondeur cinématographique
+- Slide active : face caméra (rotateY 0°, scale 1)
+- Slides adjacentes : inclinées ±25°, reculées -200px, scale 0.8, opacité 40%
+- Slides éloignées : inclinées ±35°, reculées -350px, scale 0.6, opacité 15%
+- Navigation : swipe tactile, drag souris, clavier (←/→), flèches, dots
+- Transitions : 700ms cubic-bezier(0.16, 1, 0.3, 1)
+- 4 forfaits LOREN en rotation 3D fluide
+
+**Timeline Interactive (Page Services)** :
+- Scroll reveal animations avec Intersection Observer
+- Étapes processus créatif avec animations décalées
+- Responsive avec breakpoints adaptés
+
 ## 🔒 Sécurité
 
 ### Headers configurés
@@ -369,12 +418,11 @@ tail -f /var/log/cedric-raul/error.log
 ## 🎯 Roadmap V2
 
 ### Fonctionnalités en backlog
-- [ ] **Services** - Page détaillée des prestations
 - [ ] **Drone FPV** - Page technique et réglementaire
 - [ ] **Témoignages** - Avis clients avec étoiles
 - [ ] **Journal** - Blog actualités/projets
-- [ ] **Process** - Workflow client étape par étape
 - [ ] **Réserver** - Système de réservation d'appels
+- [ ] **Galerie photos** - Intégration avec photographes partenaires
 
 ### Améliorations techniques V2
 - [ ] **API Node.js** - Express + SQLite pour formulaires
