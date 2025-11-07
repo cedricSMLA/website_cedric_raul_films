@@ -133,8 +133,43 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
 
             <div class="flex items-center gap-10 pb-1">
               <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">ACCUEIL</a>
-              <a href="/services" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">SERVICES</a>
-              <a href="/a-propos" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">À PROPOS</a>
+
+              <!-- Services Dropdown -->
+              <div class="relative group">
+                <button class="nav-dropdown-trigger text-noir-doux hover:text-doré-patiné transition-all duration-200 text-sm tracking-wide font-light flex items-center gap-1" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">
+                  SERVICES
+                  <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                <div class="nav-dropdown absolute top-full left-0 mt-2 min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50">
+                  <div class="relative rounded-xl p-2 overflow-hidden" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.2);">
+                    <!-- Grain overlay -->
+                    <div class="absolute inset-0 pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay; opacity: 0.03;"></div>
+                    <a href="/services" class="relative block px-4 py-3 text-noir-doux hover:text-doré-patiné hover:bg-doré-patiné/5 rounded-lg transition-all duration-200 text-sm" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">Nos services</a>
+                    <a href="/tarifs-forfaits" class="relative block px-4 py-3 text-noir-doux hover:text-doré-patiné hover:bg-doré-patiné/5 rounded-lg transition-all duration-200 text-sm" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">Tarifs & Forfaits</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- À propos Dropdown -->
+              <div class="relative group">
+                <button class="nav-dropdown-trigger text-noir-doux hover:text-doré-patiné transition-all duration-200 text-sm tracking-wide font-light flex items-center gap-1" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">
+                  À PROPOS
+                  <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                <div class="nav-dropdown absolute top-full left-0 mt-2 min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50">
+                  <div class="relative rounded-xl p-2 overflow-hidden" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%); backdrop-filter: blur(12px); border: 1px solid rgba(156, 175, 136, 0.2); box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.2);">
+                    <!-- Grain overlay -->
+                    <div class="absolute inset-0 pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay; opacity: 0.03;"></div>
+                    <a href="/a-propos" class="relative block px-4 py-3 text-noir-doux hover:text-sauge hover:bg-sauge/5 rounded-lg transition-all duration-200 text-sm" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">Qui suis-je ?</a>
+                    <a href="/nos-partenaires" class="relative block px-4 py-3 text-noir-doux hover:text-sauge hover:bg-sauge/5 rounded-lg transition-all duration-200 text-sm" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">Nos partenaires</a>
+                  </div>
+                </div>
+              </div>
+
               <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">CONTACT</a>
             </div>
           </div>
@@ -142,10 +177,41 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
           <!-- Mobile menu items (hidden by default) -->
           <div class="md:hidden overflow-hidden transition-all duration-500 ease-out max-h-0 opacity-0" id="mobile-menu-items">
             <div class="mt-8 flex flex-col space-y-1 border-t border-pierre/10 pt-6">
-              <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-1" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">ACCUEIL</a>
-              <a href="/services" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-2" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">SERVICES</a>
-              <a href="/a-propos" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-3" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">À PROPOS</a>
-              <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light" id="menu-item-4" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">CONTACT</a>
+              <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light menu-item" id="menu-item-1" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">ACCUEIL</a>
+
+              <!-- Services Mobile Submenu -->
+              <div class="menu-item transform translate-x-4 opacity-0 duration-300" id="menu-item-2">
+                <button class="mobile-submenu-trigger flex items-center justify-between w-full text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;" data-target="mobile-services-submenu">
+                  SERVICES
+                  <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                <div class="mobile-submenu overflow-hidden transition-all duration-300 max-h-0" id="mobile-services-submenu">
+                  <div class="pl-4 py-2 space-y-1">
+                    <a href="/services" class="block text-noir-doux/80 hover:text-doré-patiné transition-all text-sm py-2 px-3" style="font-family: 'Aestetico', sans-serif;">Nos services</a>
+                    <a href="/tarifs-forfaits" class="block text-noir-doux/80 hover:text-doré-patiné transition-all text-sm py-2 px-3" style="font-family: 'Aestetico', sans-serif;">Tarifs & Forfaits</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- À propos Mobile Submenu -->
+              <div class="menu-item transform translate-x-4 opacity-0 duration-300" id="menu-item-3">
+                <button class="mobile-submenu-trigger flex items-center justify-between w-full text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;" data-target="mobile-apropos-submenu">
+                  À PROPOS
+                  <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                <div class="mobile-submenu overflow-hidden transition-all duration-300 max-h-0" id="mobile-apropos-submenu">
+                  <div class="pl-4 py-2 space-y-1">
+                    <a href="/a-propos" class="block text-noir-doux/80 hover:text-sauge transition-all text-sm py-2 px-3" style="font-family: 'Aestetico', sans-serif;">Qui suis-je ?</a>
+                    <a href="/nos-partenaires" class="block text-noir-doux/80 hover:text-sauge transition-all text-sm py-2 px-3" style="font-family: 'Aestetico', sans-serif;">Nos partenaires</a>
+                  </div>
+                </div>
+              </div>
+
+              <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light menu-item" id="menu-item-4" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">CONTACT</a>
             </div>
           </div>
         </nav>
@@ -282,9 +348,49 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
       // Close menu when clicking on overlay
       mobileOverlay?.addEventListener('click', closeMenu);
 
-      // Close menu when clicking on a menu item
-      [menuItem1, menuItem2, menuItem3, menuItem4].forEach(item => {
-        item?.addEventListener('click', closeMenu);
+      // Close menu when clicking on a menu item (but not on submenu triggers)
+      document.querySelectorAll('#mobile-menu-items a').forEach(link => {
+        link?.addEventListener('click', closeMenu);
+      });
+
+      // Mobile submenu toggles
+      const mobileSubmenuTriggers = document.querySelectorAll('.mobile-submenu-trigger');
+
+      mobileSubmenuTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+
+          const targetId = trigger.getAttribute('data-target');
+          const submenu = document.getElementById(targetId);
+          const arrow = trigger.querySelector('svg');
+
+          if (submenu && arrow) {
+            const isOpen = submenu.classList.contains('max-h-96');
+
+            // Close all other submenus
+            document.querySelectorAll('.mobile-submenu').forEach(sm => {
+              if (sm !== submenu) {
+                sm.classList.remove('max-h-96');
+                sm.classList.add('max-h-0');
+                const otherArrow = sm.previousElementSibling?.querySelector('svg');
+                if (otherArrow) {
+                  otherArrow.classList.remove('rotate-180');
+                }
+              }
+            });
+
+            // Toggle current submenu
+            if (isOpen) {
+              submenu.classList.remove('max-h-96');
+              submenu.classList.add('max-h-0');
+              arrow.classList.remove('rotate-180');
+            } else {
+              submenu.classList.remove('max-h-0');
+              submenu.classList.add('max-h-96');
+              arrow.classList.add('rotate-180');
+            }
+          }
+        });
       });
 
       // Page transitions
