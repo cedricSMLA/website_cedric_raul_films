@@ -41,18 +41,15 @@ import Section from '@/components/Section.astro';
   </Section>
 
   <!-- Forfaits Grid 2x2 -->
-  <Section background="dark" padding="xl" class="mb-20 relative overflow-hidden">
-    <!-- Background subtle gradient -->
-    <div class="absolute inset-0 bg-gradient-to-br from-noir-doux via-noir-doux to-pierre/5 pointer-events-none"></div>
-
-    <div class="max-w-7xl mx-auto relative z-10">
+  <Section background="transparent" padding="xl" class="mb-20">
+    <div class="max-w-7xl mx-auto">
 
       <!-- Grid principal -->
       <div class="grid lg:grid-cols-2 gap-6 mb-6">
 
         <!-- LOREN PURE -->
         <div class="scroll-reveal group" id="pure">
-          <div class="relative h-full overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.02]" style="background: linear-gradient(135deg, rgba(237, 229, 216, 0.08) 0%, rgba(237, 229, 216, 0.04) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.25); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+          <div class="relative h-full overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.02] bg-noir-doux" style="background: linear-gradient(135deg, rgba(237, 229, 216, 0.08) 0%, rgba(237, 229, 216, 0.04) 100%), #2A2A2A; backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.25); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
 
             <!-- Grain -->
             <div class="absolute inset-0 pointer-events-none z-10 opacity-[0.02]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay;"></div>
@@ -60,7 +57,7 @@ import Section from '@/components/Section.astro';
             <!-- Accent -->
             <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-doré-patiné via-doré-patiné/50 to-transparent"></div>
 
-            <div class="p-8 relative z-20">
+            <div class="p-8 relative z-20 flex flex-col min-h-[420px]">
               <!-- Header -->
               <div class="flex items-start justify-between mb-6">
                 <div class="flex items-center gap-3">
@@ -82,7 +79,7 @@ import Section from '@/components/Section.astro';
               </p>
 
               <!-- Description -->
-              <p class="text-lin/60 text-sm leading-relaxed mb-6">
+              <p class="text-lin/60 text-sm leading-relaxed mb-6 flex-grow">
                 Cérémonies intimes. 6 heures de présence transformées en court-métrage de 6 minutes.
               </p>
 
@@ -118,7 +115,11 @@ import Section from '@/components/Section.astro';
                   </li>
                   <li class="flex items-start gap-2">
                     <span class="text-doré-patiné/70">•</span>
-                    <span>Teaser réseaux sociaux (1 min)</span>
+                    <span>Teaser (60 sec)</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-doré-patiné/70">•</span>
+                    <span>Drone et drone FPV (selon lieu et conditions)</span>
                   </li>
                   <li class="flex items-start gap-2">
                     <span class="text-doré-patiné/70">•</span>
@@ -144,7 +145,7 @@ import Section from '@/components/Section.astro';
 
         <!-- LOREN ÂME -->
         <div class="scroll-reveal group" id="ame">
-          <div class="relative h-full overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.02]" style="background: linear-gradient(135deg, rgba(154, 183, 159, 0.08) 0%, rgba(154, 183, 159, 0.04) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(154, 183, 159, 0.25); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+          <div class="relative h-full overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.02] bg-noir-doux" style="background: linear-gradient(135deg, rgba(154, 183, 159, 0.08) 0%, rgba(154, 183, 159, 0.04) 100%), #2A2A2A; backdrop-filter: blur(20px); border: 1px solid rgba(154, 183, 159, 0.25); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
 
             <!-- Grain -->
             <div class="absolute inset-0 pointer-events-none z-10 opacity-[0.02]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay;"></div>
@@ -152,7 +153,7 @@ import Section from '@/components/Section.astro';
             <!-- Accent -->
             <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-sauge via-sauge/50 to-transparent"></div>
 
-            <div class="p-8 relative z-20">
+            <div class="p-8 relative z-20 flex flex-col min-h-[420px]">
               <!-- Header -->
               <div class="flex items-start justify-between mb-6">
                 <div class="flex items-center gap-3">
@@ -174,8 +175,8 @@ import Section from '@/components/Section.astro';
               </p>
 
               <!-- Description -->
-              <p class="text-lin/60 text-sm leading-relaxed mb-6">
-                Le plus populaire. 9 heures de couverture étendue pour un film de 8 minutes.
+              <p class="text-lin/60 text-sm leading-relaxed mb-6 flex-grow">
+                Le plus populaire. 9 heures de couverture étendue pour un film de 10 minutes.
               </p>
 
               <!-- Specs -->
@@ -186,7 +187,7 @@ import Section from '@/components/Section.astro';
                 </div>
                 <div class="bg-lin/5 rounded-lg px-3 py-2 border border-sauge/15">
                   <p class="text-sauge/70 text-xs mb-0.5">Film</p>
-                  <p class="text-lin text-sm font-light">8 min</p>
+                  <p class="text-lin text-sm font-light">10 min</p>
                 </div>
               </div>
 
@@ -206,15 +207,15 @@ import Section from '@/components/Section.astro';
                 <ul class="space-y-2.5 text-lin/70 text-sm">
                   <li class="flex items-start gap-2">
                     <span class="text-sauge/70">•</span>
-                    <span>Film complet monté (8 min)</span>
+                    <span>Film complet monté (10 min)</span>
                   </li>
                   <li class="flex items-start gap-2">
                     <span class="text-sauge/70">•</span>
-                    <span>Teaser dynamique (90 sec)</span>
+                    <span>Teaser (60 sec)</span>
                   </li>
                   <li class="flex items-start gap-2">
                     <span class="text-sauge/70">•</span>
-                    <span>Plans drone FPV cinématiques</span>
+                    <span>Drone et drone FPV (selon lieu et conditions)</span>
                   </li>
                   <li class="flex items-start gap-2">
                     <span class="text-sauge/70">•</span>
@@ -240,14 +241,7 @@ import Section from '@/components/Section.astro';
 
         <!-- LOREN INFINIE (Plus populaire) -->
         <div class="scroll-reveal group" id="infinie">
-          <div class="relative h-full overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.02]" style="background: linear-gradient(135deg, rgba(237, 229, 216, 0.12) 0%, rgba(237, 229, 216, 0.06) 100%); backdrop-filter: blur(20px); border: 1.5px solid rgba(212, 175, 55, 0.35); box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);">
-
-            <!-- Badge -->
-            <div class="absolute top-2 right-2 z-30">
-              <div class="bg-doré-patiné/30 backdrop-blur-sm border border-doré-patiné/50 rounded-full px-3 py-1">
-                <p class="text-lin text-[10px] font-medium uppercase tracking-wider">Populaire</p>
-              </div>
-            </div>
+          <div class="relative h-full overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.02] bg-noir-doux" style="background: linear-gradient(135deg, rgba(237, 229, 216, 0.12) 0%, rgba(237, 229, 216, 0.06) 100%), #2A2A2A; backdrop-filter: blur(20px); border: 1.5px solid rgba(212, 175, 55, 0.35); box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);">
 
             <!-- Grain -->
             <div class="absolute inset-0 pointer-events-none z-10 opacity-[0.02]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay;"></div>
@@ -255,17 +249,23 @@ import Section from '@/components/Section.astro';
             <!-- Accent -->
             <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-doré-patiné via-doré-patiné/50 to-transparent"></div>
 
-            <div class="p-8 relative z-20">
+            <div class="p-8 relative z-20 flex flex-col min-h-[420px]">
               <!-- Header -->
               <div class="flex items-start justify-between mb-6">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-doré-patiné/15 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg class="w-5 h-5 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                  </div>
-                  <div>
+                <div>
+                  <div class="flex items-center gap-3 mb-2">
+                    <div class="w-10 h-10 bg-doré-patiné/15 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <svg class="w-5 h-5 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                    </div>
                     <h3 class="text-2xl font-extralight tracking-[0.2em] text-lin">INFINIE</h3>
+                  </div>
+                  <!-- Badge intégré sous le titre -->
+                  <div class="ml-[52px]">
+                    <div class="inline-block bg-doré-patiné/20 border border-doré-patiné/40 rounded-full px-2.5 py-0.5">
+                      <p class="text-doré-patiné text-[9px] font-medium uppercase tracking-wider">Populaire</p>
+                    </div>
                   </div>
                 </div>
                 <p class="text-3xl font-light text-doré-patiné">3 500€</p>
@@ -277,7 +277,7 @@ import Section from '@/components/Section.astro';
               </p>
 
               <!-- Description -->
-              <p class="text-lin/60 text-sm leading-relaxed mb-6">
+              <p class="text-lin/60 text-sm leading-relaxed mb-6 flex-grow">
                 Pour tout capturer. 12 heures de présence continue pour un film de 12 minutes.
               </p>
 
@@ -313,11 +313,11 @@ import Section from '@/components/Section.astro';
                   </li>
                   <li class="flex items-start gap-2">
                     <span class="text-doré-patiné/70">•</span>
-                    <span>Teaser + version réseaux sociaux</span>
+                    <span>Teaser (60 sec)</span>
                   </li>
                   <li class="flex items-start gap-2">
                     <span class="text-doré-patiné/70">•</span>
-                    <span>Plans drone FPV + équipement premium</span>
+                    <span>Drone et drone FPV (selon lieu et conditions)</span>
                   </li>
                   <li class="flex items-start gap-2">
                     <span class="text-doré-patiné/70">•</span>
@@ -343,7 +343,7 @@ import Section from '@/components/Section.astro';
 
         <!-- LOREN CRÉATION -->
         <div class="scroll-reveal group" id="creation">
-          <div class="relative h-full overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.02]" style="background: linear-gradient(135deg, rgba(154, 183, 159, 0.08) 0%, rgba(154, 183, 159, 0.04) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(154, 183, 159, 0.25); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+          <div class="relative h-full overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.02] bg-noir-doux" style="background: linear-gradient(135deg, rgba(154, 183, 159, 0.08) 0%, rgba(154, 183, 159, 0.04) 100%), #2A2A2A; backdrop-filter: blur(20px); border: 1px solid rgba(154, 183, 159, 0.25); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
 
             <!-- Grain -->
             <div class="absolute inset-0 pointer-events-none z-10 opacity-[0.02]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay;"></div>
@@ -351,9 +351,9 @@ import Section from '@/components/Section.astro';
             <!-- Accent -->
             <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-sauge via-sauge/50 to-transparent"></div>
 
-            <div class="p-8 relative z-20">
+            <div class="p-8 relative z-20 flex flex-col min-h-[420px]">
               <!-- Header -->
-              <div class="flex items-start justify-between mb-6">
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-0 mb-6">
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 bg-sauge/15 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg class="w-5 h-5 text-sauge" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -364,7 +364,7 @@ import Section from '@/components/Section.astro';
                     <h3 class="text-2xl font-extralight tracking-[0.2em] text-lin">CRÉATION</h3>
                   </div>
                 </div>
-                <p class="text-2xl font-light text-sauge">Sur devis</p>
+                <p class="text-2xl font-light text-sauge ml-[52px] sm:ml-0">Sur devis</p>
               </div>
 
               <!-- Quote -->
@@ -373,17 +373,23 @@ import Section from '@/components/Section.astro';
               </p>
 
               <!-- Description -->
-              <p class="text-lin/60 text-sm leading-relaxed mb-6">
+              <p class="text-lin/60 text-sm leading-relaxed mb-6 flex-grow">
                 Projets exceptionnels. Multi-jours, destinations lointaines, visions uniques.
               </p>
+
+              <!-- Inclusions minimales -->
+              <div class="mb-6 pb-4 border-b border-lin/10">
+                <p class="text-lin/50 text-xs mb-2">Inclusions :</p>
+                <p class="text-lin/70 text-xs leading-relaxed">Drone et drone FPV (selon lieu et conditions) + équipement premium sur mesure</p>
+              </div>
 
               <!-- CTA -->
               <a
                 href="/contact#contact"
-                class="inline-flex items-center gap-2 px-5 py-2.5 bg-sauge/15 hover:bg-sauge/25 border border-sauge/35 hover:border-sauge/50 rounded-lg transition-all duration-300 text-lin hover:text-sauge text-sm"
+                class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-sauge/15 hover:bg-sauge/25 border border-sauge/35 hover:border-sauge/50 rounded-lg transition-all duration-300 text-lin hover:text-sauge text-sm w-full sm:w-auto"
               >
                 <span class="font-medium">Discuter du projet</span>
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
               </a>
