@@ -46,8 +46,11 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
       <div class="space-y-10">
         <!-- CTA -->
         <div class="scroll-reveal text-center">
-          <a href="#contact" class="inline-block bg-doré-patiné text-noir-doux px-12 py-4 rounded-md font-medium hover:bg-lin hover:text-noir-doux transition-all duration-300">
-            Discutons de votre projet
+          <a href="#contact" class="group inline-flex items-center gap-2 bg-doré-patiné text-noir-doux px-8 py-3 rounded-md font-medium hover:bg-doré-patiné/90 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg">
+            <span>Discutons de votre projet</span>
+            <svg class="w-4 h-4 transform group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
           </a>
         </div>
 
@@ -277,7 +280,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
     if (target) {
       // Offset différent selon la taille d'écran
       const isMobile = window.innerWidth < 768;
-      const offset = isMobile ? 120 : 80; // 120px sur mobile, 80px sur desktop (descendu plus bas)
+      const offset = isMobile ? 80 : 40; // Offset réduit pour mieux voir le formulaire
       const targetPosition = target.offsetTop - offset;
       window.scrollTo({
         top: targetPosition,

@@ -57,9 +57,9 @@ import Section from '@/components/Section.astro';
             <!-- Accent -->
             <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-doré-patiné via-doré-patiné/50 to-transparent"></div>
 
-            <div class="p-8 relative z-20 flex flex-col min-h-[420px]">
+            <div class="p-8 relative z-20 flex flex-col h-full">
               <!-- Header -->
-              <div class="flex items-start justify-between mb-6">
+              <div class="flex items-start justify-between mb-4">
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 bg-doré-patiné/15 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg class="w-5 h-5 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,36 +73,64 @@ import Section from '@/components/Section.astro';
                 <p class="text-3xl font-light text-doré-patiné">2 300€</p>
               </div>
 
-              <!-- Quote -->
-              <p class="text-base italic text-lin/80 mb-4 font-light">
-                "L'essence en 6 minutes"
+              <!-- Hero Tagline -->
+              <p class="text-lg font-light text-lin mb-3 leading-snug">
+                Capturez l'essentiel sans compromis
               </p>
 
-              <!-- Description -->
-              <p class="text-lin/60 text-sm leading-relaxed mb-6 flex-grow">
-                Cérémonies intimes. 6 heures de présence transformées en court-métrage de 6 minutes.
+              <!-- Pour qui -->
+              <p class="text-sm text-lin/50 mb-6 pb-6 border-b border-lin/10">
+                Parfait pour les cérémonies intimes et les budgets maîtrisés
               </p>
 
-              <!-- Specs -->
-              <div class="grid grid-cols-2 gap-2 mb-6">
-                <div class="bg-lin/5 rounded-lg px-3 py-2 border border-doré-patiné/15">
-                  <p class="text-doré-patiné/70 text-xs mb-0.5">Couverture</p>
-                  <p class="text-lin text-sm font-light">6h</p>
+              <!-- Bénéfices clés (3 visibles) -->
+              <div class="space-y-3 mb-6 flex-grow">
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-doré-patiné flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed"><span class="font-medium text-lin">Film cinématographique de 6 min</span> qui raconte votre histoire</p>
                 </div>
-                <div class="bg-lin/5 rounded-lg px-3 py-2 border border-doré-patiné/15">
-                  <p class="text-doré-patiné/70 text-xs mb-0.5">Film</p>
-                  <p class="text-lin text-sm font-light">6 min</p>
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-doré-patiné flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed"><span class="font-medium text-lin">Teaser 60 sec</span> optimisé pour vos réseaux sociaux</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-doré-patiné flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed"><span class="font-medium text-lin">Plans aériens spectaculaires</span> avec drone FPV</p>
                 </div>
               </div>
 
-              <!-- Inclusions (button to open modal) -->
+              <!-- Specs compacts -->
+              <div class="flex items-center gap-4 text-xs text-lin/50 mb-6">
+                <span>6h de couverture</span>
+                <span>•</span>
+                <span>Livraison sous 3 mois</span>
+              </div>
+
+              <!-- CTA -->
+              <a
+                href="/contact#contact"
+                class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-doré-patiné/10 hover:bg-doré-patiné/20 border border-doré-patiné/30 hover:border-doré-patiné/50 rounded-lg transition-all duration-300 text-lin hover:text-doré-patiné text-sm font-medium group"
+              >
+                <span>Choisir Pure</span>
+                <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+
+              <!-- Voir détails -->
               <button
                 data-modal="pure"
-                class="modal-trigger cursor-pointer text-xs text-lin/50 hover:text-lin/80 transition-colors flex items-center gap-2 group"
+                class="modal-trigger cursor-pointer text-xs text-lin/40 hover:text-lin/60 transition-colors flex items-center justify-center gap-1 mt-3 w-full"
               >
-                <span>Voir les inclusions</span>
-                <svg class="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                <span>Voir tous les détails</span>
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                 </svg>
               </button>
 
@@ -153,9 +181,9 @@ import Section from '@/components/Section.astro';
             <!-- Accent -->
             <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-sauge via-sauge/50 to-transparent"></div>
 
-            <div class="p-8 relative z-20 flex flex-col min-h-[420px]">
+            <div class="p-8 relative z-20 flex flex-col h-full">
               <!-- Header -->
-              <div class="flex items-start justify-between mb-6">
+              <div class="flex items-start justify-between mb-4">
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 bg-sauge/15 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg class="w-5 h-5 text-sauge" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,36 +197,64 @@ import Section from '@/components/Section.astro';
                 <p class="text-3xl font-light text-sauge">2 900€</p>
               </div>
 
-              <!-- Quote -->
-              <p class="text-base italic text-lin/80 mb-4 font-light">
-                "Chaque émotion capturée"
+              <!-- Hero Tagline -->
+              <p class="text-lg font-light text-lin mb-3 leading-snug">
+                Chaque moment compte, chaque émotion capturée
               </p>
 
-              <!-- Description -->
-              <p class="text-lin/60 text-sm leading-relaxed mb-6 flex-grow">
-                Le plus populaire. 9 heures de couverture étendue pour un film de 10 minutes.
+              <!-- Pour qui -->
+              <p class="text-sm text-lin/50 mb-6 pb-6 border-b border-lin/10">
+                Le choix idéal pour une couverture complète de votre journée
               </p>
 
-              <!-- Specs -->
-              <div class="grid grid-cols-2 gap-2 mb-6">
-                <div class="bg-lin/5 rounded-lg px-3 py-2 border border-sauge/15">
-                  <p class="text-sauge/70 text-xs mb-0.5">Couverture</p>
-                  <p class="text-lin text-sm font-light">9h</p>
+              <!-- Bénéfices clés (3 visibles) -->
+              <div class="space-y-3 mb-6 flex-grow">
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-sauge flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed"><span class="font-medium text-lin">Film de 10 min</span> avec narration émotionnelle complète</p>
                 </div>
-                <div class="bg-lin/5 rounded-lg px-3 py-2 border border-sauge/15">
-                  <p class="text-sauge/70 text-xs mb-0.5">Film</p>
-                  <p class="text-lin text-sm font-light">10 min</p>
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-sauge flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed"><span class="font-medium text-lin">9h de présence</span> des préparatifs à la soirée</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-sauge flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed"><span class="font-medium text-lin">Appel découverte</span> pour personnaliser votre film</p>
                 </div>
               </div>
 
-              <!-- Inclusions (button to open modal) -->
+              <!-- Specs compacts -->
+              <div class="flex items-center gap-4 text-xs text-lin/50 mb-6">
+                <span>9h de couverture</span>
+                <span>•</span>
+                <span>Clé USB premium incluse</span>
+              </div>
+
+              <!-- CTA -->
+              <a
+                href="/contact#contact"
+                class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-sauge/10 hover:bg-sauge/20 border border-sauge/30 hover:border-sauge/50 rounded-lg transition-all duration-300 text-lin hover:text-sauge text-sm font-medium group"
+              >
+                <span>Choisir Âme</span>
+                <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+
+              <!-- Voir détails -->
               <button
                 data-modal="ame"
-                class="modal-trigger cursor-pointer text-xs text-lin/50 hover:text-lin/80 transition-colors flex items-center gap-2 group"
+                class="modal-trigger cursor-pointer text-xs text-lin/40 hover:text-lin/60 transition-colors flex items-center justify-center gap-1 mt-3 w-full"
               >
-                <span>Voir les inclusions</span>
-                <svg class="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                <span>Voir tous les détails</span>
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                 </svg>
               </button>
 
@@ -239,68 +295,104 @@ import Section from '@/components/Section.astro';
           </div>
         </div>
 
-        <!-- LOREN INFINIE (Plus populaire) -->
+        <!-- LOREN INFINIE (Le plus choisi) -->
         <div class="scroll-reveal group" id="infinie">
-          <div class="relative h-full overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.02] bg-noir-doux" style="background: linear-gradient(135deg, rgba(237, 229, 216, 0.12) 0%, rgba(237, 229, 216, 0.06) 100%), #2A2A2A; backdrop-filter: blur(20px); border: 1.5px solid rgba(212, 175, 55, 0.35); box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);">
+          <div class="relative h-full overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.03] bg-noir-doux" style="background: linear-gradient(135deg, rgba(237, 229, 216, 0.15) 0%, rgba(237, 229, 216, 0.08) 100%), #2A2A2A; backdrop-filter: blur(20px); border: 2px solid rgba(212, 175, 55, 0.5); box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25), 0 0 60px rgba(212, 175, 55, 0.1);">
+
+            <!-- Badge "Le plus choisi" en haut -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
+              <div class="bg-gradient-to-r from-doré-patiné via-[#D4AF37] to-doré-patiné border-2 border-noir-doux shadow-lg rounded-full px-5 py-1.5">
+                <p class="text-noir-doux text-xs font-bold uppercase tracking-wider">Le plus choisi</p>
+              </div>
+            </div>
+
+            <!-- Glow effect -->
+            <div class="absolute inset-0 pointer-events-none z-5 opacity-30">
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-doré-patiné/10 rounded-full blur-3xl"></div>
+            </div>
 
             <!-- Grain -->
             <div class="absolute inset-0 pointer-events-none z-10 opacity-[0.02]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay;"></div>
 
-            <!-- Accent -->
-            <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-doré-patiné via-doré-patiné/50 to-transparent"></div>
+            <!-- Accent gauche plus épais -->
+            <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-doré-patiné via-doré-patiné to-doré-patiné/50"></div>
 
-            <div class="p-8 relative z-20 flex flex-col min-h-[420px]">
+            <div class="p-8 pt-10 relative z-20 flex flex-col h-full">
               <!-- Header -->
-              <div class="flex items-start justify-between mb-6">
-                <div>
-                  <div class="flex items-center gap-3 mb-2">
-                    <div class="w-10 h-10 bg-doré-patiné/15 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <svg class="w-5 h-5 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                      </svg>
-                    </div>
-                    <h3 class="text-2xl font-extralight tracking-[0.2em] text-lin">INFINIE</h3>
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 bg-doré-patiné/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-doré-patiné/30">
+                    <svg class="w-6 h-6 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
                   </div>
-                  <!-- Badge intégré sous le titre -->
-                  <div class="ml-[52px]">
-                    <div class="inline-block bg-doré-patiné/20 border border-doré-patiné/40 rounded-full px-2.5 py-0.5">
-                      <p class="text-doré-patiné text-[9px] font-medium uppercase tracking-wider">Populaire</p>
-                    </div>
+                  <div>
+                    <h3 class="text-2xl font-extralight tracking-[0.2em] text-lin">INFINIE</h3>
                   </div>
                 </div>
                 <p class="text-3xl font-light text-doré-patiné">3 500€</p>
               </div>
 
-              <!-- Quote -->
-              <p class="text-base italic text-lin/80 mb-4 font-light">
-                "Une journée complète"
+              <!-- Hero Tagline -->
+              <p class="text-lg font-light text-lin mb-3 leading-snug">
+                Votre mariage comme un long-métrage
               </p>
 
-              <!-- Description -->
-              <p class="text-lin/60 text-sm leading-relaxed mb-6 flex-grow">
-                Pour tout capturer. 12 heures de présence continue pour un film de 12 minutes.
+              <!-- Pour qui -->
+              <p class="text-sm text-lin/50 mb-6 pb-6 border-b border-lin/10">
+                L'expérience complète pour revivre chaque instant, de l'aube à minuit
               </p>
 
-              <!-- Specs -->
-              <div class="grid grid-cols-2 gap-2 mb-6">
-                <div class="bg-lin/5 rounded-lg px-3 py-2 border border-doré-patiné/15">
-                  <p class="text-doré-patiné/70 text-xs mb-0.5">Couverture</p>
-                  <p class="text-lin text-sm font-light">12h</p>
+              <!-- Bénéfices clés (3 visibles) -->
+              <div class="space-y-3 mb-6 flex-grow">
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-doré-patiné flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed"><span class="font-medium text-lin">12 min de pur cinéma</span> + tous vos rushes brutes</p>
                 </div>
-                <div class="bg-lin/5 rounded-lg px-3 py-2 border border-doré-patiné/15">
-                  <p class="text-doré-patiné/70 text-xs mb-0.5">Film</p>
-                  <p class="text-lin text-sm font-light">12 min</p>
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-doré-patiné flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed"><span class="font-medium text-lin">Second opérateur disponible</span> pour multiplier les angles</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-doré-patiné flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed"><span class="font-medium text-lin">Post-production artisanale</span> personnalisée</p>
                 </div>
               </div>
 
-              <!-- Inclusions (button to open modal) -->
+              <!-- Specs compacts -->
+              <div class="flex items-center gap-4 text-xs text-lin/50 mb-6">
+                <span>12h de couverture</span>
+                <span>•</span>
+                <span>Rushes brutes inclus</span>
+              </div>
+
+              <!-- CTA premium -->
+              <a
+                href="/contact#contact"
+                class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg transition-all duration-300 text-noir-doux text-sm font-semibold group relative overflow-hidden"
+                style="background: linear-gradient(135deg, #D4AF37 0%, #C49F2E 50%, #B8912A 100%);"
+              >
+                <span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%);"></span>
+                <span class="relative">Démarrer mon projet</span>
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform relative" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+
+              <!-- Voir détails -->
               <button
                 data-modal="infinie"
-                class="modal-trigger cursor-pointer text-xs text-lin/50 hover:text-lin/80 transition-colors flex items-center gap-2 group"
+                class="modal-trigger cursor-pointer text-xs text-lin/40 hover:text-lin/60 transition-colors flex items-center justify-center gap-1 mt-3 w-full"
               >
-                <span>Voir les inclusions</span>
-                <svg class="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                <span>Voir tous les détails</span>
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                 </svg>
               </button>
 
@@ -351,9 +443,9 @@ import Section from '@/components/Section.astro';
             <!-- Accent -->
             <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-sauge via-sauge/50 to-transparent"></div>
 
-            <div class="p-8 relative z-20 flex flex-col min-h-[420px]">
+            <div class="p-8 relative z-20 flex flex-col h-full">
               <!-- Header -->
-              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-0 mb-6">
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-0 mb-4">
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 bg-sauge/15 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg class="w-5 h-5 text-sauge" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -367,29 +459,56 @@ import Section from '@/components/Section.astro';
                 <p class="text-2xl font-light text-sauge ml-[52px] sm:ml-0">Sur devis</p>
               </div>
 
-              <!-- Quote -->
-              <p class="text-base italic text-lin/80 mb-4 font-light">
-                "Votre vision, sans limites"
+              <!-- Hero Tagline -->
+              <p class="text-lg font-light text-lin mb-3 leading-snug">
+                Des projets exceptionnels méritent une approche unique
               </p>
 
-              <!-- Description -->
-              <p class="text-lin/60 text-sm leading-relaxed mb-6 flex-grow">
-                Projets exceptionnels. Multi-jours, destinations lointaines, visions uniques.
+              <!-- Pour qui -->
+              <p class="text-sm text-lin/50 mb-6 pb-6 border-b border-lin/10">
+                Multi-jours, destinations exotiques, ou visions extraordinaires
               </p>
 
-              <!-- Inclusions minimales -->
-              <div class="mb-6 pb-4 border-b border-lin/10">
-                <p class="text-lin/50 text-xs mb-2">Inclusions :</p>
-                <p class="text-lin/70 text-xs leading-relaxed">Drone et drone FPV (selon lieu et conditions) + équipement premium sur mesure</p>
+              <!-- Exemples de cas d'usage -->
+              <div class="space-y-3 mb-6 flex-grow">
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-sauge flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed">Mariages de plusieurs jours</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-sauge flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed">Destinations lointaines</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-sauge flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed">Équipes de tournage dédiées</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-sauge flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                  </svg>
+                  <p class="text-sm text-lin/80 leading-relaxed">Concepts créatifs sur-mesure</p>
+                </div>
               </div>
+
+              <!-- Info supplémentaire -->
+              <p class="text-xs text-lin/40 italic mb-6">
+                Chaque projet Création est unique et conçu autour de votre vision
+              </p>
 
               <!-- CTA -->
               <a
                 href="/contact#contact"
-                class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-sauge/15 hover:bg-sauge/25 border border-sauge/35 hover:border-sauge/50 rounded-lg transition-all duration-300 text-lin hover:text-sauge text-sm w-full sm:w-auto"
+                class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-sauge/15 hover:bg-sauge/25 border border-sauge/35 hover:border-sauge/50 rounded-lg transition-all duration-300 text-lin hover:text-sauge text-sm font-medium group"
               >
-                <span class="font-medium">Discuter du projet</span>
-                <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span>Discuter de mon projet</span>
+                <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
               </a>
