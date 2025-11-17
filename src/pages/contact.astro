@@ -142,21 +142,21 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
           />
         </div>
 
-        <!-- Budget (optionnel) -->
+        <!-- Forfait (optionnel) -->
         <div>
-          <label for="budget" class="block text-sm font-medium text-noir-doux mb-3">
-            Budget envisagé <span class="text-pierre font-normal">(optionnel)</span>
+          <label for="forfait" class="block text-sm font-medium text-noir-doux mb-3">
+            Choisir un forfait <span class="text-pierre font-normal">(optionnel)</span>
           </label>
           <select
-            id="budget"
-            name="budget"
+            id="forfait"
+            name="forfait"
             class="w-full px-4 py-3 border border-pierre/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-noir-doux"
           >
             <option value="">Préfère ne pas préciser</option>
-            <option value="2000-3500">2000€ - 3500€</option>
-            <option value="3500-5000">3500€ - 5000€</option>
-            <option value="5000+">Plus de 5000€</option>
-            <option value="discuter">À discuter ensemble</option>
+            <option value="pure">LOREN Pure - 2 300€</option>
+            <option value="ame">LOREN Âme - 2 900€</option>
+            <option value="infinie">LOREN Infinie - 3 500€</option>
+            <option value="creation">LOREN Création - Sur devis</option>
           </select>
         </div>
 
@@ -228,7 +228,7 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
       nom: formData.get('nom'),
       email: formData.get('email'),
       date: formData.get('date'),
-      budget: formData.get('budget'),
+      forfait: formData.get('forfait'),
       message: formData.get('message'),
       consent: formData.get('consent') ? true : false
     };
@@ -304,6 +304,28 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
       }, 100);
     });
   }
+
+  // Présélection du forfait depuis l'URL
+  function preselectForfait() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const forfaitParam = urlParams.get('forfait');
+
+    if (forfaitParam) {
+      const forfaitSelect = document.getElementById('forfait');
+      if (forfaitSelect) {
+        // Chercher l'option correspondante
+        const option = forfaitSelect.querySelector(`option[value="${forfaitParam}"]`);
+        if (option) {
+          forfaitSelect.value = forfaitParam;
+        }
+      }
+    }
+  }
+
+  // Appeler la fonction de présélection au chargement
+  window.addEventListener('load', () => {
+    preselectForfait();
+  });
 
   // Scroll reveal animations
   function initScrollReveal() {
