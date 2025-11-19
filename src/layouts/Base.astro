@@ -1,4 +1,6 @@
 ---
+import '@/styles/global.css';
+
 export interface Props {
   title: string;
   description?: string;
@@ -51,9 +53,6 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <title>{title}</title>
-
-    <!-- Global styles -->
-    <link rel="stylesheet" href="/src/styles/global.css" />
 
     <!-- JSON-LD Schema -->
     <script type="application/ld+json">

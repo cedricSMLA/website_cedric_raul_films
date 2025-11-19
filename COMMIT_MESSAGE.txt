@@ -1,0 +1,45 @@
+refactor: migration vers déploiement systemd + nginx sans Docker
+
+## Changements majeurs
+
+### Suppression Docker/Traefik
+- ❌ Suppression Dockerfile et docker-compose.yml
+- ❌ Suppression scripts Docker (backup.sh, rotate-logs.sh)
+- ✅ Migration vers systemd natif pour la gestion de processus
+
+### Nouvelle architecture de déploiement
+- ✅ Service systemd (cedric-raul.service)
+- ✅ nginx en reverse proxy avec gzip et cache optimisés
+- ✅ SSL/HTTPS avec Certbot (Let's Encrypt)
+- ✅ Script de déploiement automatisé (deploy.sh)
+- ✅ Script de healthcheck (healthcheck.sh)
+
+### Améliorations configuration
+- ✅ Variables d'environnement via systemd
+- ✅ Logs gérés par journalctl + fichiers dédiés
+- ✅ Rate limiting nginx pour API contact
+- ✅ Headers de sécurité optimisés
+- ✅ Cache stratégique pour assets statiques et vidéos
+
+### Documentation
+- ✅ DEPLOY.md - Guide complet de déploiement et maintenance
+- ✅ QUICKSTART.md - Démarrage rapide en 5 minutes
+- ✅ README.md mis à jour avec instructions systemd
+- ✅ .env.example complet avec toutes les variables
+
+### Corrections techniques
+- 🔧 API contact: process.env au lieu de import.meta.env (fix SSR)
+- 🔧 nginx: gzip, cache headers, rate limiting configurés
+- 🔧 Médias: Posters JPG ajoutés, vidéos MP4 exclus (gitignore)
+
+## Architecture finale
+
+Internet (443) → nginx (reverse proxy) → Node.js (localhost:4321) via systemd
+
+## Déploiement
+
+Voir QUICKSTART.md pour un déploiement rapide ou DEPLOY.md pour le guide complet.
+
+🤖 Generated with Claude Code
+
+Co-Authored-By: Claude <noreply@anthropic.com>
