@@ -1,0 +1,161 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+
+const lastUpdate = "2 mars 2026";
+---
+
+<Base
+  title="Politique de confidentialité - PLEIA"
+  description="Politique de confidentialité de l'application PLEIA par SMLEYE PRODUCTION"
+>
+  <Section background="primary" padding="xl">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="mb-12 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-noir-doux mb-4">
+          Politique de confidentialité
+        </h1>
+        <p class="text-pierre text-sm font-semibold">Application PLEIA – SMLEYE PRODUCTION</p>
+        <p class="text-pierre text-sm mt-1">
+          Dernière mise à jour : {lastUpdate}
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div class="prose prose-lg max-w-none space-y-8">
+
+        <!-- Éditeur -->
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">1. Éditeur</h2>
+          <p class="text-pierre leading-relaxed">
+            PLEIA est éditée par <strong>SMLEYE PRODUCTION</strong>, auto-entreprise immatriculée sous le SIRET 93907930700012, représentée par Cédric Salim Soumaïla.
+          </p>
+          <div class="mt-4 pl-4 border-l-4 border-doré-patiné">
+            <p class="text-pierre">Email : <a href="mailto:contact@smleyeprod.fr" class="text-doré-patiné underline hover:no-underline">contact@smleyeprod.fr</a></p>
+          </div>
+        </div>
+
+        <!-- Données collectées -->
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">2. Données collectées</h2>
+          <p class="text-pierre leading-relaxed mb-4">
+            PLEIA collecte uniquement les données strictement nécessaires à son fonctionnement :
+          </p>
+          <ul class="list-disc list-inside space-y-2 text-pierre ml-4">
+            <li><strong>Données de projets</strong> : noms des mariés, dates, horaires, lieux – saisis par l'utilisateur et stockés localement sur l'appareil.</li>
+            <li><strong>Données d'usage IA</strong> : le texte soumis à l'import automatique est transmis à notre serveur proxy (Supabase) pour traitement par l'API Claude (Anthropic). Ce texte n'est pas conservé après traitement.</li>
+            <li><strong>Identifiant d'appareil anonyme</strong> : utilisé pour le comptage des crédits et le rate limiting, sans identification personnelle.</li>
+            <li><strong>Données Pinterest (si connexion)</strong> : un token d'accès OAuth est stocké localement sur l'appareil dans un espace sécurisé (iOS Keychain). PLEIA accède en lecture seule à vos tableaux et épingles Pinterest pour afficher des références visuelles.</li>
+          </ul>
+        </div>
+
+        <!-- Données NON collectées -->
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">3. Données NON collectées</h2>
+          <ul class="list-disc list-inside space-y-2 text-pierre ml-4">
+            <li>Nom, prénom ou adresse e-mail de l'utilisateur</li>
+            <li>Localisation géographique</li>
+            <li>Photos (stockées uniquement en local sur l'appareil)</li>
+            <li>Données de paiement (gérées par Apple via les achats intégrés)</li>
+          </ul>
+        </div>
+
+        <!-- Finalité -->
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">4. Finalité du traitement</h2>
+          <ul class="list-disc list-inside space-y-2 text-pierre ml-4">
+            <li>Fonctionnement de l'application (gestion de projets événementiels)</li>
+            <li>Import automatique de plannings via intelligence artificielle</li>
+            <li>Affichage de références visuelles depuis Pinterest (si connexion)</li>
+            <li>Envoi de notifications locales de rappel (gérées sur l'appareil)</li>
+          </ul>
+        </div>
+
+        <!-- Stockage et sécurité -->
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">5. Stockage et sécurité</h2>
+          <p class="text-pierre leading-relaxed">
+            Toutes les données de projet sont stockées <strong>localement sur votre appareil</strong>. Aucune synchronisation cloud n'est effectuée sans votre accord explicite.
+          </p>
+          <p class="text-pierre leading-relaxed mt-4">
+            Les tokens Pinterest sont conservés dans l'espace sécurisé du système (iOS Keychain).
+          </p>
+          <p class="text-pierre leading-relaxed mt-4">
+            Les appels à l'API d'intelligence artificielle transitent par un serveur proxy sécurisé (Supabase). La clé API n'est jamais exposée côté client.
+          </p>
+        </div>
+
+        <!-- Partage -->
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">6. Partage des données</h2>
+          <p class="text-pierre leading-relaxed">
+            <strong>Aucune donnée personnelle n'est vendue ni partagée avec des tiers à des fins commerciales.</strong> Les seuls sous-traitants impliqués sont :
+          </p>
+          <ul class="list-disc list-inside space-y-2 text-pierre ml-4 mt-4">
+            <li><strong>Supabase</strong> (serveur proxy, hébergé en UE) – <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" class="text-doré-patiné underline hover:no-underline">politique de confidentialité</a></li>
+            <li><strong>Anthropic</strong> (traitement IA du texte importé) – <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener noreferrer" class="text-doré-patiné underline hover:no-underline">politique de confidentialité</a></li>
+            <li><strong>Pinterest</strong> (si connexion OAuth) – <a href="https://policy.pinterest.com/fr/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-doré-patiné underline hover:no-underline">politique de confidentialité</a></li>
+          </ul>
+        </div>
+
+        <!-- Durée de conservation -->
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">7. Durée de conservation</h2>
+          <p class="text-pierre leading-relaxed">
+            Les données de projet sont conservées sur votre appareil jusqu'à suppression manuelle. Les tokens Pinterest sont supprimés lors de la déconnexion dans l'application.
+          </p>
+        </div>
+
+        <!-- Vos droits -->
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">8. Vos droits (RGPD)</h2>
+          <p class="text-pierre leading-relaxed mb-4">
+            Conformément au RGPD, vous disposez des droits suivants :
+          </p>
+          <ul class="list-disc list-inside space-y-2 text-pierre ml-4">
+            <li>Droit d'accès, de rectification et de suppression</li>
+            <li>Droit à la portabilité des données</li>
+            <li>Droit d'opposition au traitement</li>
+            <li>Droit de retirer votre consentement à tout moment</li>
+          </ul>
+          <p class="text-pierre leading-relaxed mt-6">
+            Pour exercer ces droits : <a href="mailto:contact@smleyeprod.fr" class="text-doré-patiné underline hover:no-underline">contact@smleyeprod.fr</a>
+          </p>
+          <p class="text-pierre leading-relaxed mt-4">
+            En cas de réclamation non résolue, vous pouvez saisir la <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" class="text-doré-patiné underline hover:no-underline">CNIL</a>.
+          </p>
+        </div>
+
+        <!-- Modifications -->
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">9. Modifications</h2>
+          <p class="text-pierre leading-relaxed">
+            Cette politique peut être mise à jour. La date de dernière modification est indiquée en haut de ce document. L'utilisation continue de l'application vaut acceptation des modifications.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="mt-12 text-center text-pierre text-sm">
+        <p>SMLEYE PRODUCTION – SIRET 93907930700012 – <a href="mailto:contact@smleyeprod.fr" class="text-doré-patiné underline hover:no-underline">contact@smleyeprod.fr</a></p>
+      </div>
+
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .prose h2 {
+    margin-top: 0;
+  }
+
+  .prose ul {
+    margin-top: 1rem;
+  }
+
+  .prose li {
+    margin-top: 0.5rem;
+  }
+</style>
