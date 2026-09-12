@@ -2,160 +2,104 @@
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
 
-const lastUpdate = "2 mars 2026";
+const lastUpdate = "12 septembre 2026";
 ---
 
 <Base
   title="Politique de confidentialité - PLEIA"
-  description="Politique de confidentialité de l'application PLEIA par SMLEYE PRODUCTION"
+  description="Politique de confidentialité de l’application PLEIA par SMLEYE PRODUCTION"
 >
   <Section background="primary" padding="xl">
     <div class="max-w-4xl mx-auto">
-      <!-- Header -->
       <div class="mb-12 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-noir-doux mb-4">
-          Politique de confidentialité
-        </h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-noir-doux mb-4">Politique de confidentialité</h1>
         <p class="text-pierre text-sm font-semibold">Application PLEIA – SMLEYE PRODUCTION</p>
-        <p class="text-pierre text-sm mt-1">
-          Dernière mise à jour : {lastUpdate}
-        </p>
+        <p class="text-pierre text-sm mt-1">Dernière mise à jour : {lastUpdate}</p>
       </div>
 
-      <!-- Content -->
       <div class="prose prose-lg max-w-none space-y-8">
-
-        <!-- Éditeur -->
         <div class="bg-white p-8 rounded-lg shadow-sm">
           <h2 class="text-2xl font-bold text-noir-doux mb-4">1. Éditeur</h2>
-          <p class="text-pierre leading-relaxed">
-            PLEIA est éditée par <strong>SMLEYE PRODUCTION</strong>, auto-entreprise immatriculée sous le SIRET 93907930700012, représentée par Cédric Salim Soumaïla.
-          </p>
-          <div class="mt-4 pl-4 border-l-4 border-doré-patiné">
-            <p class="text-pierre">Email : <a href="mailto:contact@smleyeprod.fr" class="text-doré-patiné underline hover:no-underline">contact@smleyeprod.fr</a></p>
-          </div>
-        </div>
+          <p class="text-pierre leading-relaxed mb-3">PLEIA est éditée par <strong>SMLEYE PRODUCTION</strong>, auto-entreprise immatriculée sous le SIRET 93907930700012, représentée par Cédric Salim Soumaïla.</p>
+          <p class="text-pierre leading-relaxed mb-3">Contact : <a href="mailto:contact@smleyeprod.fr" class="text-doré-patiné underline hover:no-underline">contact@smleyeprod.fr</a></p>
 
-        <!-- Données collectées -->
+        </div>
         <div class="bg-white p-8 rounded-lg shadow-sm">
-          <h2 class="text-2xl font-bold text-noir-doux mb-4">2. Données collectées</h2>
-          <p class="text-pierre leading-relaxed mb-4">
-            PLEIA collecte uniquement les données strictement nécessaires à son fonctionnement :
-          </p>
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">2. Ce que l’application enregistre</h2>
+          <p class="text-pierre leading-relaxed mb-3">PLEIA est un outil pour les professionnels de l’événementiel : il sert à préparer et tenir le déroulé d’une journée de prestation.</p>
           <ul class="list-disc list-inside space-y-2 text-pierre ml-4">
-            <li><strong>Données de projets</strong> : noms des mariés, dates, horaires, lieux – saisis par l'utilisateur et stockés localement sur l'appareil.</li>
-            <li><strong>Données d'usage IA</strong> : le texte soumis à l'import automatique est transmis à notre serveur proxy (Supabase) pour traitement par l'API Claude (Anthropic). Ce texte n'est pas conservé après traitement.</li>
-            <li><strong>Identifiant d'appareil anonyme</strong> : utilisé pour le comptage des crédits et le rate limiting, sans identification personnelle.</li>
-            <li><strong>Données Pinterest (si connexion)</strong> : un token d'accès OAuth est stocké localement sur l'appareil dans un espace sécurisé (iOS Keychain). PLEIA accède en lecture seule à vos tableaux et épingles Pinterest pour afficher des références visuelles.</li>
+            <li><strong>Le contenu de vos projets</strong> : nom du client, horaires, lieux, notes, plans à capturer, contacts saisis (nom, rôle, téléphone). Stocké sur votre téléphone, et sur nos serveurs uniquement si vous avez ajouté une adresse e-mail pour la sauvegarde.</li>
+            <li><strong>Votre adresse e-mail</strong>, si vous en ajoutez une, pour retrouver vos projets sur un autre téléphone.</li>
+            <li><strong>Le texte, la photo ou le PDF que vous importez</strong> : transmis à notre serveur puis au service d’analyse le temps de retrouver les horaires et les contacts qu’ils contiennent. Non conservé après traitement.</li>
+            <li><strong>L’adresse d’un lieu</strong> : envoyée une fois à un service de géocodage pour obtenir des coordonnées. Le coucher du soleil est ensuite calculé sur le téléphone.</li>
+            <li><strong>Un identifiant d’achat</strong> pour gérer l’abonnement.</li>
+            <li><strong>Des rapports de plantage techniques</strong>, sans contenu de projet.</li>
           </ul>
-        </div>
+          <p class="text-pierre leading-relaxed mb-3">Sans adresse e-mail, votre compte est anonyme : un identifiant technique est créé sur votre téléphone pour utiliser le service d’import. Il n’est lié à aucune information personnelle.</p>
 
-        <!-- Données NON collectées -->
+        </div>
         <div class="bg-white p-8 rounded-lg shadow-sm">
-          <h2 class="text-2xl font-bold text-noir-doux mb-4">3. Données NON collectées</h2>
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">3. Ce que l’application ne fait pas</h2>
           <ul class="list-disc list-inside space-y-2 text-pierre ml-4">
-            <li>Nom, prénom ou adresse e-mail de l'utilisateur</li>
-            <li>Localisation géographique</li>
-            <li>Photos (stockées uniquement en local sur l'appareil)</li>
-            <li>Données de paiement (gérées par Apple via les achats intégrés)</li>
+            <li>Elle ne demande jamais votre position.</li>
+            <li>Elle ne lit pas les contacts de votre téléphone.</li>
+            <li>Elle ne contient aucune publicité et n’utilise aucun identifiant publicitaire.</li>
+            <li>Elle ne vend ni ne cède vos données à personne.</li>
           </ul>
-        </div>
 
-        <!-- Finalité -->
+        </div>
         <div class="bg-white p-8 rounded-lg shadow-sm">
-          <h2 class="text-2xl font-bold text-noir-doux mb-4">4. Finalité du traitement</h2>
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">4. Les services que nous utilisons</h2>
           <ul class="list-disc list-inside space-y-2 text-pierre ml-4">
-            <li>Fonctionnement de l'application (gestion de projets événementiels)</li>
-            <li>Import automatique de plannings via intelligence artificielle</li>
-            <li>Affichage de références visuelles depuis Pinterest (si connexion)</li>
-            <li>Envoi de notifications locales de rappel (gérées sur l'appareil)</li>
+            <li><strong>Supabase</strong> : hébergement des comptes et des sauvegardes.</li>
+            <li><strong>Anthropic</strong> : analyse des documents importés pour y retrouver les horaires. Les documents ne sont pas conservés après traitement.</li>
+            <li><strong>Nominatim (OpenStreetMap)</strong> : conversion d’une adresse en coordonnées.</li>
+            <li><strong>RevenueCat</strong>, <strong>Apple App Store</strong>, <strong>Google Play</strong> : abonnement et paiement. Nous ne voyons jamais vos données bancaires.</li>
+            <li><strong>Sentry</strong> : rapports de plantage.</li>
           </ul>
-        </div>
 
-        <!-- Stockage et sécurité -->
-        <div class="bg-white p-8 rounded-lg shadow-sm">
-          <h2 class="text-2xl font-bold text-noir-doux mb-4">5. Stockage et sécurité</h2>
-          <p class="text-pierre leading-relaxed">
-            Toutes les données de projet sont stockées <strong>localement sur votre appareil</strong>. Aucune synchronisation cloud n'est effectuée sans votre accord explicite.
-          </p>
-          <p class="text-pierre leading-relaxed mt-4">
-            Les tokens Pinterest sont conservés dans l'espace sécurisé du système (iOS Keychain).
-          </p>
-          <p class="text-pierre leading-relaxed mt-4">
-            Les appels à l'API d'intelligence artificielle transitent par un serveur proxy sécurisé (Supabase). La clé API n'est jamais exposée côté client.
-          </p>
         </div>
-
-        <!-- Partage -->
         <div class="bg-white p-8 rounded-lg shadow-sm">
-          <h2 class="text-2xl font-bold text-noir-doux mb-4">6. Partage des données</h2>
-          <p class="text-pierre leading-relaxed">
-            <strong>Aucune donnée personnelle n'est vendue ni partagée avec des tiers à des fins commerciales.</strong> Les seuls sous-traitants impliqués sont :
-          </p>
-          <ul class="list-disc list-inside space-y-2 text-pierre ml-4 mt-4">
-            <li><strong>Supabase</strong> (serveur proxy, hébergé en UE) – <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" class="text-doré-patiné underline hover:no-underline">politique de confidentialité</a></li>
-            <li><strong>Anthropic</strong> (traitement IA du texte importé) – <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener noreferrer" class="text-doré-patiné underline hover:no-underline">politique de confidentialité</a></li>
-            <li><strong>Pinterest</strong> (si connexion OAuth) – <a href="https://policy.pinterest.com/fr/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-doré-patiné underline hover:no-underline">politique de confidentialité</a></li>
-          </ul>
-        </div>
-
-        <!-- Durée de conservation -->
-        <div class="bg-white p-8 rounded-lg shadow-sm">
-          <h2 class="text-2xl font-bold text-noir-doux mb-4">7. Durée de conservation</h2>
-          <p class="text-pierre leading-relaxed">
-            Les données de projet sont conservées sur votre appareil jusqu'à suppression manuelle. Les tokens Pinterest sont supprimés lors de la déconnexion dans l'application.
-          </p>
-        </div>
-
-        <!-- Vos droits -->
-        <div class="bg-white p-8 rounded-lg shadow-sm">
-          <h2 class="text-2xl font-bold text-noir-doux mb-4">8. Vos droits (RGPD)</h2>
-          <p class="text-pierre leading-relaxed mb-4">
-            Conformément au RGPD, vous disposez des droits suivants :
-          </p>
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">5. Autorisations demandées sur le téléphone</h2>
           <ul class="list-disc list-inside space-y-2 text-pierre ml-4">
-            <li>Droit d'accès, de rectification et de suppression</li>
-            <li>Droit à la portabilité des données</li>
-            <li>Droit d'opposition au traitement</li>
-            <li>Droit de retirer votre consentement à tout moment</li>
+            <li><strong>Appareil photo</strong> et <strong>photos</strong> : uniquement quand vous choisissez de photographier ou d’importer un déroulé.</li>
+            <li><strong>Notifications</strong> : uniquement si vous posez un rappel avant un moment.</li>
           </ul>
-          <p class="text-pierre leading-relaxed mt-6">
-            Pour exercer ces droits : <a href="mailto:contact@smleyeprod.fr" class="text-doré-patiné underline hover:no-underline">contact@smleyeprod.fr</a>
-          </p>
-          <p class="text-pierre leading-relaxed mt-4">
-            En cas de réclamation non résolue, vous pouvez saisir la <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" class="text-doré-patiné underline hover:no-underline">CNIL</a>.
-          </p>
-        </div>
+          <p class="text-pierre leading-relaxed mb-3">Chaque autorisation est demandée au moment où vous en avez besoin, jamais au lancement, et peut être retirée dans les réglages du téléphone.</p>
 
-        <!-- Modifications -->
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">6. Combien de temps</h2>
+          <p class="text-pierre leading-relaxed mb-3">Vos projets restent tant que vous ne les supprimez pas. Les sauvegardes sont effacées dès que vous supprimez un projet dans l’application, ou votre compte. Les rapports de plantage sont conservés 90 jours.</p>
+
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">7. Supprimer votre compte et vos données</h2>
+          <p class="text-pierre leading-relaxed mb-3"><strong>Dans l’application</strong> : Réglages → Supprimer mon compte et mes données. Cette action efface vos projets sur le téléphone, vos sauvegardes sur nos serveurs et votre compte. Elle est définitive.</p>
+          <p class="text-pierre leading-relaxed mb-3"><strong>Sans l’application</strong> : écrivez à <a href="mailto:contact@smleyeprod.fr" class="text-doré-patiné underline hover:no-underline">contact@smleyeprod.fr</a> depuis l’adresse liée à votre compte, avec l’objet « Suppression de compte ». La suppression est faite sous 30 jours et confirmée par retour de mail.</p>
+
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-noir-doux mb-4">8. Vos droits</h2>
+          <p class="text-pierre leading-relaxed mb-3">Vous pouvez demander l’accès à vos données, leur correction, leur effacement ou leur portabilité en écrivant à <a href="mailto:contact@smleyeprod.fr" class="text-doré-patiné underline hover:no-underline">contact@smleyeprod.fr</a>. Vous pouvez aussi saisir la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" class="text-doré-patiné underline hover:no-underline">www.cnil.fr</a>) si vous estimez que vos droits ne sont pas respectés.</p>
+
+        </div>
         <div class="bg-white p-8 rounded-lg shadow-sm">
           <h2 class="text-2xl font-bold text-noir-doux mb-4">9. Modifications</h2>
-          <p class="text-pierre leading-relaxed">
-            Cette politique peut être mise à jour. La date de dernière modification est indiquée en haut de ce document. L'utilisation continue de l'application vaut acceptation des modifications.
-          </p>
-        </div>
+          <p class="text-pierre leading-relaxed mb-3">Si cette politique change, la date en haut de page est mise à jour et l’application vous le signale à l’ouverture suivante.</p>
 
+        </div>
       </div>
 
-      <!-- Footer -->
       <div class="mt-12 text-center text-pierre text-sm">
         <p>SMLEYE PRODUCTION – SIRET 93907930700012 – <a href="mailto:contact@smleyeprod.fr" class="text-doré-patiné underline hover:no-underline">contact@smleyeprod.fr</a></p>
       </div>
-
     </div>
   </Section>
 </Base>
 
 <style>
-  .prose h2 {
-    margin-top: 0;
-  }
-
-  .prose ul {
-    margin-top: 1rem;
-  }
-
-  .prose li {
-    margin-top: 0.5rem;
-  }
+  .prose h2 { margin-top: 0; }
+  .prose ul { margin-top: 1rem; }
+  .prose li { margin-top: 0.5rem; }
 </style>
