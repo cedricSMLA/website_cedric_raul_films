@@ -14,16 +14,17 @@ RestartSec=10
 Environment=NODE_ENV=production
 Environment=HOST=0.0.0.0
 Environment=PORT=4321
-
-# SMTP Configuration - À MODIFIER avec vos vraies valeurs
-Environment=SMTP_HOST=smtp.protonmail.ch
-Environment=SMTP_PORT=587
-Environment=SMTP_SECURE=false
-Environment=SMTP_USER=contact@cedricraulfilms.fr
-Environment=SMTP_PASS=votre_mot_de_passe
-
-Environment=CONTACT_EMAIL=contact@cedricraulfilms.fr
 Environment=SITE_URL=https://cedricraulfilms.fr
+
+# Configuration SMTP : jamais de secret dans ce fichier (il est versionné).
+# Le fichier ci-dessous est créé sur le serveur (root:smleye, chmod 640) et contient :
+#   SMTP_HOST=smtp.protonmail.ch
+#   SMTP_PORT=587
+#   SMTP_SECURE=false
+#   SMTP_USER=contact@cedricraulfilms.fr
+#   SMTP_PASS=<token SMTP Proton>
+#   CONTACT_EMAIL=contact@cedricraulfilms.fr
+EnvironmentFile=/etc/cedric-raul/app.env
 
 # Logs
 StandardOutput=append:/var/log/cedric-raul/app.log

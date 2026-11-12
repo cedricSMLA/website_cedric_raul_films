@@ -1,6 +1,12 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
+import { forfaitsById, LIVRAISON } from '@/data/forfaits';
+
+const pure = forfaitsById.pure;
+const ame = forfaitsById.ame;
+const infinie = forfaitsById.infinie;
+const creation = forfaitsById.creation;
 ---
 
 <Base
@@ -129,23 +135,22 @@ import Section from '@/components/Section.astro';
         <!-- LOREN PURE -->
         <div id="pure" class="scroll-reveal bg-gradient-to-br from-noir-doux/60 to-noir-doux/40 border border-lin/10 rounded-2xl p-10 scroll-mt-32">
           <h3 class="text-3xl md:text-4xl font-extralight tracking-widest text-lin mb-6" style="background: linear-gradient(to right, #EDE5D8, #D4C5B0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-            LOREN PURE
+            {pure.nomComplet.toUpperCase()}
           </h3>
           <p class="text-xl italic text-lin/80 mb-6 font-light">
-            "L'essence de votre histoire en 6 minutes."
+            "{pure.citation}"
           </p>
 
           <div class="space-y-4 text-lin/70 leading-relaxed mb-8">
-            <p><span class="text-doré-patiné">•</span> 6 heures de couverture minutieuse</p>
-            <p><span class="text-doré-patiné">•</span> Film cinématographique de 6 minutes</p>
-            <p><span class="text-doré-patiné">•</span> Teaser (60 sec)</p>
-            <p><span class="text-doré-patiné">•</span> Drone et drone FPV (selon lieu et conditions)</p>
-            <p><span class="text-doré-patiné">•</span> Sound design immersif et colorimétrie cinéma</p>
-            <p><span class="text-doré-patiné">•</span> Livraison sous 3 mois</p>
+            <p><span class="text-doré-patiné">•</span> {pure.heures} heures de {pure.presenceLoren}</p>
+            {pure.inclusions.map((item) => (
+              <p><span class="text-doré-patiné">•</span> {item}</p>
+            ))}
+            <p><span class="text-doré-patiné">•</span> Livraison sous {LIVRAISON}</p>
           </div>
 
           <p class="text-lin/60 text-sm leading-relaxed border-t border-lin/10 pt-6">
-            L'essentiel capturé avec précision. Chaque instant choisi pour sa capacité à raconter l'âme de votre célébration.
+            {pure.description}
             Une narration épurée où chaque seconde compte.
           </p>
         </div>
@@ -153,71 +158,64 @@ import Section from '@/components/Section.astro';
         <!-- LOREN ÂME -->
         <div id="ame" class="scroll-reveal bg-gradient-to-br from-noir-doux/60 to-noir-doux/40 border border-lin/10 rounded-2xl p-10 scroll-mt-32">
           <h3 class="text-3xl md:text-4xl font-extralight tracking-widest text-lin mb-6" style="background: linear-gradient(to right, #EDE5D8, #D4C5B0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-            LOREN ÂME
+            {ame.nomComplet.toUpperCase()}
           </h3>
           <p class="text-xl italic text-lin/80 mb-6 font-light">
-            "Chaque émotion capturée pendant 9 heures."
+            "{ame.citation}"
           </p>
 
           <div class="space-y-4 text-lin/70 leading-relaxed mb-8">
-            <p><span class="text-sauge">•</span> 9 heures de présence discrète</p>
-            <p><span class="text-sauge">•</span> Film complet de 10 minutes</p>
-            <p><span class="text-sauge">•</span> Teaser (60 sec)</p>
-            <p><span class="text-sauge">•</span> Drone et drone FPV (selon lieu et conditions)</p>
-            <p><span class="text-sauge">•</span> Post-production artisanale approfondie</p>
-            <p><span class="text-sauge">•</span> Rushes bruts triés disponibles sur demande</p>
+            <p><span class="text-sauge">•</span> {ame.heures} heures de {ame.presenceLoren}</p>
+            {ame.inclusions.map((item) => (
+              <p><span class="text-sauge">•</span> {item}</p>
+            ))}
+            <p><span class="text-sauge">•</span> Livraison sous {LIVRAISON}</p>
           </div>
 
           <p class="text-lin/60 text-sm leading-relaxed border-t border-lin/10 pt-6">
-            Une amplitude émotionnelle plus large. Du premier regard aux dernières danses,
-            une narration équilibrée qui révèle la profondeur et les nuances de votre union.
+            {ame.description}
           </p>
         </div>
 
         <!-- LOREN INFINIE -->
         <div id="infinie" class="scroll-reveal bg-gradient-to-br from-noir-doux/60 to-noir-doux/40 border border-lin/10 rounded-2xl p-10 scroll-mt-32">
           <h3 class="text-3xl md:text-4xl font-extralight tracking-widest text-lin mb-6" style="background: linear-gradient(to right, #EDE5D8, #D4C5B0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-            LOREN INFINIE
+            {infinie.nomComplet.toUpperCase()}
           </h3>
           <p class="text-xl italic text-lin/80 mb-6 font-light">
-            "Une journée complète immortalisée."
+            "{infinie.citation}"
           </p>
 
           <div class="space-y-4 text-lin/70 leading-relaxed mb-8">
-            <p><span class="text-doré-patiné">•</span> 12 heures de couverture intégrale</p>
-            <p><span class="text-doré-patiné">•</span> Film épique de 12 minutes</p>
-            <p><span class="text-doré-patiné">•</span> Teaser (60 sec)</p>
-            <p><span class="text-doré-patiné">•</span> Drone et drone FPV (selon lieu et conditions)</p>
-            <p><span class="text-doré-patiné">•</span> Montage narratif complet avec chapitrage</p>
+            <p><span class="text-doré-patiné">•</span> {infinie.heures} heures de {infinie.presenceLoren}</p>
+            {infinie.inclusions.map((item) => (
+              <p><span class="text-doré-patiné">•</span> {item}</p>
+            ))}
+            <p><span class="text-doré-patiné">•</span> Livraison sous {LIVRAISON}</p>
           </div>
 
           <p class="text-lin/60 text-sm leading-relaxed border-t border-lin/10 pt-6">
-            L'expérience totale. Du lever du soleil aux derniers pas de danse,
-            votre histoire complète capturée en images cinématographiques. Rien n'est laissé au hasard.
+            {infinie.description}
           </p>
         </div>
 
         <!-- LOREN CRÉATION -->
         <div id="creation" class="scroll-reveal bg-gradient-to-br from-noir-doux/70 to-noir-doux/50 border border-doré-patiné/30 rounded-2xl p-10 scroll-mt-32">
           <h3 class="text-3xl md:text-4xl font-extralight tracking-widest text-lin mb-6" style="background: linear-gradient(to right, #EDE5D8, #D4C5B0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-            LOREN CRÉATION
+            {creation.nomComplet.toUpperCase()}
           </h3>
           <p class="text-xl italic text-lin/80 mb-6 font-light">
-            "Votre vision, sans limites."
+            "{creation.citation}"
           </p>
 
           <div class="space-y-4 text-lin/70 leading-relaxed mb-8">
-            <p><span class="text-doré-patiné">•</span> Mariages multi-jours</p>
-            <p><span class="text-doré-patiné">•</span> Destinations internationales</p>
-            <p><span class="text-doré-patiné">•</span> Drone et drone FPV (selon lieu et conditions)</p>
-            <p><span class="text-doré-patiné">•</span> Directions artistiques uniques</p>
-            <p><span class="text-doré-patiné">•</span> Collaboration avec artistes externes</p>
-            <p><span class="text-doré-patiné">•</span> Formats expérimentaux (court-métrage, documentaire...)</p>
+            {creation.inclusions.map((item) => (
+              <p><span class="text-doré-patiné">•</span> {item}</p>
+            ))}
           </div>
 
           <p class="text-lin/60 text-sm leading-relaxed border-t border-doré-patiné/20 pt-6">
-            Une expérience sur mesure où votre imagination définit les contours de l'œuvre finale.
-            Pour les couples qui veulent repousser les limites du possible et créer quelque chose d'absolument unique.
+            {creation.description}
           </p>
         </div>
 

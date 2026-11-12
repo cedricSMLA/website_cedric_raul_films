@@ -10,7 +10,14 @@
       "Bash(sudo systemctl:*)",
       "Bash(sudo lsof:*)",
       "Bash(sudo pkill:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(xargs:*)",
+      "Bash(find /Volumes/LaCiePerso/WORKSPACE_MAC/CEDRICRAULFILMS_WEBSITE/website -type f -name \"README*\" -o -name \"readme*\" 2>/dev/null | head -20)",
+      "Bash(scp -q public/media/video/teaser_clemence_aymeric_poster.jpg smleye@192.168.1.50:/home/smleye/website_cedric_raul_films/public/media/video/)",
+      "Bash(scp -q public/media/video/teaser_olivia_thomas_poster.jpg smleye@192.168.1.50:/home/smleye/website_cedric_raul_films/public/media/video/)",
+      "Bash(scp -q src/pages/index.astro smleye@192.168.1.50:/home/smleye/website_cedric_raul_films/src/pages/index.astro)",
+      "Bash(ssh -o BatchMode=yes smleye@192.168.1.50 'cd /home/smleye/website_cedric_raul_films && npm run build 2>&1 | tail -3 && sudo -n systemctl restart cedric-raul && sleep 4 && systemctl is-active cedric-raul')",
+      "Bash(curl -s -o /dev/null -w \"portfolio: %{http_code}\\\\n\" -L \"https://coedit.mypixieset.com/gallery-1/\")"
     ],
     "defaultMode": "acceptEdits"
   }

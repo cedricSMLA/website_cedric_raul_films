@@ -14,6 +14,7 @@ SERVICE_FILE="/etc/systemd/system/cedric-raul.service"
 NGINX_SITE="/etc/nginx/sites-available/cedricraulfilms"
 NGINX_ENABLED="/etc/nginx/sites-enabled/cedricraulfilms"
 LOG_DIR="/var/log/cedric-raul"
+ENV_FILE="/etc/cedric-raul/app.env"
 USER="smleye"
 
 # Vérifier si exécuté en root
@@ -39,12 +40,26 @@ echo "⚙️  Configuration du service systemd..."
 if [ -f "cedric-raul.service" ]; then
     cp cedric-raul.service "$SERVICE_FILE"
 
-    # Demander le mot de passe SMTP
-    read -sp "Entrez le mot de passe SMTP: " SMTP_PASS
-    echo
+    # Fichier d'environnement contenant les secrets SMTP (hors dépôt git)
+    mkdir -p "$(dirname "$ENV_FILE")"
+    if [ ! -f "$ENV_FILE" ]; then
+        read -sp "Entrez le mot de passe (token) SMTP: " SMTP_PASS
+        echo
 
-    # Remplacer le mot de passe dans le fichier de service
-    sed -i "s/Environment=SMTP_PASS=votre_mot_de_passe/Environment=SMTP_PASS=$SMTP_PASS/" "$SERVICE_FILE"
+        cat > "$ENV_FILE" <<EOF
+SMTP_HOST=smtp.protonmail.ch
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=contact@cedricraulfilms.fr
+SMTP_PASS=$SMTP_PASS
+CONTACT_EMAIL=contact@cedricraulfilms.fr
+EOF
+        echo "  ✅ $ENV_FILE créé"
+    else
+        echo "  ℹ️  $ENV_FILE déjà présent, conservé en l'état"
+    fi
+    chown root:"$USER" "$ENV_FILE"
+    chmod 640 "$ENV_FILE"
 
     systemctl daemon-reload
     echo "  ✅ Service systemd configuré"

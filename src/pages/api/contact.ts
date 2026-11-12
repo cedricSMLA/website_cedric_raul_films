@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
 import he from 'he';
+import { forfaitLabels } from '@/data/forfaits';
 
 export const prerender = false;
 
@@ -71,7 +72,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       );
     }
 
-    const { nom, email, date, budget, message, consent } = data;
+    // `forfait` est le champ envoyé par le formulaire ; `budget` reste accepté
+    // pour compatibilité avec l'ancienne version du formulaire.
+    const { nom, email, date, forfait, budget, message, consent } = data;
 
     // Validation
     if (!nom || !email || !date || !message || !consent) {
@@ -151,12 +154,43 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       );
     }
 
-    // Sanitize all inputs (encode HTML entities to prevent XSS)
-    const sanitizedNom = he.encode(nom.trim());
-    const sanitizedEmail = he.encode(email.trim());
-    const sanitizedDate = he.encode(date.trim());
-    const sanitizedBudget = budget ? he.encode(String(budget).trim()) : 'Non spécifié';
-    const sanitizedMessage = he.encode(message.trim());
+    // Valeurs brutes : utilisées pour les en-têtes et la version texte de l'email
+    // (he.encode transformerait les accents en entités illisibles hors HTML).
+    // `email` et `date` alimentent des en-têtes (replyTo, subject) : on retire tout
+    // retour à la ligne, car en JS `$` tolère un \n final et laisserait passer une
+    // tentative d'injection d'en-tête.
+    const stripBreaks = (value: string) => value.replace(/[\r\n]/g, '');
+    const rawNom = nom.trim();
+    const rawEmail = stripBreaks(email.trim());
+    const rawDate = stripBreaks(date.trim());
+    const forfaitCode = String(forfait ?? budget ?? '').trim();
+    const rawForfait = forfaitLabels[forfaitCode] || 'Non spécifié';
+    const rawMessage = message.trim();
+
+    // Valeurs échappées : uniquement pour la version HTML de l'email (anti-XSS)
+    const safeNom = he.encode(rawNom);
+    const safeEmail = he.encode(rawEmail);
+    const safeDate = he.encode(rawDate);
+    const safeForfait = he.encode(rawForfait);
+    const safeMessage = he.encode(rawMessage);
+
+    // Garde-fou : sans identifiants SMTP valides, l'envoi échoue en 500 générique.
+    // On le détecte ici pour laisser une trace explicite dans les logs serveur.
+    const smtpPass = process.env.SMTP_PASS;
+    if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !smtpPass ||
+        smtpPass === 'votre_mot_de_passe' || smtpPass === 'your_smtp_password_here') {
+      console.error(
+        'Configuration SMTP manquante ou placeholder : vérifiez SMTP_HOST/SMTP_USER/SMTP_PASS ' +
+        'dans /etc/cedric-raul/app.env (EnvironmentFile du service systemd).'
+      );
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.'
+        }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
 
     // Configure SMTP transporter
     const transporter = nodemailer.createTransport({
@@ -169,23 +203,23 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       },
     });
 
-    // Email content (using sanitized inputs)
+    // Email content
     const mailOptions = {
       from: process.env.SMTP_USER,
       to: process.env.CONTACT_EMAIL,
-      replyTo: sanitizedEmail,
-      subject: `Demande de devis - Mariage du ${sanitizedDate}`,
+      replyTo: rawEmail,
+      subject: `Demande de devis - Mariage du ${rawDate}`,
       text: `
 Nouvelle demande de devis
 
 Informations :
-- Noms : ${sanitizedNom}
-- Email : ${sanitizedEmail}
-- Date du mariage : ${sanitizedDate}
-- Budget envisagé : ${sanitizedBudget}
+- Noms : ${rawNom}
+- Email : ${rawEmail}
+- Date du mariage : ${rawDate}
+- Forfait souhaité : ${rawForfait}
 
 Message :
-${sanitizedMessage}
+${rawMessage}
       `,
       html: `
 <!DOCTYPE html>
@@ -208,20 +242,20 @@ ${sanitizedMessage}
     </div>
     <div class="content">
       <div class="info-row">
-        <span class="label">Noms :</span> ${sanitizedNom}
+        <span class="label">Noms :</span> ${safeNom}
       </div>
       <div class="info-row">
-        <span class="label">Email :</span> <a href="mailto:${sanitizedEmail}">${sanitizedEmail}</a>
+        <span class="label">Email :</span> <a href="mailto:${safeEmail}">${safeEmail}</a>
       </div>
       <div class="info-row">
-        <span class="label">Date du mariage :</span> ${sanitizedDate}
+        <span class="label">Date du mariage :</span> ${safeDate}
       </div>
       <div class="info-row">
-        <span class="label">Budget envisagé :</span> ${sanitizedBudget}
+        <span class="label">Forfait souhaité :</span> ${safeForfait}
       </div>
       <div class="message">
         <p><strong>Message :</strong></p>
-        <p>${sanitizedMessage.replace(/\n/g, '<br>')}</p>
+        <p>${safeMessage.replace(/\n/g, '<br>')}</p>
       </div>
     </div>
   </div>

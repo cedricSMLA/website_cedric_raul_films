@@ -1,6 +1,12 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
+import { forfaitsById, LIVRAISON } from '@/data/forfaits';
+
+const pure = forfaitsById.pure;
+const ame = forfaitsById.ame;
+const infinie = forfaitsById.infinie;
+const creation = forfaitsById.creation;
 ---
 
 <Base
@@ -65,51 +71,41 @@ import Section from '@/components/Section.astro';
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                     </svg>
                   </div>
-                  <h3 class="text-xl font-light tracking-[0.3em] text-noir-doux/90">PURE</h3>
+                  <h3 class="text-xl font-light tracking-[0.3em] text-noir-doux/90">{pure.nom}</h3>
                 </div>
                 <div class="text-right">
                   <p class="text-sm text-noir-doux/40 font-light mb-1">À partir de</p>
-                  <p class="text-2xl font-light text-noir-doux">1 700€</p>
+                  <p class="text-2xl font-light text-noir-doux">{pure.prixLabel}</p>
                 </div>
               </div>
 
               <!-- Tagline -->
               <p class="text-base font-light text-noir-doux/70 mb-4 leading-relaxed">
-                L'essence de votre journée, sans compromis sur l'émotion
+                {pure.tagline}
               </p>
 
               <!-- Idéal pour -->
               <p class="text-xs text-noir-doux/40 mb-8 pb-8 border-b border-noir-doux/10">
-                Idéal pour les cérémonies intimistes
+                {pure.idealPour}
               </p>
 
               <!-- Bénéfices (3 max, ultra-minimalistes) -->
               <div class="space-y-4 mb-auto">
-                <div class="flex items-start gap-3">
-                  <div class="w-4 h-4 rounded-full border border-doré-patiné/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-doré-patiné"></div>
+                {pure.beneficesCles.map((benefice) => (
+                  <div class="flex items-start gap-3">
+                    <div class="w-4 h-4 rounded-full border border-doré-patiné/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div class="w-1.5 h-1.5 rounded-full bg-doré-patiné"></div>
+                    </div>
+                    <p class="text-sm text-noir-doux/60 leading-relaxed">{benefice}</p>
                   </div>
-                  <p class="text-sm text-noir-doux/60 leading-relaxed">Film cinéma 6 min + teaser 45 sec</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-4 h-4 rounded-full border border-doré-patiné/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-doré-patiné"></div>
-                  </div>
-                  <p class="text-sm text-noir-doux/60 leading-relaxed">Appel découverte personnalisé</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-4 h-4 rounded-full border border-doré-patiné/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-doré-patiné"></div>
-                  </div>
-                  <p class="text-sm text-noir-doux/60 leading-relaxed">Montage cinématographique</p>
-                </div>
+                ))}
               </div>
 
               <!-- Specs discrètes -->
               <div class="flex items-center gap-4 text-sm text-noir-doux/50 mt-8 mb-6 font-medium">
-                <span>6h de présence</span>
+                <span>{pure.heures}h de présence</span>
                 <span class="w-1 h-1 rounded-full bg-noir-doux/30"></span>
-                <span>Livraison 3 mois</span>
+                <span>Livraison {LIVRAISON}</span>
               </div>
 
               <!-- CTA minimal -->
@@ -129,14 +125,10 @@ import Section from '@/components/Section.astro';
               <!-- Hidden data for modal -->
               <div class="hidden" data-inclusions="pure">
                 <ul class="space-y-2.5 text-lin/70 text-sm">
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Film complet monté (6 min)</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Teaser (45 sec)</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Appel découverte personnalisé</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Drone et drone FPV (selon lieu et conditions)</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Montage cinématographique</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Design sonore immersif</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Galerie en ligne privée</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Livraison sous 3 mois</span></li>
+                  {pure.inclusions.map((item) => (
+                    <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>{item}</span></li>
+                  ))}
+                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Livraison sous {LIVRAISON}</span></li>
                 </ul>
               </div>
             </div>
@@ -161,51 +153,41 @@ import Section from '@/components/Section.astro';
                       <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
                     </svg>
                   </div>
-                  <h3 class="text-xl font-light tracking-[0.3em] text-lin">ÂME</h3>
+                  <h3 class="text-xl font-light tracking-[0.3em] text-lin">{ame.nom}</h3>
                 </div>
                 <div class="text-right">
                   <p class="text-sm text-lin/40 font-light mb-1">À partir de</p>
-                  <p class="text-2xl font-light text-sauge">2 000€</p>
+                  <p class="text-2xl font-light text-sauge">{ame.prixLabel}</p>
                 </div>
               </div>
 
               <!-- Tagline -->
               <p class="text-base font-light text-lin/70 mb-4 leading-relaxed">
-                Chaque émotion, chaque instant décisif immortalisé
+                {ame.tagline}
               </p>
 
               <!-- Idéal pour -->
               <p class="text-xs text-lin/40 mb-8 pb-8 border-b border-lin/10">
-                Idéal pour une couverture étendue et complète
+                {ame.idealPour}
               </p>
 
               <!-- Bénéfices (3 max) -->
               <div class="space-y-4 mb-auto">
-                <div class="flex items-start gap-3">
-                  <div class="w-4 h-4 rounded-full border border-sauge/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-sauge"></div>
+                {ame.beneficesCles.map((benefice) => (
+                  <div class="flex items-start gap-3">
+                    <div class="w-4 h-4 rounded-full border border-sauge/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div class="w-1.5 h-1.5 rounded-full bg-sauge"></div>
+                    </div>
+                    <p class="text-sm text-lin/60 leading-relaxed">{benefice}</p>
                   </div>
-                  <p class="text-sm text-lin/60 leading-relaxed">Film cinéma 10 min + teaser 60 sec</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-4 h-4 rounded-full border border-sauge/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-sauge"></div>
-                  </div>
-                  <p class="text-sm text-lin/60 leading-relaxed">Appel découverte personnalisé</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-4 h-4 rounded-full border border-sauge/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-sauge"></div>
-                  </div>
-                  <p class="text-sm text-lin/60 leading-relaxed">Montage cinématographique</p>
-                </div>
+                ))}
               </div>
 
               <!-- Specs discrètes -->
               <div class="flex items-center gap-4 text-sm text-lin/55 mt-8 mb-6 font-medium">
-                <span>9h de présence</span>
+                <span>{ame.heures}h de présence</span>
                 <span class="w-1 h-1 rounded-full bg-lin/30"></span>
-                <span>Livraison 3 mois</span>
+                <span>Livraison {LIVRAISON}</span>
               </div>
 
               <!-- CTA minimal -->
@@ -225,14 +207,10 @@ import Section from '@/components/Section.astro';
               <!-- Hidden data for modal -->
               <div class="hidden" data-inclusions="ame">
                 <ul class="space-y-2.5 text-lin/70 text-sm">
-                  <li class="flex items-start gap-2"><span class="text-sauge/70">•</span><span>Film complet monté (10 min)</span></li>
-                  <li class="flex items-start gap-2"><span class="text-sauge/70">•</span><span>Teaser (60 sec)</span></li>
-                  <li class="flex items-start gap-2"><span class="text-sauge/70">•</span><span>Appel découverte personnalisé</span></li>
-                  <li class="flex items-start gap-2"><span class="text-sauge/70">•</span><span>Drone et drone FPV (selon lieu et conditions)</span></li>
-                  <li class="flex items-start gap-2"><span class="text-sauge/70">•</span><span>Montage cinématographique</span></li>
-                  <li class="flex items-start gap-2"><span class="text-sauge/70">•</span><span>Design sonore immersif</span></li>
-                  <li class="flex items-start gap-2"><span class="text-sauge/70">•</span><span>Galerie en ligne privée</span></li>
-                  <li class="flex items-start gap-2"><span class="text-sauge/70">•</span><span>Livraison sous 3 mois</span></li>
+                  {ame.inclusions.map((item) => (
+                    <li class="flex items-start gap-2"><span class="text-sauge/70">•</span><span>{item}</span></li>
+                  ))}
+                  <li class="flex items-start gap-2"><span class="text-sauge/70">•</span><span>Livraison sous {LIVRAISON}</span></li>
                 </ul>
               </div>
             </div>
@@ -268,51 +246,41 @@ import Section from '@/components/Section.astro';
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6l4 2"/>
                     </svg>
                   </div>
-                  <h3 class="text-xl font-light tracking-[0.3em] text-lin">INFINIE</h3>
+                  <h3 class="text-xl font-light tracking-[0.3em] text-lin">{infinie.nom}</h3>
                 </div>
                 <div class="text-right">
                   <p class="text-sm text-lin/40 font-light mb-1">À partir de</p>
-                  <p class="text-2xl font-light text-doré-patiné">2 500€</p>
+                  <p class="text-2xl font-light text-doré-patiné">{infinie.prixLabel}</p>
                 </div>
               </div>
 
               <!-- Tagline -->
               <p class="text-base font-light text-lin/80 mb-4 leading-relaxed">
-                Votre mariage comme une œuvre cinématographique
+                {infinie.tagline}
               </p>
 
               <!-- Idéal pour -->
               <p class="text-xs text-lin/40 mb-8 pb-8 border-b border-lin/10">
-                Idéal pour l'expérience complète, de l'aube au crépuscule
+                {infinie.idealPour}
               </p>
 
               <!-- Bénéfices (3 max) -->
               <div class="space-y-4 mb-auto">
-                <div class="flex items-start gap-3">
-                  <div class="w-4 h-4 rounded-full border border-doré-patiné/40 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-doré-patiné"></div>
+                {infinie.beneficesCles.map((benefice) => (
+                  <div class="flex items-start gap-3">
+                    <div class="w-4 h-4 rounded-full border border-doré-patiné/40 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div class="w-1.5 h-1.5 rounded-full bg-doré-patiné"></div>
+                    </div>
+                    <p class="text-sm text-lin/70 leading-relaxed">{benefice}</p>
                   </div>
-                  <p class="text-sm text-lin/70 leading-relaxed">Film cinéma 15 min + teaser 60 sec</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-4 h-4 rounded-full border border-doré-patiné/40 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-doré-patiné"></div>
-                  </div>
-                  <p class="text-sm text-lin/70 leading-relaxed">Appel découverte personnalisé</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-4 h-4 rounded-full border border-doré-patiné/40 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-doré-patiné"></div>
-                  </div>
-                  <p class="text-sm text-lin/70 leading-relaxed">Montage cinématographique</p>
-                </div>
+                ))}
               </div>
 
               <!-- Specs discrètes -->
               <div class="flex items-center gap-4 text-sm text-lin/55 mt-8 mb-6 font-medium">
-                <span>12h de présence</span>
+                <span>{infinie.heures}h de présence</span>
                 <span class="w-1 h-1 rounded-full bg-lin/30"></span>
-                <span>Livraison 3 mois</span>
+                <span>Livraison {LIVRAISON}</span>
               </div>
 
               <!-- CTA premium -->
@@ -334,14 +302,10 @@ import Section from '@/components/Section.astro';
               <!-- Hidden data for modal -->
               <div class="hidden" data-inclusions="infinie">
                 <ul class="space-y-2.5 text-lin/70 text-sm">
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Film complet monté (15 min)</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Teaser (60 sec)</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Appel découverte personnalisé</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Drone et drone FPV (selon lieu et conditions)</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Montage cinématographique</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Design sonore immersif</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Galerie en ligne privée</span></li>
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Livraison sous 3 mois</span></li>
+                  {infinie.inclusions.map((item) => (
+                    <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>{item}</span></li>
+                  ))}
+                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Livraison sous {LIVRAISON}</span></li>
                 </ul>
               </div>
             </div>
@@ -366,43 +330,33 @@ import Section from '@/components/Section.astro';
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
                     </svg>
                   </div>
-                  <h3 class="text-xl font-light tracking-[0.3em] text-lin">CRÉATION</h3>
+                  <h3 class="text-xl font-light tracking-[0.3em] text-lin">{creation.nom}</h3>
                 </div>
                 <div class="text-right sm:text-left ml-[44px] sm:ml-0">
-                  <p class="text-lg font-light text-lin/50">Sur devis</p>
+                  <p class="text-lg font-light text-lin/50">{creation.prixLabel}</p>
                 </div>
               </div>
 
               <!-- Tagline -->
               <p class="text-base font-light text-lin/70 mb-4 leading-relaxed">
-                Projets d'exception conçus sur mesure
+                {creation.tagline}
               </p>
 
               <!-- Idéal pour -->
               <p class="text-xs text-lin/40 mb-8 pb-8 border-b border-lin/10">
-                Idéal pour destinations lointaines, multi-jours, visions uniques
+                {creation.idealPour}
               </p>
 
               <!-- Exemples (4 max pour celle-ci) -->
               <div class="space-y-4 mb-auto">
-                <div class="flex items-start gap-3">
-                  <div class="w-4 h-4 rounded-full border border-lin/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-lin/40"></div>
+                {creation.beneficesCles.map((exemple) => (
+                  <div class="flex items-start gap-3">
+                    <div class="w-4 h-4 rounded-full border border-lin/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div class="w-1.5 h-1.5 rounded-full bg-lin/40"></div>
+                    </div>
+                    <p class="text-sm text-lin/50 leading-relaxed">{exemple}</p>
                   </div>
-                  <p class="text-sm text-lin/50 leading-relaxed">Mariages de plusieurs jours</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-4 h-4 rounded-full border border-lin/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-lin/40"></div>
-                  </div>
-                  <p class="text-sm text-lin/50 leading-relaxed">Destinations internationales</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-4 h-4 rounded-full border border-lin/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-lin/40"></div>
-                  </div>
-                  <p class="text-sm text-lin/50 leading-relaxed">Équipes dédiées multi-opérateurs</p>
-                </div>
+                ))}
               </div>
 
               <!-- Note -->

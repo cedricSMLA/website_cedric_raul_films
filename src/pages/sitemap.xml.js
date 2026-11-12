@@ -1,11 +1,13 @@
 export async function GET({ site }) {
   const staticPages = [
     '',
-    '/portfolio',
+    '/services',
+    '/tarifs-forfaits',
     '/loren',
     '/a-propos',
+    '/nos-partenaires',
     '/contact',
-    '/photographes'
+    '/confidentialite'
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -14,7 +16,7 @@ ${staticPages
   .map(
     (page) => `
   <url>
-    <loc>${site}${page}</loc>
+    <loc>${new URL(page, site).href}</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${page === '' ? '1.0' : '0.8'}</priority>

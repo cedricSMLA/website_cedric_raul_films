@@ -3,6 +3,7 @@ import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
 import Button from '@/components/Button.astro';
 import Card from '@/components/Card.astro';
+import { forfaits, optionLabel } from '@/data/forfaits';
 
 const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.fr';
 ---
@@ -153,10 +154,9 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
             class="w-full px-4 py-3 border border-pierre/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-noir-doux"
           >
             <option value="">Préfère ne pas préciser</option>
-            <option value="pure">LOREN Pure - 1 700€</option>
-            <option value="ame">LOREN Âme - 2 000€</option>
-            <option value="infinie">LOREN Infinie - 2 500€</option>
-            <option value="creation">LOREN Création - Sur devis</option>
+            {forfaits.map((f) => (
+              <option value={f.id}>{optionLabel(f)}</option>
+            ))}
           </select>
         </div>
 
