@@ -1,295 +1,199 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
-import { forfaitsById, LIVRAISON } from '@/data/forfaits';
+import Button from '@/components/Button.astro';
+import Arrow from '@/components/Arrow.astro';
+import ImageBand from '@/components/ImageBand.astro';
+import { forfaits } from '@/data/forfaits';
 
-const pure = forfaitsById.pure;
-const ame = forfaitsById.ame;
-const infinie = forfaitsById.infinie;
-const creation = forfaitsById.creation;
+/** Le prix d'appel est calculé : il suit toujours le forfait le moins cher. */
+const prixMin = forfaits
+  .filter((f) => f.prix !== null)
+  .sort((a, b) => (a.prix ?? 0) - (b.prix ?? 0))[0];
+
+/** Phrase propre à cette page, ajoutée à la description de Pure. */
+const complement: Record<string, string> = {
+  pure: ' Une narration épurée où chaque seconde compte.'
+};
+
+const inclus = [
+  {
+    titre: 'Post-production artisanale',
+    texte: 'Sound design, colorimétrie cinéma, montage narratif'
+  },
+  {
+    titre: 'Galerie privée en ligne',
+    texte: 'Accès illimité, téléchargement haute qualité'
+  },
+  {
+    titre: 'Présence discrète',
+    texte: "Vous vivez votre journée, j'immortalise l'authenticité"
+  }
+];
 ---
 
 <Base
   title="L'Univers LOREN - Cédric Raúl Films"
   description="LOREN n'est pas une prestation de mariage. C'est une évidence que vous ressentez avant même de comprendre pourquoi. Découvrez la philosophie derrière chaque film."
 >
-  <!-- Hero LOREN -->
-  <Section background="primary" padding="none" class="min-h-[60vh] flex items-center justify-center relative overflow-hidden">
-    <!-- Background subtil -->
-    <div class="absolute inset-0 bg-gradient-to-br from-lin via-pierre/5 to-doré-patiné/10"></div>
+  <!-- Ouverture : la seule page centrée du site, c'est la signature -->
+  <header class="tone-foret py-24 text-center md:py-36">
+    <div class="wrap">
+      <h1 class="hero-rise loren-titre">LOREN</h1>
+      <hr class="hero-rule mx-auto my-8 w-16 !origin-center border-t" style="border-color: var(--accent)" />
+      <p class="hero-rise quote muted" style="--d: 200ms">Ce que l'amour révèle au silence</p>
+    </div>
+  </header>
 
-    <div class="container max-w-5xl mx-auto px-6 py-20 md:py-32 text-center relative z-10" style="font-family: 'Georgia', serif;">
-      <h1 class="scroll-reveal text-6xl md:text-8xl font-extralight tracking-[0.3em] text-noir-doux mb-6">
-        LOREN
-      </h1>
-      <div class="w-16 h-px bg-doré-patiné mx-auto mb-10"></div>
-      <p class="scroll-reveal scroll-reveal-delay-1 text-xl md:text-2xl text-pierre/80 italic font-light tracking-wide">
-        Ce que l'amour révèle au silence
+  <!-- Le texte -->
+  <Section width="text">
+    <div class="prose-serif">
+      <p class="quote text-center" data-reveal>
+        Il y a des moments qui ne se voient pas. Des regards qui disent tout sans un mot. Des
+        instants suspendus où le temps retient son souffle.
+      </p>
+
+      <hr class="rule mx-auto w-16" />
+
+      <p data-reveal>
+        LOREN. Du latin <em>laurus</em> — le laurier, symbole de victoire et d'éternité. Cet arbre
+        sacré d'Apollon, dieu de la lumière et des arts, incarnait ce qui triomphe du temps. Ce qui
+        reste quand tout s'efface.
+      </p>
+
+      <p data-reveal>
+        C'est exactement ce que je crée pour vous : une œuvre qui traverse les années, qui porte la
+        lumière dorée du souvenir et la force tranquille de l'amour durable.
+      </p>
+
+      <blockquote class="rule quote border-y py-10 text-center" data-reveal>
+        « Je ne filme pas pour qu'on regarde.<br class="hidden md:block" />
+        Je filme pour qu'on ressente. »
+      </blockquote>
+
+      <p data-reveal>
+        LOREN n'est pas une prestation, c'est une évidence. Les couples qui viennent à moi ne
+        cherchent pas simplement à être filmés. Ils veulent être vus, compris, sublimés sans
+        artifice. Ils veulent un film qui leur ressemble vraiment.
+      </p>
+
+      <p data-reveal>
+        Mon approche est cinématographique et sensorielle. Je cherche l'invisible — ces gestes
+        infimes, ces silences lourds de sens, cette lumière qui change tout. Pas le sourire parfait
+        pour la caméra, mais le frisson authentique.
+      </p>
+
+      <p data-reveal>
+        À la fin, vous aurez bien plus qu'une vidéo. Un halo de lumière autour de vos souvenirs. Une
+        mémoire sculptée avec soin. Une trace vivante de ce jour où tout a pris son vrai sens.
+      </p>
+
+      <p data-reveal>
+        <em>LOREN :</em> comme l'or qui brille discrètement. Comme le
+        laurier qui couronne ce qui mérite de rester. Comme votre histoire, qui mérite l'éternité.
+      </p>
+
+      <hr class="rule mx-auto w-16" />
+
+      <p class="muted text-right italic" data-reveal>— Cédric Raúl</p>
+    </div>
+  </Section>
+
+  <ImageBand
+    src="/media/video/amelie_cedric_poster.jpg"
+    alt="Amelie et Cedric front contre front sous le voile, image extraite de leur film"
+    caption="Amelie & Cedric"
+    position="50% 30%"
+  />
+
+  <!-- Les quatre expériences : résumé, le détail est sur la page tarifs -->
+  <Section tone="foret" id="forfaits">
+    <div class="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-16">
+      <h2 data-reveal>Les quatre expériences LOREN</h2>
+      <div data-reveal style="--i: 1">
+        <p class="lead">
+          Chaque formule porte en elle la même intention : révéler l'invisible. Seule la durée et
+          l'amplitude du récit changent.
+        </p>
+        <a href="/tarifs-forfaits" class="link-arrow mt-6">
+          À partir de {prixMin.prixLabel} · Voir tous les tarifs <Arrow />
+        </a>
+      </div>
+    </div>
+
+    <ul class="mt-14 md:mt-20">
+      {
+        forfaits.map((f) => (
+          <li
+            class="experience rule border-t last:border-b"
+            id={f.id}
+            data-reveal
+          >
+            <div>
+              <h3 class="text-[1.625rem] md:text-[2rem]">{f.nomComplet.replace('LOREN ', '')}</h3>
+              <p class="muted mt-3 text-sm">
+                {f.heures ? `${f.heures} heures de ${f.presenceLoren}` : f.idealPour}
+              </p>
+            </div>
+            <div class="max-w-[36rem]">
+              <p class="font-serif text-xl leading-snug">« {f.citation} »</p>
+              <p class="muted mt-4">
+                {f.description}{complement[f.id] ?? ''}
+              </p>
+            </div>
+            <div class="md:text-right">
+              <p class="prix text-[1.5rem]">{f.prixLabel}</p>
+              <a href={`/tarifs-forfaits#${f.id}`} class="link-arrow mt-4 text-sm">
+                Voir le détail <Arrow />
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Commun à toutes les formules -->
+    <h3 class="mt-20 md:mt-28" data-reveal>Inclus dans toutes les expériences LOREN</h3>
+    <div class="mt-8 grid gap-8 md:grid-cols-3 md:gap-12">
+      {
+        inclus.map((item, i) => (
+          <div class="rule border-t pt-5" data-reveal style={`--i: ${i}`}>
+            <h4>{item.titre}</h4>
+            <p class="muted mt-2">{item.texte}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-16 flex flex-col items-start gap-5 md:mt-20 md:flex-row md:items-center md:gap-8" data-reveal>
+      <Button href="/contact#contact">Discutons de votre projet</Button>
+      <p class="muted text-sm">
+        Ou découvrez <a href="/services" class="link">le processus créatif complet</a>
       </p>
     </div>
   </Section>
-
-  <!-- Narrative principale -->
-  <Section background="light" padding="xl">
-    <div class="max-w-3xl mx-auto" style="font-family: 'Georgia', serif;">
-
-      <!-- Opening quote -->
-      <div class="scroll-reveal text-center mb-16">
-        <p class="text-2xl md:text-3xl text-pierre/90 font-light leading-relaxed italic px-4">
-          Il y a des moments qui ne se voient pas. Des regards qui disent tout sans un mot.
-          Des instants suspendus où le temps retient son souffle.
-        </p>
-      </div>
-
-      <div class="w-16 h-px bg-doré-patiné/50 mx-auto mb-12"></div>
-
-      <!-- Paragraphe étymologie -->
-      <div class="scroll-reveal mb-12">
-        <p class="text-lg md:text-xl text-pierre/80 leading-relaxed">
-          LOREN. Du latin <em>laurus</em> — le laurier, symbole de victoire et d'éternité.
-          Cet arbre sacré d'Apollon, dieu de la lumière et des arts, incarnait ce qui triomphe du temps.
-          Ce qui reste quand tout s'efface.
-        </p>
-      </div>
-
-      <div class="scroll-reveal mb-12">
-        <p class="text-lg md:text-xl text-pierre/80 leading-relaxed">
-          C'est exactement ce que je crée pour vous : une œuvre qui traverse les années,
-          qui porte la lumière dorée du souvenir et la force tranquille de l'amour durable.
-        </p>
-      </div>
-
-      <!-- Quote centrale -->
-      <div class="scroll-reveal my-16 py-10 border-y border-pierre/20">
-        <p class="text-2xl md:text-3xl text-pierre font-light italic text-center leading-relaxed">
-          « Je ne filme pas pour qu'on regarde.<br class="hidden md:block">
-          Je filme pour qu'on ressente. »
-        </p>
-      </div>
-
-      <!-- Suite narrative -->
-      <div class="scroll-reveal mb-12">
-        <p class="text-lg md:text-xl text-pierre/80 leading-relaxed">
-          LOREN n'est pas une prestation, c'est une évidence. Les couples qui viennent à moi
-          ne cherchent pas simplement à être filmés. Ils veulent être vus, compris, sublimés sans artifice.
-          Ils veulent un film qui leur ressemble vraiment.
-        </p>
-      </div>
-
-      <div class="scroll-reveal mb-12">
-        <p class="text-lg md:text-xl text-pierre/80 leading-relaxed">
-          Mon approche est cinématographique et sensorielle. Je cherche l'invisible — ces gestes infimes,
-          ces silences lourds de sens, cette lumière qui change tout. Pas le sourire parfait pour la caméra,
-          mais le frisson authentique.
-        </p>
-      </div>
-
-      <div class="scroll-reveal mb-12">
-        <p class="text-lg md:text-xl text-pierre/80 leading-relaxed">
-          À la fin, vous aurez bien plus qu'une vidéo. Un halo de lumière autour de vos souvenirs.
-          Une mémoire sculptée avec soin. Une trace vivante de ce jour où tout a pris son vrai sens.
-        </p>
-      </div>
-
-      <div class="scroll-reveal mb-12">
-        <p class="text-lg md:text-xl text-pierre/80 leading-relaxed">
-          <span class="font-medium text-pierre">LOREN :</span> comme l'or qui brille discrètement.
-          Comme le laurier qui couronne ce qui mérite de rester.
-          Comme votre histoire, qui mérite l'éternité.
-        </p>
-      </div>
-
-      <div class="w-16 h-px bg-doré-patiné/50 mx-auto my-12"></div>
-
-      <!-- Signature -->
-      <div class="scroll-reveal text-right">
-        <p class="text-lg text-pierre/60 italic tracking-widest">
-          — Cédric Raúl
-        </p>
-      </div>
-
-    </div>
-  </Section>
-
-  <!-- Les 4 forfaits détaillés -->
-  <Section background="dark" padding="xl" id="forfaits" class="scroll-mt-20">
-    <div class="max-w-6xl mx-auto">
-
-      <!-- Intro forfaits -->
-      <div class="text-center mb-20">
-        <h2 class="scroll-reveal text-4xl md:text-5xl font-light text-lin mb-6 tracking-wide">
-          Les quatre expériences LOREN
-        </h2>
-        <p class="scroll-reveal scroll-reveal-delay-1 text-lg text-lin/70 font-light max-w-3xl mx-auto mb-4">
-          Chaque formule porte en elle la même intention : révéler l'invisible.
-          Seule la durée et l'amplitude du récit changent.
-        </p>
-        <a href="/tarifs-forfaits" class="scroll-reveal scroll-reveal-delay-2 inline-block text-sm text-doré-patiné hover:text-lin transition-colors border-b border-doré-patiné/30 hover:border-lin/50 font-light">
-          À partir de 2 300€ · Voir tous les tarifs →
-        </a>
-      </div>
-
-      <!-- Grid des forfaits -->
-      <div class="grid md:grid-cols-2 gap-8 mb-16">
-
-        <!-- LOREN PURE -->
-        <div id="pure" class="scroll-reveal bg-gradient-to-br from-noir-doux/60 to-noir-doux/40 border border-lin/10 rounded-2xl p-10 scroll-mt-32">
-          <h3 class="text-3xl md:text-4xl font-extralight tracking-widest text-lin mb-6" style="background: linear-gradient(to right, #EDE5D8, #D4C5B0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-            {pure.nomComplet.toUpperCase()}
-          </h3>
-          <p class="text-xl italic text-lin/80 mb-6 font-light">
-            "{pure.citation}"
-          </p>
-
-          <div class="space-y-4 text-lin/70 leading-relaxed mb-8">
-            <p><span class="text-doré-patiné">•</span> {pure.heures} heures de {pure.presenceLoren}</p>
-            {pure.inclusions.map((item) => (
-              <p><span class="text-doré-patiné">•</span> {item}</p>
-            ))}
-            <p><span class="text-doré-patiné">•</span> Livraison sous {LIVRAISON}</p>
-          </div>
-
-          <p class="text-lin/60 text-sm leading-relaxed border-t border-lin/10 pt-6">
-            {pure.description}
-            Une narration épurée où chaque seconde compte.
-          </p>
-        </div>
-
-        <!-- LOREN ÂME -->
-        <div id="ame" class="scroll-reveal bg-gradient-to-br from-noir-doux/60 to-noir-doux/40 border border-lin/10 rounded-2xl p-10 scroll-mt-32">
-          <h3 class="text-3xl md:text-4xl font-extralight tracking-widest text-lin mb-6" style="background: linear-gradient(to right, #EDE5D8, #D4C5B0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-            {ame.nomComplet.toUpperCase()}
-          </h3>
-          <p class="text-xl italic text-lin/80 mb-6 font-light">
-            "{ame.citation}"
-          </p>
-
-          <div class="space-y-4 text-lin/70 leading-relaxed mb-8">
-            <p><span class="text-sauge">•</span> {ame.heures} heures de {ame.presenceLoren}</p>
-            {ame.inclusions.map((item) => (
-              <p><span class="text-sauge">•</span> {item}</p>
-            ))}
-            <p><span class="text-sauge">•</span> Livraison sous {LIVRAISON}</p>
-          </div>
-
-          <p class="text-lin/60 text-sm leading-relaxed border-t border-lin/10 pt-6">
-            {ame.description}
-          </p>
-        </div>
-
-        <!-- LOREN INFINIE -->
-        <div id="infinie" class="scroll-reveal bg-gradient-to-br from-noir-doux/60 to-noir-doux/40 border border-lin/10 rounded-2xl p-10 scroll-mt-32">
-          <h3 class="text-3xl md:text-4xl font-extralight tracking-widest text-lin mb-6" style="background: linear-gradient(to right, #EDE5D8, #D4C5B0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-            {infinie.nomComplet.toUpperCase()}
-          </h3>
-          <p class="text-xl italic text-lin/80 mb-6 font-light">
-            "{infinie.citation}"
-          </p>
-
-          <div class="space-y-4 text-lin/70 leading-relaxed mb-8">
-            <p><span class="text-doré-patiné">•</span> {infinie.heures} heures de {infinie.presenceLoren}</p>
-            {infinie.inclusions.map((item) => (
-              <p><span class="text-doré-patiné">•</span> {item}</p>
-            ))}
-            <p><span class="text-doré-patiné">•</span> Livraison sous {LIVRAISON}</p>
-          </div>
-
-          <p class="text-lin/60 text-sm leading-relaxed border-t border-lin/10 pt-6">
-            {infinie.description}
-          </p>
-        </div>
-
-        <!-- LOREN CRÉATION -->
-        <div id="creation" class="scroll-reveal bg-gradient-to-br from-noir-doux/70 to-noir-doux/50 border border-doré-patiné/30 rounded-2xl p-10 scroll-mt-32">
-          <h3 class="text-3xl md:text-4xl font-extralight tracking-widest text-lin mb-6" style="background: linear-gradient(to right, #EDE5D8, #D4C5B0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-            {creation.nomComplet.toUpperCase()}
-          </h3>
-          <p class="text-xl italic text-lin/80 mb-6 font-light">
-            "{creation.citation}"
-          </p>
-
-          <div class="space-y-4 text-lin/70 leading-relaxed mb-8">
-            {creation.inclusions.map((item) => (
-              <p><span class="text-doré-patiné">•</span> {item}</p>
-            ))}
-          </div>
-
-          <p class="text-lin/60 text-sm leading-relaxed border-t border-doré-patiné/20 pt-6">
-            {creation.description}
-          </p>
-        </div>
-
-      </div>
-
-      <!-- Ce qui est inclus dans tous les forfaits -->
-      <div class="scroll-reveal bg-gradient-to-br from-doré-patiné/10 to-sauge/5 border border-doré-patiné/20 rounded-2xl p-10 md:p-12 mb-16">
-        <h3 class="text-2xl font-semibold text-lin mb-6 text-center">Inclus dans toutes les expériences LOREN</h3>
-
-        <div class="grid md:grid-cols-3 gap-6 text-lin/70">
-          <div class="text-center">
-            <div class="text-3xl mb-3">🎬</div>
-            <h4 class="text-lin font-medium mb-2">Post-production artisanale</h4>
-            <p class="text-sm">Sound design, colorimétrie cinéma, montage narratif</p>
-          </div>
-
-          <div class="text-center">
-            <div class="text-3xl mb-3">☁️</div>
-            <h4 class="text-lin font-medium mb-2">Galerie privée en ligne</h4>
-            <p class="text-sm">Accès illimité, téléchargement haute qualité</p>
-          </div>
-
-          <div class="text-center">
-            <div class="text-3xl mb-3">💫</div>
-            <h4 class="text-lin font-medium mb-2">Présence discrète</h4>
-            <p class="text-sm">Vous vivez votre journée, j'immortalise l'authenticité</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div class="scroll-reveal text-center">
-        <a
-          href="/contact#contact"
-          class="group inline-block relative px-12 py-5 rounded-lg font-semibold text-lg text-noir-doux overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl"
-          style="background: linear-gradient(135deg, #D4AF37 0%, #C49F2E 50%, #B8912A 100%);"
-        >
-          <span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%); filter: blur(10px);"></span>
-          <span class="relative">Discutons de votre projet</span>
-        </a>
-
-        <p class="text-lin/60 text-sm mt-6">
-          Ou découvrez <a href="/services" class="text-doré-patiné hover:text-lin transition-colors border-b border-doré-patiné/30">le processus créatif complet</a>
-        </p>
-      </div>
-
-    </div>
-  </Section>
-
 </Base>
 
-<script>
-  // Scroll reveal animations
-  function initScrollReveal() {
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-visible');
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.scroll-reveal');
-    elements.forEach(el => observer.observe(el));
+<style>
+  .loren-titre {
+    font-size: clamp(2.75rem, 1.6rem + 7vw, 5.5rem);
+    letter-spacing: 0.22em;
+    /* Compense l'interlettrage après la dernière lettre pour rester centré */
+    margin-right: -0.22em;
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollReveal);
-  } else {
-    initScrollReveal();
+  .experience {
+    display: grid;
+    gap: 1.5rem;
+    padding-block: 2.5rem;
   }
-</script>
+
+  @media (min-width: 900px) {
+    .experience {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 6fr) minmax(0, 2.5fr);
+      gap: 3rem;
+      padding-block: 3.25rem;
+      align-items: start;
+    }
+  }
+</style>

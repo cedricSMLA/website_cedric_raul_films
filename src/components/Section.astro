@@ -1,35 +1,28 @@
 ---
 export interface Props {
+  /** Couleur de fond de la section. */
+  tone?: 'ivoire' | 'sable' | 'foret' | 'profond';
+  /** Largeur du contenu. */
+  width?: 'default' | 'narrow' | 'text';
+  size?: 'md' | 'lg';
   class?: string;
-  background?: 'primary' | 'secondary' | 'dark' | 'gradient';
-  padding?: 'sm' | 'md' | 'lg' | 'xl';
+  id?: string;
 }
 
-const {
-  class: className = '',
-  background = 'primary',
-  padding = 'lg'
-} = Astro.props;
+const { tone = 'ivoire', width = 'default', size = 'lg', class: className = '', id } = Astro.props;
 
-const backgrounds = {
-  primary: 'bg-lin text-pierre',
-  secondary: 'bg-sauge text-lin',
-  dark: 'bg-noir-doux text-lin',
-  gradient: 'bg-gradient-to-br from-lin to-sauge text-pierre'
+const wraps = {
+  default: 'wrap',
+  narrow: 'wrap wrap-narrow',
+  text: 'wrap wrap-text'
 };
-
-const paddings = {
-  sm: 'py-8',
-  md: 'py-12',
-  lg: 'py-16',
-  xl: 'py-24'
-};
-
-const classes = `${backgrounds[background]} ${paddings[padding]} ${className}`;
 ---
 
-<section class={classes}>
-  <div class="container mx-auto px-4">
+<section
+  id={id}
+  class:list={['section', size === 'md' && 'section-md', tone !== 'ivoire' && `tone-${tone}`, className]}
+>
+  <div class={wraps[width]}>
     <slot />
   </div>
 </section>

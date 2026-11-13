@@ -1,208 +1,732 @@
-/* Variables globales pour le thème moody vert-sauge & doré désaturé */
+@import '@fontsource-variable/jost/wght.css';
+@import '@fontsource/marcellus/400.css';
+
+/* Les chiffres de Marcellus se lisent mal (le « 1 » ressemble à un « I »,
+   « 10 » à « IO »). Cette police virtuelle ne contient que les chiffres de
+   Jost : placée en tête de la pile serif, elle les remplace partout. */
+@font-face {
+  font-family: 'Chiffres';
+  src: url('@fontsource-variable/jost/files/jost-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0030-0039;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   Palette « Sauge profonde »
+   Les variables --bg / --fg / --accent changent selon le ton de la
+   section (.tone-foret, .tone-sable…) : les composants n'ont donc
+   jamais besoin de connaître la couleur de fond sur laquelle ils sont.
+   ------------------------------------------------------------------ */
 :root {
-  --background-primary: #F2EEE3;
-  --background-secondary: #A3B18A;
-  --background-dark: #1C1A19;
-  --text-primary: #5E5B55;
-  --text-secondary: #A3B18A;
-  --accent-primary: #C2A56B;
-  --accent-light: #D4B87E;
-  --border-subtle: rgba(94, 91, 85, 0.2);
-  --shadow-soft: 0 2px 8px rgba(28, 26, 25, 0.08);
-  --shadow-cinema: 0 4px 16px rgba(28, 26, 25, 0.12), 0 2px 6px rgba(28, 26, 25, 0.08);
+  --ivoire: #F5F2EA;
+  --sable: #EBE7DB;
+  --ligne: #D6D3C6;
+  --encre: #1C211D;
+  --mousse: #586058;
+  --foret: #26342B;
+  --foret-profond: #1A251E;
+  --cuivre: #A0562F;
+  --cuivre-clair: #DBA27C;
+  --sauge: #A9B8A0;
+
+  --bg: var(--ivoire);
+  --fg: var(--encre);
+  --fg-muted: var(--mousse);
+  --accent: var(--cuivre);
+  --rule: var(--ligne);
+  --btn-bg: var(--foret);
+  --btn-fg: var(--ivoire);
+  --btn-hover: var(--cuivre);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --header-h: 4.5rem;
+  --radius: 6px;
 }
 
-/* Grain pellicule subtil pour ambiance cinématographique */
-body::before {
-  content: '';
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  width: 200%;
-  height: 200vh;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E") repeat;
-  opacity: 0.02;
-  z-index: 1;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  will-change: transform;
-  animation: grain 8s steps(10) infinite;
+.tone-sable {
+  --bg: var(--sable);
+  --rule: #CBC7B8;
+  background: var(--bg);
 }
 
-/* Style des liens */
-a {
-  color: var(--accent-primary);
-  text-decoration: none;
-  transition: color 0.3s ease;
+.tone-foret,
+.tone-profond {
+  --bg: var(--foret);
+  --fg: var(--ivoire);
+  --fg-muted: var(--sauge);
+  --accent: var(--cuivre-clair);
+  --rule: rgb(245 242 234 / 0.16);
+  --btn-bg: var(--ivoire);
+  --btn-fg: var(--foret-profond);
+  --btn-hover: var(--cuivre-clair);
+  background: var(--bg);
+  color: var(--fg);
 }
 
-a:hover {
-  color: var(--accent-light);
+.tone-profond {
+  --bg: var(--foret-profond);
 }
 
-/* Sélection de texte */
-::selection {
-  background-color: var(--accent-primary);
-  color: var(--background-primary);
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 1.5rem);
+    scrollbar-color: var(--mousse) var(--ivoire);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--ivoire);
+    color: var(--encre);
+    font-family: theme('fontFamily.sans');
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    caret-color: var(--cuivre);
+    accent-color: var(--foret);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: theme('fontFamily.serif');
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: 0;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+
+  /* Marcellus n'existe qu'en une graisse, sans italique : on interdit au
+     navigateur de fabriquer un faux gras ou un faux italique. */
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-serif,
+  .quote,
+  .prose-serif {
+    font-synthesis: none;
+  }
+
+  /* Le minimum laisse tenir « cinématographique » sur un écran de 320px */
+  h1 {
+    font-size: clamp(1.75rem, 0.9rem + 4.7vw, 4.5rem);
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 1.3rem + 2.1vw, 2.875rem);
+  }
+
+  h3 {
+    font-size: clamp(1.3125rem, 1.2rem + 0.6vw, 1.5625rem);
+    line-height: 1.2;
+  }
+
+  h4 {
+    font-size: 1.1875rem;
+    line-height: 1.25;
+  }
+
+  /* La seconde ligne des titres se distingue par la couleur */
+  h1 em,
+  h2 em,
+  h3 em,
+  .prose-serif em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+
+  ::selection {
+    background: var(--cuivre);
+    color: var(--ivoire);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  [id] {
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  }
 }
 
-::-moz-selection {
-  background-color: var(--accent-primary);
-  color: var(--background-primary);
-}
+@layer components {
+  /* ---------- Mise en page ---------- */
+  .wrap {
+    width: min(100% - 2 * var(--gutter), 76rem);
+    margin-inline: auto;
+  }
 
-/* Scrollbar personnalisée */
-::-webkit-scrollbar {
-  width: 8px;
-}
+  .wrap-narrow {
+    width: min(100% - 2 * var(--gutter), 56rem);
+  }
 
-::-webkit-scrollbar-track {
-  background: var(--background-primary);
-}
+  .wrap-text {
+    width: min(100% - 2 * var(--gutter), 40rem);
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--text-secondary);
-  border-radius: 4px;
-}
+  .section {
+    padding-block: clamp(4rem, 9vw, 8rem);
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-primary);
-}
+  .section-md {
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
 
-/* Base pour un look éditorial */
-body {
-  background-color: var(--background-primary);
-  color: var(--text-primary);
-  font-weight: 400;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  .rule {
+    border: 0;
+    border-top: 1px solid var(--rule);
+  }
 
-/* Amélioration des transitions globales */
-* {
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
+  /* ---------- Texte ---------- */
+  .lead {
+    font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+    line-height: 1.55;
+    color: var(--fg-muted);
+    max-width: 38rem;
+  }
 
-/* Focus states accessibles */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
-}
+  .muted {
+    color: var(--fg-muted);
+  }
 
-/* Animations de révélation au scroll */
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transition-delay: 0s;
-}
+  .accent {
+    color: var(--accent);
+  }
 
-.scroll-reveal.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+  /* Prix : en Jost, car le « 1 » de Marcellus se lit comme un « I » */
+  .prix {
+    font-family: theme('fontFamily.sans');
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    font-variant-numeric: lining-nums;
+  }
 
-.scroll-reveal-slide-left {
-  opacity: 0;
-  transform: translateX(-40px);
-  transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+  .label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
 
-.scroll-reveal-slide-left.reveal-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
+  .quote {
+    font-family: theme('fontFamily.serif');
+    font-size: clamp(1.25rem, 1.1rem + 0.9vw, 1.75rem);
+    line-height: 1.4;
+    text-wrap: balance;
+  }
 
-.scroll-reveal-slide-right {
-  opacity: 0;
-  transform: translateX(40px);
-  transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+  /* Texte long en serif (page LOREN) */
+  .prose-serif {
+    font-family: theme('fontFamily.serif');
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+    line-height: 1.75;
+  }
 
-.scroll-reveal-slide-right.reveal-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
+  .prose-serif > * + * {
+    margin-top: 1.6em;
+  }
 
-.scroll-reveal-fade {
-  opacity: 0;
-  transition: opacity 1s ease-out;
-}
+  /* Liste à tirets cuivre */
+  .ticks li {
+    position: relative;
+    padding-left: 1.4rem;
+  }
 
-.scroll-reveal-fade.reveal-visible {
-  opacity: 1;
-}
+  .ticks li + li {
+    margin-top: 0.6rem;
+  }
 
-/* Délais échelonnés pour les éléments multiples */
-.scroll-reveal-delay-1 { transition-delay: 0.1s; }
-.scroll-reveal-delay-2 { transition-delay: 0.2s; }
-.scroll-reveal-delay-3 { transition-delay: 0.3s; }
-.scroll-reveal-delay-4 { transition-delay: 0.4s; }
+  .ticks li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.82em;
+    width: 0.7rem;
+    height: 1px;
+    background: var(--accent);
+  }
 
-/* Respect des préférences d'accessibilité */
-@media (prefers-reduced-motion: reduce) {
-  .scroll-reveal,
-  .scroll-reveal-slide-left,
-  .scroll-reveal-slide-right,
-  .scroll-reveal-fade {
+  /* ---------- Liens ---------- */
+  .link {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .link:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--accent);
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+    padding-bottom: 0.15em;
+    transition: border-color 0.2s ease;
+  }
+
+  .link-arrow svg {
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .link-arrow:hover {
+    border-color: currentColor;
+  }
+
+  .link-arrow:hover svg {
+    transform: translateX(0.25em);
+  }
+
+  /* ---------- Boutons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    min-height: 3rem;
+    padding: 0.7rem 1.6rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease,
+      transform 0.15s ease;
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn-solid {
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+  }
+
+  .btn-solid:hover {
+    background: var(--btn-hover);
+  }
+
+  .tone-foret .btn-solid:hover,
+  .tone-profond .btn-solid:hover {
+    color: var(--foret-profond);
+  }
+
+  .btn-ghost {
+    border-color: color-mix(in srgb, var(--fg) 30%, transparent);
+    color: var(--fg);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--fg);
+    background: color-mix(in srgb, var(--fg) 6%, transparent);
+  }
+
+  .btn[disabled] {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  /* ---------- En-tête ---------- */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--ivoire);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+    view-transition-name: site-header;
+  }
+
+  .site-header[data-scrolled] {
+    border-bottom-color: var(--ligne);
+  }
+
+  .site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    height: var(--header-h);
+  }
+
+  .wordmark {
+    font-weight: 600;
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--encre);
+    white-space: nowrap;
+  }
+
+  .nav-link {
+    position: relative;
+    padding-block: 0.4rem;
+    font-size: 0.95rem;
+    color: var(--encre);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--cuivre);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s var(--ease-out);
+  }
+
+  .nav-link:hover::after,
+  .nav-link[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+
+  .menu-panel {
+    position: fixed;
+    inset: var(--header-h) 0 0 0;
+    z-index: 39;
+    background: var(--ivoire);
+    overflow-y: auto;
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      opacity 0.3s ease,
+      visibility 0s linear 0.3s;
+  }
+
+  [data-menu-open] .menu-panel {
+    visibility: visible;
+    opacity: 1;
+    transition:
+      opacity 0.3s ease,
+      visibility 0s;
+  }
+
+  .menu-panel li {
+    opacity: 0;
+    transform: translateY(0.75rem);
+    transition:
+      opacity 0.5s var(--ease-out),
+      transform 0.5s var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 45ms + 60ms);
+  }
+
+  [data-menu-open] .menu-panel li {
     opacity: 1;
     transform: none;
-    transition: none;
-  }
-}
-
-/* Transition de page custom - approche robuste */
-body {
-  position: relative;
-}
-
-body.page-transitioning {
-  overflow: hidden;
-}
-
-.page-transition-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--background-primary);
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 450ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.page-transition-overlay.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
-/* Animation de la page principale */
-main {
-  transition: opacity 450ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 450ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-body.page-exit main {
-  opacity: 0;
-  transform: translateY(-30px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .page-transition-overlay,
-  main {
-    transition: none !important;
   }
 
-  body.page-exit main {
+  /* ---------- En-tête de page ---------- */
+  .page-hero {
+    padding-block: clamp(3.5rem, 9vw, 7.5rem) clamp(3rem, 7vw, 6rem);
+  }
+
+  .page-hero-grid {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  @media (min-width: 900px) {
+    .page-hero-grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      align-items: end;
+      gap: 4rem;
+    }
+  }
+
+  .hero-rise {
+    animation: hero-rise 0.9s var(--ease-out) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  .hero-rule {
+    transform-origin: left;
+    animation: rule-draw 1.2s var(--ease-out) 0.15s both;
+  }
+
+  /* ---------- Médias ---------- */
+  .frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--foret-profond);
+  }
+
+  .frame > img,
+  .frame > video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .film {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+
+  .film .frame > video {
+    transition: transform 1.4s var(--ease-out);
+  }
+
+  .film:hover .frame > video,
+  .film:focus-visible .frame > video {
+    transform: scale(1.03);
+  }
+
+  .film-cue {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    background: rgb(26 37 30 / 0.78);
+    color: var(--ivoire);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(0.4rem);
+    transition:
+      opacity 0.3s ease,
+      transform 0.5s var(--ease-out);
+  }
+
+  .film:hover .film-cue,
+  .film:focus-visible .film-cue {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (hover: none) {
+    .film-cue {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .film-dialog {
+    width: min(100% - 2rem, 76rem);
+    max-width: none;
+    max-height: none;
+    padding: 0;
+    background: transparent;
+    color: var(--ivoire);
+    overflow: visible;
+  }
+
+  .film-dialog::backdrop {
+    background: rgb(26 37 30 / 0.95);
+  }
+
+  .film-dialog[open] {
+    animation: dialog-in 0.45s var(--ease-out) both;
+  }
+
+  /* ---------- Formulaire ---------- */
+  .field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: var(--ivoire);
+    border: 1px solid #B9B6A8;
+    border-radius: var(--radius);
+    color: var(--encre);
+    font: inherit;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .input::placeholder {
+    color: var(--mousse);
+    opacity: 1;
+  }
+
+  .input:hover {
+    border-color: var(--mousse);
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--foret);
+    box-shadow: 0 0 0 3px rgb(160 86 47 / 0.28);
+  }
+
+  /* Champ piège anti-robots : hors écran plutôt que display:none,
+     que certains robots savent repérer */
+  .piege {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form-note {
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--ligne);
+    background: var(--ivoire);
+  }
+
+  .form-note[data-state='success'] {
+    border-color: var(--foret);
+    color: var(--foret);
+  }
+
+  .form-note[data-state='error'] {
+    border-color: #9B2C1F;
+    color: #8A2419;
+  }
+
+  /* ---------- Pages légales ---------- */
+  .legal-block {
+    padding-block: 2rem;
+    border-top: 1px solid var(--ligne);
+  }
+
+  .legal-block h2 {
+    font-size: 1.75rem;
+  }
+
+  /* ---------- Apparition au défilement ----------
+     Le contenu est visible par défaut : il n'est masqué que si le
+     script a pu poser la classe .js sur <html>. */
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition:
+      opacity 0.9s var(--ease-out),
+      transform 0.9s var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  .js [data-reveal].is-in {
+    opacity: 1;
     transform: none;
   }
 }
 
+/* ---------- Animations ---------- */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+}
+
+@keyframes rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes frame-open {
+  from {
+    clip-path: inset(7% 5% round var(--radius));
+    opacity: 0.4;
+  }
+  to {
+    clip-path: inset(0 round var(--radius));
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ---------- Transition entre les pages (fondu natif) ---------- */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: page-out 0.16s ease both;
+}
+
+::view-transition-new(root) {
+  animation: page-in 0.32s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

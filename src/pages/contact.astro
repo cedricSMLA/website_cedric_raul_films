@@ -1,228 +1,160 @@
 ---
 import Base from '@/layouts/Base.astro';
-import Section from '@/components/Section.astro';
-import Button from '@/components/Button.astro';
-import Card from '@/components/Card.astro';
+import PageHero from '@/components/PageHero.astro';
 import { forfaits, optionLabel } from '@/data/forfaits';
+import { EMAIL, INSTAGRAM, DELAI_REPONSE } from '@/data/site';
 
-const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.fr';
+const promesses = [
+  { titre: 'Réponse rapide', texte: `Sous ${DELAI_REPONSE} maximum` },
+  { titre: 'Devis gratuit', texte: 'Personnalisé et détaillé' },
+  { titre: 'Conseil expert', texte: 'Accompagnement personnalisé' }
+];
 ---
 
 <Base
   title="Contact - Cédric Raúl Films"
-  description="Créons ensemble votre film de mariage. Films cinématographiques qui provoquent l'émotion. Paris & worldwide, nombreuses dates 2025-2026."
+  description="Créons ensemble votre film de mariage. Films cinématographiques qui provoquent l'émotion. Basé à Paris, disponible partout ailleurs."
 >
-  <!-- Hero Section -->
-  <Section background="dark" padding="xl" class="rounded-xl mb-8">
-    <div class="max-w-5xl mx-auto">
+  <PageHero
+    title="Créons votre film"
+    accent="ensemble"
+    lead="Un film de mariage qui vous fera revivre chaque émotion, comme si vous y étiez encore."
+  />
 
-      <!-- Titre centré avec cadre -->
-      <div class="relative mb-16">
-        <!-- Ligne supérieure -->
-        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-doré-patiné/40 to-transparent"></div>
-
-        <div class="text-center py-12">
-          <h1 class="scroll-reveal text-5xl md:text-7xl font-bold text-lin mb-4 leading-tight tracking-tight">
-            Créons votre film
-            <span class="block text-doré-patiné italic font-light mt-2">ensemble</span>
-          </h1>
-
-          <div class="w-24 h-1 bg-gradient-to-r from-transparent via-doré-patiné to-transparent mx-auto mb-10 animate-line-reveal"></div>
-
-          <p class="scroll-reveal scroll-reveal-delay-1 text-lg md:text-xl text-lin/90 max-w-3xl mx-auto leading-relaxed mb-6">
-            Un film de mariage qui vous fera revivre chaque émotion,
-            comme si vous y étiez encore.
+  <section class="section">
+    <div class="wrap grid gap-14 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-20">
+      <!-- Ce à quoi s'attendre -->
+      <aside>
+        <dl>
+          {
+            promesses.map((p) => (
+              <div class="rule border-t py-5" data-reveal>
+                <dt class="font-serif text-xl leading-tight">{p.titre}</dt>
+                <dd class="muted mt-1">{p.texte}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <div class="rule border-t pt-6" data-reveal>
+          <p class="muted text-sm">Vous préférez écrire directement ?</p>
+          <p class="mt-2">
+            <a href={`mailto:${EMAIL}`} class="link break-all">{EMAIL}</a>
           </p>
-
-          <p class="scroll-reveal scroll-reveal-delay-2 text-sm text-lin/70">
-            Destination weddings • Nombreuses dates disponibles 2025-2026
+          <p class="mt-1">
+            <a href={INSTAGRAM} target="_blank" rel="noopener noreferrer" class="link">Instagram</a>
           </p>
         </div>
-
-        <!-- Ligne inférieure -->
-        <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-doré-patiné/40 to-transparent"></div>
-      </div>
-
-      <!-- CTA + Promesses -->
-      <div class="space-y-10">
-        <!-- CTA -->
-        <div class="scroll-reveal text-center">
-          <a href="#contact" class="group inline-flex items-center gap-2 bg-doré-patiné text-noir-doux px-8 py-3 rounded-md font-medium hover:bg-doré-patiné/90 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg">
-            <span>Discutons de votre projet</span>
-            <svg class="w-4 h-4 transform group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-            </svg>
-          </a>
-        </div>
-
-        <!-- Promesses en grid -->
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="scroll-reveal scroll-reveal-delay-1 bg-lin/5 border border-doré-patiné/20 rounded-lg p-6 text-center">
-            <div class="w-10 h-10 bg-doré-patiné/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-5 h-5 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-lin mb-2">Réponse rapide</h3>
-            <p class="text-lin/70 text-sm">Sous 24h maximum</p>
-          </div>
-
-          <div class="scroll-reveal scroll-reveal-delay-2 bg-lin/5 border border-doré-patiné/20 rounded-lg p-6 text-center">
-            <div class="w-10 h-10 bg-sauge/30 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-5 h-5 text-sauge" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-lin mb-2">Devis gratuit</h3>
-            <p class="text-lin/70 text-sm">Personnalisé et détaillé</p>
-          </div>
-
-          <div class="scroll-reveal scroll-reveal-delay-3 bg-lin/5 border border-doré-patiné/20 rounded-lg p-6 text-center">
-            <div class="w-10 h-10 bg-doré-patiné/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-5 h-5 text-doré-patiné" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17 8h1a4 4 0 110 8h-1m-10-8H6a4 4 0 000 8h1m2-4h8"/>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-lin mb-2">Conseil expert</h3>
-            <p class="text-lin/70 text-sm">Accompagnement personnalisé</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </Section>
-
-  <!-- Contact Form -->
-  <Section background="primary" padding="xl">
-    <div class="max-w-3xl mx-auto" id="contact">
+      </aside>
 
       <!-- Formulaire -->
-      <form id="contact-form" class="scroll-reveal space-y-8 bg-white p-8 md:p-12 rounded-lg shadow-cinema">
-        <!-- Infos de base -->
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <label for="nom" class="block text-sm font-medium text-noir-doux mb-3">
-              Vos noms *
-            </label>
-            <input
-              type="text"
-              id="nom"
-              name="nom"
-              required
-              class="w-full px-4 py-3 border border-pierre/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-noir-doux placeholder-pierre/60"
-              placeholder="Marie & Thomas"
-            />
+      <div id="contact">
+        <form id="contact-form" class="tone-sable space-y-7 rounded-md p-6 sm:p-10" data-reveal>
+          <h2 class="text-[1.875rem]">Discutons de votre projet</h2>
+
+          <div class="grid gap-7 sm:grid-cols-2">
+            <div class="field">
+              <label for="nom">Vos noms *</label>
+              <input
+                type="text"
+                id="nom"
+                name="nom"
+                required
+                autocomplete="name"
+                class="input"
+                placeholder="Marie & Thomas"
+              />
+            </div>
+
+            <div class="field">
+              <label for="email">Email *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                autocomplete="email"
+                class="input"
+                placeholder="marie.thomas@email.com"
+              />
+            </div>
           </div>
 
-          <div>
-            <label for="email" class="block text-sm font-medium text-noir-doux mb-3">
-              Email *
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              class="w-full px-4 py-3 border border-pierre/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-noir-doux placeholder-pierre/60"
-              placeholder="marie.thomas@email.com"
-            />
+          <div class="field">
+            <label for="date">Date de votre mariage *</label>
+            <input type="date" id="date" name="date" required class="input" />
           </div>
-        </div>
 
-        <!-- Date mariage -->
-        <div>
-          <label for="date" class="block text-sm font-medium text-noir-doux mb-3">
-            Date de votre mariage *
-          </label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            required
-            class="w-full px-4 py-3 border border-pierre/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-noir-doux"
-          />
-        </div>
+          <div class="field">
+            <label for="forfait">
+              Choisir un forfait <span class="muted font-normal">(optionnel)</span>
+            </label>
+            <select id="forfait" name="forfait" class="input">
+              <option value="">Préfère ne pas préciser</option>
+              {forfaits.map((f) => <option value={f.id}>{optionLabel(f)}</option>)}
+            </select>
+          </div>
 
-        <!-- Forfait (optionnel) -->
-        <div>
-          <label for="forfait" class="block text-sm font-medium text-noir-doux mb-3">
-            Choisir un forfait <span class="text-pierre font-normal">(optionnel)</span>
-          </label>
-          <select
-            id="forfait"
-            name="forfait"
-            class="w-full px-4 py-3 border border-pierre/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent bg-lin text-noir-doux"
-          >
-            <option value="">Préfère ne pas préciser</option>
-            {forfaits.map((f) => (
-              <option value={f.id}>{optionLabel(f)}</option>
-            ))}
-          </select>
-        </div>
+          <div class="field">
+            <label for="message">Parlez-nous de votre vision *</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              class="input resize-none"
+              placeholder="Décrivez-nous votre mariage, vos attentes, l'ambiance que vous souhaitez..."
+              aria-describedby="message-aide"
+            ></textarea>
+            <p id="message-aide" class="muted mt-2 text-sm">
+              Les liens ne sont pas acceptés dans ce formulaire.
+            </p>
+          </div>
 
-        <!-- Message -->
-        <div>
-          <label for="message" class="block text-sm font-medium text-noir-doux mb-3">
-            Parlez-nous de votre vision *
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows="5"
-            required
-            class="w-full px-4 py-3 border border-pierre/30 rounded-md focus:ring-2 focus:ring-doré-patiné focus:border-transparent resize-none bg-lin text-noir-doux placeholder-pierre/60"
-            placeholder="Décrivez-nous votre mariage, vos attentes, l'ambiance que vous souhaitez..."
-          ></textarea>
-        </div>
+          <!-- Champ piège : invisible pour un humain, rempli par les robots -->
+          <div class="piege" aria-hidden="true">
+            <label for="site_web">Ne pas remplir ce champ</label>
+            <input type="text" id="site_web" name="site_web" tabindex="-1" autocomplete="off" />
+          </div>
 
-        <!-- RGPD -->
-        <div class="flex items-start space-x-3 pt-4">
-          <input
-            type="checkbox"
-            id="consent"
-            name="consent"
-            required
-            class="mt-1.5 h-4 w-4 text-doré-patiné border-pierre/40 rounded focus:ring-doré-patiné"
-          />
-          <label for="consent" class="text-sm text-pierre leading-relaxed">
-            J'accepte que mes données soient utilisées pour traiter ma demande.
-            <a href="/confidentialite" class="text-doré-patiné underline hover:no-underline">Politique de confidentialité</a>
-          </label>
-        </div>
+          <div class="flex items-start gap-3">
+            <input type="checkbox" id="consent" name="consent" required class="mt-1.5 h-4 w-4 shrink-0" />
+            <label for="consent" class="muted text-sm leading-relaxed">
+              J'accepte que mes données soient utilisées pour traiter ma demande.
+              <a href="/confidentialite" class="link">Politique de confidentialité</a>
+            </label>
+          </div>
 
-        <!-- Submit -->
-        <div class="pt-6 text-center">
-          <button
-            type="submit"
-            id="submit-btn"
-            class="w-full bg-noir-doux text-lin px-12 py-4 rounded-md font-medium hover:bg-doré-patiné hover:text-noir-doux transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Envoyer ma demande
-          </button>
-        </div>
+          <button type="submit" id="submit-btn" class="btn btn-solid w-full">Envoyer ma demande</button>
 
-        <!-- Messages de feedback -->
-        <div id="form-message" class="hidden mt-4 p-4 rounded-lg text-center"></div>
-      </form>
+          <div id="form-message" class="form-note hidden" role="status" aria-live="polite"></div>
+        </form>
+      </div>
     </div>
-  </Section>
+  </section>
 </Base>
 
 <script>
-  // Contact form handling
-  const form = document.getElementById('contact-form');
-  const submitBtn = document.getElementById('submit-btn');
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
   const formMessage = document.getElementById('form-message');
+  const affichage = performance.now();
 
-  form?.addEventListener('submit', async function(e) {
+  function afficherMessage(texte: string, etat: 'success' | 'error') {
+    if (!formMessage) return;
+    formMessage.textContent = texte;
+    formMessage.dataset.state = etat;
+    formMessage.classList.remove('hidden');
+    formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (!submitBtn) return;
 
-    // Disable button and show loading state
     submitBtn.disabled = true;
     submitBtn.textContent = 'Envoi en cours...';
-    formMessage.classList.add('hidden');
+    formMessage?.classList.add('hidden');
 
-    // Get form data
     const formData = new FormData(form);
     const data = {
       nom: formData.get('nom'),
@@ -230,130 +162,42 @@ const contactEmail = import.meta.env.CONTACT_EMAIL || 'contact@cedricraulfilms.f
       date: formData.get('date'),
       forfait: formData.get('forfait'),
       message: formData.get('message'),
-      consent: formData.get('consent') ? true : false
+      consent: formData.get('consent') ? true : false,
+      // Anti-robots : champ piège et temps passé sur le formulaire
+      site_web: formData.get('site_web'),
+      duree: Math.round(performance.now() - affichage)
     };
 
     try {
-      // Send to API
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-
       const result = await response.json();
 
       if (result.success) {
-        // Success message
-        formMessage.textContent = result.message;
-        formMessage.className = 'mt-4 p-4 rounded-lg text-center bg-sauge/20 text-sauge border border-sauge/30';
-        formMessage.classList.remove('hidden');
-
-        // Reset form
+        afficherMessage(result.message, 'success');
         form.reset();
-
-        // Scroll to message
-        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {
-        // Error message
-        formMessage.textContent = result.error || 'Une erreur est survenue.';
-        formMessage.className = 'mt-4 p-4 rounded-lg text-center bg-red-100 text-red-700 border border-red-300';
-        formMessage.classList.remove('hidden');
+        afficherMessage(result.error || 'Une erreur est survenue.', 'error');
       }
-    } catch (error) {
-      // Network error
-      formMessage.textContent = 'Erreur de connexion. Veuillez vérifier votre connexion internet et réessayer.';
-      formMessage.className = 'mt-4 p-4 rounded-lg text-center bg-red-100 text-red-700 border border-red-300';
-      formMessage.classList.remove('hidden');
+    } catch {
+      afficherMessage(
+        'Erreur de connexion. Veuillez vérifier votre connexion internet et réessayer.',
+        'error'
+      );
     } finally {
-      // Re-enable button
       submitBtn.disabled = false;
       submitBtn.textContent = 'Envoyer ma demande';
     }
   });
 
-  // Fonction de scroll vers le formulaire
-  function scrollToContact() {
-    const target = document.querySelector('#contact');
-    if (target) {
-      // Offset différent selon la taille d'écran
-      const isMobile = window.innerWidth < 768;
-      const offset = isMobile ? 80 : 40; // Offset réduit pour mieux voir le formulaire
-      const targetPosition = target.offsetTop - offset;
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-    }
-  }
-
-  // Smooth scroll pour les liens internes à la page
-  document.querySelector('a[href="#contact"]')?.addEventListener('click', function(e) {
-    e.preventDefault();
-    scrollToContact();
-  });
-
-  // Scroll automatique si on arrive avec #contact dans l'URL
-  if (window.location.hash === '#contact') {
-    // Attendre que la page soit complètement chargée
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        scrollToContact();
-      }, 100);
-    });
-  }
-
-  // Présélection du forfait depuis l'URL
-  function preselectForfait() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const forfaitParam = urlParams.get('forfait');
-
-    if (forfaitParam) {
-      const forfaitSelect = document.getElementById('forfait');
-      if (forfaitSelect) {
-        // Chercher l'option correspondante
-        const option = forfaitSelect.querySelector(`option[value="${forfaitParam}"]`);
-        if (option) {
-          forfaitSelect.value = forfaitParam;
-        }
-      }
-    }
-  }
-
-  // Appeler la fonction de présélection au chargement
-  window.addEventListener('load', () => {
-    preselectForfait();
-  });
-
-  // Scroll reveal animations
-  function initScrollReveal() {
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-visible');
-        }
-      });
-    }, observerOptions);
-
-    // Observer tous les éléments avec les classes scroll-reveal
-    const elements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-slide-left, .scroll-reveal-slide-right, .scroll-reveal-fade');
-
-    elements.forEach(el => {
-      observer.observe(el);
-    });
-  }
-
-  // Initialiser après le chargement du DOM
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollReveal);
-  } else {
-    initScrollReveal();
+  // Présélection du forfait depuis l'URL (?forfait=ame)
+  const forfaitDemande = new URLSearchParams(window.location.search).get('forfait');
+  const forfaitSelect = document.getElementById('forfait') as HTMLSelectElement | null;
+  if (forfaitDemande && forfaitSelect) {
+    const existe = Array.from(forfaitSelect.options).some((o) => o.value === forfaitDemande);
+    if (existe) forfaitSelect.value = forfaitDemande;
   }
 </script>

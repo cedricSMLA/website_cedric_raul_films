@@ -1,0 +1,33 @@
+---
+/** Témoignages : les mêmes textes sur toutes les pages (src/data/site.ts). */
+import { temoignages } from '@/data/site';
+
+export interface Props {
+  tone?: 'ivoire' | 'sable' | 'foret';
+  title?: string;
+}
+
+const { tone = 'sable', title = "Ce qu'ils en pensent" } = Astro.props;
+---
+
+<section class:list={['section', `tone-${tone}`]}>
+  <div class="wrap">
+    <h2 data-reveal>{title}</h2>
+
+    <div class="mt-12 grid gap-12 md:mt-16 md:grid-cols-2 md:gap-16">
+      {
+        temoignages.map((t, i) => (
+          <figure data-reveal style={`--i: ${i + 1}`}>
+            <blockquote class="quote">« {t.texte} »</blockquote>
+            <figcaption class="mt-6 flex items-baseline gap-3">
+              <span class="font-medium">{t.auteur}</span>
+              <span class="muted text-sm">{t.date}</span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+
+    <slot />
+  </div>
+</section>

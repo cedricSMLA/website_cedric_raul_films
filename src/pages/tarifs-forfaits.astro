@@ -1,632 +1,196 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
+import PageHero from '@/components/PageHero.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Button from '@/components/Button.astro';
+import Arrow from '@/components/Arrow.astro';
 import { forfaitsById, LIVRAISON } from '@/data/forfaits';
 
-const pure = forfaitsById.pure;
-const ame = forfaitsById.ame;
-const infinie = forfaitsById.infinie;
+const colonnes = [forfaitsById.pure, forfaitsById.ame, forfaitsById.infinie];
 const creation = forfaitsById.creation;
+
+/** Forfait mis en avant et libellés des boutons. */
+const VEDETTE = 'infinie';
+const boutons: Record<string, string> = {
+  pure: 'Choisir Pure',
+  ame: 'Choisir Âme',
+  infinie: 'Démarrer mon projet'
+};
+
+const infos = [
+  {
+    titre: 'Paiement',
+    lignes: ['Acompte 30% à réservation', 'Solde au plus tard le jour J', 'Virement bancaire']
+  },
+  {
+    titre: 'Déplacements',
+    lignes: ['Inclus en Île-de-France', "Côte d'Azur : +200€", 'International : sur devis']
+  },
+  {
+    titre: 'Options',
+    lignes: ['Second opérateur : +500€', 'Session engagement : +400€']
+  },
+  {
+    titre: 'Garanties',
+    lignes: ['Matériel redondant', 'Sauvegarde triple', 'Assurance RC pro']
+  }
+];
 ---
 
 <Base
   title="Tarifs & Forfaits - Cédric Raúl Films"
   description="Découvrez les forfaits LOREN : quatre expériences cinématographiques adaptées à votre histoire. Tarifs transparents, sans frais cachés."
 >
-  <!-- Hero Section -->
-  <Section background="dark" padding="xl" class="rounded-2xl mb-12 relative overflow-hidden">
-    <!-- Background atmosphérique -->
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-20 left-20 w-96 h-96 bg-doré-patiné/10 rounded-full blur-3xl animate-pulse-slow"></div>
-      <div class="absolute bottom-20 right-20 w-96 h-96 bg-sauge/8 rounded-full blur-3xl animate-pulse-slower"></div>
-      <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay;"></div>
+  <PageHero
+    title="Tarifs"
+    accent="L'univers LOREN"
+    lead="Quatre expériences cinématographiques pensées pour s'adapter à votre célébration, avec des tarifs transparents."
+  >
+    <a href="/loren" class="link-arrow mt-6">Découvrir la philosophie LOREN <Arrow /></a>
+  </PageHero>
+
+  <!-- Les trois forfaits à prix fixe -->
+  <Section>
+    <div class="grid gap-6 lg:grid-cols-3 lg:gap-0">
+      {
+        colonnes.map((f, i) => {
+          const vedette = f.id === VEDETTE;
+          return (
+            <article
+              id={f.id}
+              data-reveal
+              style={`--i: ${i}`}
+              class:list={[
+                'forfait flex flex-col',
+                vedette ? 'forfait-vedette tone-foret' : 'forfait-simple'
+              ]}
+            >
+              <div class="flex items-center justify-between gap-4">
+                <h2 class="text-[2rem]">{f.nomComplet.replace('LOREN ', '')}</h2>
+                {vedette && <span class="label accent">Le plus choisi</span>}
+              </div>
+
+              <p class="mt-6">
+                <span class="muted block text-sm">À partir de</span>
+                <span class="prix text-[2.5rem]">{f.prixLabel}</span>
+              </p>
+
+              <p class="mt-6 font-serif text-[1.1875rem] leading-snug">{f.tagline}</p>
+              <p class="muted mt-2 text-sm">{f.idealPour}</p>
+
+              <dl class="rule mt-8 grid grid-cols-2 gap-4 border-y py-5 text-sm">
+                <div>
+                  <dt class="muted">Présence</dt>
+                  <dd class="mt-1 font-medium">{f.heures}h le jour J</dd>
+                </div>
+                <div>
+                  <dt class="muted">Livraison</dt>
+                  <dd class="mt-1 font-medium">{LIVRAISON}</dd>
+                </div>
+              </dl>
+
+              <ul class="ticks mb-10 mt-7 text-[0.975rem] leading-snug">
+                {f.inclusions.map((item) => <li>{item}</li>)}
+              </ul>
+
+              <Button href={`/contact?forfait=${f.id}#contact`} class="mt-auto w-full">
+                {boutons[f.id]}
+              </Button>
+            </article>
+          );
+        })
+      }
     </div>
 
-    <div class="max-w-5xl mx-auto relative z-10">
-      <div class="text-center">
-        <div class="scroll-reveal mb-6">
-          <h1 class="text-5xl md:text-6xl font-extralight tracking-[0.3em] text-lin mb-3" style="background: linear-gradient(to right, #EDE5D8, #D4C5B0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-            TARIFS
-          </h1>
-          <p class="text-sm md:text-base text-lin/60 italic font-light tracking-wide">
-            L'univers LOREN
-          </p>
-        </div>
-
-        <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-doré-patiné to-transparent mx-auto my-8"></div>
-
-        <p class="scroll-reveal scroll-reveal-delay-1 text-lg text-lin/80 max-w-2xl mx-auto leading-relaxed mb-6">
-          Quatre expériences cinématographiques pensées pour s'adapter à votre célébration, avec des tarifs transparents.
-        </p>
-
-        <a href="/loren" class="scroll-reveal scroll-reveal-delay-2 inline-block text-sm text-doré-patiné hover:text-lin transition-colors border-b border-doré-patiné/30 hover:border-lin/50 font-light">
-          Découvrir la philosophie LOREN →
-        </a>
+    <!-- Création : sur devis -->
+    <article
+      id={creation.id}
+      class="creation mt-6 grid gap-10 rounded-md p-8 md:p-12 lg:mt-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16"
+      data-reveal
+    >
+      <div class="flex flex-col items-start">
+        <h2 class="text-[2rem]">{creation.nomComplet.replace('LOREN ', '')}</h2>
+        <p class="mt-4 font-serif text-[2rem] leading-none">{creation.prixLabel}</p>
+        <p class="mt-6 font-serif text-[1.1875rem] leading-snug">{creation.tagline}</p>
+        <p class="muted mt-2 text-sm">{creation.idealPour}</p>
+        <p class="muted mt-6 text-sm italic">Chaque projet est co-créé avec vous</p>
+        <Button href={`/contact?forfait=${creation.id}#contact`} variant="ghost" class="mt-8">
+          Discuter de mon projet
+        </Button>
       </div>
+      <ul class="ticks self-center text-[0.975rem] leading-snug sm:columns-2 sm:gap-10">
+        {creation.inclusions.map((item) => <li class="break-inside-avoid">{item}</li>)}
+      </ul>
+    </article>
+  </Section>
+
+  <!-- Informations pratiques -->
+  <Section tone="sable">
+    <h2 data-reveal>Informations pratiques</h2>
+
+    <div class="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        infos.map((bloc, i) => (
+          <div data-reveal style={`--i: ${i}`}>
+            <h3 class="text-2xl">{bloc.titre}</h3>
+            <ul class="muted mt-4 space-y-2">
+              {bloc.lignes.map((ligne) => <li>{ligne}</li>)}
+            </ul>
+          </div>
+        ))
+      }
     </div>
   </Section>
 
-  <!-- Forfaits Grid 2x2 -->
-  <Section background="transparent" padding="xl" class="mb-20">
-    <div class="max-w-7xl mx-auto">
-
-      <!-- Start redesigned pricing cards -->
-      <div class="grid lg:grid-cols-2 gap-8 mb-6">
-
-        <!-- LOREN PURE - Clair/Lumineux -->
-        <div class="scroll-reveal group" id="pure">
-          <div class="relative h-full rounded-3xl transition-all duration-700 ease-out hover:translate-y-[-4px]"
-               style="background: linear-gradient(to bottom, #F5F1EA, #EDE5D8); box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 20px 40px rgba(0,0,0,0.03);">
-
-            <!-- Micro accent line -->
-            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-doré-patiné/40 to-transparent"></div>
-
-            <div class="p-10 flex flex-col h-full">
-
-              <!-- Header minimal -->
-              <div class="flex items-start justify-between mb-8">
-                <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 flex items-center justify-center">
-                    <svg class="w-4 h-4 text-doré-patiné/80" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                    </svg>
-                  </div>
-                  <h3 class="text-xl font-light tracking-[0.3em] text-noir-doux/90">{pure.nom}</h3>
-                </div>
-                <div class="text-right">
-                  <p class="text-sm text-noir-doux/40 font-light mb-1">À partir de</p>
-                  <p class="text-2xl font-light text-noir-doux">{pure.prixLabel}</p>
-                </div>
-              </div>
-
-              <!-- Tagline -->
-              <p class="text-base font-light text-noir-doux/70 mb-4 leading-relaxed">
-                {pure.tagline}
-              </p>
-
-              <!-- Idéal pour -->
-              <p class="text-xs text-noir-doux/40 mb-8 pb-8 border-b border-noir-doux/10">
-                {pure.idealPour}
-              </p>
-
-              <!-- Bénéfices (3 max, ultra-minimalistes) -->
-              <div class="space-y-4 mb-auto">
-                {pure.beneficesCles.map((benefice) => (
-                  <div class="flex items-start gap-3">
-                    <div class="w-4 h-4 rounded-full border border-doré-patiné/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div class="w-1.5 h-1.5 rounded-full bg-doré-patiné"></div>
-                    </div>
-                    <p class="text-sm text-noir-doux/60 leading-relaxed">{benefice}</p>
-                  </div>
-                ))}
-              </div>
-
-              <!-- Specs discrètes -->
-              <div class="flex items-center gap-4 text-sm text-noir-doux/50 mt-8 mb-6 font-medium">
-                <span>{pure.heures}h de présence</span>
-                <span class="w-1 h-1 rounded-full bg-noir-doux/30"></span>
-                <span>Livraison {LIVRAISON}</span>
-              </div>
-
-              <!-- CTA minimal -->
-              <a href="/contact?forfait=pure#contact"
-                 class="group flex items-center justify-center gap-2 px-6 py-3.5 bg-noir-doux/5 hover:bg-noir-doux/10 border border-noir-doux/10 hover:border-doré-patiné/30 rounded-xl transition-all duration-300 text-sm font-light text-noir-doux/70 hover:text-doré-patiné">
-                <span>Choisir Pure</span>
-                <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-              </a>
-
-              <!-- Détails link -->
-              <button data-modal="pure" class="modal-trigger mt-3 text-xs text-noir-doux/30 hover:text-noir-doux/50 transition-colors">
-                Voir tous les détails
-              </button>
-
-              <!-- Hidden data for modal -->
-              <div class="hidden" data-inclusions="pure">
-                <ul class="space-y-2.5 text-lin/70 text-sm">
-                  {pure.inclusions.map((item) => (
-                    <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>{item}</span></li>
-                  ))}
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Livraison sous {LIVRAISON}</span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- LOREN ÂME - Sauge/Douce -->
-        <div class="scroll-reveal group" id="ame">
-          <div class="relative h-full rounded-3xl transition-all duration-700 ease-out hover:translate-y-[-4px]"
-               style="background: linear-gradient(to bottom, rgba(154, 183, 159, 0.08), rgba(154, 183, 159, 0.04)), #2A2A2A; box-shadow: 0 1px 3px rgba(154, 183, 159, 0.1), 0 20px 40px rgba(0,0,0,0.15);">
-
-            <!-- Micro accent line -->
-            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-sauge/50 to-transparent"></div>
-
-            <div class="p-10 flex flex-col h-full">
-
-              <!-- Header minimal -->
-              <div class="flex items-start justify-between mb-8">
-                <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 flex items-center justify-center">
-                    <svg class="w-4 h-4 text-sauge" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
-                    </svg>
-                  </div>
-                  <h3 class="text-xl font-light tracking-[0.3em] text-lin">{ame.nom}</h3>
-                </div>
-                <div class="text-right">
-                  <p class="text-sm text-lin/40 font-light mb-1">À partir de</p>
-                  <p class="text-2xl font-light text-sauge">{ame.prixLabel}</p>
-                </div>
-              </div>
-
-              <!-- Tagline -->
-              <p class="text-base font-light text-lin/70 mb-4 leading-relaxed">
-                {ame.tagline}
-              </p>
-
-              <!-- Idéal pour -->
-              <p class="text-xs text-lin/40 mb-8 pb-8 border-b border-lin/10">
-                {ame.idealPour}
-              </p>
-
-              <!-- Bénéfices (3 max) -->
-              <div class="space-y-4 mb-auto">
-                {ame.beneficesCles.map((benefice) => (
-                  <div class="flex items-start gap-3">
-                    <div class="w-4 h-4 rounded-full border border-sauge/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div class="w-1.5 h-1.5 rounded-full bg-sauge"></div>
-                    </div>
-                    <p class="text-sm text-lin/60 leading-relaxed">{benefice}</p>
-                  </div>
-                ))}
-              </div>
-
-              <!-- Specs discrètes -->
-              <div class="flex items-center gap-4 text-sm text-lin/55 mt-8 mb-6 font-medium">
-                <span>{ame.heures}h de présence</span>
-                <span class="w-1 h-1 rounded-full bg-lin/30"></span>
-                <span>Livraison {LIVRAISON}</span>
-              </div>
-
-              <!-- CTA minimal -->
-              <a href="/contact?forfait=ame#contact"
-                 class="group flex items-center justify-center gap-2 px-6 py-3.5 bg-sauge/10 hover:bg-sauge/20 border border-sauge/20 hover:border-sauge/40 rounded-xl transition-all duration-300 text-sm font-light text-lin hover:text-sauge">
-                <span>Choisir Âme</span>
-                <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-              </a>
-
-              <!-- Détails link -->
-              <button data-modal="ame" class="modal-trigger mt-3 text-xs text-lin/30 hover:text-lin/50 transition-colors">
-                Voir tous les détails
-              </button>
-
-              <!-- Hidden data for modal -->
-              <div class="hidden" data-inclusions="ame">
-                <ul class="space-y-2.5 text-lin/70 text-sm">
-                  {ame.inclusions.map((item) => (
-                    <li class="flex items-start gap-2"><span class="text-sauge/70">•</span><span>{item}</span></li>
-                  ))}
-                  <li class="flex items-start gap-2"><span class="text-sauge/70">•</span><span>Livraison sous {LIVRAISON}</span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- LOREN INFINIE - Premium/Doré (Featured) -->
-        <div class="scroll-reveal group" id="infinie">
-          <div class="relative h-full rounded-3xl transition-all duration-700 ease-out hover:translate-y-[-4px]"
-               style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.06), rgba(212, 175, 55, 0.02)), #2A2A2A; box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15), 0 24px 48px rgba(212, 175, 55, 0.08), 0 0 0 1px rgba(212, 175, 55, 0.2);">
-
-            <!-- Badge discret -->
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-              <div class="px-4 py-1.5 rounded-full shadow-xl" style="background: linear-gradient(135deg, #D4AF37, #C49F2E);">
-                <p class="text-[11px] font-semibold uppercase tracking-widest" style="color: #1a1a1a;">Le plus choisi</p>
-              </div>
-            </div>
-
-            <!-- Micro accent line plus prononcé -->
-            <div class="absolute top-0 left-0 right-0 h-[2px]" style="background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.6), transparent);"></div>
-
-            <!-- Glow subtil -->
-            <div class="absolute inset-0 rounded-3xl opacity-20 pointer-events-none" style="background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15), transparent 60%);"></div>
-
-            <div class="p-10 pt-12 flex flex-col h-full relative">
-
-              <!-- Header minimal -->
-              <div class="flex items-start justify-between mb-8">
-                <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <circle cx="12" cy="12" r="10" stroke-width="1.5"/>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6l4 2"/>
-                    </svg>
-                  </div>
-                  <h3 class="text-xl font-light tracking-[0.3em] text-lin">{infinie.nom}</h3>
-                </div>
-                <div class="text-right">
-                  <p class="text-sm text-lin/40 font-light mb-1">À partir de</p>
-                  <p class="text-2xl font-light text-doré-patiné">{infinie.prixLabel}</p>
-                </div>
-              </div>
-
-              <!-- Tagline -->
-              <p class="text-base font-light text-lin/80 mb-4 leading-relaxed">
-                {infinie.tagline}
-              </p>
-
-              <!-- Idéal pour -->
-              <p class="text-xs text-lin/40 mb-8 pb-8 border-b border-lin/10">
-                {infinie.idealPour}
-              </p>
-
-              <!-- Bénéfices (3 max) -->
-              <div class="space-y-4 mb-auto">
-                {infinie.beneficesCles.map((benefice) => (
-                  <div class="flex items-start gap-3">
-                    <div class="w-4 h-4 rounded-full border border-doré-patiné/40 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div class="w-1.5 h-1.5 rounded-full bg-doré-patiné"></div>
-                    </div>
-                    <p class="text-sm text-lin/70 leading-relaxed">{benefice}</p>
-                  </div>
-                ))}
-              </div>
-
-              <!-- Specs discrètes -->
-              <div class="flex items-center gap-4 text-sm text-lin/55 mt-8 mb-6 font-medium">
-                <span>{infinie.heures}h de présence</span>
-                <span class="w-1 h-1 rounded-full bg-lin/30"></span>
-                <span>Livraison {LIVRAISON}</span>
-              </div>
-
-              <!-- CTA premium -->
-              <a href="/contact?forfait=infinie#contact"
-                 class="group relative flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl transition-all duration-300 text-sm font-medium text-noir-doux overflow-hidden"
-                 style="background: linear-gradient(135deg, #D4AF37, #C49F2E, #B8912A);">
-                <span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style="background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);"></span>
-                <span class="relative">Démarrer mon projet</span>
-                <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform relative" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-              </a>
-
-              <!-- Détails link -->
-              <button data-modal="infinie" class="modal-trigger mt-3 text-xs text-lin/30 hover:text-lin/50 transition-colors">
-                Voir tous les détails
-              </button>
-
-              <!-- Hidden data for modal -->
-              <div class="hidden" data-inclusions="infinie">
-                <ul class="space-y-2.5 text-lin/70 text-sm">
-                  {infinie.inclusions.map((item) => (
-                    <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>{item}</span></li>
-                  ))}
-                  <li class="flex items-start gap-2"><span class="text-doré-patiné/70">•</span><span>Livraison sous {LIVRAISON}</span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- LOREN CRÉATION - Dark/Concept -->
-        <div class="scroll-reveal group" id="creation">
-          <div class="relative h-full rounded-3xl transition-all duration-700 ease-out hover:translate-y-[-4px]"
-               style="background: linear-gradient(to bottom, #1F1F1F, #2A2A2A); box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 20px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.03);">
-
-            <!-- Micro accent line distinctive -->
-            <div class="absolute top-0 left-0 right-0 h-[2px]" style="background: linear-gradient(to right, transparent, rgba(154, 183, 159, 0.4), rgba(212, 175, 55, 0.4), transparent);"></div>
-
-            <div class="p-10 flex flex-col h-full">
-
-              <!-- Header minimal -->
-              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
-                <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 flex items-center justify-center">
-                    <svg class="w-4 h-4 text-lin/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
-                    </svg>
-                  </div>
-                  <h3 class="text-xl font-light tracking-[0.3em] text-lin">{creation.nom}</h3>
-                </div>
-                <div class="text-right sm:text-left ml-[44px] sm:ml-0">
-                  <p class="text-lg font-light text-lin/50">{creation.prixLabel}</p>
-                </div>
-              </div>
-
-              <!-- Tagline -->
-              <p class="text-base font-light text-lin/70 mb-4 leading-relaxed">
-                {creation.tagline}
-              </p>
-
-              <!-- Idéal pour -->
-              <p class="text-xs text-lin/40 mb-8 pb-8 border-b border-lin/10">
-                {creation.idealPour}
-              </p>
-
-              <!-- Exemples (4 max pour celle-ci) -->
-              <div class="space-y-4 mb-auto">
-                {creation.beneficesCles.map((exemple) => (
-                  <div class="flex items-start gap-3">
-                    <div class="w-4 h-4 rounded-full border border-lin/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div class="w-1.5 h-1.5 rounded-full bg-lin/40"></div>
-                    </div>
-                    <p class="text-sm text-lin/50 leading-relaxed">{exemple}</p>
-                  </div>
-                ))}
-              </div>
-
-              <!-- Note -->
-              <p class="text-xs text-lin/30 italic mt-8 mb-6">
-                Chaque projet est co-créé avec vous
-              </p>
-
-              <!-- CTA sobre -->
-              <a href="/contact?forfait=creation#contact"
-                 class="group flex items-center justify-center gap-2 px-6 py-3.5 bg-lin/5 hover:bg-lin/10 border border-lin/10 hover:border-lin/20 rounded-xl transition-all duration-300 text-sm font-light text-lin/70 hover:text-lin">
-                <span>Discuter de mon projet</span>
-                <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <!-- End redesigned pricing cards -->
-    </div>
-  </Section>
-
-  <!-- Informations pratiques (plus compact et intégré) -->
-  <Section background="dark" padding="lg" class="rounded-2xl mb-12">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-10">
-        <h2 class="scroll-reveal text-2xl md:text-3xl font-light text-lin mb-3">
-          Informations pratiques
-        </h2>
-        <div class="w-12 h-px bg-doré-patiné/30 mx-auto"></div>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-        <!-- Paiement -->
-        <div class="scroll-reveal bg-gradient-to-br from-lin/3 to-transparent border border-lin/8 rounded-xl p-5 hover:border-doré-patiné/20 transition-all duration-500">
-          <div class="w-8 h-8 bg-doré-patiné/10 rounded-lg flex items-center justify-center mb-3">
-            <svg class="w-4 h-4 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-base font-semibold text-lin mb-2.5">Paiement</h3>
-          <ul class="space-y-1.5 text-lin/60 text-xs">
-            <li>• Acompte 30% à réservation</li>
-            <li>• Solde au plus tard le jour J</li>
-            <li>• Virement bancaire</li>
-          </ul>
-        </div>
-
-        <!-- Déplacements -->
-        <div class="scroll-reveal scroll-reveal-delay-1 bg-gradient-to-br from-lin/3 to-transparent border border-lin/8 rounded-xl p-5 hover:border-sauge/20 transition-all duration-500">
-          <div class="w-8 h-8 bg-sauge/10 rounded-lg flex items-center justify-center mb-3">
-            <svg class="w-4 h-4 text-sauge" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-base font-semibold text-lin mb-2.5">Déplacements</h3>
-          <ul class="space-y-1.5 text-lin/60 text-xs">
-            <li>• Inclus en Île-de-France</li>
-            <li>• Côte d'Azur : +200€</li>
-            <li>• International : sur devis</li>
-          </ul>
-        </div>
-
-        <!-- Options -->
-        <div class="scroll-reveal scroll-reveal-delay-2 bg-gradient-to-br from-lin/3 to-transparent border border-lin/8 rounded-xl p-5 hover:border-doré-patiné/20 transition-all duration-500">
-          <div class="w-8 h-8 bg-doré-patiné/10 rounded-lg flex items-center justify-center mb-3">
-            <svg class="w-4 h-4 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-            </svg>
-          </div>
-          <h3 class="text-base font-semibold text-lin mb-2.5">Options</h3>
-          <ul class="space-y-1.5 text-lin/60 text-xs">
-            <li>• Second opérateur : +500€</li>
-            <li>• Session engagement : +400€</li>
-            <li>• Forfait combiné photo + vidéo</li>
-          </ul>
-        </div>
-
-        <!-- Garanties -->
-        <div class="scroll-reveal scroll-reveal-delay-3 bg-gradient-to-br from-lin/3 to-transparent border border-lin/8 rounded-xl p-5 hover:border-sauge/20 transition-all duration-500">
-          <div class="w-8 h-8 bg-sauge/10 rounded-lg flex items-center justify-center mb-3">
-            <svg class="w-4 h-4 text-sauge" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-            </svg>
-          </div>
-          <h3 class="text-base font-semibold text-lin mb-2.5">Garanties</h3>
-          <ul class="space-y-1.5 text-lin/60 text-xs">
-            <li>• Matériel redondant</li>
-            <li>• Sauvegarde triple</li>
-            <li>• Assurance RC pro</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </Section>
-
-  <!-- CTA Finale -->
-  <Section background="dark" padding="lg" class="rounded-2xl overflow-hidden relative">
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-10 right-10 w-64 h-64 bg-doré-patiné/8 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-10 left-10 w-64 h-64 bg-sauge/6 rounded-full blur-3xl"></div>
-    </div>
-
-    <div class="max-w-2xl mx-auto text-center relative z-10">
-      <h2 class="scroll-reveal text-2xl md:text-3xl font-light text-lin mb-4">
-        Prêt à immortaliser <span class="text-doré-patiné italic">votre histoire</span> ?
-      </h2>
-
-      <p class="scroll-reveal scroll-reveal-delay-1 text-sm text-lin/70 mb-8 leading-relaxed">
-        Discutons ensemble de votre projet pour trouver le forfait idéal.
-      </p>
-
-      <div class="scroll-reveal scroll-reveal-delay-2 flex flex-col sm:flex-row gap-3 justify-center">
-        <a
-          href="/contact#contact"
-          class="group inline-block relative px-10 py-4 rounded-lg font-semibold text-base text-noir-doux overflow-hidden transition-all duration-500 hover:scale-105"
-          style="background: linear-gradient(135deg, #D4AF37 0%, #C49F2E 50%, #B8912A 100%);"
-        >
-          <span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%); filter: blur(10px);"></span>
-          <span class="relative">Demander un devis</span>
-        </a>
-
-        <a
-          href="/loren"
-          class="inline-block px-10 py-4 rounded-lg font-semibold text-base text-lin border border-lin/25 hover:bg-lin/8 hover:border-doré-patiné/40 transition-all duration-500"
-        >
-          Philosophie LOREN
-        </a>
-      </div>
-    </div>
-  </Section>
-
-  <!-- Modal Inclusions -->
-  <div id="inclusions-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-noir-doux/80 backdrop-blur-sm">
-    <div class="relative max-w-md w-full bg-gradient-to-br from-noir-doux via-noir-doux/95 to-noir-doux/90 border border-doré-patiné/30 rounded-2xl p-8 shadow-2xl animate-scale-in" style="backdrop-filter: blur(20px);">
-      <!-- Grain overlay -->
-      <div class="absolute inset-0 pointer-events-none rounded-2xl opacity-[0.02]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay;"></div>
-
-      <!-- Close button -->
-      <button id="close-modal" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-lg bg-lin/5 hover:bg-lin/10 border border-lin/10 hover:border-lin/20 transition-all duration-300 group">
-        <svg class="w-4 h-4 text-lin/60 group-hover:text-lin transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
-
-      <!-- Content -->
-      <div class="relative z-10">
-        <h3 class="text-2xl font-light text-lin mb-4 tracking-wide">Inclusions</h3>
-        <div class="w-12 h-px bg-doré-patiné/30 mb-6"></div>
-        <div id="modal-content"></div>
-      </div>
-    </div>
-  </div>
-
+  <CtaBand
+    title="Prêt à immortaliser"
+    accent="votre histoire ?"
+    text="Discutons ensemble de votre projet pour trouver le forfait idéal."
+    primary={{ href: '/contact#contact', label: 'Demander un devis' }}
+    secondary={{ href: '/loren', label: 'Philosophie LOREN' }}
+  />
 </Base>
 
 <style>
-  @keyframes pulse-slow {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(1.05); }
+  .forfait {
+    padding: 2rem 1.75rem 2.25rem;
   }
 
-  @keyframes pulse-slower {
-    0%, 100% { opacity: 0.2; transform: scale(1); }
-    50% { opacity: 0.35; transform: scale(1.08); }
+  .forfait-simple {
+    border: 1px solid var(--ligne);
+    border-radius: var(--radius);
   }
 
-  @keyframes scale-in {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
+  .forfait-vedette {
+    border-radius: var(--radius);
+  }
+
+  .creation {
+    border: 1px solid var(--ligne);
+  }
+
+  /* Sur ordinateur les trois forfaits forment un seul tableau :
+     filets entre les colonnes, forfait vedette qui dépasse. */
+  @media (min-width: 1024px) {
+    .forfait {
+      padding: 3rem 2.5rem;
     }
-    to {
-      opacity: 1;
-      transform: scale(1);
+
+    .forfait-simple {
+      border: 0;
+      border-block: 1px solid var(--ligne);
+      border-radius: 0;
     }
-  }
 
-  .animate-pulse-slow {
-    animation: pulse-slow 8s ease-in-out infinite;
-  }
+    .forfait-simple + .forfait-simple {
+      border-left: 1px solid var(--ligne);
+    }
 
-  .animate-pulse-slower {
-    animation: pulse-slower 12s ease-in-out infinite;
-  }
-
-  .animate-scale-in {
-    animation: scale-in 0.2s ease-out;
-  }
-
-  /* Modal visible state */
-  #inclusions-modal.modal-visible {
-    display: flex;
+    .forfait-vedette {
+      margin-block: -1.25rem;
+      padding-block: 4.25rem;
+      box-shadow: 0 1.5rem 3rem -1.5rem rgb(26 37 30 / 0.45);
+    }
   }
 </style>
-
-<script>
-  function initScrollReveal() {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-visible');
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-delay-1, .scroll-reveal-delay-2, .scroll-reveal-delay-3');
-    elements.forEach(el => observer.observe(el));
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollReveal);
-  } else {
-    initScrollReveal();
-  }
-
-  // Modal inclusions management
-  function initInclusionsModal() {
-    const modal = document.getElementById('inclusions-modal');
-    const modalContent = document.getElementById('modal-content');
-    const closeBtn = document.getElementById('close-modal');
-    const triggers = document.querySelectorAll('.modal-trigger');
-
-    // Open modal
-    triggers.forEach(trigger => {
-      trigger.addEventListener('click', () => {
-        const modalId = trigger.getAttribute('data-modal');
-        const inclusionsDiv = document.querySelector(`[data-inclusions="${modalId}"]`);
-
-        if (inclusionsDiv) {
-          modalContent.innerHTML = inclusionsDiv.innerHTML;
-          modal.classList.add('modal-visible');
-          document.body.style.overflow = 'hidden';
-        }
-      });
-    });
-
-    // Close modal
-    function closeModal() {
-      modal.classList.remove('modal-visible');
-      document.body.style.overflow = '';
-    }
-
-    closeBtn.addEventListener('click', closeModal);
-
-    // Close on backdrop click
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-
-    // Close on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('modal-visible')) {
-        closeModal();
-      }
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initInclusionsModal);
-  } else {
-    initInclusionsModal();
-  }
-</script>

@@ -1,5 +1,14 @@
 ---
 import '@/styles/global.css';
+import {
+  EMAIL,
+  INSTAGRAM,
+  YOUTUBE,
+  TAGLINE,
+  LOCALISATION,
+  navPrincipale,
+  navSecondaire
+} from '@/data/site';
 
 export interface Props {
   title: string;
@@ -10,8 +19,40 @@ export interface Props {
 
 const { title, description, image, noindex = false } = Astro.props;
 
+const descriptionParDefaut =
+  'Cédric Raúl Films - Vidéaste mariage cinématographique, drone FPV. Basé à Paris, disponible partout ailleurs.';
+const metaDescription = description || descriptionParDefaut;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImage = image ? new URL(image, Astro.site) : new URL('/media/hero-poster.jpg', Astro.site);
+const socialImage = new URL(image || '/media/video/amelie_cedric_poster.jpg', Astro.site);
+
+// Entrée du menu correspondant à la page courante
+const chemin = Astro.url.pathname.replace(/\/$/, '') || '/';
+const estActif = (href: string, aussi: string[] = []) =>
+  chemin === href || aussi.includes(chemin);
+
+const annee = new Date().getFullYear();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Cédric Raúl Films',
+  description:
+    'Vidéaste spécialisé dans les films de mariage cinématographiques, avec drone FPV',
+  url: 'https://cedricraulfilms.fr',
+  logo: 'https://cedricraulfilms.fr/logo.svg',
+  image: socialImage.href,
+  email: EMAIL,
+  priceRange: '€€€',
+  address: { '@type': 'PostalAddress', addressLocality: 'Paris', addressCountry: 'FR' },
+  areaServed: [
+    { '@type': 'Country', name: 'France' },
+    { '@type': 'Place', name: 'International' }
+  ],
+  serviceType: ['Vidéaste mariage', 'Film de mariage', 'Drone FPV'],
+  founder: { '@type': 'Person', name: 'Cédric Raúl' },
+  sameAs: [INSTAGRAM, YOUTUBE]
+};
 
 // Analytics
 const plausibleDomain = import.meta.env.PLAUSIBLE_DOMAIN;
@@ -19,421 +60,240 @@ const plausibleSrc = import.meta.env.PLAUSIBLE_SRC || 'https://plausible.io/js/s
 ---
 
 <!doctype html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description || "Cédric Raúl Films - Vidéaste mariage cinématographique, drone FPV, Côte d'Azur. Films de mariage haut de gamme."} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={metaDescription} />
+    <meta name="theme-color" content="#F5F2EA" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    
-    <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
-    
-    <!-- Robots -->
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description || "Vidéaste mariage cinématographique sur la Côte d'Azur"} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:image" content={socialImage} />
     <meta property="og:locale" content="fr_FR" />
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description || "Vidéaste mariage cinématographique sur la Côte d'Azur"} />
+    <meta property="twitter:description" content={metaDescription} />
     <meta property="twitter:image" content={socialImage} />
-    
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://www.youtube.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <title>{title}</title>
 
-    <!-- JSON-LD Schema -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Cédric Raúl Films",
-        "description": "Vidéaste spécialisé dans les films de mariage cinématographiques et les vidéos corporate avec drone FPV",
-        "url": "https://cedricraulfilms.fr",
-        "logo": "https://cedricraulfilms.fr/logo.svg",
-        "image": "https://cedricraulfilms.fr/media/hero-poster.jpg",
-        "telephone": "+33-X-XX-XX-XX-XX",
-        "priceRange": "€€€",
-        "areaServed": {
-          "@type": "Place",
-          "name": "Côte d'Azur, France"
-        },
-        "serviceType": ["Vidéaste mariage", "Drone FPV", "Vidéo corporate"],
-        "founder": {
-          "@type": "Person",
-          "name": "Cédric Raúl"
-        }
-      }
+    <!-- Les animations d'apparition ne s'activent que si le script tourne -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
     </script>
-    
-    <!-- Analytics - Plausible -->
-    {plausibleDomain && (
-      <script defer data-domain={plausibleDomain} src={plausibleSrc}></script>
-    )}
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    {plausibleDomain && <script defer data-domain={plausibleDomain} src={plausibleSrc} />}
   </head>
-  <body class="bg-lin text-pierre font-sans antialiased">
-    <!-- Page transition overlay -->
-    <div class="page-transition-overlay" id="page-transition-overlay"></div>
+  <body>
+    <a
+      href="#contenu"
+      class="btn btn-solid sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50"
+    >
+      Aller au contenu
+    </a>
 
-    <!-- Container global 77% -->
-    <div class="w-[95%] md:w-[77%] mx-auto">
-      <!-- Header -->
-      <header class="bg-lin transition-all duration-300 relative z-40" id="header">
-        <nav class="w-full px-4 py-6 md:px-0 md:py-10">
-          <!-- Mobile layout -->
-          <div class="md:hidden">
-            <a href="/" class="hover:text-doré-patiné transition-colors block">
-              <div class="text-3xl font-bold uppercase tracking-tight leading-none" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif; color: #2A2926;">
-                Cédric Raúl
-              </div>
-            </a>
-            <div class="flex justify-between items-end mt-1">
-              <div>
-                <a href="/" class="hover:text-doré-patiné transition-colors">
-                  <div class="text-3xl font-bold uppercase tracking-tight leading-none" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif; color: #2A2926;">
-                    Films
-                  </div>
-                </a>
-                <div class="text-xs text-pierre/70 mt-2 tracking-wide">
-                  Wedding videographer
-                </div>
-              </div>
-              <!-- Mobile menu button -->
-              <button class="text-pierre/80 hover:text-pierre transition-colors" id="mobile-menu-btn">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
+    <header class="site-header" id="header">
+      <div class="wrap site-header-inner">
+        <a href="/" class="wordmark" aria-label="Cédric Raúl Films, accueil">Cédric Raúl Films</a>
 
-          <!-- Desktop layout -->
-          <div class="hidden md:flex justify-between items-end">
-            <a href="/" class="hover:text-doré-patiné transition-colors group">
-              <div class="text-5xl font-bold uppercase tracking-tight leading-none mb-2" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif; color: #2A2926;">
-                Cédric Raúl Films
-              </div>
-              <div class="text-xs text-pierre/60 group-hover:text-pierre/80 transition-colors tracking-widest uppercase" style="letter-spacing: 0.1em;">
-                Wedding videographer
-              </div>
-            </a>
-
-            <div class="flex items-center gap-10 pb-1">
-              <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">ACCUEIL</a>
-
-              <!-- Services Dropdown -->
-              <div class="relative group">
-                <button class="nav-dropdown-trigger text-noir-doux hover:text-doré-patiné transition-all duration-200 text-sm tracking-wide font-light flex items-center gap-1" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">
-                  SERVICES
-                  <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                  </svg>
-                </button>
-                <div class="nav-dropdown absolute top-full left-0 mt-2 min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50">
-                  <div class="relative rounded-xl p-2 overflow-hidden" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.2);">
-                    <!-- Grain overlay -->
-                    <div class="absolute inset-0 pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay; opacity: 0.03;"></div>
-                    <a href="/services" class="relative block px-4 py-3 text-noir-doux hover:text-doré-patiné hover:bg-doré-patiné/5 rounded-lg transition-all duration-200 text-sm" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">Nos services</a>
-                    <a href="/tarifs-forfaits" class="relative block px-4 py-3 text-noir-doux hover:text-doré-patiné hover:bg-doré-patiné/5 rounded-lg transition-all duration-200 text-sm" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">Tarifs & Forfaits</a>
-                  </div>
-                </div>
-              </div>
-
-              <!-- À propos Dropdown -->
-              <div class="relative group">
-                <button class="nav-dropdown-trigger text-noir-doux hover:text-doré-patiné transition-all duration-200 text-sm tracking-wide font-light flex items-center gap-1" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">
-                  À PROPOS
-                  <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                  </svg>
-                </button>
-                <div class="nav-dropdown absolute top-full left-0 mt-2 min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50">
-                  <div class="relative rounded-xl p-2 overflow-hidden" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%); backdrop-filter: blur(12px); border: 1px solid rgba(156, 175, 136, 0.2); box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.2);">
-                    <!-- Grain overlay -->
-                    <div class="absolute inset-0 pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay; opacity: 0.03;"></div>
-                    <a href="/a-propos" class="relative block px-4 py-3 text-noir-doux hover:text-sauge hover:bg-sauge/5 rounded-lg transition-all duration-200 text-sm" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">Qui suis-je ?</a>
-                    <a href="/nos-partenaires" class="relative block px-4 py-3 text-noir-doux hover:text-sauge hover:bg-sauge/5 rounded-lg transition-all duration-200 text-sm" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">Nos partenaires</a>
-                  </div>
-                </div>
-              </div>
-
-              <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all duration-200 hover:scale-105 text-sm tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">CONTACT</a>
-            </div>
-          </div>
-
-          <!-- Mobile menu items (hidden by default) -->
-          <div class="md:hidden overflow-hidden transition-all duration-500 ease-out max-h-0 opacity-0" id="mobile-menu-items">
-            <div class="mt-8 flex flex-col space-y-1 border-t border-pierre/10 pt-6">
-              <a href="/" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light menu-item" id="menu-item-1" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">ACCUEIL</a>
-
-              <!-- Services Mobile Submenu -->
-              <div class="menu-item transform translate-x-4 opacity-0 duration-300" id="menu-item-2">
-                <button class="mobile-submenu-trigger flex items-center justify-between w-full text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;" data-target="mobile-services-submenu">
-                  SERVICES
-                  <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                  </svg>
-                </button>
-                <div class="mobile-submenu overflow-hidden transition-all duration-300 max-h-0" id="mobile-services-submenu">
-                  <div class="pl-4 py-2 space-y-1">
-                    <a href="/services" class="block text-noir-doux/80 hover:text-doré-patiné transition-all text-sm py-2 px-3" style="font-family: 'Aestetico', sans-serif;">Nos services</a>
-                    <a href="/tarifs-forfaits" class="block text-noir-doux/80 hover:text-doré-patiné transition-all text-sm py-2 px-3" style="font-family: 'Aestetico', sans-serif;">Tarifs & Forfaits</a>
-                  </div>
-                </div>
-              </div>
-
-              <!-- À propos Mobile Submenu -->
-              <div class="menu-item transform translate-x-4 opacity-0 duration-300" id="menu-item-3">
-                <button class="mobile-submenu-trigger flex items-center justify-between w-full text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 tracking-wide font-light" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;" data-target="mobile-apropos-submenu">
-                  À PROPOS
-                  <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                  </svg>
-                </button>
-                <div class="mobile-submenu overflow-hidden transition-all duration-300 max-h-0" id="mobile-apropos-submenu">
-                  <div class="pl-4 py-2 space-y-1">
-                    <a href="/a-propos" class="block text-noir-doux/80 hover:text-sauge transition-all text-sm py-2 px-3" style="font-family: 'Aestetico', sans-serif;">Qui suis-je ?</a>
-                    <a href="/nos-partenaires" class="block text-noir-doux/80 hover:text-sauge transition-all text-sm py-2 px-3" style="font-family: 'Aestetico', sans-serif;">Nos partenaires</a>
-                  </div>
-                </div>
-              </div>
-
-              <a href="/contact" class="text-noir-doux hover:text-doré-patiné transition-all text-sm py-3 px-2 transform translate-x-4 opacity-0 duration-300 tracking-wide font-light menu-item" id="menu-item-4" style="font-family: 'Aestetico', sans-serif; letter-spacing: 0.05em;">CONTACT</a>
-            </div>
-          </div>
+        <!-- Menu ordinateur -->
+        <nav class="hidden items-center gap-9 md:flex" aria-label="Navigation principale">
+          {
+            navPrincipale.map((item) => (
+              <a
+                href={item.href}
+                class="nav-link"
+                aria-current={estActif(item.href, item.aussi) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <a href="/contact" class="btn btn-solid">Contact</a>
         </nav>
-      </header>
 
-      <!-- Mobile overlay -->
-      <div class="md:hidden fixed top-0 left-0 right-0 bottom-0 bg-noir-doux/50 z-30 opacity-0 invisible transition-all duration-500" id="mobile-overlay"></div>
+        <!-- Bouton menu mobile -->
+        <button
+          type="button"
+          class="label -mr-2 px-2 py-3 md:hidden"
+          id="menu-btn"
+          aria-expanded="false"
+          aria-controls="menu-panel"
+        >
+          Menu
+        </button>
+      </div>
+    </header>
 
-      <!-- Main content -->
-      <main>
-        <slot />
-      </main>
+    <!-- Menu mobile -->
+    <div class="menu-panel md:hidden" id="menu-panel">
+      <nav class="wrap flex min-h-full flex-col justify-between pb-10 pt-8" aria-label="Menu">
+        <ul class="space-y-1">
+          {
+            navPrincipale.map((item, i) => (
+              <li style={`--i: ${i}`}>
+                <a
+                  href={item.href}
+                  class="block py-2 font-serif text-[2rem] leading-tight"
+                  aria-current={estActif(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          {
+            navSecondaire.map((item, i) => (
+              <li style={`--i: ${navPrincipale.length + i}`}>
+                <a href={item.href} class="muted block py-2 font-serif text-xl">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <ul class="mt-10">
+          <li style={`--i: ${navPrincipale.length + navSecondaire.length}`}>
+            <a href="/contact" class="btn btn-solid w-full">Contact</a>
+            <p class="muted mt-5 text-center text-sm">{LOCALISATION}</p>
+          </li>
+        </ul>
+      </nav>
+    </div>
 
-      <!-- Footer -->
-      <footer class="bg-lin border-t border-pierre/20 py-16">
-        <div class="px-4 max-w-2xl mx-auto text-center">
-          <!-- Logo et description -->
-          <div class="mb-8">
-            <h3 class="text-2xl font-bold text-pierre mb-4" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">
-              CÉDRIC RAÚL FILMS
-            </h3>
-            <p class="text-pierre/70 text-sm max-w-md mx-auto leading-relaxed mb-2">
-              Films de mariage cinématographiques qui provoquent l'émotion
-            </p>
-            <p class="text-pierre/60 text-xs">
-              Basé à Paris • Disponible partout ailleurs
-            </p>
-          </div>
+    <main id="contenu">
+      <slot />
+    </main>
 
-          <!-- Réseaux sociaux -->
-          <div class="flex justify-center space-x-8 mb-8">
-            <a href="https://www.instagram.com/cedric_raul_films/" target="_blank"
-               class="w-12 h-12 bg-pierre/10 rounded-full flex items-center justify-center text-pierre/70 hover:text-doré-patiné hover:bg-doré-patiné/10 transition-all hover:scale-110">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-
-            <a href="https://www.youtube.com/@C%C3%A9dricRa%C3%BAlFilms" target="_blank"
-               class="w-12 h-12 bg-pierre/10 rounded-full flex items-center justify-center text-pierre/70 hover:text-doré-patiné hover:bg-doré-patiné/10 transition-all hover:scale-110">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-            </a>
-
-            <a href="mailto:contact@smleyeprod.fr"
-               class="w-12 h-12 bg-pierre/10 rounded-full flex items-center justify-center text-pierre/70 hover:text-doré-patiné hover:bg-doré-patiné/10 transition-all hover:scale-110">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-              </svg>
-            </a>
-          </div>
-
-          <!-- Copyright -->
-          <div class="pt-6 border-t border-pierre/10">
-            <p class="text-xs text-pierre/60">&copy; 2024 Cédric Raúl Films. Tous droits réservés.</p>
-            <p class="text-xs text-pierre/50 mt-1">by <span class="text-doré-patiné">SMLEYE Prod</span></p>
-          </div>
+    <footer class="tone-profond">
+      <div class="wrap grid gap-12 py-16 md:grid-cols-[minmax(0,5fr)_minmax(0,3fr)_minmax(0,3fr)] md:py-20">
+        <div>
+          <p class="wordmark" style="color: var(--ivoire)">Cédric Raúl Films</p>
+          <p class="mt-5 max-w-xs font-serif text-xl leading-snug">{TAGLINE}</p>
+          <p class="muted mt-4 text-sm">{LOCALISATION}</p>
         </div>
-      </footer>
+
+        <nav aria-label="Pied de page">
+          <ul class="space-y-2.5">
+            {
+              [...navPrincipale, ...navSecondaire, { href: '/contact', label: 'Contact' }].map(
+                (item) => (
+                  <li>
+                    <a href={item.href} class="hover:text-cuivre-clair transition-colors">
+                      {item.label}
+                    </a>
+                  </li>
+                )
+              )
+            }
+          </ul>
+        </nav>
+
+        <ul class="space-y-2.5">
+          <li>
+            <a href={`mailto:${EMAIL}`} class="hover:text-cuivre-clair break-all transition-colors">
+              {EMAIL}
+            </a>
+          </li>
+          <li>
+            <a
+              href={INSTAGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-cuivre-clair transition-colors"
+            >
+              Instagram
+            </a>
+          </li>
+          <li>
+            <a
+              href={YOUTUBE}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-cuivre-clair transition-colors"
+            >
+              YouTube
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="wrap">
+        <div
+          class="rule muted flex flex-col gap-2 border-t py-6 text-sm md:flex-row md:items-center md:justify-between"
+        >
+          <p>&copy; {annee} Cédric Raúl Films. Tous droits réservés.</p>
+          <p class="flex gap-6">
+            <a href="/confidentialite" class="hover:text-ivoire transition-colors">
+              Politique de confidentialité
+            </a>
+            <span>by SMLEYE Prod</span>
+          </p>
+        </div>
+      </div>
+    </footer>
 
     <script>
-      // Mobile menu toggle with animations
-      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenuItems = document.getElementById('mobile-menu-items');
-      const mobileOverlay = document.getElementById('mobile-overlay');
-      const menuItem1 = document.getElementById('menu-item-1');
-      const menuItem2 = document.getElementById('menu-item-2');
-      const menuItem3 = document.getElementById('menu-item-3');
-      const menuItem4 = document.getElementById('menu-item-4');
+      const racine = document.documentElement;
 
-      let isMenuOpen = false;
+      // Filet sous l'en-tête dès que la page a défilé
+      const header = document.getElementById('header');
+      const marquerDefilement = () => header?.toggleAttribute('data-scrolled', window.scrollY > 8);
+      marquerDefilement();
+      window.addEventListener('scroll', marquerDefilement, { passive: true });
 
-      mobileMenuBtn?.addEventListener('click', () => {
-        if (!isMenuOpen) {
-          // Open menu
-          mobileMenuItems?.classList.remove('max-h-0', 'opacity-0');
-          mobileMenuItems?.classList.add('max-h-96', 'opacity-100');
-
-          // Show overlay
-          mobileOverlay?.classList.remove('opacity-0', 'invisible');
-          mobileOverlay?.classList.add('opacity-100', 'visible');
-
-          // Animate menu items
-          setTimeout(() => {
-            menuItem1?.classList.remove('translate-x-4', 'opacity-0');
-            menuItem1?.classList.add('translate-x-0', 'opacity-100');
-          }, 100);
-
-          setTimeout(() => {
-            menuItem2?.classList.remove('translate-x-4', 'opacity-0');
-            menuItem2?.classList.add('translate-x-0', 'opacity-100');
-          }, 200);
-
-          setTimeout(() => {
-            menuItem3?.classList.remove('translate-x-4', 'opacity-0');
-            menuItem3?.classList.add('translate-x-0', 'opacity-100');
-          }, 300);
-
-          setTimeout(() => {
-            menuItem4?.classList.remove('translate-x-4', 'opacity-0');
-            menuItem4?.classList.add('translate-x-0', 'opacity-100');
-          }, 400);
-
-          isMenuOpen = true;
-        } else {
-          closeMenu();
+      // Menu mobile
+      const menuBtn = document.getElementById('menu-btn');
+      const basculerMenu = (ouvrir: boolean) => {
+        racine.toggleAttribute('data-menu-open', ouvrir);
+        menuBtn?.setAttribute('aria-expanded', String(ouvrir));
+        if (menuBtn) menuBtn.textContent = ouvrir ? 'Fermer' : 'Menu';
+        document.body.style.overflow = ouvrir ? 'hidden' : '';
+      };
+      menuBtn?.addEventListener('click', () =>
+        basculerMenu(!racine.hasAttribute('data-menu-open'))
+      );
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && racine.hasAttribute('data-menu-open')) {
+          basculerMenu(false);
+          menuBtn?.focus();
         }
       });
-
-      function closeMenu() {
-        // Hide menu items first
-        menuItem1?.classList.add('translate-x-4', 'opacity-0');
-        menuItem1?.classList.remove('translate-x-0', 'opacity-100');
-        menuItem2?.classList.add('translate-x-4', 'opacity-0');
-        menuItem2?.classList.remove('translate-x-0', 'opacity-100');
-        menuItem3?.classList.add('translate-x-4', 'opacity-0');
-        menuItem3?.classList.remove('translate-x-0', 'opacity-100');
-        menuItem4?.classList.add('translate-x-4', 'opacity-0');
-        menuItem4?.classList.remove('translate-x-0', 'opacity-100');
-
-        // Then hide overlay and menu
-        setTimeout(() => {
-          mobileMenuItems?.classList.add('max-h-0', 'opacity-0');
-          mobileMenuItems?.classList.remove('max-h-96', 'opacity-100');
-
-          mobileOverlay?.classList.add('opacity-0', 'invisible');
-          mobileOverlay?.classList.remove('opacity-100', 'visible');
-        }, 200);
-
-        isMenuOpen = false;
-      }
-
-      // Close menu when clicking on overlay
-      mobileOverlay?.addEventListener('click', closeMenu);
-
-      // Close menu when clicking on a menu item (but not on submenu triggers)
-      document.querySelectorAll('#mobile-menu-items a').forEach(link => {
-        link?.addEventListener('click', closeMenu);
+      window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
+        if (e.matches) basculerMenu(false);
       });
 
-      // Mobile submenu toggles
-      const mobileSubmenuTriggers = document.querySelectorAll('.mobile-submenu-trigger');
-
-      mobileSubmenuTriggers.forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
-          e.stopPropagation();
-
-          const targetId = trigger.getAttribute('data-target');
-          const submenu = document.getElementById(targetId);
-          const arrow = trigger.querySelector('svg');
-
-          if (submenu && arrow) {
-            const isOpen = submenu.classList.contains('max-h-96');
-
-            // Close all other submenus
-            document.querySelectorAll('.mobile-submenu').forEach(sm => {
-              if (sm !== submenu) {
-                sm.classList.remove('max-h-96');
-                sm.classList.add('max-h-0');
-                const otherArrow = sm.previousElementSibling?.querySelector('svg');
-                if (otherArrow) {
-                  otherArrow.classList.remove('rotate-180');
-                }
+      // Apparition au défilement : une seule fois par élément
+      const aReveler = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const observateur = new IntersectionObserver(
+          (entrees) => {
+            entrees.forEach((entree) => {
+              if (entree.isIntersecting) {
+                entree.target.classList.add('is-in');
+                observateur.unobserve(entree.target);
               }
             });
-
-            // Toggle current submenu
-            if (isOpen) {
-              submenu.classList.remove('max-h-96');
-              submenu.classList.add('max-h-0');
-              arrow.classList.remove('rotate-180');
-            } else {
-              submenu.classList.remove('max-h-0');
-              submenu.classList.add('max-h-96');
-              arrow.classList.add('rotate-180');
-            }
-          }
-        });
-      });
-
-      // Page transitions
-      const overlay = document.getElementById('page-transition-overlay');
-      const links = document.querySelectorAll('a[href^="/"]');
-
-      // Exclure les liens externes, ancres et downloads
-      const internalLinks = Array.from(links).filter(link => {
-        const href = link.getAttribute('href');
-        return href &&
-               href.startsWith('/') &&
-               !href.startsWith('//') &&
-               !link.hasAttribute('download') &&
-               !link.getAttribute('target') === '_blank' &&
-               !href.includes('#');
-      });
-
-      internalLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-          const href = link.getAttribute('href');
-
-          // Ne pas intercepter si c'est la page actuelle
-          if (href === window.location.pathname) {
-            return;
-          }
-
-          e.preventDefault();
-
-          // Déclencher l'animation de sortie
-          document.body.classList.add('page-exit');
-          overlay?.classList.add('active');
-
-          // Naviguer après l'animation (450ms)
-          setTimeout(() => {
-            window.location.href = href;
-          }, 450);
-        });
-      });
-
-      // Animation d'entrée au chargement de la page
-      window.addEventListener('pageshow', () => {
-        document.body.classList.remove('page-exit');
-        overlay?.classList.remove('active');
-      });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+        );
+        aReveler.forEach((el) => observateur.observe(el));
+      } else {
+        aReveler.forEach((el) => el.classList.add('is-in'));
+      }
     </script>
   </body>
 </html>

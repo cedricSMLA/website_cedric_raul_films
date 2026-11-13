@@ -1,14 +1,11 @@
 // Test setup file for Vitest
 import { beforeEach } from 'vitest';
 
-// Mock DOM globals if needed
+// Remise à zéro du DOM entre deux tests, quand le test tourne dans un navigateur simulé.
+// Les tests marqués « @vitest-environment node » n'ont pas de DOM : on ne fait rien.
 beforeEach(() => {
-  // Reset DOM
+  if (typeof document === 'undefined') return;
   document.body.innerHTML = '';
-  
-  // Reset localStorage
   localStorage.clear();
-  
-  // Reset sessionStorage
   sessionStorage.clear();
 });

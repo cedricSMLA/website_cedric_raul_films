@@ -1,0 +1,27 @@
+---
+/**
+ * En-tête commun à toutes les pages intérieures : bandeau vert forêt,
+ * titre à gauche, texte d'introduction à droite.
+ */
+export interface Props {
+  title: string;
+  /** Deuxième ligne du titre, en cuivre. */
+  accent?: string;
+  lead?: string;
+}
+
+const { title, accent, lead } = Astro.props;
+---
+
+<header class="page-hero tone-foret">
+  <div class="wrap page-hero-grid">
+    <h1 class="hero-rise">
+      {title}
+      {accent && <em class="block">{accent}</em>}
+    </h1>
+    <div class="hero-rise" style="--d: 140ms">
+      {lead && <p class="lead">{lead}</p>}
+      <slot />
+    </div>
+  </div>
+</header>

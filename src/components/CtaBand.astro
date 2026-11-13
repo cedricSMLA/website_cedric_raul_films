@@ -1,0 +1,36 @@
+---
+/** Bandeau de fin de page : une question, un ou deux boutons. */
+import Button from './Button.astro';
+
+interface Lien {
+  href: string;
+  label: string;
+}
+
+export interface Props {
+  title: string;
+  accent?: string;
+  text?: string;
+  primary: Lien;
+  secondary?: Lien;
+}
+
+const { title, accent, text, primary, secondary } = Astro.props;
+---
+
+<section class="section tone-foret">
+  <div class="wrap grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-16">
+    <h2 data-reveal>
+      {title}
+      {accent && <em class="block">{accent}</em>}
+    </h2>
+    <div data-reveal style="--i: 1">
+      {text && <p class="lead">{text}</p>}
+      <div class="mt-8 flex flex-wrap gap-3">
+        <Button href={primary.href}>{primary.label}</Button>
+        {secondary && <Button href={secondary.href} variant="ghost">{secondary.label}</Button>}
+      </div>
+      <slot />
+    </div>
+  </div>
+</section>

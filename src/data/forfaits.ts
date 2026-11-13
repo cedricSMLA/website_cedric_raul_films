@@ -117,11 +117,10 @@ export const forfaits: Forfait[] = [
     beneficesCles: ['Film cinéma 15 min + teaser 60 sec', APPEL, 'Montage cinématographique'],
     inclusions: [
       'Film complet monté (15 min)',
-      'Teaser (60 sec)',
+      'Teaser (90 sec)',
       'Vidéo bonus : les moments clés en intégralité, non montés (interviews des invités, ouverture de bal…)',
       APPEL,
       DRONE,
-      'Montage narratif complet avec chapitrage',
       SON,
       GALERIE
     ]

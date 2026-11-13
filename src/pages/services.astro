@@ -1,546 +1,217 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
+import PageHero from '@/components/PageHero.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Testimonials from '@/components/Testimonials.astro';
+import ImageBand from '@/components/ImageBand.astro';
+import { LIVRAISON } from '@/data/forfaits';
+import { DELAI_REPONSE } from '@/data/site';
+
+const etapes = [
+  {
+    titre: 'Premier contact',
+    repere: `Réponse sous ${DELAI_REPONSE}`,
+    texte:
+      "Vous remplissez le formulaire ou m'envoyez un email avec les informations essentielles : date, lieu, et quelques mots sur vous. Je vous confirme rapidement mes disponibilités et vous envoie les premières informations utiles."
+  },
+  {
+    titre: 'Appel découverte',
+    repere: 'Visio 30–45 min',
+    texte:
+      'Nous nous rencontrons en visio (ou en personne si vous êtes sur Paris). Nous parlons de vous, de votre journée, de ce qui est important pour vous.',
+    fort: "C'est une vraie conversation, pas un questionnaire."
+  },
+  {
+    titre: 'Préparation',
+    repere: '2–4 semaines avant',
+    texte:
+      "Nous construisons ensemble le planning du jour J : horaires clés, lieux importants, moments à ne surtout pas manquer. Je m'adapte à votre organisation et repère les meilleurs moments pour la lumière, les cadrages et les éventuels plans drone."
+  },
+  {
+    titre: 'Le jour J',
+    repere: 'Présence discrète',
+    avant: "Vous vivez votre journée, je m'occupe des images.",
+    texte:
+      "Je filme les regards, les réactions, les moments de complicité et les petites scènes que vous n'aurez parfois même pas vues sur le moment.",
+    note: 'Drone FPV (si les conditions le permettent), caméras stabilisées 4K, plans cinéma.'
+  }
+];
+
+const postProduction = [
+  {
+    titre: 'Le son qui vous replonge',
+    texte:
+      "Les rires, les applaudissements, les voix qui comptent pour vous : chaque son est nettoyé et équilibré pour que vous ayez l'impression d'y être à nouveau."
+  },
+  {
+    titre: "L'ambiance en couleurs",
+    texte:
+      'Des tons plus chauds pour les moments intimes, plus lumineux pour la fête. La colorimétrie est travaillée pour rester naturelle et agréable, même des années plus tard.'
+  },
+  {
+    titre: 'Le rythme de votre journée',
+    texte:
+      'Comme votre mariage alterne moments calmes et temps forts, le montage respecte ce rythme pour que le film soit vivant, sans être fatigant à regarder.'
+  }
+];
+
+const livrables = [
+  {
+    titre: 'Film complet',
+    texte:
+      'Le film principal de votre journée, monté et sonorisé avec soin, que vous pourrez revoir ensemble autant de fois que vous le souhaitez.'
+  },
+  {
+    titre: 'Teaser',
+    texte:
+      'Une version courte et rythmée, idéale à montrer rapidement à vos proches ou à partager sur les réseaux.'
+  },
+  {
+    titre: 'Fichiers à conserver',
+    texte:
+      'Vos films livrés en fichiers haute définition, faciles à lire sur ordinateur ou téléviseur, et simples à sauvegarder sur vos propres supports.'
+  }
+];
+
+const numero = (i: number) => String(i + 1).padStart(2, '0');
 ---
 
 <Base
   title="Services - Cédric Raúl Films"
   description="Films de mariage sur-mesure : un accompagnement clair à chaque étape, de notre premier échange jusqu'à la livraison de votre film."
 >
-  <!-- Hero Section -->
-  <Section background="primary" padding="xl" class="rounded-xl mb-8 relative overflow-hidden">
-    <!-- Gradient background avec effet coin supérieur gauche -->
-    <div class="absolute inset-0 bg-gradient-to-br from-doré-patiné/15 via-lin to-pierre/10"></div>
+  <PageHero
+    title="Une expérience"
+    accent="sur-mesure"
+    lead="De notre premier échange jusqu'à la livraison de votre film, je vous montre simplement comment nous travaillons ensemble pour raconter votre journée."
+  />
 
-    <div class="max-w-5xl mx-auto relative z-10">
-      <div class="text-center">
-        <h1 class="scroll-reveal text-5xl md:text-7xl font-bold text-noir-doux mb-8 leading-tight tracking-tight">
-          Une expérience
-          <span class="block text-doré-patiné italic font-light mt-2">sur-mesure</span>
-        </h1>
-
-        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-doré-patiné to-transparent mx-auto mb-10 animate-line-reveal"></div>
-
-        <p class="scroll-reveal scroll-reveal-delay-1 text-lg md:text-xl text-pierre max-w-3xl mx-auto leading-relaxed">
-          De notre premier échange jusqu'à la livraison de votre film, je vous montre simplement
-          comment nous travaillons ensemble pour raconter votre journée.
-        </p>
-      </div>
+  <!-- Le déroulé, étape par étape -->
+  <Section>
+    <div class="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-16">
+      <h2 data-reveal>De la première rencontre au film final</h2>
+      <p class="lead" data-reveal style="--i: 1">
+        Voici comment tout se déroule, étape par étape, du premier contact à la livraison de votre film.
+      </p>
     </div>
+
+    <ol class="mt-14 md:mt-20">
+      {
+        etapes.map((etape, i) => (
+          <li class="etape rule border-t" data-reveal>
+            <span class="etape-numero" aria-hidden="true">{numero(i)}</span>
+            <div>
+              <h3>{etape.titre}</h3>
+              <p class="accent mt-2 text-sm font-medium">{etape.repere}</p>
+            </div>
+            <div class="max-w-[38rem]">
+              <p>
+                {etape.avant && <strong class="font-medium">{etape.avant} </strong>}
+                {etape.texte}
+                {etape.fort && <strong class="font-medium"> {etape.fort}</strong>}
+              </p>
+              {etape.note && <p class="muted mt-4 text-sm italic">{etape.note}</p>}
+            </div>
+          </li>
+        ))
+      }
+
+      <!-- Dernière étape : la post-production, détaillée -->
+      <li class="etape rule border-y" data-reveal>
+        <span class="etape-numero" aria-hidden="true">{numero(etapes.length)}</span>
+        <div>
+          <h3>Post production</h3>
+          <p class="accent mt-2 text-sm font-medium">Livraison sous {LIVRAISON}</p>
+        </div>
+        <div class="max-w-[38rem]">
+          <p>
+            <strong class="font-medium">Plusieurs jours de travail minutieux</strong> pour transformer
+            les images de votre journée en un film fluide, cohérent et agréable à regarder.
+          </p>
+          <dl class="mt-8 space-y-6">
+            {
+              postProduction.map((point) => (
+                <div>
+                  <dt class="font-serif text-[1.1875rem] leading-snug">{point.titre}</dt>
+                  <dd class="muted mt-1.5">{point.texte}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          <p class="mt-8 font-serif text-xl leading-snug">
+            Ce n'est pas un simple assemblage d'images,
+            <em class="accent">c'est un travail d'artisan.</em>
+          </p>
+        </div>
+      </li>
+    </ol>
   </Section>
 
-  <!-- Le processus créatif -->
-  <Section background="primary" padding="xl" class="rounded-2xl">
-    <div class="max-w-6xl mx-auto">
-      <!-- Titre -->
-      <div class="text-center mb-20">
-        <h2 class="scroll-reveal text-4xl md:text-6xl font-bold text-pierre mb-6">
-          De la première rencontre au film final
-        </h2>
-        <p class="scroll-reveal scroll-reveal-delay-1 text-xl text-pierre/80 max-w-3xl mx-auto leading-relaxed">
-          Voici comment tout se déroule, étape par étape, du premier contact à la livraison de votre film.
-        </p>
-      </div>
-
-      <!-- Timeline cinématique avec ligne centrale -->
-      <div class="max-w-6xl mx-auto relative" id="timeline-container">
-        <!-- Ligne verticale centrale progressive (desktop uniquement) -->
-        <div class="hidden md:block absolute left-1/2 top-0 h-full w-px -translate-x-1/2" id="timeline-track">
-          <!-- Ligne de fond statique -->
-          <div class="absolute inset-0 w-px bg-gradient-to-b from-doré-patiné/10 via-doré-patiné/20 to-doré-patiné/10"></div>
-          <!-- Ligne progressive qui se dessine -->
-          <div class="absolute top-0 left-0 w-px bg-gradient-to-b from-doré-patiné/80 via-doré-patiné to-doré-patiné/60 origin-top transition-transform duration-300 ease-out" id="timeline-progress" style="transform: scaleY(0);"></div>
-        </div>
-
-        <div class="space-y-16 md:space-y-24">
-
-        <!-- Étape 01 - GAUCHE -->
-        <div class="scroll-reveal timeline-item" data-side="left" data-step="1">
-          <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
-            <!-- Contenu à gauche (desktop) -->
-            <div class="md:pr-12 md:text-right order-2 md:order-1">
-              <div class="bg-gradient-to-br from-noir-doux via-noir-doux/95 to-noir-doux/90 border border-doré-patiné/30 rounded-2xl p-8 md:p-10 shadow-cinema hover:shadow-strong transition-all duration-500">
-                <div class="mb-4">
-                  <div class="flex md:flex-row-reverse items-center gap-3 mb-2 md:justify-end">
-                    <div class="w-10 h-10 bg-doré-patiné/20 rounded-lg flex items-center justify-center">
-                      <svg class="w-5 h-5 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                      </svg>
-                    </div>
-                    <div class="md:text-right">
-                      <h3 class="text-2xl md:text-3xl font-bold text-lin">Premier contact</h3>
-                      <p class="text-doré-patiné text-sm">Réponse sous 24–48h</p>
-                    </div>
-                  </div>
-                </div>
-                <p class="text-lin/80 leading-relaxed">
-                  Vous remplissez le formulaire ou m'envoyez un email avec les informations essentielles&nbsp;:
-                  date, lieu, et quelques mots sur vous. Je vous confirme rapidement mes disponibilités
-                  et vous envoie les premières informations utiles.
-                </p>
-              </div>
-            </div>
-
-            <!-- Point central (desktop uniquement) -->
-            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 order-1 md:order-2 timeline-circle">
-              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-doré-patiné to-doré-patiné/60 flex items-center justify-center shadow-2xl ring-4 ring-lin transition-all duration-700 ease-out">
-                <span class="text-noir-doux font-bold text-2xl">01</span>
-              </div>
-            </div>
-
-            <!-- Espace droite (desktop) -->
-            <div class="hidden md:block order-3"></div>
-          </div>
-        </div>
-
-        <!-- Étape 02 - DROITE -->
-        <div class="scroll-reveal timeline-item" data-side="right" data-step="2">
-          <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
-            <!-- Espace gauche (desktop) -->
-            <div class="hidden md:block"></div>
-
-            <!-- Point central (desktop uniquement) -->
-            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 timeline-circle">
-              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-sauge to-sauge/60 flex items-center justify-center shadow-2xl ring-4 ring-lin transition-all duration-700 ease-out">
-                <span class="text-noir-doux font-bold text-2xl">02</span>
-              </div>
-            </div>
-
-            <!-- Contenu à droite (desktop) -->
-            <div class="md:pl-12">
-              <div class="bg-gradient-to-br from-noir-doux via-noir-doux/95 to-noir-doux/90 border border-sauge/30 rounded-2xl p-8 md:p-10 shadow-cinema hover:shadow-strong transition-all duration-500">
-                <div class="mb-4">
-                  <div class="flex items-center gap-3 mb-2">
-                    <div class="w-10 h-10 bg-sauge/20 rounded-lg flex items-center justify-center">
-                      <svg class="w-5 h-5 text-sauge" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 class="text-2xl md:text-3xl font-bold text-lin">Appel découverte</h3>
-                      <p class="text-sauge text-sm">Visio 30–45 min</p>
-                    </div>
-                  </div>
-                </div>
-                <p class="text-lin/80 leading-relaxed">
-                  Nous nous rencontrons en visio (ou en personne si vous êtes sur Paris).
-                  Nous parlons de vous, de votre journée, de ce qui est important pour vous.
-                  <span class="text-lin font-medium">C'est une vraie conversation, pas un questionnaire.</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Étape 03 - GAUCHE -->
-        <div class="scroll-reveal timeline-item" data-side="left" data-step="3">
-          <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
-            <!-- Contenu à gauche (desktop) -->
-            <div class="md:pr-12 md:text-right">
-              <div class="bg-gradient-to-br from-noir-doux via-noir-doux/95 to-noir-doux/90 border border-doré-patiné/30 rounded-2xl p-8 md:p-10 shadow-cinema hover:shadow-strong transition-all duration-500">
-                <div class="mb-4">
-                  <div class="flex md:flex-row-reverse items-center gap-3 mb-2 md:justify-end">
-                    <div class="w-10 h-10 bg-doré-patiné/20 rounded-lg flex items-center justify-center">
-                      <svg class="w-5 h-5 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-                      </svg>
-                    </div>
-                    <div class="md:text-right">
-                      <h3 class="text-2xl md:text-3xl font-bold text-lin">Préparation</h3>
-                      <p class="text-doré-patiné text-sm">2–4 semaines avant</p>
-                    </div>
-                  </div>
-                </div>
-                <p class="text-lin/80 leading-relaxed">
-                  Nous construisons ensemble le planning du jour J&nbsp;: horaires clés, lieux importants,
-                  moments à ne surtout pas manquer. Je m'adapte à votre organisation et repère les meilleurs
-                  moments pour la lumière, les cadrages et les éventuels plans drone.
-                </p>
-              </div>
-            </div>
-
-            <!-- Point central (desktop uniquement) -->
-            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 timeline-circle">
-              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-doré-patiné to-doré-patiné/60 flex items-center justify-center shadow-2xl ring-4 ring-lin transition-all duration-700 ease-out">
-                <span class="text-noir-doux font-bold text-2xl">03</span>
-              </div>
-            </div>
-
-            <!-- Espace droite (desktop) -->
-            <div class="hidden md:block"></div>
-          </div>
-        </div>
-
-        <!-- Étape 04 - DROITE -->
-        <div class="scroll-reveal timeline-item" data-side="right" data-step="4">
-          <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
-            <!-- Espace gauche (desktop) -->
-            <div class="hidden md:block"></div>
-
-            <!-- Point central (desktop uniquement) -->
-            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 timeline-circle">
-              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-sauge to-sauge/60 flex items-center justify-center shadow-2xl ring-4 ring-lin transition-all duration-700 ease-out">
-                <span class="text-noir-doux font-bold text-2xl">04</span>
-              </div>
-            </div>
-
-            <!-- Contenu à droite (desktop) -->
-            <div class="md:pl-12">
-              <div class="bg-gradient-to-br from-noir-doux via-noir-doux/95 to-noir-doux/90 border border-sauge/30 rounded-2xl p-8 md:p-10 shadow-cinema hover:shadow-strong transition-all duration-500">
-                <div class="mb-4">
-                  <div class="flex items-center gap-3 mb-2">
-                    <div class="w-10 h-10 bg-sauge/20 rounded-lg flex items-center justify-center">
-                      <svg class="w-5 h-5 text-sauge" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 class="text-2xl md:text-3xl font-bold text-lin">Le jour J</h3>
-                      <p class="text-sauge text-sm">Présence discrète</p>
-                    </div>
-                  </div>
-                </div>
-                <p class="text-lin/80 leading-relaxed mb-4">
-                  <strong class="text-lin">Vous vivez votre journée, je m'occupe des images.</strong>
-                  Je filme les regards, les réactions, les moments de complicité et les petites scènes
-                  que vous n'aurez parfois même pas vues sur le moment.
-                </p>
-                <p class="text-lin/70 text-sm italic">
-                  Drone FPV (si les conditions le permettent), caméras stabilisées 4K, plans cinéma.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Étape 05 - CENTRÉ (mise en avant finale) -->
-        <div class="scroll-reveal timeline-item" data-side="center" data-step="5">
-          <div class="max-w-4xl mx-auto relative">
-            <!-- Point central (desktop uniquement) -->
-            <div class="hidden md:flex absolute left-1/2 -top-8 -translate-x-1/2 timeline-circle">
-              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-doré-patiné via-doré-patiné to-doré-light flex items-center justify-center shadow-2xl ring-4 ring-doré-patiné/30 transition-all duration-700 ease-out">
-                <span class="text-noir-doux font-bold text-3xl">05</span>
-              </div>
-            </div>
-
-            <div class="bg-gradient-to-br from-noir-doux via-noir-doux/98 to-noir-doux border border-doré-patiné/40 rounded-2xl p-8 md:p-16 shadow-strong md:mt-16">
-              <!-- Header centré -->
-              <div class="text-center mb-12">
-                <div class="w-16 h-16 bg-doré-patiné/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <svg class="w-8 h-8 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                </div>
-                <h3 class="text-3xl md:text-4xl font-bold text-lin mb-3">Post production</h3>
-                <p class="text-doré-patiné">Livraison sous 2 à 4 semaines</p>
-              </div>
-
-              <!-- Encadré central géométrique -->
-              <div class="max-w-4xl mx-auto">
-                <!-- Intro -->
-                <p class="text-lin text-center text-lg leading-relaxed mb-12">
-                  <strong>Plusieurs jours de travail minutieux</strong> pour transformer les images de votre journée
-                  en un film fluide, cohérent et agréable à regarder.
-                </p>
-
-                <!-- Grid 2x2 géométrique -->
-                <div class="grid md:grid-cols-2 gap-8 mb-12">
-                  <!-- Carte 1 -->
-                  <div class="bg-noir-doux/40 border border-doré-patiné/20 rounded-xl p-6 hover:border-doré-patiné/40 transition-all duration-300">
-                    <div class="flex items-start gap-4">
-                      <div class="w-3 h-3 rounded-full bg-doré-patiné mt-1.5 flex-shrink-0"></div>
-                      <div>
-                        <h4 class="text-xl font-semibold text-lin mb-3">Le son qui vous replonge</h4>
-                        <p class="text-lin/80 leading-relaxed">
-                          Les rires, les applaudissements, les voix qui comptent pour vous&nbsp;:
-                          chaque son est nettoyé et équilibré pour que vous ayez l'impression d'y être à nouveau.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Carte 2 -->
-                  <div class="bg-noir-doux/40 border border-sauge/20 rounded-xl p-6 hover:border-sauge/40 transition-all duration-300">
-                    <div class="flex items-start gap-4">
-                      <div class="w-3 h-3 rounded-full bg-sauge mt-1.5 flex-shrink-0"></div>
-                      <div>
-                        <h4 class="text-xl font-semibold text-lin mb-3">L'ambiance en couleurs</h4>
-                        <p class="text-lin/80 leading-relaxed">
-                          Des tons plus chauds pour les moments intimes, plus lumineux pour la fête.
-                          La colorimétrie est travaillée pour rester naturelle et agréable, même des années plus tard.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Carte 3 (span 2 colonnes sur desktop) -->
-                  <div class="md:col-span-2 bg-noir-doux/40 border border-doré-patiné/20 rounded-xl p-6 hover:border-doré-patiné/40 transition-all duration-300">
-                    <div class="flex items-start gap-4 max-w-2xl mx-auto">
-                      <div class="w-3 h-3 rounded-full bg-doré-patiné mt-1.5 flex-shrink-0"></div>
-                      <div>
-                        <h4 class="text-xl font-semibold text-lin mb-3">Le rythme de votre journée</h4>
-                        <p class="text-lin/80 leading-relaxed">
-                          Comme votre mariage alterne moments calmes et temps forts,
-                          le montage respecte ce rythme pour que le film soit vivant,
-                          sans être fatigant à regarder.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Message final -->
-                <div class="text-center pt-8 border-t border-doré-patiné/20">
-                  <p class="text-lin/90 text-lg leading-relaxed">
-                    Ce n'est pas un simple assemblage d'images,
-                    <span class="text-doré-patiné font-semibold">c'est un travail d'artisan.</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        </div>
-      </div>
-    </div>
-  </Section>
+  <ImageBand
+    src="/media/video/raumane_maxime_poster.jpg"
+    alt="Raumane et Maxime au coucher du soleil, image extraite de leur film"
+    caption="Raumane & Maxime"
+  />
 
   <!-- Ce que vous recevez -->
-  <Section background="primary" padding="xl">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-pierre mb-6">
-          Ce que vous recevez
-        </h2>
-        <p class="scroll-reveal scroll-reveal-delay-1 text-lg text-pierre/80">
-          Des livrables simples et concrets pour revoir et partager votre journée.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="scroll-reveal-slide-left bg-white rounded-xl p-8 shadow-cinema text-center">
-          <div class="text-5xl mb-4">🎬</div>
-          <h3 class="text-xl font-bold text-pierre mb-3">Film complet</h3>
-          <p class="text-pierre/70 leading-relaxed">
-            Le film principal de votre journée, monté et sonorisé avec soin,
-            que vous pourrez revoir ensemble autant de fois que vous le souhaitez.
-          </p>
-        </div>
-
-        <div class="scroll-reveal scroll-reveal-delay-1 bg-white rounded-xl p-8 shadow-cinema text-center">
-          <div class="text-5xl mb-4">⚡</div>
-          <h3 class="text-xl font-bold text-pierre mb-3">Teaser</h3>
-          <p class="text-pierre/70 leading-relaxed">
-            Une version courte et rythmée, idéale à montrer rapidement à vos proches
-            ou à partager sur les réseaux.
-          </p>
-        </div>
-
-        <div class="scroll-reveal-slide-right bg-white rounded-xl p-8 shadow-cinema text-center">
-          <div class="text-5xl mb-4">📁</div>
-          <h3 class="text-xl font-bold text-pierre mb-3">Fichiers à conserver</h3>
-          <p class="text-pierre/70 leading-relaxed">
-            Vos films livrés en fichiers haute définition, faciles à lire sur ordinateur ou téléviseur,
-            et simples à sauvegarder sur vos propres supports.
-          </p>
-        </div>
-      </div>
-    </div>
-  </Section>
-
-  <!-- Témoignages -->
-  <Section background="dark" padding="lg" class="rounded-xl mb-16">
-    <div class="max-w-5xl mx-auto">
-
-      <div class="grid md:grid-cols-2 gap-10">
-
-        <!-- Témoignage 1 -->
-        <div class="scroll-reveal scroll-reveal-delay-1">
-          <div class="relative rounded-xl p-8 h-full flex flex-col justify-between overflow-hidden" style="background: linear-gradient(135deg, rgba(237, 229, 216, 0.05) 0%, rgba(237, 229, 216, 0.02) 100%); backdrop-filter: blur(8px); border: 1px solid rgba(237, 229, 216, 0.15);">
-            <!-- Grain overlay -->
-            <div class="absolute inset-0 pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay; opacity: 0.03;"></div>
-
-            <div class="relative z-10">
-              <svg class="w-8 h-8 text-doré-patiné/30 mb-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-              </svg>
-              <p class="text-lg text-lin mb-6 leading-relaxed italic">
-                "J'ai eu des frissons, j'étais émue aux larmes."
-              </p>
-            </div>
-            <p class="relative z-10 text-doré-patiné text-sm font-medium">— Raumane</p>
-          </div>
-        </div>
-
-        <!-- Témoignage 2 -->
-        <div class="scroll-reveal scroll-reveal-delay-2">
-          <div class="relative rounded-xl p-8 h-full flex flex-col justify-between overflow-hidden" style="background: linear-gradient(135deg, rgba(237, 229, 216, 0.05) 0%, rgba(237, 229, 216, 0.02) 100%); backdrop-filter: blur(8px); border: 1px solid rgba(237, 229, 216, 0.15);">
-            <!-- Grain overlay -->
-            <div class="absolute inset-0 pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E&quot;); mix-blend-mode: overlay; opacity: 0.03;"></div>
-
-            <div class="relative z-10">
-              <svg class="w-8 h-8 text-doré-patiné/30 mb-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-              </svg>
-              <p class="text-lg text-lin mb-6 leading-relaxed italic">
-                "Le résultat est allé bien au-delà de mes espérances."
-              </p>
-            </div>
-            <p class="relative z-10 text-doré-patiné text-sm font-medium">— Thomas</p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </Section>
-
-  <!-- CTA vers tarifs -->
-  <Section background="dark" padding="xl" class="rounded-2xl overflow-hidden relative">
-    <div class="max-w-3xl mx-auto text-center relative z-10">
-      <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-lin mb-6 leading-tight">
-        Découvrez nos forfaits
-        <span class="block text-doré-patiné italic font-light mt-2">LOREN</span>
-      </h2>
-
-      <p class="scroll-reveal scroll-reveal-delay-1 text-lg md:text-xl text-lin/80 mb-10 leading-relaxed">
-        Quatre formules claires pour que votre film corresponde à la façon dont vous voulez revivre cette journée.
+  <Section tone="foret">
+    <div class="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-16">
+      <h2 data-reveal>Ce que vous recevez</h2>
+      <p class="lead" data-reveal style="--i: 1">
+        Des livrables simples et concrets pour revoir et partager votre journée.
       </p>
+    </div>
 
-      <div class="scroll-reveal scroll-reveal-delay-2 flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href="/tarifs-forfaits"
-          class="group inline-block relative px-10 py-4 rounded-lg font-semibold text-lg text-noir-doux overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl"
-          style="background: linear-gradient(135deg, #D4AF37 0%, #C49F2E 50%, #B8912A 100%);"
-        >
-          <span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%); filter: blur(10px);"></span>
-          <span class="relative">Voir les tarifs</span>
-        </a>
-
-        <a
-          href="/loren"
-          class="inline-block px-10 py-4 rounded-lg font-semibold text-lg text-lin border border-lin/30 hover:bg-lin/10 hover:border-doré-patiné/50 transition-all duration-500"
-        >
-          Philosophie LOREN
-        </a>
-      </div>
+    <div class="mt-12 grid gap-10 md:mt-16 md:grid-cols-3 md:gap-12">
+      {
+        livrables.map((item, i) => (
+          <div class="rule border-t pt-6" data-reveal style={`--i: ${i}`}>
+            <h3>{item.titre}</h3>
+            <p class="muted mt-3">{item.texte}</p>
+          </div>
+        ))
+      }
     </div>
   </Section>
 
+  <Testimonials tone="sable" />
+
+  <CtaBand
+    title="Découvrez nos forfaits"
+    accent="LOREN"
+    text="Quatre formules claires pour que votre film corresponde à la façon dont vous voulez revivre cette journée."
+    primary={{ href: '/tarifs-forfaits', label: 'Voir les tarifs' }}
+    secondary={{ href: '/loren', label: 'Philosophie LOREN' }}
+  />
 </Base>
 
-<script>
-  // Scroll reveal animations
-  function initScrollReveal() {
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-visible');
-        }
-      });
-    }, observerOptions);
-
-    // Observer tous les éléments avec les classes scroll-reveal
-    const elements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-slide-left, .scroll-reveal-slide-right, .scroll-reveal-fade');
-    elements.forEach(el => observer.observe(el));
+<style>
+  .etape {
+    display: grid;
+    gap: 1rem;
+    padding-block: 2.5rem;
   }
 
-  // Initialiser après le chargement du DOM
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollReveal);
-  } else {
-    initScrollReveal();
+  .etape-numero {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    font-variant-numeric: lining-nums tabular-nums;
   }
 
-  // ============================================
-  // TIMELINE SCROLL STORYTELLING (SUBTIL & PREMIUM)
-  // ============================================
-  function initTimelineEffects() {
-    const timelineContainer = document.getElementById('timeline-container');
-    const timelineProgress = document.getElementById('timeline-progress');
-    const timelineCircles = document.querySelectorAll('.timeline-circle > div');
-
-    if (!timelineContainer || !timelineProgress) return;
-
-    let ticking = false;
-
-    // Animation de la ligne progressive
-    function updateTimeline() {
-      if (ticking) return;
-
-      ticking = true;
-      requestAnimationFrame(() => {
-        const rect = timelineContainer.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const start = rect.top;
-        const end = rect.bottom;
-
-        // Calculer le pourcentage de scroll dans la section
-        let progress = 0;
-        if (start < windowHeight && end > 0) {
-          progress = Math.max(0, Math.min(1, (windowHeight - start) / (windowHeight + rect.height)));
-        }
-
-        // Appliquer avec scaleY (plus fluide que height)
-        timelineProgress.style.transform = `scaleY(${progress})`;
-
-        ticking = false;
-      });
+  @media (min-width: 900px) {
+    .etape {
+      grid-template-columns: 5rem minmax(0, 4fr) minmax(0, 7fr);
+      gap: 2.5rem;
+      padding-block: 3.5rem;
     }
 
-    // Observer pour les cercles (effet scale subtil)
-    const circleObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const circle = entry.target;
-        if (entry.isIntersecting) {
-          // Scale subtil + brightness
-          circle.style.transform = 'scale(1)';
-          circle.style.filter = 'brightness(1.1)';
-        } else if (entry.boundingClientRect.top > 0) {
-          // Pas encore visible
-          circle.style.transform = 'scale(0.85)';
-          circle.style.filter = 'brightness(0.7)';
-        }
-      });
-    }, {
-      threshold: 0.5,
-      rootMargin: '-20% 0px'
-    });
-
-    // Observer chaque cercle
-    timelineCircles.forEach(circle => {
-      circle.style.transform = 'scale(0.85)';
-      circle.style.filter = 'brightness(0.7)';
-      circleObserver.observe(circle);
-    });
-
-    // Écouter le scroll (throttled)
-    let scrollTimeout;
-    function handleScroll() {
-      updateTimeline();
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(updateTimeline, 50);
+    .etape-numero {
+      font-size: 1.375rem;
+      line-height: 1.5;
     }
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
-
-    // Init
-    updateTimeline();
   }
-
-  // Initialiser
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTimelineEffects);
-  } else {
-    initTimelineEffects();
-  }
-
-</script>
+</style>

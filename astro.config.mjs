@@ -10,7 +10,8 @@ export default defineConfig({
   }),
   site: process.env.SITE_URL || 'https://cedricraulfilms.fr',
   integrations: [
-    tailwind(),
+    // Les couches Tailwind sont déclarées dans src/styles/global.css
+    tailwind({ applyBaseStyles: false }),
     sitemap({
       i18n: {
         defaultLocale: 'fr',

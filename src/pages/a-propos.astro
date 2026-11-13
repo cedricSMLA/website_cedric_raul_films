@@ -1,176 +1,139 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
+import PageHero from '@/components/PageHero.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Arrow from '@/components/Arrow.astro';
+
+const portrait = [
+  {
+    titre: "L'œil technique",
+    texte:
+      "Ingénieur de formation, j'ai développé une approche précise et méthodique de l'image. Mais c'est dans la montagne et les sports extrêmes que j'ai appris l'essentiel : anticiper l'instant, composer dans l'urgence, capturer l'émotion brute."
+  },
+  {
+    titre: 'La sensibilité artistique',
+    texte:
+      "Cette double culture technique et sensible définit mon approche : documentaire et cinématographique. Je filme ce qui se vit vraiment - les regards qui se cherchent, les silences chargés d'émotion, les gestes spontanés. Sans mise en scène, juste l'art de me faire oublier pour révéler l'authenticité."
+  },
+  {
+    titre: 'Le résultat',
+    texte:
+      "Drone FPV cinématique pour des plans impossibles, 4K pour une qualité qui traverse les décennies, post-production artisanale où chaque seconde compte. La technique s'efface devant l'essentiel : un film qui ne documente pas votre mariage, mais le fait revivre."
+  }
+];
+
+const suite = [
+  {
+    href: '/loren',
+    titre: "L'univers LOREN",
+    texte: "Ce que l'amour révèle au silence"
+  },
+  {
+    href: '/nos-partenaires',
+    titre: 'Nos partenaires',
+    texte: 'Un réseau de confiance'
+  }
+];
 ---
 
 <Base
   title="À propos - Cédric Raúl Films"
   description="Des films de mariage qui provoquent l'émotion. Approche cinématographique, drone FPV, post-production soignée. Paris & worldwide."
 >
-  <!-- Hero Section avec LOREN -->
-  <Section background="primary" padding="xl" class="rounded-xl mb-8 relative overflow-hidden">
-    <!-- Gradient background -->
-    <div class="absolute inset-0 bg-gradient-to-br from-doré-patiné/15 via-lin to-pierre/10"></div>
+  <PageHero
+    title="Une vision"
+    accent="cinématographique"
+    lead="Entre précision technique et sensibilité artistique, je transforme l'émotion brute de votre mariage en récit visuel qui traverse le temps."
+  />
 
-    <div class="max-w-5xl mx-auto relative z-10">
-      <div class="text-center">
-        <!-- LOREN Signature -->
-        <div class="scroll-reveal mb-8">
-          <h1 class="text-4xl md:text-5xl font-extralight tracking-[0.3em] text-noir-doux mb-3" style="background: linear-gradient(to right, #2c2c2c, #8b7355); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-            LOREN
-          </h1>
-          <p class="text-sm md:text-base text-pierre/70 italic font-light tracking-wide">
-            Ce que l'amour révèle au silence
-          </p>
+  <!-- Portrait -->
+  <Section>
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+      <div class="frame aspect-[4/5] lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <img
+          src="/media/photo/IMG_1094.jpg"
+          alt="Cédric Raúl, vidéaste mariage"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <div>
+        <h2 data-reveal>Qui je suis ?</h2>
+        <div class="mt-10 md:mt-14">
+          {
+            portrait.map((bloc) => (
+              <div class="rule border-t py-8" data-reveal>
+                <h3>{bloc.titre}</h3>
+                <p class="mt-4 max-w-[38rem]">{bloc.texte}</p>
+              </div>
+            ))
+          }
         </div>
-
-        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-doré-patiné to-transparent mx-auto my-10 animate-line-reveal"></div>
-
-        <h2 class="scroll-reveal scroll-reveal-delay-1 text-3xl md:text-5xl font-bold text-noir-doux mb-8 leading-tight">
-          Une vision
-          <span class="block text-doré-patiné italic font-light mt-2">cinématographique</span>
-        </h2>
-
-        <p class="scroll-reveal scroll-reveal-delay-2 text-lg md:text-xl text-pierre max-w-3xl mx-auto leading-relaxed">
-          Entre précision technique et sensibilité artistique,
-          je transforme l'émotion brute de votre mariage en récit visuel qui traverse le temps.
-        </p>
       </div>
     </div>
   </Section>
 
-  <!-- L'approche -->
-  <Section background="dark" padding="xl" class="rounded-xl mb-8">
-    <div class="max-w-6xl mx-auto">
-
-      <!-- Titre minimaliste -->
-      <div class="text-center mb-20">
-        <h2 class="scroll-reveal text-3xl md:text-5xl font-light text-lin mb-4 tracking-wide">
-          Qui je suis ?
-        </h2>
-        <div class="w-16 h-px bg-doré-patiné/40 mx-auto"></div>
-      </div>
-
-      <!-- Grid simple 2 colonnes -->
-      <div class="grid lg:grid-cols-2 gap-20 items-center">
-
-        <!-- Photo gauche -->
-        <div class="scroll-reveal">
-          <div class="relative aspect-[4/5] w-full">
-            <img
-              src="/media/photo/IMG_1094.jpg"
-              alt="Cédric Raúl, vidéaste mariage"
-              class="w-full h-full object-cover rounded-lg shadow-strong"
-            />
-          </div>
-        </div>
-
-        <!-- Contenu droite -->
-        <div class="scroll-reveal scroll-reveal-delay-1 space-y-8">
-          <!-- Qui je suis -->
-          <div class="space-y-4">
-            <h3 class="text-xl text-doré-patiné font-light tracking-wide">L'œil technique</h3>
-            <p class="text-base text-lin/80 leading-relaxed">
-              Ingénieur de formation, j'ai développé une approche précise et méthodique de l'image.
-              Mais c'est dans la montagne et les sports extrêmes que j'ai appris l'essentiel :
-              anticiper l'instant, composer dans l'urgence, capturer l'émotion brute.
-            </p>
-          </div>
-
-          <!-- Mon approche -->
-          <div class="space-y-4">
-            <h3 class="text-xl text-doré-patiné font-light tracking-wide">La sensibilité artistique</h3>
-            <p class="text-base text-lin/80 leading-relaxed">
-              Cette double culture technique et sensible définit mon approche : documentaire et cinématographique.
-              Je filme ce qui se vit vraiment - les regards qui se cherchent, les silences chargés d'émotion,
-              les gestes spontanés. Sans mise en scène, juste l'art de me faire oublier pour révéler l'authenticité.
-            </p>
-          </div>
-
-          <!-- Mon engagement -->
-          <div class="space-y-4">
-            <h3 class="text-xl text-doré-patiné font-light tracking-wide">Le résultat</h3>
-            <p class="text-base text-lin/80 leading-relaxed">
-              Drone FPV cinématique pour des plans impossibles, 4K pour une qualité qui traverse les décennies,
-              post-production artisanale où chaque seconde compte. La technique s'efface devant l'essentiel :
-              un film qui ne documente pas votre mariage, mais le fait revivre.
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </Section>
-
-  <!-- Signature finale -->
-  <Section background="primary" padding="lg" class="rounded-xl mb-8">
-    <div class="max-w-3xl mx-auto text-center">
-      <div class="scroll-reveal">
-        <p class="text-xl md:text-2xl text-pierre font-light italic mb-4 leading-relaxed">
-          Votre mariage mérite plus qu'un souvenir.<br class="hidden md:block" />
-          Il mérite une œuvre.
-        </p>
-        <div class="w-16 h-0.5 bg-doré-patiné mx-auto my-6"></div>
-        <p class="text-doré-patiné text-base md:text-lg font-medium tracking-wider">
-          Cédric Raúl
-        </p>
-        <p class="text-pierre/60 text-sm mt-2">
+  <!-- Signature -->
+  <Section tone="foret" width="narrow">
+    <figure class="text-center" data-reveal>
+      <blockquote class="quote">
+        Votre mariage mérite plus qu'un souvenir.<br class="hidden md:block" />
+        Il mérite une œuvre.
+      </blockquote>
+      <figcaption class="mt-8">
+        <span class="font-medium">Cédric Raúl</span>
+        <span class="muted mt-1 block text-sm">
           Vidéaste mariage cinématographique • Paris & Worldwide
-        </p>
-      </div>
-    </div>
+        </span>
+      </figcaption>
+    </figure>
   </Section>
 
-  <!-- CTA finale -->
-  <Section background="dark" padding="xl" class="rounded-xl">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-lin mb-6 leading-tight">
-        Prêt à raconter
-        <span class="block text-doré-patiné italic mt-2">votre histoire ?</span>
-      </h2>
-
-      <p class="scroll-reveal scroll-reveal-delay-1 text-lg md:text-xl text-lin/80 mb-10 leading-relaxed">
-        Discutons ensemble de votre projet et créons un film qui vous ressemble vraiment.
-      </p>
-
-      <div class="scroll-reveal scroll-reveal-delay-2">
-        <a
-          href="/contact#contact"
-          class="inline-block bg-doré-patiné text-noir-doux px-12 py-4 rounded-md font-medium hover:bg-lin hover:text-noir-doux transition-all duration-300 hover:scale-105 shadow-strong"
-        >
-          Contactez-nous
-        </a>
-      </div>
-    </div>
+  <!-- Pour aller plus loin : les deux pages rattachées -->
+  <Section tone="sable" size="md">
+    <ul class="grid gap-0 md:grid-cols-2 md:gap-12">
+      {
+        suite.map((page, i) => (
+          <li data-reveal style={`--i: ${i}`}>
+            <a href={page.href} class="suite rule group block border-t py-8">
+              <span class="font-serif text-[1.625rem] leading-tight md:text-[2rem]">
+                {page.titre}
+              </span>
+              <span class="muted mt-3 flex items-center justify-between gap-4">
+                <span class="font-serif text-lg">{page.texte}</span>
+                <span class="suite-fleche accent"><Arrow /></span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </Section>
+
+  <CtaBand
+    title="Prêt à raconter"
+    accent="votre histoire ?"
+    text="Discutons ensemble de votre projet et créons un film qui vous ressemble vraiment."
+    primary={{ href: '/contact#contact', label: 'Contactez-nous' }}
+  />
 </Base>
 
-<script>
-  // Scroll reveal animations
-  function initScrollReveal() {
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-visible');
-        }
-      });
-    }, observerOptions);
-
-    // Observer tous les éléments avec les classes scroll-reveal
-    const elements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-delay-1, .scroll-reveal-delay-2, .scroll-reveal-delay-3, .scroll-reveal-slide-left, .scroll-reveal-slide-right, .scroll-reveal-fade');
-    elements.forEach(el => observer.observe(el));
+<style>
+  .suite {
+    transition: border-color 0.3s ease;
   }
 
-  // Initialiser après le chargement du DOM
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollReveal);
-  } else {
-    initScrollReveal();
+  .suite:hover {
+    border-color: var(--cuivre);
   }
-</script>
+
+  .suite-fleche {
+    transition: transform 0.5s var(--ease-out);
+  }
+
+  .suite:hover .suite-fleche {
+    transform: translateX(0.5rem);
+  }
+</style>

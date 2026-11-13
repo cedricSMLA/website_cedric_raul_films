@@ -1,45 +1,15 @@
 ---
 export interface Props {
   href?: string;
-  variant?: 'primary' | 'secondary' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: 'solid' | 'ghost';
   class?: string;
-  target?: string;
+  [key: string]: unknown;
 }
 
-const { 
-  href, 
-  variant = 'primary', 
-  size = 'md', 
-  class: className = '',
-  target,
-  ...props 
-} = Astro.props;
-
-const baseClasses = 'inline-flex items-center justify-center font-semibold transition-all duration-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-noir-doux';
-
-const variants = {
-  primary: 'bg-doré-patiné text-noir-doux hover:bg-doré-light hover:shadow-cinema focus:ring-doré-patiné',
-  secondary: 'bg-transparent border-2 border-doré-patiné text-doré-patiné hover:bg-doré-patiné hover:text-noir-doux hover:shadow-cinema focus:ring-doré-patiné',
-  outline: 'border-2 border-pierre text-pierre hover:bg-pierre hover:text-lin hover:shadow-soft focus:ring-pierre'
-};
-
-const sizes = {
-  sm: 'px-3 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg'
-};
-
-const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`;
-
+const { href, variant = 'solid', class: className = '', ...rest } = Astro.props;
 const Element = href ? 'a' : 'button';
 ---
 
-<Element 
-  href={href}
-  target={target}
-  class={classes}
-  {...props}
->
+<Element href={href} class:list={['btn', `btn-${variant}`, className]} {...rest}>
   <slot />
 </Element>

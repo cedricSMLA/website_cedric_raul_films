@@ -2,6 +2,12 @@ import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
 import he from 'he';
 import { forfaitLabels } from '@/data/forfaits';
+import {
+  contientLien,
+  adresseBloquee,
+  lireListeBloquee,
+  ressembleARobot
+} from '@/lib/antispam';
 
 export const prerender = false;
 
@@ -76,6 +82,20 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     // pour compatibilité avec l'ancienne version du formulaire.
     const { nom, email, date, forfait, budget, message, consent } = data;
 
+    // Robots : champ piège rempli ou formulaire envoyé en moins de 3 secondes.
+    // On répond « envoyé » sans rien envoyer, pour ne pas indiquer au robot
+    // qu'il a été repéré.
+    if (ressembleARobot(data.site_web, data.duree)) {
+      console.warn(`Contact bloqué (robot) depuis ${ip}`);
+      return new Response(
+        JSON.stringify({
+          success: true,
+          message: 'Votre demande a été envoyée avec succès !'
+        }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
     // Validation
     if (!nom || !email || !date || !message || !consent) {
       return new Response(
@@ -137,6 +157,33 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         JSON.stringify({
           success: false,
           error: 'Adresse email invalide.'
+        }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Adresse refusée : messagerie jetable, fragment vu dans des arnaques,
+    // ou entrée de la liste CONTACT_BLOCKED.
+    if (adresseBloquee(email, lireListeBloquee(process.env.CONTACT_BLOCKED))) {
+      console.warn(`Contact bloqué (adresse refusée) depuis ${ip}`);
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Votre demande n'a pas pu être envoyée avec cette adresse email."
+        }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Aucun lien dans le formulaire : c'est le vecteur des tentatives de
+    // hameçonnage (faux « programme du mariage » demandant un mot de passe).
+    if (contientLien(nom) || contientLien(message)) {
+      console.warn(`Contact bloqué (lien dans le message) depuis ${ip}`);
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error:
+            "Pour des raisons de sécurité, les liens et adresses de sites ne sont pas acceptés dans ce formulaire. Retirez-les de votre message : nous échangerons les documents par email ensuite."
         }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
@@ -220,6 +267,11 @@ Informations :
 
 Message :
 ${rawMessage}
+
+--
+Rappel sécurité : ce message vient du formulaire public du site.
+Ne saisissez jamais votre adresse email et votre mot de passe sur un site
+envoyé par un prospect, même pour « consulter un programme ».
       `,
       html: `
 <!DOCTYPE html>
@@ -228,11 +280,12 @@ ${rawMessage}
   <style>
     body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background-color: #C2A56B; color: white; padding: 20px; text-align: center; }
+    .header { background-color: #26342B; color: #F5F2EA; padding: 20px; text-align: center; }
     .content { background-color: #f9f9f9; padding: 20px; margin-top: 20px; }
     .info-row { margin: 10px 0; }
-    .label { font-weight: bold; color: #5E5B55; }
-    .message { background-color: white; padding: 15px; margin-top: 15px; border-left: 4px solid #C2A56B; }
+    .label { font-weight: bold; color: #586058; }
+    .message { background-color: white; padding: 15px; margin-top: 15px; border: 1px solid #D6D3C6; }
+    .securite { margin-top: 20px; padding: 12px 15px; border: 1px solid #A0562F; color: #7A3F20; font-size: 13px; }
   </style>
 </head>
 <body>
@@ -256,6 +309,11 @@ ${rawMessage}
       <div class="message">
         <p><strong>Message :</strong></p>
         <p>${safeMessage.replace(/\n/g, '<br>')}</p>
+      </div>
+      <div class="securite">
+        <strong>Rappel sécurité :</strong> ce message vient du formulaire public du site.
+        Ne saisissez jamais votre adresse email et votre mot de passe sur un site envoyé
+        par un prospect, même pour « consulter un programme ».
       </div>
     </div>
   </div>

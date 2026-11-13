@@ -1,278 +1,171 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
+import PageHero from '@/components/PageHero.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Arrow from '@/components/Arrow.astro';
+
+const photographes = [
+  {
+    nom: 'Coraline',
+    photo: '/media/photo/Coraline.jpeg',
+    texte:
+      "Regard sensible, lumière naturelle, instants volés. Coraline capture l'émotion brute avec une approche documentaire subtile et poétique.",
+    points: [
+      'Reportage photo complet',
+      'Style documentaire & artistique',
+      'Édition professionnelle soignée'
+    ],
+    liens: [
+      { href: 'https://www.instagram.com/theco.edit/', label: 'Voir son Instagram' },
+      { href: 'https://coedit.mypixieset.com/gallery-1/', label: 'Voir son portfolio' }
+    ]
+  },
+  {
+    nom: 'Alexys',
+    photo: '/media/photo/Alexys.jpg',
+    texte:
+      "Approche documentaire, émotions brutes, récit visuel. Alexys crée des images qui racontent l'histoire authentique de votre journée.",
+    points: [
+      'Photojournalisme de mariage',
+      'Authenticité & spontanéité',
+      'Post-traitement signature'
+    ],
+    liens: [{ href: 'https://alexyska.mypixieset.com/wedding/', label: 'Voir son portfolio' }]
+  }
+];
+
+const raisons = [
+  {
+    titre: 'Harmonie parfaite',
+    texte:
+      'Photo et vidéo travaillent ensemble, sans se gêner. Une chorégraphie fluide pour capturer tous les moments.'
+  },
+  {
+    titre: 'Des habitudes communes',
+    texte:
+      "Nous avons déjà travaillé ensemble : chacun connaît les placements et le rythme de l'autre."
+  },
+  {
+    titre: 'Chacun son devis',
+    texte:
+      'Vous échangez directement avec le photographe de votre choix. Chacun établit son propre devis et sa propre facture.'
+  }
+];
 ---
 
 <Base
   title="Nos partenaires - Cédric Raúl Films"
   description="Un réseau de confiance : photographes, lieux, prestataires. Des collaborateurs qui partagent notre vision pour créer des mariages d'exception."
 >
-  <!-- Hero Section -->
-  <Section background="primary" padding="xl" class="rounded-xl mb-8 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-doré-patiné/15 via-lin to-pierre/10"></div>
-
-    <div class="max-w-5xl mx-auto relative z-10">
-      <div class="text-center">
-        <h1 class="scroll-reveal text-5xl md:text-7xl font-bold text-noir-doux mb-8 leading-tight tracking-tight">
-          Un réseau
-          <span class="block text-doré-patiné italic font-light mt-2">de confiance</span>
-        </h1>
-
-        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-doré-patiné to-transparent mx-auto mb-10 animate-line-reveal"></div>
-
-        <p class="scroll-reveal scroll-reveal-delay-1 text-lg md:text-xl text-pierre max-w-3xl mx-auto leading-relaxed">
-          Photographes talentueux, lieux d'exception, prestataires passionnés :
-          des collaborateurs qui partagent notre vision de l'excellence.
-        </p>
-      </div>
-    </div>
-  </Section>
+  <PageHero
+    title="Un réseau"
+    accent="de confiance"
+    lead="Photographes talentueux, lieux d'exception, prestataires passionnés : des collaborateurs qui partagent notre vision de l'excellence."
+  />
 
   <!-- Philosophie de collaboration -->
-  <Section background="dark" padding="lg" class="rounded-xl mb-8">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="scroll-reveal text-3xl md:text-4xl font-bold text-lin mb-6">
+  <Section size="md">
+    <div class="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+      <h2 data-reveal>
         La collaboration au cœur du projet
       </h2>
-      <p class="scroll-reveal scroll-reveal-delay-1 text-base md:text-lg text-lin/80 leading-relaxed">
-        Un mariage réussi est le fruit d'une collaboration fluide entre tous les prestataires.
-        Je travaille avec des professionnels qui partagent ma vision de l'excellence et mon souci du détail,
-        pour que votre journée soit parfaitement orchestrée.
+      <p class="max-w-[38rem] text-lg" data-reveal style="--i: 1">
+        Un mariage réussi est le fruit d'une collaboration fluide entre tous les prestataires. Je
+        travaille avec des professionnels qui partagent ma vision de l'excellence et mon souci du
+        détail, pour que votre journée soit parfaitement orchestrée.
       </p>
     </div>
   </Section>
 
   <!-- Photographes partenaires -->
-  <Section background="primary" padding="xl" class="rounded-2xl mb-8">
-    <div class="max-w-6xl mx-auto">
-      <!-- Titre -->
-      <div class="text-center mb-16">
-        <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-pierre mb-4">
-          Photographes partenaires
-        </h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-doré-patiné to-transparent mx-auto mb-6"></div>
-        <p class="scroll-reveal scroll-reveal-delay-1 text-lg text-pierre/80 max-w-2xl mx-auto leading-relaxed">
-          Une collaboration fluide avec des artistes qui partagent ma vision.
-          Coordination parfaite garantie le jour J.
+  <Section tone="sable">
+    <div class="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-16">
+      <h2 data-reveal>Photographes partenaires</h2>
+      <p class="lead" data-reveal style="--i: 1">
+        Une collaboration fluide avec des artistes qui partagent ma vision. Coordination parfaite
+        garantie le jour J.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-16 md:mt-16 md:grid-cols-2 md:gap-12 lg:gap-20">
+      {
+        photographes.map((p, i) => (
+          <article data-reveal style={`--i: ${i}`}>
+            <div class="frame photographe aspect-[4/5]">
+              <img
+                src={p.photo}
+                alt={`${p.nom} - Photographe partenaire`}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="mt-7 text-[1.875rem]">{p.nom}</h3>
+            <p class="muted mt-1 text-sm">Photographe mariage</p>
+            <p class="mt-5 max-w-[34rem]">{p.texte}</p>
+            <ul class="ticks muted mt-5">
+              {p.points.map((point) => <li>{point}</li>)}
+            </ul>
+            <p class="mt-7 flex flex-wrap gap-x-8 gap-y-3">
+              {
+                p.liens.map((lien) => (
+                  <a href={lien.href} target="_blank" rel="noopener noreferrer" class="link-arrow">
+                    {lien.label} <Arrow />
+                  </a>
+                ))
+              }
+            </p>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Mise en relation : chacun reste indépendant -->
+    <div
+      class="rule mt-16 grid gap-6 border-t pt-10 md:mt-24 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16"
+      data-reveal
+    >
+      <h3>Besoin d'un photographe ?</h3>
+      <div>
+        <p class="max-w-[38rem] text-lg">
+          Je vous mets en relation avec des photographes avec qui j'ai l'habitude de travailler.
+          Chacun établit son propre devis et sa propre facture.
         </p>
-      </div>
-
-      <!-- Grid photographes -->
-      <div class="grid md:grid-cols-2 gap-12">
-        <!-- Coraline -->
-        <div class="scroll-reveal-slide-left group">
-          <!-- Photo -->
-          <div class="relative overflow-hidden rounded-2xl mb-6">
-            <div class="aspect-[4/5] overflow-hidden bg-noir-doux/40 border border-doré-patiné/20 group-hover:border-doré-patiné/40 transition-all duration-500">
-              <img
-                src="/media/photo/Coraline.jpeg"
-                alt="Coraline - Photographe partenaire"
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            <!-- Accent géométrique -->
-            <div class="absolute -bottom-3 -right-3 w-24 h-24 border-r-2 border-b-2 border-doré-patiné/30"></div>
-          </div>
-
-          <!-- Infos -->
-          <div class="pl-4 border-l-2 border-doré-patiné/30">
-            <h3 class="text-3xl font-bold text-pierre mb-2">Coraline</h3>
-            <p class="text-doré-patiné text-sm font-medium uppercase tracking-wider mb-4">Photographe mariage</p>
-            <p class="text-pierre/70 leading-relaxed mb-6">
-              Regard sensible, lumière naturelle, instants volés. Coraline capture l'émotion brute
-              avec une approche documentaire subtile et poétique.
-            </p>
-            <div class="space-y-3 mb-6">
-              <div class="flex items-center gap-3 text-sm text-pierre/60">
-                <span class="text-doré-patiné">✓</span>
-                <span>Reportage photo complet</span>
-              </div>
-              <div class="flex items-center gap-3 text-sm text-pierre/60">
-                <span class="text-doré-patiné">✓</span>
-                <span>Style documentaire & artistique</span>
-              </div>
-              <div class="flex items-center gap-3 text-sm text-pierre/60">
-                <span class="text-doré-patiné">✓</span>
-                <span>Édition professionnelle soignée</span>
-              </div>
-            </div>
-            <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
-              <a
-                href="https://www.instagram.com/theco.edit/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 text-doré-patiné hover:text-pierre transition-colors duration-300 text-sm font-medium group"
-              >
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-                <span class="border-b border-doré-patiné/30 group-hover:border-pierre transition-colors duration-300">Voir son Instagram</span>
-              </a>
-              <a
-                href="https://coedit.mypixieset.com/gallery-1/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 text-doré-patiné hover:text-pierre transition-colors duration-300 text-sm font-medium group"
-              >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                </svg>
-                <span class="border-b border-doré-patiné/30 group-hover:border-pierre transition-colors duration-300">Voir son portfolio</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Alexys -->
-        <div class="scroll-reveal-slide-right group">
-          <!-- Photo -->
-          <div class="relative overflow-hidden rounded-2xl mb-6">
-            <div class="aspect-[4/5] overflow-hidden bg-noir-doux/40 border border-sauge/20 group-hover:border-sauge/40 transition-all duration-500">
-              <img
-                src="/media/photo/Alexys.jpg"
-                alt="Alexys - Photographe partenaire"
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            <!-- Accent géométrique -->
-            <div class="absolute -bottom-3 -right-3 w-24 h-24 border-r-2 border-b-2 border-sauge/30"></div>
-          </div>
-
-          <!-- Infos -->
-          <div class="pl-4 border-l-2 border-sauge/30">
-            <h3 class="text-3xl font-bold text-pierre mb-2">Alexys</h3>
-            <p class="text-sauge text-sm font-medium uppercase tracking-wider mb-4">Photographe mariage</p>
-            <p class="text-pierre/70 leading-relaxed mb-6">
-              Approche documentaire, émotions brutes, récit visuel. Alexys crée des images
-              qui racontent l'histoire authentique de votre journée.
-            </p>
-            <div class="space-y-3 mb-6">
-              <div class="flex items-center gap-3 text-sm text-pierre/60">
-                <span class="text-sauge">✓</span>
-                <span>Photojournalisme de mariage</span>
-              </div>
-              <div class="flex items-center gap-3 text-sm text-pierre/60">
-                <span class="text-sauge">✓</span>
-                <span>Authenticité & spontanéité</span>
-              </div>
-              <div class="flex items-center gap-3 text-sm text-pierre/60">
-                <span class="text-sauge">✓</span>
-                <span>Post-traitement signature</span>
-              </div>
-            </div>
-            <a
-              href="https://alexyska.mypixieset.com/wedding/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 text-sauge hover:text-pierre transition-colors duration-300 text-sm font-medium group"
-            >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-              </svg>
-              <span class="border-b border-sauge/30 group-hover:border-pierre transition-colors duration-300">Voir son portfolio</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Forfait combiné -->
-      <div class="scroll-reveal mt-16 text-center">
-        <div class="inline-block bg-gradient-to-r from-doré-patiné/10 via-sauge/5 to-doré-patiné/10 border border-doré-patiné/30 rounded-xl px-8 py-5">
-          <p class="text-pierre/80 text-lg mb-2">
-            Forfaits combinés <span class="text-doré-patiné font-semibold">Photo + Vidéo</span> disponibles
-          </p>
-          <p class="text-pierre/60 text-sm mb-3">
-            Une coordination parfaite, une réduction tarifaire, un seul point de contact
-          </p>
-          <a
-            href="/contact#contact"
-            class="inline-flex items-center gap-1.5 text-doré-patiné hover:text-pierre text-sm font-medium transition-colors duration-300 group"
-          >
-            <span class="border-b border-doré-patiné/30 group-hover:border-pierre/50 transition-colors duration-300">En savoir plus</span>
-            <svg class="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </a>
-        </div>
+        <a href="/contact#contact" class="link-arrow mt-6">En savoir plus <Arrow /></a>
       </div>
     </div>
   </Section>
 
-  <!-- Pourquoi travailler ensemble -->
-  <Section background="dark" padding="xl" class="rounded-2xl mb-8">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="scroll-reveal text-4xl md:text-5xl font-bold text-lin mb-6">
-          Pourquoi choisir une équipe coordonnée ?
-        </h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-doré-patiné to-transparent mx-auto"></div>
-      </div>
+  <!-- Pourquoi des prestataires qui se connaissent -->
+  <Section>
+    <h2 class="max-w-[22ch]" data-reveal>Pourquoi choisir des prestataires qui se connaissent ?</h2>
 
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="scroll-reveal bg-noir-doux/40 border border-doré-patiné/20 rounded-xl p-8 text-center">
-          <div class="w-16 h-16 bg-doré-patiné/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg class="w-8 h-8 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
+    <div class="mt-12 grid gap-10 md:mt-16 md:grid-cols-3 md:gap-12">
+      {
+        raisons.map((raison, i) => (
+          <div class="rule border-t pt-6" data-reveal style={`--i: ${i}`}>
+            <h3>{raison.titre}</h3>
+            <p class="muted mt-3">{raison.texte}</p>
           </div>
-          <h3 class="text-xl font-bold text-lin mb-4">Harmonie parfaite</h3>
-          <p class="text-lin/70 leading-relaxed">
-            Photo et vidéo travaillent ensemble, sans se gêner. Une chorégraphie fluide pour capturer tous les moments.
-          </p>
-        </div>
-
-        <div class="scroll-reveal scroll-reveal-delay-1 bg-noir-doux/40 border border-sauge/20 rounded-xl p-8 text-center">
-          <div class="w-16 h-16 bg-sauge/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg class="w-8 h-8 text-sauge" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-lin mb-4">Tarifs avantageux</h3>
-          <p class="text-lin/70 leading-relaxed">
-            Économisez jusqu'à 15% en réservant photo et vidéo ensemble. Un seul devis, une seule facture.
-          </p>
-        </div>
-
-        <div class="scroll-reveal scroll-reveal-delay-2 bg-noir-doux/40 border border-doré-patiné/20 rounded-xl p-8 text-center">
-          <div class="w-16 h-16 bg-doré-patiné/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg class="w-8 h-8 text-doré-patiné" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-lin mb-4">Simplicité totale</h3>
-          <p class="text-lin/70 leading-relaxed">
-            Un seul point de contact pour coordonner photo et vidéo. Moins de stress, plus de temps pour vous.
-          </p>
-        </div>
-      </div>
+        ))
+      }
     </div>
   </Section>
 
+  <CtaBand
+    title="Prêt à raconter"
+    accent="votre histoire ?"
+    text="Discutons ensemble de votre projet et créons un film qui vous ressemble vraiment."
+    primary={{ href: '/contact#contact', label: 'Contactez-nous' }}
+  />
 </Base>
 
-<script>
-  // Scroll reveal animations
-  function initScrollReveal() {
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-visible');
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-slide-left, .scroll-reveal-slide-right, .scroll-reveal-delay-1, .scroll-reveal-delay-2');
-    elements.forEach(el => observer.observe(el));
+<style>
+  .photographe img {
+    transition: transform 1.6s var(--ease-out);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollReveal);
-  } else {
-    initScrollReveal();
+  article:hover .photographe img {
+    transform: scale(1.03);
   }
-</script>
+</style>

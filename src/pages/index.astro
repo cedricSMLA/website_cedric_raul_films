@@ -1,510 +1,209 @@
 ---
 import Base from '@/layouts/Base.astro';
-import Section from '@/components/Section.astro';
 import Button from '@/components/Button.astro';
-import Card from '@/components/Card.astro';
-import BadgePrice from '@/components/BadgePrice.astro';
-import VideoEmbed from '@/components/VideoEmbed.astro';
-import { getCollection } from 'astro:content';
-
-const portfolioItems = await getCollection('portfolio');
-const featuredItems = portfolioItems
-  .filter(item => item.data.featured)
-  .slice(0, 5)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+import Testimonials from '@/components/Testimonials.astro';
+import { filmPrincipal, films } from '@/data/films';
+import { LOCALISATION } from '@/data/site';
 ---
 
 <Base
   title="Cédric Raúl Films - Vidéaste mariage cinématographique Paris & Worldwide"
   description="Films de mariage cinématographiques qui provoquent l'émotion. Basé à Paris, disponible partout ailleurs. Drone FPV inclus."
 >
-  <!-- Hero Video -->
-  <section class="w-full pb-4 md:pb-12">
-    <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer md:cursor-default hover:shadow-strong transition-all duration-300" id="hero-video-container" data-video="amelie">
-      <video
-        id="hero-video"
-        muted
-        loop
-        playsinline
-        disablepictureinpicture
-        preload="metadata"
-        poster="/media/video/amelie_cedric_poster.jpg"
-        class="w-full h-full object-cover"
-      >
-        <source src="/media/video/amelie_cedric_website.mp4" type="video/mp4">
-      </video>
+  <!-- Film principal -->
+  <section class="pb-16 pt-2 md:pb-24 md:pt-4">
+    <div class="wrap">
+      <div class="frame hero-frame" id="hero-frame">
+        <video
+          id="hero-video"
+          muted
+          loop
+          playsinline
+          disablepictureinpicture
+          preload="metadata"
+          poster={filmPrincipal.poster}
+        >
+          <source src={filmPrincipal.src} type="video/mp4" />
+        </video>
 
-      <!-- Mute/Unmute button (desktop uniquement) -->
-      <button
-        id="mute-toggle"
-        class="hidden md:flex absolute bottom-4 right-4 w-10 h-10 bg-noir-doux/50 hover:bg-noir-doux/80 backdrop-blur-sm rounded-full items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 border border-doré-patiné/30 hover:border-doré-patiné/60"
-        aria-label="Activer/Désactiver le son"
-      >
-        <svg id="mute-icon" class="w-5 h-5 text-doré-patiné" fill="currentColor" viewBox="0 0 28 24">
-          <path d="M3 9v6h4l5 5V4L7 9H3z"/>
-          <path d="m20 9 2.5-2.5 1.5 1.5-2.5 2.5 2.5 2.5-1.5 1.5-2.5-2.5-2.5 2.5-1.5-1.5 2.5-2.5-2.5-2.5 1.5-1.5 2.5 2.5z"/>
-        </svg>
-        <svg id="unmute-icon" class="w-5 h-5 text-doré-patiné hidden" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"/>
-        </svg>
-      </button>
-    </div>
+        <!-- Mobile : la vidéo ne démarre pas seule, on l'ouvre en grand -->
+        <button
+          type="button"
+          class="film-cue md:hidden"
+          style="opacity: 1; transform: none"
+          data-film-src={filmPrincipal.src}
+        >
+          <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true">
+            <path d="M0 0l10 6-10 6z"></path>
+          </svg>
+          Voir le film
+        </button>
 
-    <!-- Titre sous la vidéo (mobile uniquement) -->
-    <div class="md:hidden mt-2 text-center">
-      <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Amelie & Cedric</h3>
-    </div>
-  </section>
+        <!-- Ordinateur : la vidéo tourne sans le son, on peut l'activer -->
+        <button
+          type="button"
+          id="mute-toggle"
+          class="film-cue left-auto right-4 hidden md:inline-flex"
+          style="opacity: 1; transform: none"
+          aria-pressed="false"
+        >
+          Activer le son
+        </button>
+      </div>
+      <p class="muted mt-3 text-sm">{filmPrincipal.couple}</p>
 
-  <!-- Four Videos Layout -->
-  <section class="w-full pb-4 md:pb-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6">
-
-      <!-- Left Column: Two stacked videos -->
-      <div class="space-y-2 md:space-y-6">
-        <!-- Clémence & Aymeric Video -->
-        <div>
-          <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="clemence">
-            <video
-              muted
-              loop
-              playsinline
-              disablepictureinpicture
-              preload="metadata"
-              poster="/media/video/teaser_clemence_aymeric_poster.jpg"
-              class="w-full h-full object-cover"
-              onmouseenter="this.play()"
-              onmouseleave="this.pause()"
-            >
-              <source src="/media/video/teaser_clemence_aymeric.mp4" type="video/mp4">
-            </video>
-
-            <!-- Overlay on hover (desktop uniquement) -->
-            <div class="hidden md:flex absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
-              <div class="text-center text-lin">
-                <h3 class="text-xl md:text-2xl mb-2 text-doré-patiné" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Clémence & Aymeric</h3>
-                <p class="text-md md:text-lg">Juillet 2025</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Titre sous la vidéo (mobile uniquement) -->
-          <div class="md:hidden mt-2 text-center">
-            <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Clémence & Aymeric</h3>
-            <p class="text-sm text-pierre/70">Juillet 2025</p>
-          </div>
-        </div>
-
-        <!-- Olivia & Thomas Video -->
-        <div>
-          <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="olivia">
-            <video
-              muted
-              loop
-              playsinline
-              disablepictureinpicture
-              preload="metadata"
-              poster="/media/video/teaser_olivia_thomas_poster.jpg"
-              class="w-full h-full object-cover"
-              onmouseenter="this.play()"
-              onmouseleave="this.pause()"
-            >
-              <source src="/media/video/teaser_olivia_thomas_16_9_v3.mp4" type="video/mp4">
-            </video>
-
-            <!-- Overlay on hover (desktop uniquement) -->
-            <div class="hidden md:flex absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
-              <div class="text-center text-lin">
-                <h3 class="text-xl md:text-2xl mb-2 text-doré-patiné" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Olivia & Thomas</h3>
-                <p class="text-md md:text-lg">Septembre 2025</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Titre sous la vidéo (mobile uniquement) -->
-          <div class="md:hidden mt-2 text-center">
-            <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Olivia & Thomas</h3>
-            <p class="text-sm text-pierre/70">Septembre 2025</p>
-          </div>
-        </div>
-
-        <!-- Raumane & Maxime Video -->
-        <div>
-          <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="raumane">
-            <video
-              muted
-              loop
-              playsinline
-              disablepictureinpicture
-              preload="metadata"
-              class="w-full h-full object-cover"
-              poster="/media/video/raumane_maxime_poster.jpg"
-              onmouseenter="this.play()"
-              onmouseleave="this.pause()"
-            >
-              <source src="/media/video/TEASER_RAUMANE_MAXIME_WEBSITE.mp4" type="video/mp4">
-            </video>
-
-            <!-- Overlay on hover (desktop uniquement) -->
-            <div class="hidden md:flex absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
-              <div class="text-center text-lin">
-                <h3 class="text-xl md:text-2xl mb-2 text-doré-patiné" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Raumane & Maxime</h3>
-                <p class="text-md md:text-lg">Octobre 2024</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Titre sous la vidéo (mobile uniquement) -->
-          <div class="md:hidden mt-2 text-center">
-            <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Raumane & Maxime</h3>
-            <p class="text-sm text-pierre/70">Octobre 2024</p>
-          </div>
-        </div>
-
-        <!-- Sarah & Thierry Video -->
-        <div>
-          <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="sarah">
-            <video
-              muted
-              loop
-              playsinline
-              disablepictureinpicture
-              preload="metadata"
-              class="w-full h-full object-cover"
-              poster="/media/video/teaser_sarah_thierry_poster.jpg"
-              onmouseenter="this.play()"
-              onmouseleave="this.pause()"
-            >
-              <source src="/media/video/teaser_sarah_thierry.mp4" type="video/mp4">
-            </video>
-
-            <!-- Overlay on hover (desktop uniquement) -->
-            <div class="hidden md:flex absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
-              <div class="text-center text-lin">
-                <h3 class="text-xl md:text-2xl mb-2 text-doré-patiné" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Sarah & Thierry</h3>
-                <p class="text-md md:text-lg">Juillet 2025</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Titre sous la vidéo (mobile uniquement) -->
-          <div class="md:hidden mt-2 text-center">
-            <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Sarah & Thierry</h3>
-            <p class="text-sm text-pierre/70">Juillet 2025</p>
+      <div class="mt-10 grid gap-8 md:mt-14 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-16">
+        <h1 class="hero-rise text-[clamp(1.75rem,0.9rem+4vw,3.75rem)]" style="--d: 250ms">
+          Films de mariage cinématographiques
+          <em class="block">qui provoquent l'émotion</em>
+        </h1>
+        <div class="hero-rise" style="--d: 400ms">
+          <p class="lead">{LOCALISATION}</p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <Button href="/contact#contact">Demander un devis</Button>
+            <Button href="/tarifs-forfaits" variant="ghost">Voir les tarifs</Button>
           </div>
         </div>
       </div>
-
-      <!-- Right Column: Two stacked videos -->
-      <div class="space-y-2 md:space-y-6">
-        <!-- Laureen & Gauthier Video -->
-        <div>
-          <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="laureen">
-            <video
-              muted
-              loop
-              playsinline
-              disablepictureinpicture
-              preload="metadata"
-              poster="/media/video/teaser_laureen_gauthier_poster.jpg"
-              class="w-full h-full object-cover"
-              onmouseenter="this.play()"
-              onmouseleave="this.pause()"
-            >
-              <source src="/media/video/teaser_laureen_gauthier_4_3.mp4" type="video/mp4">
-            </video>
-
-            <!-- Overlay on hover (desktop uniquement) -->
-            <div class="hidden md:flex absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
-              <div class="text-center text-lin">
-                <h3 class="text-xl md:text-2xl mb-2 text-doré-patiné" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Laureen & Gauthier</h3>
-                <p class="text-md md:text-lg">Août 2025</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Titre sous la vidéo (mobile uniquement) -->
-          <div class="md:hidden mt-2 text-center">
-            <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Laureen & Gauthier</h3>
-            <p class="text-sm text-pierre/70">Août 2025</p>
-          </div>
-        </div>
-
-        <!-- Marie-Ange & Mathieu Video -->
-        <div>
-          <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="marie-ange">
-            <video
-              muted
-              loop
-              playsinline
-              disablepictureinpicture
-              preload="metadata"
-              poster="/media/video/teaser_marie-ange_mathieu_poster.jpg"
-              class="w-full h-full object-cover"
-              onmouseenter="this.play()"
-              onmouseleave="this.pause()"
-            >
-              <source src="/media/video/teaser_marie-ange_mathieu.mp4" type="video/mp4">
-            </video>
-
-            <!-- Overlay on hover (desktop uniquement) -->
-            <div class="hidden md:flex absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
-              <div class="text-center text-lin">
-                <h3 class="text-xl md:text-2xl mb-2 text-doré-patiné" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Marie-Ange & Mathieu</h3>
-                <p class="text-md md:text-lg">Octobre 2025</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Titre sous la vidéo (mobile uniquement) -->
-          <div class="md:hidden mt-2 text-center">
-            <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Marie-Ange & Mathieu</h3>
-            <p class="text-sm text-pierre/70">Octobre 2025</p>
-          </div>
-        </div>
-
-        <!-- Solene & Thomas Video -->
-        <div>
-          <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="solene">
-            <video
-              muted
-              loop
-              playsinline
-              disablepictureinpicture
-              preload="metadata"
-              class="w-full h-full object-cover"
-              poster="/media/video/tezase_solene_thomas_poster.jpg"
-              onmouseenter="this.play()"
-              onmouseleave="this.pause()"
-            >
-              <source src="/media/video/tezase_solene_thomas_website.mp4" type="video/mp4">
-            </video>
-
-            <!-- Overlay on hover (desktop uniquement) -->
-            <div class="hidden md:flex absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
-              <div class="text-center text-lin">
-                <h3 class="text-xl md:text-2xl mb-2 text-doré-patiné" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Solène & Thomas</h3>
-                <p class="text-md md:text-lg">Août 2024</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Titre sous la vidéo (mobile uniquement) -->
-          <div class="md:hidden mt-2 text-center">
-            <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Solène & Thomas</h3>
-            <p class="text-sm text-pierre/70">Août 2024</p>
-          </div>
-        </div>
-
-        <!-- Melissa & Daniel Video -->
-        <div>
-          <div class="aspect-video w-full overflow-hidden rounded-lg shadow-cinema relative group cursor-pointer hover:shadow-strong transition-all duration-300" data-video="melissa">
-            <video
-              muted
-              loop
-              playsinline
-              disablepictureinpicture
-              preload="metadata"
-              poster="/media/video/teaser_shooting_melissa_poster.jpg"
-              class="w-full h-full object-cover"
-              onmouseenter="this.play()"
-              onmouseleave="this.pause()"
-            >
-              <source src="/media/video/teaser_shooting_melissa.mp4" type="video/mp4">
-            </video>
-
-            <!-- Overlay on hover (desktop uniquement) -->
-            <div class="hidden md:flex absolute inset-0 bg-noir-doux/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center">
-              <div class="text-center text-lin">
-                <h3 class="text-xl md:text-2xl mb-2 text-doré-patiné" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Melissa & Daniel</h3>
-                <p class="text-md md:text-lg">Septembre 2025</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Titre sous la vidéo (mobile uniquement) -->
-          <div class="md:hidden mt-2 text-center">
-            <h3 class="text-lg text-pierre" style="font-family: 'Aestetico', sans-serif; font-weight: 200;">Melissa & Daniel</h3>
-            <p class="text-sm text-pierre/70">Septembre 2025</p>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- Témoignages - Version élégante -->
-  <Section background="dark" padding="xl">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl md:text-5xl font-bold text-lin mb-12" style="font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;">
-        Ce qu'ils en pensent
-      </h2>
+  <!-- Grille des films -->
+  <section class="pb-20 md:pb-32" aria-labelledby="titre-films">
+    <div class="wrap">
+      <hr class="rule" />
+      <h2 id="titre-films" class="mt-12 md:mt-16" data-reveal>Les films</h2>
 
-      <div class="grid md:grid-cols-2 gap-12">
-        <!-- Témoignage 1 -->
-        <div class="text-left">
-          <p class="text-lg text-lin/80 mb-4 italic leading-relaxed">
-            "J'ai eu des frissons en regardant notre film. J'étais émue aux larmes.
-            Cédric a capturé des moments que je pensais avoir oubliés."
-          </p>
-          <p class="text-doré-patiné font-medium">— Raumane & Maxime</p>
-          <p class="text-lin/60 text-sm">Octobre 2024</p>
-        </div>
-
-        <!-- Témoignage 2 -->
-        <div class="text-left">
-          <p class="text-lg text-lin/80 mb-4 italic leading-relaxed">
-            "Je savais que Cédric faisait du bon travail, mais le résultat
-            a largement dépassé mes espérances. C'est du grand cinéma."
-          </p>
-          <p class="text-doré-patiné font-medium">— Thomas</p>
-          <p class="text-lin/60 text-sm">Août 2024</p>
-        </div>
+      <div class="mt-10 grid gap-x-8 gap-y-12 md:mt-14 md:grid-cols-2 md:gap-y-16">
+        {
+          films.map((film, i) => (
+            <button
+              type="button"
+              class="film"
+              data-film-src={film.src}
+              data-reveal
+              style={`--i: ${i % 2}`}
+              aria-label={`Voir le film de ${film.couple}`}
+            >
+              <span class="frame block aspect-video">
+                <video muted loop playsinline disablepictureinpicture preload="none" poster={film.poster}>
+                  <source src={film.src} type="video/mp4" />
+                </video>
+                <span class="film-cue">
+                  <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true">
+                    <path d="M0 0l10 6-10 6z" />
+                  </svg>
+                  Voir le film
+                </span>
+              </span>
+              <span class="mt-4 flex items-baseline justify-between gap-4">
+                <span class="font-serif text-xl leading-tight md:text-[1.375rem]">
+                  {film.couple}
+                </span>
+                <span class="muted shrink-0 text-sm">{film.date}</span>
+              </span>
+            </button>
+          ))
+        }
       </div>
+    </div>
+  </section>
 
-      <!-- Badge Featured (discrètement) -->
-      <div class="mt-12 pt-8 border-t border-lin/10">
-        <p class="text-lin/60 text-sm mb-2">Publié dans</p>
-        <a href="https://www.lasoeurdelamariee.com/mariage-moderne-a-paris/" target="_blank" rel="noopener noreferrer" class="text-doré-patiné hover:text-doré-light transition-colors text-base">
+  <!-- Témoignages -->
+  <Testimonials tone="foret">
+    <div
+      class="rule mt-16 flex flex-col gap-8 border-t pt-10 md:flex-row md:items-center md:justify-between"
+      data-reveal
+    >
+      <p>
+        <span class="muted">Publié dans</span>
+        <a
+          href="https://www.lasoeurdelamariee.com/mariage-moderne-a-paris/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link ml-1"
+        >
           La Sœur de la Mariée
         </a>
-      </div>
-
-      <!-- CTA vers le formulaire -->
-      <div class="mt-12">
-        <a href="/contact#contact" class="inline-block bg-doré-patiné text-noir-doux px-8 py-4 rounded-md font-medium hover:bg-doré-light transition-all duration-300 shadow-cinema hover:shadow-strong">
-          Demander un devis
-        </a>
-      </div>
+      </p>
+      <Button href="/contact#contact">Demander un devis</Button>
     </div>
-  </Section>
+  </Testimonials>
 
-  <!-- Video Modal -->
-  <div id="video-modal" class="fixed inset-0 bg-noir-doux/95 z-50 hidden flex items-center justify-center p-4">
-    <!-- Close button -->
-    <button id="close-modal-btn" class="absolute top-6 right-6 w-12 h-12 bg-doré-patiné/20 hover:bg-doré-patiné/40 rounded-full flex items-center justify-center text-doré-patiné transition-colors z-10">
-      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-      </svg>
-    </button>
-
-    <!-- Video container -->
-    <div class="w-full max-w-6xl aspect-video bg-noir-doux rounded-lg overflow-hidden shadow-cinema">
-      <video
-        id="modal-video"
-        controls
-        class="w-full h-full"
-        autoplay
-      >
-        <!-- Source will be set dynamically -->
-      </video>
+  <!-- Lecture en grand -->
+  <dialog id="film-dialog" class="film-dialog" aria-label="Lecture du film">
+    <form method="dialog" class="mb-3 flex justify-end">
+      <button class="btn btn-ghost tone-profond" style="background: transparent">Fermer</button>
+    </form>
+    <div class="frame aspect-video">
+      <video id="film-dialog-video" controls playsinline></video>
     </div>
-  </div>
+  </dialog>
 </Base>
 
+<style>
+  /* Le film principal s'ouvre comme un rideau au chargement */
+  .hero-frame {
+    aspect-ratio: 16 / 9;
+    max-height: calc(100svh - var(--header-h) - 14rem);
+    min-height: 14rem;
+    width: 100%;
+    animation: frame-open 1.5s var(--ease-out) both;
+  }
+</style>
+
 <script>
-  // Video modal functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const videoModal = document.getElementById('video-modal');
-    const modalVideo = document.getElementById('modal-video');
-    const closeBtn = document.getElementById('close-modal-btn');
+  const dialog = document.getElementById('film-dialog') as HTMLDialogElement | null;
+  const dialogVideo = document.getElementById('film-dialog-video') as HTMLVideoElement | null;
+  const heroVideo = document.getElementById('hero-video') as HTMLVideoElement | null;
+  const muteToggle = document.getElementById('mute-toggle');
+  const ordinateur = window.matchMedia('(min-width: 768px)');
+  const survol = window.matchMedia('(hover: hover)');
 
+  // Film principal : lecture automatique sur ordinateur uniquement
+  if (heroVideo && ordinateur.matches) {
+    heroVideo.play().catch(() => {});
+  }
 
-    // Hero video - autoplay desktop uniquement
-    const heroVideo = document.getElementById('hero-video');
-    const heroVideoContainer = document.getElementById('hero-video-container');
-    const muteToggle = document.getElementById('mute-toggle');
-    const muteIcon = document.getElementById('mute-icon');
-    const unmuteIcon = document.getElementById('unmute-icon');
+  muteToggle?.addEventListener('click', () => {
+    if (!heroVideo) return;
+    heroVideo.muted = !heroVideo.muted;
+    muteToggle.setAttribute('aria-pressed', String(!heroVideo.muted));
+    muteToggle.textContent = heroVideo.muted ? 'Activer le son' : 'Couper le son';
+  });
 
-    // Autoplay sur desktop uniquement
-    if (heroVideo) {
-      const isDesktop = window.innerWidth >= 768;
-      if (isDesktop) {
-        heroVideo.autoplay = true;
-        heroVideo.play().catch(e => console.log('Autoplay prevented:', e));
-      }
-    }
+  // Ouverture d'un film en grand
+  document.querySelectorAll<HTMLElement>('[data-film-src]').forEach((declencheur) => {
+    const apercu = declencheur.querySelector('video');
 
-    // Mute/unmute toggle (desktop)
-    if (heroVideo && muteToggle) {
-      muteToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        heroVideo.muted = !heroVideo.muted;
-
-        if (heroVideo.muted) {
-          muteIcon.classList.remove('hidden');
-          unmuteIcon.classList.add('hidden');
-        } else {
-          muteIcon.classList.add('hidden');
-          unmuteIcon.classList.remove('hidden');
-        }
-      });
-    }
-
-    const videos = {
-      sarah: '/media/video/teaser_sarah_thierry.mp4',
-      melissa: '/media/video/teaser_shooting_melissa.mp4',
-      solene: '/media/video/tezase_solene_thomas_website.mp4',
-      raumane: '/media/video/TEASER_RAUMANE_MAXIME_WEBSITE.mp4',
-      amelie: '/media/video/amelie_cedric_website.mp4',
-      'marie-ange': '/media/video/teaser_marie-ange_mathieu.mp4',
-      olivia: '/media/video/teaser_olivia_thomas_16_9_v3.mp4',
-      laureen: '/media/video/teaser_laureen_gauthier_4_3.mp4',
-      clemence: '/media/video/teaser_clemence_aymeric.mp4'
-    };
-
-    // Add click listeners to video containers
-    document.querySelectorAll('[data-video]').forEach(container => {
-      container.addEventListener('click', function(e) {
-        // Sur desktop, empêcher l'ouverture de la modal pour la vidéo hero
-        const videoId = this.getAttribute('data-video');
-        const isDesktop = window.innerWidth >= 768;
-
-        // Si c'est la vidéo hero sur desktop, ne pas ouvrir la modal
-        if (videoId === 'amelie' && isDesktop) {
-          return;
-        }
-
-        // Si on clique sur le bouton mute, ne pas ouvrir la modal
-        if (e.target.closest('#mute-toggle')) {
-          return;
-        }
-
-        const videoSrc = videos[videoId];
-
-        if (videoSrc) {
-          modalVideo.src = videoSrc;
-          videoModal.classList.remove('hidden');
-          document.body.style.overflow = 'hidden';
-        }
-      });
+    declencheur.addEventListener('click', () => {
+      const src = declencheur.dataset.filmSrc;
+      if (!dialog || !dialogVideo || !src) return;
+      apercu?.pause();
+      heroVideo?.pause();
+      dialogVideo.src = src;
+      dialog.showModal();
+      dialogVideo.play().catch(() => {});
     });
 
-    // Close modal function
-    function closeVideoModal() {
-      modalVideo.pause();
-      modalVideo.src = '';
-      videoModal.classList.add('hidden');
-      document.body.style.overflow = 'auto';
+    // Aperçu muet au survol
+    if (apercu && survol.matches) {
+      declencheur.addEventListener('mouseenter', () => apercu.play().catch(() => {}));
+      declencheur.addEventListener('mouseleave', () => apercu.pause());
     }
+  });
 
-    // Close button
-    closeBtn.addEventListener('click', closeVideoModal);
+  dialog?.addEventListener('close', () => {
+    if (dialogVideo) {
+      dialogVideo.pause();
+      dialogVideo.removeAttribute('src');
+      dialogVideo.load();
+    }
+    if (heroVideo && ordinateur.matches) heroVideo.play().catch(() => {});
+  });
 
-    // Close modal when clicking outside video
-    videoModal.addEventListener('click', function(e) {
-      if (e.target === videoModal) {
-        closeVideoModal();
-      }
-    });
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
-        closeVideoModal();
-      }
-    });
+  // Clic en dehors de la vidéo : on ferme
+  dialog?.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
   });
 </script>
-
