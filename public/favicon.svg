@@ -1,42 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <defs>
-    <!-- Gradient doré cinematique -->
-    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#D4AF77"/>
-      <stop offset="50%" style="stop-color:#C9A86A"/>
-      <stop offset="100%" style="stop-color:#B8956A"/>
-    </linearGradient>
-
-    <!-- Style du texte -->
-    <style>
-      .letters {
-        font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
-        font-weight: 700;
-        font-size: 48px;
-        letter-spacing: -2px;
-      }
-    </style>
-  </defs>
-
-  <!-- Fond noir doux -->
-  <rect width="100" height="100" fill="#2A2926" rx="8"/>
-
-  <!-- Cadre de film subtil (coins) -->
-  <rect x="4" y="4" width="15" height="2" fill="#C9A86A" opacity="0.4"/>
-  <rect x="4" y="4" width="2" height="15" fill="#C9A86A" opacity="0.4"/>
-
-  <rect x="81" y="4" width="15" height="2" fill="#C9A86A" opacity="0.4"/>
-  <rect x="94" y="4" width="2" height="15" fill="#C9A86A" opacity="0.4"/>
-
-  <rect x="4" y="94" width="15" height="2" fill="#C9A86A" opacity="0.4"/>
-  <rect x="4" y="81" width="2" height="15" fill="#C9A86A" opacity="0.4"/>
-
-  <rect x="81" y="94" width="15" height="2" fill="#C9A86A" opacity="0.4"/>
-  <rect x="94" y="81" width="2" height="15" fill="#C9A86A" opacity="0.4"/>
-
-  <!-- Lettres CR avec gradient doré -->
-  <text x="50" y="65" text-anchor="middle" class="letters" fill="url(#goldGradient)">CR</text>
-
-  <!-- Ligne cinématique sous les lettres -->
-  <line x1="25" y1="75" x2="75" y2="75" stroke="#C9A86A" stroke-width="1.5" opacity="0.6"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Deux alliances entrelacées ; celle de gauche contient un diaphragme d'objectif.
+       Couleurs du site : vert forêt et cuivre. -->
+  <rect width="64" height="64" rx="13" fill="#26342B"/>
+  <!-- Diaphragme -->
+  <circle cx="20.85" cy="32" r="11.75" fill="#DBA27C"/>
+  <path d="M24.82 33.45L21.58 36.17L17.61 34.72L16.88 30.55L20.12 27.83L24.09 29.28Z" fill="#26342B"/>
+  <path d="M24.09 29.28L26.49 42.88M24.82 33.45L14.25 42.32M21.58 36.17L8.61 31.44M17.61 34.72L15.21 21.12M16.88 30.55L27.45 21.68M20.12 27.83L33.09 32.56" fill="none" stroke="#26342B" stroke-width="1.3"/>
+  <g fill="none">
+    <!-- Alliance de gauche -->
+    <circle cx="20.85" cy="32" r="15.4" stroke="#DBA27C" stroke-width="3.9"/>
+    <!-- Alliance de droite, par-dessus -->
+    <circle cx="43.15" cy="32" r="15.4" stroke="#26342B" stroke-width="6.5"/>
+    <circle cx="43.15" cy="32" r="15.4" stroke="#DBA27C" stroke-width="3.9"/>
+    <!-- En haut, l'alliance de gauche repasse dessus : les anneaux sont entrelacés -->
+    <path d="M26.72 17.76A15.4 15.4 0 0 1 35.36 26.83" stroke="#26342B" stroke-width="6.5"/>
+    <path d="M25.96 17.47A15.4 15.4 0 0 1 35.61 27.60" stroke="#DBA27C" stroke-width="3.9"/>
+  </g>
 </svg>
